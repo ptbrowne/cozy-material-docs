@@ -1,0 +1,101 @@
+# server host (serve command) - flag --host
+host: "127.0.0.1"
+# server port (serve command) - flag --port
+port: 8081
+
+couchdb:
+  # CouchDB server url - flag --couchdb-url
+  url: http://localhost:5984
+  # CouchDB user - flag --couchdb-user
+  user: admin
+  # CouchDB password - flag --couchdb-password
+  password: password
+  # CouchDB prefix for the registries databases - flag --couchdb-prefix
+  # prefix: registry1
+
+redis:
+  addrs: localhost:6379
+  master:
+  password: password
+  databases:
+    versionsList: 0
+    versionsLatest: 1
+
+  # advanced parameters for advanced users
+
+  # max_retries: 2
+  # dial_timeout: 5s
+  # read_timeout: 3s
+  # write_timeout: 3s
+  # pool_size: 10 * runtime.NumCPU()
+  # pool_timeout: 3s
+  # idle_timeout: 5m
+  # idle_check_frequency: 1m
+  # read_only_slave: false
+
+# Swift configuration
+swift:
+  auth_url: http://localhost:1234
+  username: admin
+  api_key: s3cret!
+  endpoint_type: public
+  tenant: demo
+  domain: default
+
+# Conservation configuration allows to manage paramaters of how many app versions
+# of each channel must be kept during cleaning tasks
+conservation:
+  enable_background_cleaning: false # Specifies if the app cleaning task is enabled
+  month: 2 # Specifies how many months the cleaning job should lookup for. Versions anterior to this parameter will be removed.
+  major: 2 # Specifies how many major versions should be kept
+  minor: 2 # Specifies how many minor versions should be kept for each major version
+
+# List of supported spaces by the registry.
+#
+# If specified, the routes of the registry API will be formed with as follow:
+#   /:space-name/registry/
+#
+# The `__default__` name is a special identifier to specify a space with an
+# empty name, that will respond on /registry/
+#
+# spaces: __default__ registry1 registry2
+
+#
+# Domain space links a domain host to a space
+domain_space:
+  link.cozycloud.cc: "__default__"
+  foo-link.bar.fr: "foobar"
+
+# Trusted domains is used by the universal link to allow redirections on trusted
+# domains
+trusted_domains:
+  __default__:
+    - cloud
+    - mycozy.cloud
+  foobar:
+    - foobar.com
+    - foobar.org
+
+# List of virtual spaces.
+#
+# A virtual space is a read-only view on another space with a filter to
+# restrict the list of available applications. For example, we can use a
+# `select` filter to create a virtual space with just a few applications, or a
+# `reject` filter to have all the connectors and webapps, but not the google
+# and facebook connectors.
+#
+# virtual_spaces:
+#   registry3:
+#     source: __default__
+#     filter: select
+#     slugs: ['home', 'settings', 'drive', 'contacts', 'store']
+#   registry4:
+#     source: __default__
+#     filter: reject
+#     slugs: ['google', 'facebook']
+
+# Path to the session secret file containing the master secret to generate
+# session token.
+#
+# Should be generated with the "gen-session-secret" command.
+session-secret: sessionsecret.key

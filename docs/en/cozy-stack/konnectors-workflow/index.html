@@ -1,0 +1,3138 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Cozy documentation">
+      
+      
+        <link rel="canonical" href="https://docs.cozy.io/cozy-stack/konnectors-workflow/">
+      
+      
+        <meta name="author" content="CozyCloud - https://cozy.io">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[^a-zа-яё0-9\-]">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.0">
+    
+    
+      
+        <title>Workflow of the konnectors - Cozy Developer Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.0284f74d.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.01803549.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#2196f3">
+      
+    
+    
+    
+      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
+    
+    <script type="text/javascript">
+        // Used in extra.js, we have to define the variable here since
+        // we need access to the "config" jinja variable
+        window.outsideDocs = [{"repo": "https://github.com/cozy/cozy-app-publish.git", "name": "cozy-app-publish", "subdir": "."}, {"repo": "https://github.com/cozy/cozy-apps-registry.git", "name": "cozy-apps-registry", "subdir": "."}, {"repo": "https://github.com/cozy/cozy-client.git", "name": "cozy-client", "subdir": "docs"}, {"repo": "https://github.com/cozy/cozy-client-js.git", "name": "cozy-client-js", "subdir": "docs"}, {"repo": "https://github.com/cozy/cozy-ui.git", "name": "cozy-ui", "subdir": "docs"}, {"repo": "https://github.com/cozy/cozy-doctypes.git", "name": "cozy-doctypes", "subdir": "."}, {"repo": "https://github.com/konnectors/libs.git", "name": "cozy-konnector-libs", "subdir": "packages/cozy-konnector-libs/docs"}, {"repo": "https://github.com/CPatchane/create-cozy-app.git", "name": "cozy-scripts", "subdir": "packages/cozy-scripts/docs"}, {"repo": "https://github.com/cozy/cozy-stack.git", "name": "cozy-stack", "subdir": "docs"}, {"repo": "https://github.com/konnectors/konitor.git", "name": "konitor", "subdir": "docs"}, {"repo": "https://github.com/cozy/cozy-libs.git", "name": "babel-preset-cozy-app", "subdir": "packages/babel-preset-cozy-app"}, {"repo": "https://github.com/cozy/cozy-libs.git", "name": "commitlint-config-cozy", "subdir": "packages/commitlint-config-cozy"}, {"repo": "https://github.com/cozy/cozy-libs.git", "name": "cozy-device-helper", "subdir": "packages/cozy-device-helper"}, {"repo": "https://github.com/cozy/cozy-libs.git", "name": "eslint-config-cozy-app", "subdir": "packages/eslint-config-cozy-app"}, {"repo": "https://github.com/cozy/cozy-libs.git", "name": "cozy-flags", "subdir": "packages/cozy-flags"}, {"repo": "https://github.com/cozy/cozy-libs.git", "name": "cozy-realtime", "subdir": "packages/cozy-realtime"}]
+    </script>
+
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Ubuntu+Mono&display=fallback">
+        <style>body,input{font-family:"Lato","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Ubuntu Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="blue" data-md-color-accent="blue">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#konnectors-workflow" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://docs.cozy.io/" title="Cozy Developer Documentation" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon">cloud</i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              Cozy Developer Documentation
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Workflow of the konnectors
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/cozy/cozy.github.io/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://docs.cozy.io/" title="Cozy Developer Documentation" class="md-nav__button md-logo">
+      
+        <i class="md-icon">cloud</i>
+      
+    </a>
+    Cozy Developer Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/cozy/cozy.github.io/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Tutorials
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Tutorials
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/app/" title="Create Your Application" class="md-nav__link">
+      Create Your Application
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/konnector/" title="Develop a Connector" class="md-nav__link">
+      Develop a Connector
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/selfhost-debian/" title="Self-Host on Debian" class="md-nav__link">
+      Self-Host on Debian
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      How-to
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        How-to
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-1" type="checkbox" id="nav-3-1">
+    
+    <label class="md-nav__link" for="nav-3-1">
+      Dev
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-1">
+        Dev
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../howTos/dev/runCozyDocker/" title="Run an App in a Cozy using Docker" class="md-nav__link">
+      Run an App in a Cozy using Docker
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../howTos/dev/hmr/" title="Use Hot Module Replacement in Your App" class="md-nav__link">
+      Use Hot Module Replacement in Your App
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../howTos/dev/cordova/" title="Make a Mobile App Using Cordova" class="md-nav__link">
+      Make a Mobile App Using Cordova
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../howTos/dev/connect-mobile-app-local-stack/" title="Connect a Mobile App to Your Local Stack" class="md-nav__link">
+      Connect a Mobile App to Your Local Stack
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../howTos/dev/sendmail/" title="Send and Receive E-mails in Development" class="md-nav__link">
+      Send and Receive E-mails in Development
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../references/git-flow/" title="Our Front-End Git Flow" class="md-nav__link">
+      Our Front-End Git Flow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../references/tech-intro/" title="Technical introduction to the Cozy platform" class="md-nav__link">
+      Technical introduction to the Cozy platform
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-2" type="checkbox" id="nav-3-2">
+    
+    <label class="md-nav__link" for="nav-3-2">
+      Synchronize
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-2">
+        Synchronize
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../howTos/sync/linux/" title="Install Cozy Drive on GNU/Linux" class="md-nav__link">
+      Install Cozy Drive on GNU/Linux
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
+    
+    <label class="md-nav__link" for="nav-4">
+      Stack and tools
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Stack and tools
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../eslint-config-cozy-app/" title="eslint-config-cozy-app" class="md-nav__link">
+      eslint-config-cozy-app
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../commitlint-config-cozy/" title="commitlint-config-cozy" class="md-nav__link">
+      commitlint-config-cozy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3" type="checkbox" id="nav-4-3" checked>
+    
+    <label class="md-nav__link" for="nav-4-3">
+      cozy-stack
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-3">
+        cozy-stack
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../" title="README" class="md-nav__link">
+      README
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-2" type="checkbox" id="nav-4-3-2">
+    
+    <label class="md-nav__link" for="nav-4-3-2">
+      Usage
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-3-2">
+        Usage
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../INSTALL/" title="Install the cozy-stack" class="md-nav__link">
+      Install the cozy-stack
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../config/" title="Configuration file" class="md-nav__link">
+      Configuration file
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../instance/" title="Managing Instances" class="md-nav__link">
+      Managing Instances
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../security/" title="Security" class="md-nav__link">
+      Security
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../cli/cozy-stack/" title="Manpages of the command-line tool" class="md-nav__link">
+      Manpages of the command-line tool
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-3" type="checkbox" id="nav-4-3-3">
+    
+    <label class="md-nav__link" for="nav-4-3-3">
+      How-to guides for developpers
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-3-3">
+        How-to guides for developpers
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../client-app-dev/" title="Develop a client-side app" class="md-nav__link">
+      Develop a client-side app
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../docker/" title="Running and building Docker images" class="md-nav__link">
+      Running and building Docker images
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../doctype/" title="Adding a new doctype" class="md-nav__link">
+      Adding a new doctype
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../assets/" title="Working with the stack assets" class="md-nav__link">
+      Working with the stack assets
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../release/" title="Build a release" class="md-nav__link">
+      Build a release
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../CONTRIBUTING/" title="The contributing guide" class="md-nav__link">
+      The contributing guide
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-4" type="checkbox" id="nav-4-3-4" checked>
+    
+    <label class="md-nav__link" for="nav-4-3-4">
+      Explanations
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-3-4">
+        Explanations
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../sharing-design/" title="Sharing design" class="md-nav__link">
+      Sharing design
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Workflow of the konnectors
+      </label>
+    
+    <a href="./" title="Workflow of the konnectors" class="md-nav__link md-nav__link--active">
+      Workflow of the konnectors
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tldr" title="TL;DR" class="md-nav__link">
+    TL;DR
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#types" title="Types" class="md-nav__link">
+    Types
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#accounts" title="Accounts" class="md-nav__link">
+    Accounts
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#aggregator-accounts" title="Aggregator accounts" class="md-nav__link">
+    Aggregator accounts
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#konnectors" title="Konnectors" class="md-nav__link">
+    Konnectors
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#permissions" title="Permissions" class="md-nav__link">
+    Permissions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#triggers" title="Triggers" class="md-nav__link">
+    Triggers
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#complete-flow-example" title="Complete flow example" class="md-nav__link">
+    Complete flow example
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#konnector-worker-specs" title="Konnector Worker specs" class="md-nav__link">
+    Konnector Worker specs
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prepare-the-execution" title="Prepare the execution" class="md-nav__link">
+    Prepare the execution
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#execute-the-konnector" title="Execute the konnector" class="md-nav__link">
+    Execute the konnector
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#konnector-error-handling" title="Konnector error handling" class="md-nav__link">
+    Konnector error handling
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#account-deleted" title="Account deleted" class="md-nav__link">
+    Account deleted
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#oauth-and-service-secrets" title="OAuth (and service secrets)" class="md-nav__link">
+    OAuth (and service secrets)
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#doctypes" title="Doctypes" class="md-nav__link">
+    Doctypes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#secrets-that-are-not-oauth" title="Secrets that are not OAuth" class="md-nav__link">
+    Secrets that are not OAuth
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reminder-oauth-flow" title="Reminder OAuth flow" class="md-nav__link">
+    Reminder OAuth flow
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#client-registration" title="Client Registration" class="md-nav__link">
+    Client Registration
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manually" title="Manually" class="md-nav__link">
+    Manually
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-google" title="Example: Google" class="md-nav__link">
+    Example: Google
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dynamic-registration-protocol" title="Dynamic Registration Protocol" class="md-nav__link">
+    Dynamic Registration Protocol
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#no-redirect_url-enforcement" title="No redirect_url enforcement" class="md-nav__link">
+    No redirect_url enforcement
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#authorization-grant-flows" title="Authorization Grant flows" class="md-nav__link">
+    Authorization Grant flows
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#webserver-flow-authorization-code-grant" title="webserver flow (Authorization Code Grant)" class="md-nav__link">
+    webserver flow (Authorization Code Grant)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spa-flow-implicit-grant" title="SPA flow (Implicit grant)" class="md-nav__link">
+    SPA flow (Implicit grant)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#accessing-data" title="Accessing data" class="md-nav__link">
+    Accessing data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#refreshing-token" title="Refreshing token" class="md-nav__link">
+    Refreshing token
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#konnectors-marketplace-requirements" title="Konnectors Marketplace Requirements" class="md-nav__link">
+    Konnectors Marketplace Requirements
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#account-types-security-rules" title="Account types security rules" class="md-nav__link">
+    Account types security rules
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notes-for-mesinfos-experiment" title="Notes for MesInfos experiment" class="md-nav__link">
+    Notes for MesInfos experiment
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-5" type="checkbox" id="nav-4-3-5">
+    
+    <label class="md-nav__link" for="nav-4-3-5">
+      List of services
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-3-5">
+        List of services
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../auth/" title="/auth - Authentication & OAuth" class="md-nav__link">
+      /auth - Authentication & OAuth
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../apps/" title="/apps - Applications Management" class="md-nav__link">
+      /apps - Applications Management
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../registry/" title="/apps - Apps registry" class="md-nav__link">
+       /apps - Apps registry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../konnectors/" title="/apps - Konnectors" class="md-nav__link">
+       /apps - Konnectors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../data-system/" title="/data - Data System" class="md-nav__link">
+      /data - Data System
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mango/" title="/data - Mango" class="md-nav__link">
+       /data - Mango
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../couchdb-quirks/" title="/data - CouchDB Quirks" class="md-nav__link">
+       /data - CouchDB Quirks
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../pouchdb-quirks/" title="/data - PouchDB Quirks" class="md-nav__link">
+       /data - PouchDB Quirks
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../files/" title="/files - Virtual File System" class="md-nav__link">
+      /files - Virtual File System
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../references-docs-in-vfs/" title="/files - References of documents in VFS" class="md-nav__link">
+       /files - References of documents in VFS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../intents/" title="/intents - Intents" class="md-nav__link">
+      /intents - Intents
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../jobs/" title="/jobs - Jobs" class="md-nav__link">
+      /jobs - Jobs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../workers/" title="/jobs - Workers" class="md-nav__link">
+       /jobs - Workers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../move/" title="/move - Move, export and import an instance" class="md-nav__link">
+      /move - Move, export and import an instance
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../notifications/" title="/notifications - Notifications" class="md-nav__link">
+      /notifications - Notifications
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../public/" title="/public - Public" class="md-nav__link">
+      /public - Public
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../permissions/" title="/permissions - Permissions" class="md-nav__link">
+      /permissions - Permissions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../realtime/" title="/realtime - Realtime" class="md-nav__link">
+      /realtime - Realtime
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../remote/" title="/remote - Proxy for remote data/API" class="md-nav__link">
+      /remote - Proxy for remote data/API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../settings/" title="/settings - Settings" class="md-nav__link">
+      /settings - Settings
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../user-action-required/" title="/settings - Terms of Services" class="md-nav__link">
+       /settings - Terms of Services
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../sharing/" title="/sharings - Sharing" class="md-nav__link">
+      /sharings - Sharing
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-app-publish/" title="cozy-app-publish" class="md-nav__link">
+      cozy-app-publish
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../babel-preset-cozy-app/" title="babel-preset-cozy-app" class="md-nav__link">
+      babel-preset-cozy-app
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../konitor/cli/" title="konitor" class="md-nav__link">
+      konitor
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-7" type="checkbox" id="nav-4-7">
+    
+    <label class="md-nav__link" for="nav-4-7">
+      cozy-doctypes
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-7">
+        cozy-doctypes
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/" title="README" class="md-nav__link">
+      README
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.accounts/" title="Accounts" class="md-nav__link">
+      Accounts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.apps/" title="Apps" class="md-nav__link">
+      Apps
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.bank/" title="Banking doctypes" class="md-nav__link">
+      Banking doctypes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.bills/" title="Bills" class="md-nav__link">
+      Bills
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.konnectors/" title="Connectors" class="md-nav__link">
+      Connectors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.contacts/" title="Contacts" class="md-nav__link">
+      Contacts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.files/" title="Files" class="md-nav__link">
+      Files
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.files_metadata/" title="Files metadata" class="md-nav__link">
+      Files metadata
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.identities/" title="Identities" class="md-nav__link">
+      Identities
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.notifications/" title="Notifications" class="md-nav__link">
+      Notifications
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.remote.requests/" title="Remote requests" class="md-nav__link">
+      Remote requests
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.sessions.logins/" title="Session logins" class="md-nav__link">
+      Session logins
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.permissions/" title="Permissions" class="md-nav__link">
+      Permissions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.photos.albums/" title="Photos Albums" class="md-nav__link">
+      Photos Albums
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.procedures/" title="Procedures" class="md-nav__link">
+      Procedures
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.sessions.logins/" title="Sessions Logins" class="md-nav__link">
+      Sessions Logins
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.settings/" title="Settings" class="md-nav__link">
+      Settings
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.sharings/" title="Sharings" class="md-nav__link">
+      Sharings
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.account_types/" title="Accounts Types" class="md-nav__link">
+      Accounts Types
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/cc.cozycloud.autocategorization/" title="Autocategorization" class="md-nav__link">
+      Autocategorization
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.exports/" title="Exports" class="md-nav__link">
+      Exports
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.jobs/" title="Jobs" class="md-nav__link">
+      Jobs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.oauth.clients/" title="OAuth Clients" class="md-nav__link">
+      OAuth Clients
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.oauth.access_codes/" title="OAuth Access Codes" class="md-nav__link">
+      OAuth Access Codes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.triggers/" title="Triggers" class="md-nav__link">
+      Triggers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.triggers.state/" title="Triggers state" class="md-nav__link">
+      Triggers state
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.remote.requests/" title="Remote requests" class="md-nav__link">
+      Remote requests
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.sessions/" title="Sessions" class="md-nav__link">
+      Sessions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.shared/" title="Shared" class="md-nav__link">
+      Shared
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.terms/" title="Terms" class="md-nav__link">
+      Terms
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/com.unibet.bets/" title="Bets Unibet" class="md-nav__link">
+      Bets Unibet
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-ui/" title="cozy-ui" class="md-nav__link">
+      cozy-ui
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-device-helper/" title="cozy-device-helper" class="md-nav__link">
+      cozy-device-helper
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-10" type="checkbox" id="nav-4-10">
+    
+    <label class="md-nav__link" for="nav-4-10">
+      cozy-client
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-10">
+        cozy-client
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client/getting-started/" title="Getting started" class="md-nav__link">
+      Getting started
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client/relationships/" title="Using relationship" class="md-nav__link">
+      Using relationship
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client/metadata/" title="cozyMetadata maintenance" class="md-nav__link">
+      cozyMetadata maintenance
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client/react-integration/" title="React integration" class="md-nav__link">
+      React integration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client/details/" title="Other details" class="md-nav__link">
+      Other details
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client/api/cozy-client/" title="Cozy Client API" class="md-nav__link">
+      Cozy Client API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client/api/cozy-pouch-link/" title="Cozy Pouch Link API" class="md-nav__link">
+      Cozy Pouch Link API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client/api/cozy-stack-client/" title="Cozy Stack Client API" class="md-nav__link">
+      Cozy Stack Client API
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-realtime/" title="cozy-realtime" class="md-nav__link">
+      cozy-realtime
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-12" type="checkbox" id="nav-4-12">
+    
+    <label class="md-nav__link" for="nav-4-12">
+      cozy-konnector-libs
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-12">
+        cozy-konnector-libs
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-konnector-libs/api/" title="API" class="md-nav__link">
+      API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-konnector-libs/cli/" title="CLI" class="md-nav__link">
+      CLI
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-konnector-libs/dev/" title="Develop" class="md-nav__link">
+      Develop
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-konnector-libs/errors/" title="Errors" class="md-nav__link">
+      Errors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-konnector-libs/operation-linking/" title="Operation linking" class="md-nav__link">
+      Operation linking
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-konnector-libs/synchronization/" title="Synchronization" class="md-nav__link">
+      Synchronization
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-apps-registry/" title="cozy-apps-registry" class="md-nav__link">
+      cozy-apps-registry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-flags/" title="cozy-flags" class="md-nav__link">
+      cozy-flags
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-15" type="checkbox" id="nav-4-15">
+    
+    <label class="md-nav__link" for="nav-4-15">
+      cozy-client-js
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-15">
+        cozy-client-js
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/" title="README" class="md-nav__link">
+      README
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/intro/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/browser-sdk-transition/" title="Transition from cozy-browser-sdk" class="md-nav__link">
+      Transition from cozy-browser-sdk
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/offline/" title="How to support offline" class="md-nav__link">
+      How to support offline
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/oauth/" title="OAuth guide" class="md-nav__link">
+      OAuth guide
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/auth-api/" title="Authentication API" class="md-nav__link">
+      Authentication API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/data-api/" title="Data System API" class="md-nav__link">
+      Data System API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/files-api/" title="Files API" class="md-nav__link">
+      Files API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/jobs-api/" title="Jobs API" class="md-nav__link">
+      Jobs API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/intents-api/" title="Intents API" class="md-nav__link">
+      Intents API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/settings-api/" title="Settings API" class="md-nav__link">
+      Settings API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/sharing-api/" title="Sharing API" class="md-nav__link">
+      Sharing API
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tldr" title="TL;DR" class="md-nav__link">
+    TL;DR
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#types" title="Types" class="md-nav__link">
+    Types
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#accounts" title="Accounts" class="md-nav__link">
+    Accounts
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#aggregator-accounts" title="Aggregator accounts" class="md-nav__link">
+    Aggregator accounts
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#konnectors" title="Konnectors" class="md-nav__link">
+    Konnectors
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#permissions" title="Permissions" class="md-nav__link">
+    Permissions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#triggers" title="Triggers" class="md-nav__link">
+    Triggers
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#complete-flow-example" title="Complete flow example" class="md-nav__link">
+    Complete flow example
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#konnector-worker-specs" title="Konnector Worker specs" class="md-nav__link">
+    Konnector Worker specs
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prepare-the-execution" title="Prepare the execution" class="md-nav__link">
+    Prepare the execution
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#execute-the-konnector" title="Execute the konnector" class="md-nav__link">
+    Execute the konnector
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#konnector-error-handling" title="Konnector error handling" class="md-nav__link">
+    Konnector error handling
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#account-deleted" title="Account deleted" class="md-nav__link">
+    Account deleted
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#oauth-and-service-secrets" title="OAuth (and service secrets)" class="md-nav__link">
+    OAuth (and service secrets)
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#doctypes" title="Doctypes" class="md-nav__link">
+    Doctypes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#secrets-that-are-not-oauth" title="Secrets that are not OAuth" class="md-nav__link">
+    Secrets that are not OAuth
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reminder-oauth-flow" title="Reminder OAuth flow" class="md-nav__link">
+    Reminder OAuth flow
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#client-registration" title="Client Registration" class="md-nav__link">
+    Client Registration
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manually" title="Manually" class="md-nav__link">
+    Manually
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-google" title="Example: Google" class="md-nav__link">
+    Example: Google
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dynamic-registration-protocol" title="Dynamic Registration Protocol" class="md-nav__link">
+    Dynamic Registration Protocol
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#no-redirect_url-enforcement" title="No redirect_url enforcement" class="md-nav__link">
+    No redirect_url enforcement
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#authorization-grant-flows" title="Authorization Grant flows" class="md-nav__link">
+    Authorization Grant flows
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#webserver-flow-authorization-code-grant" title="webserver flow (Authorization Code Grant)" class="md-nav__link">
+    webserver flow (Authorization Code Grant)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spa-flow-implicit-grant" title="SPA flow (Implicit grant)" class="md-nav__link">
+    SPA flow (Implicit grant)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#accessing-data" title="Accessing data" class="md-nav__link">
+    Accessing data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#refreshing-token" title="Refreshing token" class="md-nav__link">
+    Refreshing token
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#konnectors-marketplace-requirements" title="Konnectors Marketplace Requirements" class="md-nav__link">
+    Konnectors Marketplace Requirements
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#account-types-security-rules" title="Account types security rules" class="md-nav__link">
+    Account types security rules
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notes-for-mesinfos-experiment" title="Notes for MesInfos experiment" class="md-nav__link">
+    Notes for MesInfos experiment
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/cozy/cozy.github.io/edit/dev/src/cozy-stack/konnectors-workflow.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="konnectors-workflow">Konnectors workflow<a class="headerlink" href="#konnectors-workflow" title="Permanent link">&para;</a></h1>
+<h2 id="tldr">TL;DR<a class="headerlink" href="#tldr" title="Permanent link">&para;</a></h2>
+<p><img alt="Konnectors workflow" src="../diagrams/konnector-workflow.png" /></p>
+<p><img alt="Konnectors models" src="../diagrams/konnector-models.png" /></p>
+<h2 id="types">Types<a class="headerlink" href="#types" title="Permanent link">&para;</a></h2>
+<h3 id="accounts">Accounts<a class="headerlink" href="#accounts" title="Permanent link">&para;</a></h3>
+<p><code>io.cozy.accounts</code> contains information for an account, including those for
+authentication (technically, they are encrypted by cozy-stack before being
+saved in CouchDB, but we will show them as the konnectors will see them):</p>
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;auth&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;login&quot;</span><span class="p">:</span> <span class="s2">&quot;000000000&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;password&quot;</span><span class="p">:</span> <span class="s2">&quot;**********&quot;</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;folderPath&quot;</span><span class="p">:</span> <span class="s2">&quot;/Administratif/Free Mobile&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;freemobile&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;namePath&quot;</span><span class="p">:</span> <span class="s2">&quot;Free Mobile&quot;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>Accounts are manipulated through the <code>/data/</code> API.</p>
+<h4 id="aggregator-accounts">Aggregator accounts<a class="headerlink" href="#aggregator-accounts" title="Permanent link">&para;</a></h4>
+<p>Some konnectors are based on an aggregator service. An aggregator is declared
+in the konnector manifest and specify an <code>accountId</code> property. When Cozy-Home
+detects this property, it checks if an account with this given id exists. If not,
+it creates it. Every account created for a konnector based on an aggregator is
+then related to this aggregator account. This relationship is called <code>parent</code>
+account.</p>
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;auth&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;login&quot;</span><span class="p">:</span> <span class="s2">&quot;000000000&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;password&quot;</span><span class="p">:</span> <span class="s2">&quot;**********&quot;</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;folderPath&quot;</span><span class="p">:</span> <span class="s2">&quot;/Administratif/Bankbank&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;Bankbank&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;namePath&quot;</span><span class="p">:</span> <span class="s2">&quot;Bankbank&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;relationships&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&quot;parent&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;_id&quot;</span><span class="p">:</span> <span class="s2">&quot;service-aggregator-account&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;_type&quot;</span><span class="p">:</span> <span class="s2">&quot;io.cozy.accounts&quot;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p><strong>Note:</strong> you can read more about the <a href="https://docs.cozy.io/en/cozy-doctypes/docs/io.cozy.accounts/">accounts doctype
+here</a>.</p>
+<h3 id="konnectors">Konnectors<a class="headerlink" href="#konnectors" title="Permanent link">&para;</a></h3>
+<p><code>io.cozy.konnectors</code> are installed similarly to <code>io.cozy.apps</code> (see
+<a href="../konnectors/">doc</a>)</p>
+<h3 id="permissions">Permissions<a class="headerlink" href="#permissions" title="Permanent link">&para;</a></h3>
+<p>Like client-side applications, each konnector has an associated
+<code>io.cozy.permissions</code>. These permissions are those listed on the manifest of
+the konnectors, and the stack will add a permission for the files on the folder
+choosen by the user.</p>
+<h3 id="triggers">Triggers<a class="headerlink" href="#triggers" title="Permanent link">&para;</a></h3>
+<p><code>io.cozy.triggers</code> are used to define when konnectors are launched. See
+https://docs.cozy.io/en/cozy-stack/jobs/#post-jobstriggers</p>
+<h2 id="complete-flow-example">Complete flow example<a class="headerlink" href="#complete-flow-example" title="Permanent link">&para;</a></h2>
+<p>As a user, from the expenses management app, I have a clean flow to configure a
+connector to retrieve my travel expenses</p>
+<p>1 - User is in <strong>my-expenses</strong> and clicks on [configure travels]</p>
+<p>2 - <strong>my-expenses</strong> triggers an intent</p>
+<div class="codehilite"><pre><span></span><span class="nx">cozy</span><span class="p">.</span><span class="nx">intents</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="s2">&quot;CREATE&quot;</span><span class="p">,</span> <span class="s2">&quot;io.cozy.konnectors&quot;</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">category</span><span class="o">:</span> <span class="s2">&quot;transport&quot;</span>
+<span class="p">});</span>
+</pre></div>
+
+
+<p>3 - the Store app catch the intent, fetch all available konnectors and let the
+user choose</p>
+<div class="codehilite"><pre><span></span><span class="nf">GET</span> <span class="nn">/registry?...</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</pre></div>
+
+
+<p>4 - the user chooses the trainline konnector. Its manifest looks like this:</p>
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Trainline&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;konnector&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;slug&quot;</span><span class="p">:</span> <span class="s2">&quot;konnector-trainline&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Konnector for trainline . com&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;https://github.com/konnectors/trainlines.git@build&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;developer&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;XXX&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://www.xxx.fr&quot;</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;3.0.0&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;licence&quot;</span><span class="p">:</span> <span class="s2">&quot;AGPL-3.0&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;fields&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;login&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;text&quot;</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;password&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;password&quot;</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;advancedFields&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;folderPath&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;advanced&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+                <span class="nt">&quot;isRequired&quot;</span><span class="p">:</span> <span class="kc">false</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;transport&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;frequency&quot;</span><span class="p">:</span> <span class="s2">&quot;weekly&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;permissions&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;events&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Connect train bill with  event in your calendar&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;io.cozy.events&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;verbs&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;PATCH&quot;</span><span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>5 - the user clicks on install, and the install starts:</p>
+<div class="codehilite"><pre><span></span><span class="nf">POST</span> <span class="nn">/konnectors/trainline</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</pre></div>
+
+
+<p>6 - the Store then uses an intent to know which app can configure this konnector:</p>
+<div class="codehilite"><pre><span></span><span class="nx">cozy</span><span class="p">.</span><span class="nx">intents</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="s2">&quot;REDIRECT&quot;</span><span class="p">,</span> <span class="s2">&quot;io.cozy.accounts&quot;</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">slug</span><span class="o">:</span> <span class="s2">&quot;trainline&quot;</span>
+<span class="p">});</span>
+</pre></div>
+
+
+<p>7 - the Store redirects to the Home. The Home asks the user for account config
+and create a folder to save the PDFs.</p>
+<p>8 - the Home also add a Reference from the konnector to the folder to prevent
+any accidental folder deletion:</p>
+<div class="codehilite"><pre><span></span><span class="err">POST /files/123-selected-folder-id-123/relationships/referenced_by</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;io.cozy.konnectors&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;io.cozy.konnectors/trainlines&quot;</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>9 - then the Home can create the account:</p>
+<div class="codehilite"><pre><span></span><span class="nf">POST</span> <span class="nn">/data/io.cozy.accounts</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;account_type&quot;</span><span class="p">:</span> <span class="s2">&quot;trainline&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;auth&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;login&quot;</span><span class="p">:</span> <span class="s2">&quot;xxxx&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;password&quot;</span><span class="p">:</span> <span class="s2">&quot;yyyyy&quot;</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;folderPath&quot;</span><span class="p">:</span> <span class="s2">&quot;/Administrative/Trainline&quot;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;_id&quot;</span><span class="p">:</span> <span class="s2">&quot;123-account-id-123&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;_rev&quot;</span><span class="p">:</span> <span class="s2">&quot;1-asasasasa&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;account_type&quot;</span><span class="p">:</span> <span class="s2">&quot;trainline&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;auth&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;login&quot;</span><span class="p">:</span> <span class="s2">&quot;xxxx&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;folderPath&quot;</span><span class="p">:</span> <span class="s2">&quot;/Administrative/Trainline&quot;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>10 - the Home create the trigger:</p>
+<div class="codehilite"><pre><span></span><span class="err">POST /jobs/io.cozy.triggers</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;attributes&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;@cron&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;arguments&quot;</span><span class="p">:</span> <span class="s2">&quot;0 0 0 0 1 1 &quot;</span><span class="p">,</span>
+            <span class="nt">&quot;worker&quot;</span><span class="p">:</span> <span class="s2">&quot;konnector&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;message&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;konnector&quot;</span><span class="p">:</span> <span class="s2">&quot;trainline&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;account&quot;</span><span class="p">:</span> <span class="s2">&quot;5165621628784562148955&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;folder_to_save&quot;</span><span class="p">:</span> <span class="s2">&quot;877854878455&quot;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>11 - and, finally, the Home runs the konnector for the first time:</p>
+<div class="codehilite"><pre><span></span><span class="nf">POST</span> <span class="nn">/jobs/triggers/abc159753/launch</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</pre></div>
+
+
+<p>12 - the Home uses the <a href="../realtime/">realtime</a> to be informed if the
+konnector fails to login or succeeds to import the PDFs.</p>
+<p>If the user wants to use several account, the Home can setup several triggers
+for the same konnector &amp; various accounts.</p>
+<h2 id="konnector-worker-specs">Konnector Worker specs<a class="headerlink" href="#konnector-worker-specs" title="Permanent link">&para;</a></h2>
+<h3 id="prepare-the-execution">Prepare the execution<a class="headerlink" href="#prepare-the-execution" title="Permanent link">&para;</a></h3>
+<p>The cozy-stack prepares the execution of the konnector by doing these steps:</p>
+<ul>
+<li>it checks that the konnector is not in maintenance in the registry (execpt
+  for manual execution)</li>
+<li>it ensures that the konnector has a folder where it can write its files,
+  and has the permission to write in this folder.</li>
+</ul>
+<h3 id="execute-the-konnector">Execute the konnector<a class="headerlink" href="#execute-the-konnector" title="Permanent link">&para;</a></h3>
+<p>Start the konnector through nsjail, passing as ENV variables :</p>
+<div class="codehilite"><pre><span></span>- `COZY_URL`:          the starting instance URL
+- `COZY_CREDENTIALS`:  security token to communicate with Cozy
+- `COZY_FIELDS`:       JSON-encoded message with the arguments from the trigger
+- `COZY_PARAMETERS`:   JSON-encoded parameters from the konnector manifest
+- `COZY_LANGUAGE`:     the language field of the konnector (eg. &quot;node&quot; etc.)
+- `COZY_LOCALE`:       the locale of the user (eg. &quot;en&quot; etc.)
+- `COZY_TIME_LIMIT`:   how much time the konnector can run before being killed
+- `COZY_JOB_ID`:       id of the job
+- `COZY_JOB_MANUAL_EXECUTION`: whether the job was started manually (in Home) or automatically (via a cron trigger or event)
+</pre></div>
+
+
+<p>The konnector process can send events trough its stdout (newline separated JSON
+object), the konnector worker pass these events to the realtime hub as
+<code>io.cozy.jobs.events</code>.</p>
+<ul>
+<li>Only JSON formatted events are forwarded to the client-side throught
+    realtime</li>
+<li>Otherwise formatted lines (such as node Error) will be kept in some system
+    logs.</li>
+</ul>
+<p>Konnectors should NOT log the received account login values in production.</p>
+<h3 id="konnector-error-handling">Konnector error handling<a class="headerlink" href="#konnector-error-handling" title="Permanent link">&para;</a></h3>
+<p>The konnector can output json formated messages as stated before (the events)
+and those events will be typed and formatted like this:</p>
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="s2">&quot;messagetype&quot;</span><span class="p">,</span>  <span class="c1">// can be &quot;debug&quot;, &quot;info&quot;, &quot;warning&quot;, &quot;error&quot;, and &quot;critical&quot;</span>
+    <span class="nx">message</span><span class="o">:</span> <span class="s2">&quot;message&quot;</span>    <span class="c1">// can be any string</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>If there is an error or critical message, the execution will be seen as a
+failure by cozy-stack. It&rsquo;s also the case if the konnector reaches the timeout
+or returns with a non-zero status code.</p>
+<p><strong>Note:</strong> debug and info level are not transmitted to syslog, except if the
+instance is in debug mode. It would be too verbose to do otherwise.</p>
+<h3 id="account-deleted">Account deleted<a class="headerlink" href="#account-deleted" title="Permanent link">&para;</a></h3>
+<p>When an account is deleted, or a konnector is going to be uninstalled, the
+konnector is executed with the <code>account_deleted</code> field to true, so it can clean
+the account remotely.</p>
+<h2 id="oauth-and-service-secrets">OAuth (and service secrets)<a class="headerlink" href="#oauth-and-service-secrets" title="Permanent link">&para;</a></h2>
+<h3 id="doctypes">Doctypes<a class="headerlink" href="#doctypes" title="Permanent link">&para;</a></h3>
+<p><code>io.cozy.konnectors</code> gives their desiderata for an account</p>
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;fields&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;account&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;doctype&quot;</span><span class="p">:</span> <span class="s2">&quot;io.cozy.accounts&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;account_type&quot;</span><span class="p">:</span> <span class="s2">&quot;maif&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;scope&quot;</span><span class="p">:</span> <span class="s2">&quot;openid profile offline_access&quot;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p><code>io.cozy.accounts</code> contains authentication information for an account, as well
+as the associated scope</p>
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Mon Compte Maif&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;account_type&quot;</span><span class="p">:</span> <span class="s2">&quot;maif&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;connected&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;oauth&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;access_token&quot;</span><span class="p">:</span> <span class="s2">&quot;akosaksoakso&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;refresh_token&quot;</span><span class="p">:</span> <span class="s2">&quot;okoakozkaozk&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;scope&quot;</span><span class="p">:</span> <span class="s2">&quot;openid profile offline_access&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p><code>io.cozy.account_types</code> contains the oauth configuration:</p>
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;_id&quot;</span><span class="p">:</span> <span class="s2">&quot;service.example&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;grant_mode&quot;</span><span class="p">:</span> <span class="s2">&quot;authorization_code&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;client_id&quot;</span><span class="p">:</span> <span class="s2">&quot;the registered client id&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;client_secret&quot;</span><span class="p">:</span> <span class="s2">&quot;client_secret is necessary for server-flow&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;auth_endpoint&quot;</span><span class="p">:</span> <span class="s2">&quot;https://service.example/auth&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;token_endpoint&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.service.example/token&quot;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p><code>io.cozy.account_types</code> are not accessible to the applications: they are
+injected directly in CouchDB in a global database
+<code>secrets/io-cozy-accounts_type</code>.</p>
+<h3 id="secrets-that-are-not-oauth">Secrets that are not OAuth<a class="headerlink" href="#secrets-that-are-not-oauth" title="Permanent link">&para;</a></h3>
+<p>The <code>io.cozy.account_types</code> doctype can also be used for storing secrets that
+are not related to OAuth. The document still need to be injected manually in
+<code>secrets/io-cozy-accounts_type</code>:</p>
+<div class="codehilite"><pre><span></span>{
+    &quot;_id&quot;: &quot;service.example&quot;,
+    &quot;grant_mode&quot;: &quot;secret&quot;,
+    &quot;slug&quot;: &quot;service&quot;,
+    &quot;secret&quot;: &quot;th1$_1$_th3_s3cr3t!&quot;
+}
+</pre></div>
+
+
+<p><strong>Note</strong>: <code>grant_mode</code> must be <code>secret</code>, <code>slug</code> must be the slug of the
+konnector,  but <code>secret</code> can be a map instead of a simple string if several
+secrets are needed for this service.</p>
+<p>The secret is given to the konnector in the <code>COZY_PARAMETERS</code> env variable.</p>
+<h3 id="reminder-oauth-flow">Reminder OAuth flow<a class="headerlink" href="#reminder-oauth-flow" title="Permanent link">&para;</a></h3>
+<p><strong>Service</strong> is the website from which konnector aims to retrieve informations.
+<strong>Stack</strong> is the cozy stack.</p>
+<p>OAuth is divided in 3 steps:</p>
+<ul>
+<li>Client Registration: the client application (the Stack) needs to be
+    registered with the Service</li>
+<li>Obtaining &amp; Refreshing Authorization: all the steps from <code>client_id</code> to
+    <code>access_token</code>, the Stack will handle those</li>
+<li>Using the <code>access_token</code>: ideally, the konnector should only concern itself
+    with this part; it receives an <code>access_token</code> and uses it.</li>
+</ul>
+<h4 id="client-registration">Client Registration<a class="headerlink" href="#client-registration" title="Permanent link">&para;</a></h4>
+<p>Before beginning the Grant process, most Services require the application to be
+registered with a defined <code>redirect_uri</code>.</p>
+<p>There are a lot of options, which we will choose from when actually
+implementing konnectors using them.</p>
+<h3 id="manually">Manually<a class="headerlink" href="#manually" title="Permanent link">&para;</a></h3>
+<p>Most services requires a human developer to create the client manually and
+define its redirect_uri. However each instance has its own domain, so for these
+services, we will need to:</p>
+<p><strong>A. Register a &ldquo;proxy&rdquo; client</strong>, which is a static page performing redirections
+as needed, as was done for Facebook events in v2 konnectors. We will register a
+well known cozy domain, like <code>oauth-proxy.cozy.io</code> and registers it with all
+providers. The use and risks associated with this domain should be made clear to
+the user.</p>
+<p><strong>B. Register each Stack</strong> with a redirect_uri on the main stack domain, if we
+go this way, the register_uri below moves from
+<code>bob.cozy.rocks/accounts/redirect</code> to <code>oauthcallback.cozy.rocks/redirect</code> and the
+domain will be prepended to the state. This is feasible at cozy scale, but
+requires more knowledge and work for self-hosters.</p>
+<h4 id="example-google">Example: Google<a class="headerlink" href="#example-google" title="Permanent link">&para;</a></h4>
+<p>For example, these are the steps for creating the google <code>account_type</code> for the
+stack at .mycozy.cloud:</p>
+<ul>
+<li>Go to https://console.developers.google.com</li>
+<li>Select or Create Project (up left near the logo)</li>
+<li>Enable desired APIs (TBD with usages)</li>
+<li>Click &ldquo;Credentials&rdquo;</li>
+<li>Create credentials &gt; Oauth Client ID &gt; Web application</li>
+<li>Set redirectURI to
+    https://oauthcallback.mycozy.cloud/accounts/google/redirect</li>
+<li>Copy and paste provided Client ID and Client Secret.</li>
+</ul>
+<p>Then save the data in the console</p>
+<div class="codehilite"><pre><span></span>http PUT localhost:5984/secrets%2Fio-cozy-account_types/google
+grant_mode=authorization_code
+redirect_uri=&quot;https://oauthcallback.mycozy.cloud/accounts/google/redirect&quot;
+token_mode=basic
+token_endpoint=&quot;https://www.googleapis.com/oauth2/v4/token&quot;
+auth_endpoint=&quot;https://accounts.google.com/o/oauth2/v2/auth&quot;
+client_id=$CLIENT_ID
+client_secret=$CLIENT_SECRET
+</pre></div>
+
+
+<h4 id="dynamic-registration-protocol">Dynamic Registration Protocol<a class="headerlink" href="#dynamic-registration-protocol" title="Permanent link">&para;</a></h4>
+<p>A few services allows client to register programaticaly through the Dynamic
+Client Registration Protocol <a href="https://tools.ietf.org/html/rfc7591">RFC7591</a>, we
+should allow the Stack to register using this protocol when we first need to
+implement a Konnector connecting to such a Service.</p>
+<h4 id="no-redirect_url-enforcement">No redirect_url enforcement<a class="headerlink" href="#no-redirect_url-enforcement" title="Permanent link">&para;</a></h4>
+<p>A few services allows to specify arbitrary redirect_url without registering
+beforehand as a client.</p>
+<h3 id="authorization-grant-flows">Authorization Grant flows<a class="headerlink" href="#authorization-grant-flows" title="Permanent link">&para;</a></h3>
+<h4 id="webserver-flow-authorization-code-grant">webserver flow (Authorization Code Grant)<a class="headerlink" href="#webserver-flow-authorization-code-grant" title="Permanent link">&para;</a></h4>
+<p>A. In the cozy app (Home) give a link</p>
+<div class="codehilite"><pre><span></span><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;https://bob.cozy.rocks/accounts/service-name/start?</span>
+<span class="s">  scope=photos&amp;</span>
+<span class="s">  state=1234zyx&quot;</span><span class="p">&gt;</span>
+</pre></div>
+
+
+<p><strong>NOTE</strong> the scope may depends on other fields being configured (checkboxes),
+this will be described in json in the konnectors manifest. The format will be
+determined upon implementation.</p>
+<p><strong>NOTE</strong> To limit bandwidth and risk of state corruption, the cozy app should
+save its state under a random key into localStorage, the key is then passed as
+the state in this query.</p>
+<p>B. Service lets the user login, allows or denies the scope, then redirects to</p>
+<div class="codehilite"><pre><span></span><span class="err">https://oauthcallback.cozy.rocks/accounts/service-name/redirect?</span>
+<span class="err">  code=AUTH_CODE_HERE&amp;</span>
+<span class="err">  state=1234zyx</span>
+</pre></div>
+
+
+<p>C. The Stack does Server side this request:</p>
+<div class="codehilite"><pre><span></span><span class="nf">POST</span> <span class="nn">https://api.service.example/oauth/access_token</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/x-www-form-urlencoded</span>
+
+grant_type=authorization_code&amp;
+  code=AUTH_CODE_HERE&amp;
+  redirect_uri=https://oauthcallback.cozy.rocks/accounts/service-name/redirect&amp;
+  client_id=CLIENT_ID&amp;
+  client_secret=CLIENT_SECRET
+</pre></div>
+
+
+<p>D. The Service responds (server side) with:</p>
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;access_token&quot;</span><span class="p">:</span> <span class="s2">&quot;ACCESS_TOKEN&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;token_type&quot;</span><span class="p">:</span> <span class="s2">&quot;bearer&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;expires_in&quot;</span><span class="p">:</span> <span class="mi">2592000</span><span class="p">,</span>
+    <span class="nt">&quot;refresh_token&quot;</span><span class="p">:</span> <span class="s2">&quot;REFRESH_TOKEN&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;scope&quot;</span><span class="p">:</span> <span class="s2">&quot;read&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;uid&quot;</span><span class="p">:</span> <span class="mi">100101</span><span class="p">,</span>
+    <span class="nt">&quot;info&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Claude Douillet&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;claude.douillet@example.com&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>This whole object is saved as-is into a <code>io.cozy.accounts</code> &lsquo;s <code>extras</code> field.</p>
+<p>The known fields <code>access_token</code>, <code>refresh_token</code> &amp; <code>scope</code> will be <strong>also</strong>
+saved on the account&rsquo;s <code>oauth</code> itself</p>
+<p>E. The Stack redirect the user to the cozy app:</p>
+<div class="codehilite"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">302</span> <span class="ne">Found</span>
+<span class="na">Location</span><span class="o">:</span> <span class="l">https://bob-home.cozy.rocks/?state=1234zyx&amp;account=accountID</span>
+</pre></div>
+
+
+<p>The Cozy app checks that the state is expected, and restores its state to the
+form but whith account completed.</p>
+<h4 id="spa-flow-implicit-grant">SPA flow (Implicit grant)<a class="headerlink" href="#spa-flow-implicit-grant" title="Permanent link">&para;</a></h4>
+<p>A. The cozy app gives a link:</p>
+<div class="codehilite"><pre><span></span><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;https://service.example/auth? (url)</span>
+<span class="s">    response_type=token&amp;</span>
+<span class="s">    client_id=CLIENT_ID&amp;</span>
+<span class="s">    redirect_uri=https://bob-home.cozy.rocks/&amp;</span>
+<span class="s">    scope=photos&amp;</span>
+<span class="s">    state=1234zyx&quot;</span><span class="p">&gt;</span>
+</pre></div>
+
+
+<p>See server-flow for state rules.</p>
+<p>B. Service lets the user login, allows or denies the scope, then redirects to</p>
+<div class="codehilite"><pre><span></span><span class="err">https://bob-home.cozy.rocks/?</span>
+<span class="err">access_token=ACCESS_TOKEN&amp;</span>
+<span class="err">state=1234zyx</span>
+</pre></div>
+
+
+<p>C. The Cozy app adds the token to the <code>io.cozy.accounts</code> and save it before
+starting konnector.</p>
+<h3 id="accessing-data">Accessing data<a class="headerlink" href="#accessing-data" title="Permanent link">&para;</a></h3>
+<p>Once we have an account, the Cozy app starts the konnector with the proper
+account id. The konnector can then fetch the account and use its <code>access_token</code>
+to performs a request to fetch data:</p>
+<div class="codehilite"><pre><span></span><span class="nf">POST</span> <span class="nn">https://api.service.com/resource</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer ACCESS_TOKEN</span>
+</pre></div>
+
+
+<h3 id="refreshing-token">Refreshing token<a class="headerlink" href="#refreshing-token" title="Permanent link">&para;</a></h3>
+<p>When using the server-flow, we also get a refresh_token. It is used to get a new
+access_token when it expires. However, if konnectors are responsible for
+refreshing token there is a race condition risk :</p>
+<div class="codehilite"><pre><span></span>(konnector A) GET  https://api.service.com/resource TOKEN1     -&gt; expired
+(konnector B) GET  https://api.service.com/resource TOKEN1     -&gt; expired
+(konnector A) POST https://api.service.com/token REFRESH_TOKEN -&gt; TOKEN2a
+(konnector B) POST https://api.service.com/token REFRESH_TOKEN -&gt; TOKEN2b
+(konnector A) GET  https://api.service.com/token TOKEN2a       -&gt; invalid
+</pre></div>
+
+
+<p>To avoid this, the stack will be responsible to perform token refresh. A
+konnector can requires the stack to refresh an account token with an HTTP
+request.</p>
+<div class="codehilite"><pre><span></span><span class="nf">POST</span> <span class="nn">https://bob.cozy.rocks/accounts/:accountID/refresh</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</pre></div>
+
+
+<h3 id="konnectors-marketplace-requirements">Konnectors Marketplace Requirements<a class="headerlink" href="#konnectors-marketplace-requirements" title="Permanent link">&para;</a></h3>
+<p>The following is a few points to be careful for in konnectors when we start
+allowing non-cozy developped OAuth konnectors.</p>
+<ul>
+<li>With SPA flow, because of advanced security concerns (confused deputy
+    problem), cozy should validate the <code>access_token</code>. However, the way to do
+    that depends on the provider and cannot be described in json, it is
+    therefore the responsibility of the konnector itself.</li>
+</ul>
+<h3 id="account-types-security-rules">Account types security rules<a class="headerlink" href="#account-types-security-rules" title="Permanent link">&para;</a></h3>
+<ul>
+<li>With server flow, an evil account type with proper <code>auth_endpoint</code> but bad
+    <code>token_endpoint</code> could retrieve a valid token as well as cozy client secret.
+    The reviewer of an <code>account_type</code> should make sure both these endpoints are
+    on domains belonging to the Service provider.</li>
+</ul>
+<h3 id="notes-for-mesinfos-experiment">Notes for MesInfos experiment<a class="headerlink" href="#notes-for-mesinfos-experiment" title="Permanent link">&para;</a></h3>
+<ul>
+<li>MAIF konnector uses the webserver flow without redirect_uri validation</li>
+<li>Orange konnector uses the client-side proxy but hosted on their own servers
+    (/!\ redirect_uri vs redirect_url)</li>
+</ul>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../sharing-design/" title="Sharing design" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Sharing design
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../auth/" title="/auth - Authentication & OAuth" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                /auth - Authentication & OAuth
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.245445c6.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="../../extra.js"></script>
+      
+    
+  </body>
+</html>

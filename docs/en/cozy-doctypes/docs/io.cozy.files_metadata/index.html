@@ -1,0 +1,2885 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Cozy documentation">
+      
+      
+        <link rel="canonical" href="https://docs.cozy.io/cozy-doctypes/docs/io.cozy.files_metadata/">
+      
+      
+        <meta name="author" content="CozyCloud - https://cozy.io">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[^a-zа-яё0-9\-]">
+      
+      <link rel="shortcut icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.0">
+    
+    
+      
+        <title>Files metadata - Cozy Developer Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/application.0284f74d.css">
+      
+        <link rel="stylesheet" href="../../../assets/stylesheets/application-palette.01803549.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#2196f3">
+      
+    
+    
+    
+      <script src="../../../assets/javascripts/modernizr.74668098.js"></script>
+    
+    <script type="text/javascript">
+        // Used in extra.js, we have to define the variable here since
+        // we need access to the "config" jinja variable
+        window.outsideDocs = [{"repo": "https://github.com/cozy/cozy-app-publish.git", "name": "cozy-app-publish", "subdir": "."}, {"repo": "https://github.com/cozy/cozy-apps-registry.git", "name": "cozy-apps-registry", "subdir": "."}, {"repo": "https://github.com/cozy/cozy-client.git", "name": "cozy-client", "subdir": "docs"}, {"repo": "https://github.com/cozy/cozy-client-js.git", "name": "cozy-client-js", "subdir": "docs"}, {"repo": "https://github.com/cozy/cozy-ui.git", "name": "cozy-ui", "subdir": "docs"}, {"repo": "https://github.com/cozy/cozy-doctypes.git", "name": "cozy-doctypes", "subdir": "."}, {"repo": "https://github.com/konnectors/libs.git", "name": "cozy-konnector-libs", "subdir": "packages/cozy-konnector-libs/docs"}, {"repo": "https://github.com/CPatchane/create-cozy-app.git", "name": "cozy-scripts", "subdir": "packages/cozy-scripts/docs"}, {"repo": "https://github.com/cozy/cozy-stack.git", "name": "cozy-stack", "subdir": "docs"}, {"repo": "https://github.com/konnectors/konitor.git", "name": "konitor", "subdir": "docs"}, {"repo": "https://github.com/cozy/cozy-libs.git", "name": "babel-preset-cozy-app", "subdir": "packages/babel-preset-cozy-app"}, {"repo": "https://github.com/cozy/cozy-libs.git", "name": "commitlint-config-cozy", "subdir": "packages/commitlint-config-cozy"}, {"repo": "https://github.com/cozy/cozy-libs.git", "name": "cozy-device-helper", "subdir": "packages/cozy-device-helper"}, {"repo": "https://github.com/cozy/cozy-libs.git", "name": "eslint-config-cozy-app", "subdir": "packages/eslint-config-cozy-app"}, {"repo": "https://github.com/cozy/cozy-libs.git", "name": "cozy-flags", "subdir": "packages/cozy-flags"}, {"repo": "https://github.com/cozy/cozy-libs.git", "name": "cozy-realtime", "subdir": "packages/cozy-realtime"}]
+    </script>
+
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Ubuntu+Mono&display=fallback">
+        <style>body,input{font-family:"Lato","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Ubuntu Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="blue" data-md-color-accent="blue">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#metadata-on-iocozyfiles-documents" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://docs.cozy.io/" title="Cozy Developer Documentation" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon">cloud</i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              Cozy Developer Documentation
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Files metadata
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/cozy/cozy.github.io/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://docs.cozy.io/" title="Cozy Developer Documentation" class="md-nav__button md-logo">
+      
+        <i class="md-icon">cloud</i>
+      
+    </a>
+    Cozy Developer Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/cozy/cozy.github.io/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Tutorials
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Tutorials
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tutorials/app/" title="Create Your Application" class="md-nav__link">
+      Create Your Application
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tutorials/konnector/" title="Develop a Connector" class="md-nav__link">
+      Develop a Connector
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tutorials/selfhost-debian/" title="Self-Host on Debian" class="md-nav__link">
+      Self-Host on Debian
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      How-to
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        How-to
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-1" type="checkbox" id="nav-3-1">
+    
+    <label class="md-nav__link" for="nav-3-1">
+      Dev
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-1">
+        Dev
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../howTos/dev/runCozyDocker/" title="Run an App in a Cozy using Docker" class="md-nav__link">
+      Run an App in a Cozy using Docker
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../howTos/dev/hmr/" title="Use Hot Module Replacement in Your App" class="md-nav__link">
+      Use Hot Module Replacement in Your App
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../howTos/dev/cordova/" title="Make a Mobile App Using Cordova" class="md-nav__link">
+      Make a Mobile App Using Cordova
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../howTos/dev/connect-mobile-app-local-stack/" title="Connect a Mobile App to Your Local Stack" class="md-nav__link">
+      Connect a Mobile App to Your Local Stack
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../howTos/dev/sendmail/" title="Send and Receive E-mails in Development" class="md-nav__link">
+      Send and Receive E-mails in Development
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../references/git-flow/" title="Our Front-End Git Flow" class="md-nav__link">
+      Our Front-End Git Flow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../references/tech-intro/" title="Technical introduction to the Cozy platform" class="md-nav__link">
+      Technical introduction to the Cozy platform
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-2" type="checkbox" id="nav-3-2">
+    
+    <label class="md-nav__link" for="nav-3-2">
+      Synchronize
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-2">
+        Synchronize
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../howTos/sync/linux/" title="Install Cozy Drive on GNU/Linux" class="md-nav__link">
+      Install Cozy Drive on GNU/Linux
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
+    
+    <label class="md-nav__link" for="nav-4">
+      Stack and tools
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Stack and tools
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../eslint-config-cozy-app/" title="eslint-config-cozy-app" class="md-nav__link">
+      eslint-config-cozy-app
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../commitlint-config-cozy/" title="commitlint-config-cozy" class="md-nav__link">
+      commitlint-config-cozy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3" type="checkbox" id="nav-4-3">
+    
+    <label class="md-nav__link" for="nav-4-3">
+      cozy-stack
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-3">
+        cozy-stack
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/" title="README" class="md-nav__link">
+      README
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-2" type="checkbox" id="nav-4-3-2">
+    
+    <label class="md-nav__link" for="nav-4-3-2">
+      Usage
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-3-2">
+        Usage
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/INSTALL/" title="Install the cozy-stack" class="md-nav__link">
+      Install the cozy-stack
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/config/" title="Configuration file" class="md-nav__link">
+      Configuration file
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/instance/" title="Managing Instances" class="md-nav__link">
+      Managing Instances
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/security/" title="Security" class="md-nav__link">
+      Security
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/cli/cozy-stack/" title="Manpages of the command-line tool" class="md-nav__link">
+      Manpages of the command-line tool
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-3" type="checkbox" id="nav-4-3-3">
+    
+    <label class="md-nav__link" for="nav-4-3-3">
+      How-to guides for developpers
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-3-3">
+        How-to guides for developpers
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/client-app-dev/" title="Develop a client-side app" class="md-nav__link">
+      Develop a client-side app
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/docker/" title="Running and building Docker images" class="md-nav__link">
+      Running and building Docker images
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/doctype/" title="Adding a new doctype" class="md-nav__link">
+      Adding a new doctype
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/assets/" title="Working with the stack assets" class="md-nav__link">
+      Working with the stack assets
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/release/" title="Build a release" class="md-nav__link">
+      Build a release
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/CONTRIBUTING/" title="The contributing guide" class="md-nav__link">
+      The contributing guide
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-4" type="checkbox" id="nav-4-3-4">
+    
+    <label class="md-nav__link" for="nav-4-3-4">
+      Explanations
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-3-4">
+        Explanations
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/sharing-design/" title="Sharing design" class="md-nav__link">
+      Sharing design
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/konnectors-workflow/" title="Workflow of the konnectors" class="md-nav__link">
+      Workflow of the konnectors
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-5" type="checkbox" id="nav-4-3-5">
+    
+    <label class="md-nav__link" for="nav-4-3-5">
+      List of services
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-3-5">
+        List of services
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/auth/" title="/auth - Authentication & OAuth" class="md-nav__link">
+      /auth - Authentication & OAuth
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/apps/" title="/apps - Applications Management" class="md-nav__link">
+      /apps - Applications Management
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/registry/" title="/apps - Apps registry" class="md-nav__link">
+       /apps - Apps registry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/konnectors/" title="/apps - Konnectors" class="md-nav__link">
+       /apps - Konnectors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/data-system/" title="/data - Data System" class="md-nav__link">
+      /data - Data System
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/mango/" title="/data - Mango" class="md-nav__link">
+       /data - Mango
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/couchdb-quirks/" title="/data - CouchDB Quirks" class="md-nav__link">
+       /data - CouchDB Quirks
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/pouchdb-quirks/" title="/data - PouchDB Quirks" class="md-nav__link">
+       /data - PouchDB Quirks
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/files/" title="/files - Virtual File System" class="md-nav__link">
+      /files - Virtual File System
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/references-docs-in-vfs/" title="/files - References of documents in VFS" class="md-nav__link">
+       /files - References of documents in VFS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/intents/" title="/intents - Intents" class="md-nav__link">
+      /intents - Intents
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/jobs/" title="/jobs - Jobs" class="md-nav__link">
+      /jobs - Jobs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/workers/" title="/jobs - Workers" class="md-nav__link">
+       /jobs - Workers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/move/" title="/move - Move, export and import an instance" class="md-nav__link">
+      /move - Move, export and import an instance
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/notifications/" title="/notifications - Notifications" class="md-nav__link">
+      /notifications - Notifications
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/public/" title="/public - Public" class="md-nav__link">
+      /public - Public
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/permissions/" title="/permissions - Permissions" class="md-nav__link">
+      /permissions - Permissions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/realtime/" title="/realtime - Realtime" class="md-nav__link">
+      /realtime - Realtime
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/remote/" title="/remote - Proxy for remote data/API" class="md-nav__link">
+      /remote - Proxy for remote data/API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/settings/" title="/settings - Settings" class="md-nav__link">
+      /settings - Settings
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/user-action-required/" title="/settings - Terms of Services" class="md-nav__link">
+       /settings - Terms of Services
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/sharing/" title="/sharings - Sharing" class="md-nav__link">
+      /sharings - Sharing
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-app-publish/" title="cozy-app-publish" class="md-nav__link">
+      cozy-app-publish
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../babel-preset-cozy-app/" title="babel-preset-cozy-app" class="md-nav__link">
+      babel-preset-cozy-app
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../konitor/cli/" title="konitor" class="md-nav__link">
+      konitor
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-7" type="checkbox" id="nav-4-7" checked>
+    
+    <label class="md-nav__link" for="nav-4-7">
+      cozy-doctypes
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-7">
+        cozy-doctypes
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../" title="README" class="md-nav__link">
+      README
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../io.cozy.accounts/" title="Accounts" class="md-nav__link">
+      Accounts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../io.cozy.apps/" title="Apps" class="md-nav__link">
+      Apps
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../io.cozy.bank/" title="Banking doctypes" class="md-nav__link">
+      Banking doctypes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../io.cozy.bills/" title="Bills" class="md-nav__link">
+      Bills
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../io.cozy.konnectors/" title="Connectors" class="md-nav__link">
+      Connectors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../io.cozy.contacts/" title="Contacts" class="md-nav__link">
+      Contacts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../io.cozy.files/" title="Files" class="md-nav__link">
+      Files
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Files metadata
+      </label>
+    
+    <a href="./" title="Files metadata" class="md-nav__link md-nav__link--active">
+      Files metadata
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#image-files" title="Image files" class="md-nav__link">
+    Image files
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#administrative-documents" title="Administrative documents" class="md-nav__link">
+    Administrative documents
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data-structure" title="Data structure" class="md-nav__link">
+    Data structure
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#common-attributes" title="Common attributes" class="md-nav__link">
+    Common attributes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-attributes" title="Other Attributes" class="md-nav__link">
+    Other Attributes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#description-of-different-document-types" title="Description of different document types" class="md-nav__link">
+    Description of different document types
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#invoices-and-documents-related-to-payments" title="Invoices and documents related to payments" class="md-nav__link">
+    Invoices and documents related to payments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#payslips" title="Payslips" class="md-nav__link">
+    Payslips
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tax-notices" title="Tax Notices" class="md-nav__link">
+    Tax Notices
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tax-returns" title="Tax Returns" class="md-nav__link">
+    Tax Returns
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contracts" title="Contracts" class="md-nav__link">
+    Contracts
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#certificates" title="Certificates" class="md-nav__link">
+    Certificates
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#diplomas-and-driving-licenses" title="Diplomas and Driving licenses" class="md-nav__link">
+    Diplomas and Driving licenses
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#identity-documents" title="Identity documents" class="md-nav__link">
+    Identity documents
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bank-statements" title="Bank Statements" class="md-nav__link">
+    Bank Statements
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bank-details-iban" title="Bank Details (IBAN)" class="md-nav__link">
+    Bank Details (IBAN)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mail" title="Mail" class="md-nav__link">
+    Mail
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#report" title="Report" class="md-nav__link">
+    Report
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#office" title="Office" class="md-nav__link">
+    Office
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples" title="Examples" class="md-nav__link">
+    Examples
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#invoices-payment-statements-payment-schedules" title="Invoices, payment statements, payment schedules" class="md-nav__link">
+    Invoices, payment statements, payment schedules
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#taxe-notices" title="Taxe notices" class="md-nav__link">
+    Taxe notices
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#payslips_1" title="Payslips" class="md-nav__link">
+    Payslips
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#certificates_1" title="Certificates" class="md-nav__link">
+    Certificates
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#identity-documents_1" title="Identity documents" class="md-nav__link">
+    Identity documents
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../io.cozy.identities/" title="Identities" class="md-nav__link">
+      Identities
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../io.cozy.notifications/" title="Notifications" class="md-nav__link">
+      Notifications
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../io.cozy.remote.requests/" title="Remote requests" class="md-nav__link">
+      Remote requests
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../io.cozy.sessions.logins/" title="Session logins" class="md-nav__link">
+      Session logins
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../io.cozy.permissions/" title="Permissions" class="md-nav__link">
+      Permissions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../io.cozy.photos.albums/" title="Photos Albums" class="md-nav__link">
+      Photos Albums
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../io.cozy.procedures/" title="Procedures" class="md-nav__link">
+      Procedures
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../io.cozy.sessions.logins/" title="Sessions Logins" class="md-nav__link">
+      Sessions Logins
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../io.cozy.settings/" title="Settings" class="md-nav__link">
+      Settings
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../io.cozy.sharings/" title="Sharings" class="md-nav__link">
+      Sharings
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../io.cozy.account_types/" title="Accounts Types" class="md-nav__link">
+      Accounts Types
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../cc.cozycloud.autocategorization/" title="Autocategorization" class="md-nav__link">
+      Autocategorization
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../io.cozy.exports/" title="Exports" class="md-nav__link">
+      Exports
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../io.cozy.jobs/" title="Jobs" class="md-nav__link">
+      Jobs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../io.cozy.oauth.clients/" title="OAuth Clients" class="md-nav__link">
+      OAuth Clients
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../io.cozy.oauth.access_codes/" title="OAuth Access Codes" class="md-nav__link">
+      OAuth Access Codes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../io.cozy.triggers/" title="Triggers" class="md-nav__link">
+      Triggers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../io.cozy.triggers.state/" title="Triggers state" class="md-nav__link">
+      Triggers state
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../io.cozy.remote.requests/" title="Remote requests" class="md-nav__link">
+      Remote requests
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../io.cozy.sessions/" title="Sessions" class="md-nav__link">
+      Sessions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../io.cozy.shared/" title="Shared" class="md-nav__link">
+      Shared
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../io.cozy.terms/" title="Terms" class="md-nav__link">
+      Terms
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../com.unibet.bets/" title="Bets Unibet" class="md-nav__link">
+      Bets Unibet
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-ui/" title="cozy-ui" class="md-nav__link">
+      cozy-ui
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-device-helper/" title="cozy-device-helper" class="md-nav__link">
+      cozy-device-helper
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-10" type="checkbox" id="nav-4-10">
+    
+    <label class="md-nav__link" for="nav-4-10">
+      cozy-client
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-10">
+        cozy-client
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-client/getting-started/" title="Getting started" class="md-nav__link">
+      Getting started
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-client/relationships/" title="Using relationship" class="md-nav__link">
+      Using relationship
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-client/metadata/" title="cozyMetadata maintenance" class="md-nav__link">
+      cozyMetadata maintenance
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-client/react-integration/" title="React integration" class="md-nav__link">
+      React integration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-client/details/" title="Other details" class="md-nav__link">
+      Other details
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-client/api/cozy-client/" title="Cozy Client API" class="md-nav__link">
+      Cozy Client API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-client/api/cozy-pouch-link/" title="Cozy Pouch Link API" class="md-nav__link">
+      Cozy Pouch Link API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-client/api/cozy-stack-client/" title="Cozy Stack Client API" class="md-nav__link">
+      Cozy Stack Client API
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-realtime/" title="cozy-realtime" class="md-nav__link">
+      cozy-realtime
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-12" type="checkbox" id="nav-4-12">
+    
+    <label class="md-nav__link" for="nav-4-12">
+      cozy-konnector-libs
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-12">
+        cozy-konnector-libs
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-konnector-libs/api/" title="API" class="md-nav__link">
+      API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-konnector-libs/cli/" title="CLI" class="md-nav__link">
+      CLI
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-konnector-libs/dev/" title="Develop" class="md-nav__link">
+      Develop
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-konnector-libs/errors/" title="Errors" class="md-nav__link">
+      Errors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-konnector-libs/operation-linking/" title="Operation linking" class="md-nav__link">
+      Operation linking
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-konnector-libs/synchronization/" title="Synchronization" class="md-nav__link">
+      Synchronization
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-apps-registry/" title="cozy-apps-registry" class="md-nav__link">
+      cozy-apps-registry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-flags/" title="cozy-flags" class="md-nav__link">
+      cozy-flags
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-15" type="checkbox" id="nav-4-15">
+    
+    <label class="md-nav__link" for="nav-4-15">
+      cozy-client-js
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-15">
+        cozy-client-js
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-client-js/" title="README" class="md-nav__link">
+      README
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-client-js/intro/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-client-js/browser-sdk-transition/" title="Transition from cozy-browser-sdk" class="md-nav__link">
+      Transition from cozy-browser-sdk
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-client-js/offline/" title="How to support offline" class="md-nav__link">
+      How to support offline
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-client-js/oauth/" title="OAuth guide" class="md-nav__link">
+      OAuth guide
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-client-js/auth-api/" title="Authentication API" class="md-nav__link">
+      Authentication API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-client-js/data-api/" title="Data System API" class="md-nav__link">
+      Data System API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-client-js/files-api/" title="Files API" class="md-nav__link">
+      Files API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-client-js/jobs-api/" title="Jobs API" class="md-nav__link">
+      Jobs API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-client-js/intents-api/" title="Intents API" class="md-nav__link">
+      Intents API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-client-js/settings-api/" title="Settings API" class="md-nav__link">
+      Settings API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-client-js/sharing-api/" title="Sharing API" class="md-nav__link">
+      Sharing API
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#image-files" title="Image files" class="md-nav__link">
+    Image files
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#administrative-documents" title="Administrative documents" class="md-nav__link">
+    Administrative documents
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data-structure" title="Data structure" class="md-nav__link">
+    Data structure
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#common-attributes" title="Common attributes" class="md-nav__link">
+    Common attributes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-attributes" title="Other Attributes" class="md-nav__link">
+    Other Attributes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#description-of-different-document-types" title="Description of different document types" class="md-nav__link">
+    Description of different document types
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#invoices-and-documents-related-to-payments" title="Invoices and documents related to payments" class="md-nav__link">
+    Invoices and documents related to payments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#payslips" title="Payslips" class="md-nav__link">
+    Payslips
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tax-notices" title="Tax Notices" class="md-nav__link">
+    Tax Notices
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tax-returns" title="Tax Returns" class="md-nav__link">
+    Tax Returns
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contracts" title="Contracts" class="md-nav__link">
+    Contracts
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#certificates" title="Certificates" class="md-nav__link">
+    Certificates
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#diplomas-and-driving-licenses" title="Diplomas and Driving licenses" class="md-nav__link">
+    Diplomas and Driving licenses
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#identity-documents" title="Identity documents" class="md-nav__link">
+    Identity documents
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bank-statements" title="Bank Statements" class="md-nav__link">
+    Bank Statements
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bank-details-iban" title="Bank Details (IBAN)" class="md-nav__link">
+    Bank Details (IBAN)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mail" title="Mail" class="md-nav__link">
+    Mail
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#report" title="Report" class="md-nav__link">
+    Report
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#office" title="Office" class="md-nav__link">
+    Office
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples" title="Examples" class="md-nav__link">
+    Examples
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#invoices-payment-statements-payment-schedules" title="Invoices, payment statements, payment schedules" class="md-nav__link">
+    Invoices, payment statements, payment schedules
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#taxe-notices" title="Taxe notices" class="md-nav__link">
+    Taxe notices
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#payslips_1" title="Payslips" class="md-nav__link">
+    Payslips
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#certificates_1" title="Certificates" class="md-nav__link">
+    Certificates
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#identity-documents_1" title="Identity documents" class="md-nav__link">
+    Identity documents
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/cozy/cozy.github.io/edit/dev/src/cozy-doctypes/docs/io.cozy.files_metadata.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="metadata-on-iocozyfiles-documents">Metadata on <code>io.cozy.files</code> documents<a class="headerlink" href="#metadata-on-iocozyfiles-documents" title="Permanent link">&para;</a></h1>
+<h2 id="image-files">Image files<a class="headerlink" href="#image-files" title="Permanent link">&para;</a></h2>
+<p>For pictures files, like <code>jpg</code>, <code>png</code>, <code>gif</code>&hellip;</p>
+<ul>
+<li><code>width</code>: {number}</li>
+<li><code>height</code>: {number}</li>
+<li><code>datetime</code>: {date} : date in original image file metadata</li>
+<li><code>gps</code>: {map} : localization metadata with the following attributes<ul>
+<li><code>lat</code>: {float}: latitude</li>
+<li><code>long</code>: {float}: longitude</li>
+<li><code>city</code>: {string}: nearest city (optional)</li>
+<li><code>zip</code>: {string}: postal code of the nearest city (optional)</li>
+<li><code>country</code>: {string}: name of the associated country if any (optional)</li>
+</ul>
+</li>
+<li><code>persons</code>: {array}: the maps can have the following attributes (optional)<ul>
+<li><code>name</code>: {string}: then name of the tagged person on the photo</li>
+<li><code>created_at</code>: {date}: date of creation of the tag</li>
+<li><code>x</code>: {float}: x coordinate in the photo where the person is</li>
+<li><code>y</code>: {float}: y coordinate in the photo where the person is</li>
+</ul>
+</li>
+</ul>
+<h2 id="administrative-documents">Administrative documents<a class="headerlink" href="#administrative-documents" title="Permanent link">&para;</a></h2>
+<p>Mostly imported by the connectors, cozy stores many different types of administrative documents, like invoices, contracts or certificates.</p>
+<h3 id="data-structure">Data structure<a class="headerlink" href="#data-structure" title="Permanent link">&para;</a></h3>
+<h4 id="common-attributes">Common attributes<a class="headerlink" href="#common-attributes" title="Permanent link">&para;</a></h4>
+<p>There attributes are shared by all the document types covered by the specification.</p>
+<ul>
+<li><code>classification</code>: {string} Document types</li>
+<li><code>datetime</code> : {date} Functional date of the document, most of the time the document issue date</li>
+<li><code>datetimeLabel</code>: {string} Functional meaning of datetime</li>
+<li><code>contentAuthor</code>: {string} Author of the content of the document, can be different of the source connector</li>
+</ul>
+<h4 id="other-attributes">Other Attributes<a class="headerlink" href="#other-attributes" title="Permanent link">&para;</a></h4>
+<p>These attributes depend on the <code>classification</code>.</p>
+<ul>
+<li><code>subClassification</code>: {string} Subtype of the document (ex: invoice, payment_statement, payment_schedules)</li>
+<li><code>categories</code>: {array of strings} List of tags referring to the field of activity, can be deduced from the categories of connectors</li>
+<li><code>subjects</code> : {array of strings} List of tags referring to the subject of the document
+  &hellip;</li>
+</ul>
+<h3 id="description-of-different-document-types">Description of different document types<a class="headerlink" href="#description-of-different-document-types" title="Permanent link">&para;</a></h3>
+<h4 id="invoices-and-documents-related-to-payments">Invoices and documents related to payments<a class="headerlink" href="#invoices-and-documents-related-to-payments" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>classification</code> : {string} <code>'invoicing'</code></li>
+<li><code>datetime</code> : {date} Equals to <code>issueDate</code></li>
+<li><code>datetimeLabel</code> : {string} <code>'issueDate'</code></li>
+<li><code>contentAuthor</code> : {string}</li>
+<li><code>subClassification</code> : {string} <code>['invoice'</code>, <code>'payment_statement'</code>, <code>'payment_schedule'</code>]</li>
+<li><code>categories</code> : {array of strings} [<code>'phone'</code>, <code>'isp'</code>, <code>'energy'</code>, <code>'public_service'</code>, <code>'health'</code>, …]</li>
+<li><code>issueDate</code> : {date} Issue date of the document</li>
+<li><code>invoiceNumber</code> : {string} Invoice number</li>
+<li><code>contractReference</code> : {string} Reference of the related contract, if any</li>
+<li><code>isSubscription</code> : {bool} True if the invoice is related to a subscription plan</li>
+</ul>
+<h4 id="payslips">Payslips<a class="headerlink" href="#payslips" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>classification</code> : {string} <code>'payslip'</code></li>
+<li><code>datetime</code> : {date} Equals to <code>startDate</code></li>
+<li><code>datetimeLabel</code> : {string} <code>'startDate'</code></li>
+<li><code>contentAuthor</code> : {string} Employer on the payslip</li>
+<li><code>startDate</code> : {date} First day of the worked period</li>
+<li><code>endDate</code> : {date} Last day of the worked period</li>
+<li><code>issueDate</code> : {date} Issue date of the document</li>
+</ul>
+<h4 id="tax-notices">Tax Notices<a class="headerlink" href="#tax-notices" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>classification</code> : {string} <code>'tax_notice'</code></li>
+<li><code>datetime</code> : {date} Equals to <code>issueDate</code></li>
+<li><code>datetimeLabel</code> : {string} <code>'issueDate'</code></li>
+<li><code>contentAuthor</code> : {string}</li>
+<li><code>subjects</code> : {string} [<code>'income'</code>, <code>'property'</code>, <code>'residence'</code>, <code>'corporate'</code>]</li>
+<li><code>issueDate</code> : {date} Issue date of the document</li>
+</ul>
+<h4 id="tax-returns">Tax Returns<a class="headerlink" href="#tax-returns" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>classification</code> : {string} <code>'tax_return'</code></li>
+<li><code>datetime</code> : {date} Equals to <code>issueDate</code></li>
+<li><code>datetimeLabel</code> : {string} <code>'issueDate'</code></li>
+<li><code>contentAuthor</code> : {string}</li>
+<li><code>subjects</code> : {array of strings} [<code>'income'</code>, <code>'property'</code>, <code>'residence'</code>, <code>'corporate'</code>]</li>
+<li><code>issueDate</code> : {date} Issue date of the document</li>
+<li><code>formReference</code> : {string} Reference of the form (ex: &lsquo;2042RICI&rsquo;)</li>
+</ul>
+<h4 id="contracts">Contracts<a class="headerlink" href="#contracts" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>classification</code> : {string} <code>'contract'</code></li>
+<li><code>datetime</code> : {date} Equals to <code>startDate</code></li>
+<li><code>datetimeLabel</code> : {string} <code>'startDate'</code></li>
+<li><code>contentAuthor</code> : {string}</li>
+<li><code>categories</code> : {array of strings} [<code>'insurance'</code>, <code>'employment'</code>, <code>'health'</code>, <code>'energy'</code>, <code>'phone'</code>, <code>'isp'</code>, <code>'real_estate'</code>]</li>
+<li><code>subjects</code> : {array of strings} [<code>'house'</code>, <code>'car'</code>, <code>'health'</code>, <code>'life'</code>, <code>'rent'</code>]</li>
+<li><code>contractReference</code> : {string} Reference of the contract</li>
+<li><code>issueDate</code> : {date} Issue date of the document</li>
+<li><code>startDate</code> : {date} First day of the validity period</li>
+<li><code>endDate</code> : {date} Last day of the validity period</li>
+</ul>
+<h4 id="certificates">Certificates<a class="headerlink" href="#certificates" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>classification</code> : {string} <code>'certificate'</code></li>
+<li><code>datetime</code> : {date} Equals to <code>issueDate</code></li>
+<li><code>datetimeLabel</code> : {string} <code>'issueDate'</code></li>
+<li><code>contentAuthor</code> : {string}</li>
+<li><code>categories</code> : {array of strings} [<code>'insurance'</code>, <code>'employment'</code>, <code>'health'</code>, <code>'energy'</code>, <code>'phone'</code>, <code>'isp'</code>, <code>'real_estate'</code>, <code>'public_service'</code>, <code>'tax'</code>]</li>
+<li><code>subjects</code> : {array of strings} [<code>'house'</code>, <code>'car'</code>, <code>'health'</code>, <code>'life'</code>, <code>'property'</code>, <code>'subscription'</code>]</li>
+<li><code>issueDate</code> : {date} Issue date of the document</li>
+<li><code>startDate</code> : {date} First day of the validity period</li>
+<li><code>endDate</code> : {date} Last day of the validity period</li>
+</ul>
+<h4 id="diplomas-and-driving-licenses">Diplomas and Driving licenses<a class="headerlink" href="#diplomas-and-driving-licenses" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>classification</code> : {string} <code>'diploma'</code></li>
+<li><code>datetime</code> : {date} Equals to <code>startDate</code></li>
+<li><code>datetimeLabel</code> : {string} <code>'startDate'</code></li>
+<li><code>contentAuthor</code> : {string}</li>
+<li><code>subClassification</code> : {string} [<code>'school'</code>, <code>'driving'</code>, <code>'flying'</code>, <code>'sport'</code>]</li>
+<li><code>startDate</code> : First day of the validity period</li>
+<li><code>label</code> : {string} Short description of the diploma</li>
+<li><code>school</code> : {string} School name</li>
+<li><code>country</code> : {string} Country name</li>
+</ul>
+<h4 id="identity-documents">Identity documents<a class="headerlink" href="#identity-documents" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>classification</code> : {string} <code>'identity_document'</code></li>
+<li><code>datetime</code> : {date} Equals to <code>startDate</code></li>
+<li><code>datetimeLabel</code> : {string} <code>'startDate'</code></li>
+<li><code>contentAuthor</code> : {string}</li>
+<li><code>subClassification</code> : {string} [<code>'national_id_card'</code>, <code>'passport'</code>, <code>'family_record_book'</code>]</li>
+<li><code>issueDate</code> : {date} Issue date of the document</li>
+<li><code>expirationDate</code> : {date} Last day of validity</li>
+<li><code>number</code> : {string} Document number</li>
+<li><code>school</code> : {string} School name</li>
+<li><code>country</code> : {string} Country name</li>
+</ul>
+<h4 id="bank-statements">Bank Statements<a class="headerlink" href="#bank-statements" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>classification</code> : {string} <code>'bank_statement'</code></li>
+<li><code>datetime</code> : {date} Equals to <code>startDate</code></li>
+<li><code>datetimeLabel</code> : {string} <code>'startDate'</code></li>
+<li><code>contentAuthor</code> : {string}</li>
+<li><code>startDate</code> : {date} First day of the statement period</li>
+<li><code>endDate</code> : {date} Last day of the statement period</li>
+<li><code>accountNumber</code> : {string} Number of the related account</li>
+<li><code>bankName</code> : {string} Name of the related bank</li>
+</ul>
+<h4 id="bank-details-iban">Bank Details (IBAN)<a class="headerlink" href="#bank-details-iban" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>classification</code> : {string} <code>'bank_details'</code></li>
+<li><code>datetime</code> : {date} Equals to <code>issueDate</code></li>
+<li><code>datetimeLabel</code> : {string} <code>'issueDate'</code></li>
+<li><code>contentAuthor</code> : {string}</li>
+<li><code>issueDate</code> : {date} Issue date of the document</li>
+<li><code>accountNumber</code> : {string} Number of the related account</li>
+<li><code>bankName</code> : {string} Name of the related bank</li>
+</ul>
+<h4 id="mail">Mail<a class="headerlink" href="#mail" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>classification</code> : {string} <code>'mail'</code></li>
+<li><code>datetime</code> : {date} Equals to <code>issueDate</code></li>
+<li><code>datetimeLabel</code> : {string} <code>'issueDate'</code></li>
+<li><code>contentAuthor</code> : {string}</li>
+<li><code>categories</code> : {array of strings} [<code>'insurance'</code>, <code>'employment'</code>, <code>'health'</code>, <code>'energy'</code>, <code>'phone'</code>, <code>'isp'</code>, <code>'real_estate'</code>, <code>'tax'</code>]</li>
+</ul>
+<h4 id="report">Report<a class="headerlink" href="#report" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>classification</code> : {string} <code>'mail'</code></li>
+<li><code>datetime</code> : {date} Equals to <code>issueDate</code></li>
+<li><code>datetimeLabel</code> : {string} <code>'issueDate'</code></li>
+<li><code>contentAuthor</code> : {string}</li>
+<li><code>subjects</code> : {array of strings} [<code>'theft'</code>, <code>'loss'</code>, <code>'damage'</code>, <code>accident</code>]</li>
+</ul>
+<h4 id="office">Office<a class="headerlink" href="#office" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>classification</code> : {string} <code>'office'</code></li>
+<li><code>subClassification</code> : {string} [<code>'textpad'</code>, <code>'spreadsheet'</code>, <code>'slides'</code>]</li>
+</ul>
+<h3 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h3>
+<h4 id="invoices-payment-statements-payment-schedules">Invoices, payment statements, payment schedules<a class="headerlink" href="#invoices-payment-statements-payment-schedules" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="c1">// invoice - bouygues telecom</span>
+<span class="s1">&#39;metadata&#39;</span><span class="o">:</span> <span class="p">{</span>
+  <span class="s1">&#39;classification&#39;</span><span class="o">:</span> <span class="s1">&#39;invoicing&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;datetime&#39;</span><span class="o">:</span> <span class="s1">&#39;2019-05-10&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;datetimeLabel&#39;</span><span class="o">:</span> <span class="s1">&#39;issueDate&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;contentAuthor&#39;</span><span class="o">:</span> <span class="s1">&#39;bouyguestelecom&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;categories&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;phone&#39;</span><span class="p">,</span><span class="s1">&#39;isp&#39;</span><span class="p">,</span><span class="s1">&#39;telecom&#39;</span><span class="p">],</span>
+  <span class="s1">&#39;subClassification&#39;</span><span class="o">:</span> <span class="s1">&#39;invoice&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;issueDate&#39;</span><span class="o">:</span> <span class="s1">&#39;2019-05-10&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;contractReference&#39;</span><span class="o">:</span> <span class="s1">&#39;0645874398&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;invoiceNumber&#39;</span><span class="o">:</span> <span class="s1">&#39;KJF949875&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;isSubscription&#39;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+<span class="p">},</span>
+<span class="s1">&#39;cozyMetadata&#39;</span><span class="o">:</span> <span class="p">{</span>
+  <span class="p">...</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="c1">// payment statement - ameli</span>
+<span class="s1">&#39;metadata&#39;</span><span class="o">:</span> <span class="p">{</span>
+  <span class="s1">&#39;classification&#39;</span><span class="o">:</span> <span class="s1">&#39;invoicing&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;datetime&#39;</span><span class="o">:</span> <span class="s1">&#39;2019-05-10&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;datetimeLabel&#39;</span><span class="o">:</span> <span class="s1">&#39;issueDate&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;contentAuthor&#39;</span><span class="o">:</span> <span class="s1">&#39;ameli&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;categories&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;insurance&#39;</span><span class="p">,</span> <span class="s1">&#39;health&#39;</span><span class="p">],</span>
+  <span class="s1">&#39;subClassification&#39;</span><span class="o">:</span> <span class="s1">&#39;payment_statement&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;issueDate&#39;</span><span class="o">:</span> <span class="s1">&#39;2019-05-10&#39;</span><span class="p">,</span>
+<span class="p">},</span>
+<span class="s1">&#39;cozyMetadata&#39;</span><span class="o">:</span> <span class="p">{</span>
+  <span class="p">...</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="c1">// payment schedule - EDF</span>
+<span class="s1">&#39;metadata&#39;</span><span class="o">:</span> <span class="p">{</span>
+  <span class="s1">&#39;classification&#39;</span><span class="o">:</span> <span class="s1">&#39;invoicing&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;datetime&#39;</span><span class="o">:</span> <span class="s1">&#39;2019-05-10&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;datetimeLabel&#39;</span><span class="o">:</span> <span class="s1">&#39;issueDate&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;contentAuthor&#39;</span><span class="o">:</span> <span class="s1">&#39;edf&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;categories&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;energy&#39;</span><span class="p">],</span>
+  <span class="s1">&#39;subClassification&#39;</span><span class="o">:</span> <span class="s1">&#39;paiement_schedule&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;iSubscription&#39;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="s1">&#39;issueDate&#39;</span><span class="o">:</span> <span class="s1">&#39;2019-05-10&#39;</span><span class="p">,</span>
+<span class="p">},</span>
+<span class="s1">&#39;cozyMetadata&#39;</span><span class="o">:</span> <span class="p">{</span>
+  <span class="p">...</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<h4 id="taxe-notices">Taxe notices<a class="headerlink" href="#taxe-notices" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="c1">// taxe notice on income</span>
+<span class="s1">&#39;metadata&#39;</span><span class="o">:</span> <span class="p">{</span>
+  <span class="s1">&#39;classification&#39;</span><span class="o">:</span> <span class="s1">&#39;tax_notice&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;datetime&#39;</span><span class="o">:</span> <span class="s1">&#39;2019-05-10&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;datetimeLabel&#39;</span><span class="o">:</span> <span class="s1">&#39;issueDate&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;contentAuthor&#39;</span><span class="o">:</span> <span class="s1">&#39;impots.gouv&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;subjects&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;income&#39;</span><span class="p">],</span>
+  <span class="s1">&#39;issueDate&#39;</span><span class="o">:</span> <span class="s1">&#39;2019-05-10&#39;</span><span class="p">,</span>
+<span class="p">},</span>
+<span class="s1">&#39;cozyMetadata&#39;</span><span class="o">:</span> <span class="p">{</span>
+  <span class="p">...</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="c1">// tax return on income</span>
+<span class="s1">&#39;metadata&#39;</span><span class="o">:</span> <span class="p">{</span>
+  <span class="s1">&#39;classification&#39;</span><span class="o">:</span> <span class="s1">&#39;tax_report&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;datetime&#39;</span><span class="o">:</span> <span class="s1">&#39;2019-05-10&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;datetimeLabel&#39;</span><span class="o">:</span> <span class="s1">&#39;issueDate&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;contentAuthor&#39;</span><span class="o">:</span> <span class="s1">&#39;impots.gouv&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;subjects&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;income&#39;</span><span class="p">],</span>
+  <span class="s1">&#39;formReference&#39;</span><span class="o">:</span> <span class="s1">&#39;2042RICI&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;issueDate&#39;</span><span class="o">:</span> <span class="s1">&#39;2019-05-10&#39;</span><span class="p">,</span>
+<span class="p">},</span>
+<span class="s1">&#39;cozyMetadata&#39;</span><span class="o">:</span> <span class="p">{</span>
+  <span class="p">...</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<h4 id="payslips_1">Payslips<a class="headerlink" href="#payslips_1" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="c1">// payslip - cozycloud</span>
+<span class="s1">&#39;metadata&#39;</span><span class="o">:</span> <span class="p">{</span>
+  <span class="s1">&#39;classification&#39;</span><span class="o">:</span> <span class="s1">&#39;payslip&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;datetime&#39;</span><span class="o">:</span> <span class="s1">&#39;2019-05-01&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;datetimeLabel&#39;</span><span class="o">:</span> <span class="s1">&#39;startDate&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;contentAuthor&#39;</span><span class="o">:</span> <span class="s1">&#39;cozycloud&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;startDate&#39;</span><span class="o">:</span> <span class="s1">&#39;2019-05-01&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;endDate&#39;</span><span class="o">:</span> <span class="s1">&#39;2019-05-31&#39;</span><span class="p">,</span>
+<span class="p">},</span>
+<span class="s1">&#39;cozyMetadata&#39;</span><span class="o">:</span> <span class="p">{</span>
+  <span class="p">...</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<h4 id="certificates_1">Certificates<a class="headerlink" href="#certificates_1" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="c1">// contrat certificate - EDF</span>
+<span class="s1">&#39;metadata&#39;</span><span class="o">:</span> <span class="p">{</span>
+  <span class="s1">&#39;classification&#39;</span><span class="o">:</span> <span class="s1">&#39;certificate&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;datetime&#39;</span><span class="o">:</span> <span class="s1">&#39;2019-05-10&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;datetimeLabel&#39;</span><span class="o">:</span> <span class="s1">&#39;startDate&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;contentAuthor&#39;</span><span class="o">:</span> <span class="s1">&#39;edf&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;categories&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;energy&#39;</span><span class="p">],</span>
+  <span class="s1">&#39;subjects&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;subscription&#39;</span><span class="p">],</span>
+  <span class="s1">&#39;issueDate&#39;</span><span class="o">:</span> <span class="s1">&#39;2019-05-10&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;startDate&#39;</span><span class="o">:</span> <span class="s1">&#39;2019-01-01&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;startDate&#39;</span><span class="o">:</span> <span class="s1">&#39;2019-12-31&#39;</span><span class="p">,</span>
+<span class="p">},</span>
+<span class="s1">&#39;cozyMetadata&#39;</span><span class="o">:</span> <span class="p">{</span>
+  <span class="p">...</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="c1">// health insurance certificate - ameli</span>
+<span class="s1">&#39;metadata&#39;</span><span class="o">:</span> <span class="p">{</span>
+  <span class="s1">&#39;classification&#39;</span><span class="o">:</span> <span class="s1">&#39;certificate&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;datetime&#39;</span><span class="o">:</span> <span class="s1">&#39;2019-05-10&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;datetimeLabel&#39;</span><span class="o">:</span> <span class="s1">&#39;issueDate&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;contentAuthor&#39;</span><span class="o">:</span> <span class="s1">&#39;ameli&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;categories&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;insurance&#39;</span><span class="p">],</span>
+  <span class="s1">&#39;subCategories&#39;</span> <span class="o">:</span> <span class="p">[</span><span class="s1">&#39;health&#39;</span><span class="p">],</span>
+  <span class="s1">&#39;issueDate&#39;</span><span class="o">:</span> <span class="s1">&#39;2019-05-10&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;startDate&#39;</span><span class="o">:</span> <span class="s1">&#39;2019-01-01&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;endDate&#39;</span><span class="o">:</span> <span class="s1">&#39;2019-12-31&#39;</span><span class="p">,</span>
+<span class="p">},</span>
+<span class="s1">&#39;cozyMetadata&#39;</span><span class="o">:</span> <span class="p">{</span>
+  <span class="p">...</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="c1">// car insurance certificate - maif</span>
+<span class="s1">&#39;metadata&#39;</span><span class="o">:</span> <span class="p">{</span>
+  <span class="s1">&#39;classification&#39;</span><span class="o">:</span> <span class="s1">&#39;certificate&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;datetime&#39;</span><span class="o">:</span> <span class="s1">&#39;2019-05-10&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;datetimeLabel&#39;</span><span class="o">:</span> <span class="s1">&#39;issueDate&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;contentAuthor&#39;</span><span class="o">:</span> <span class="s1">&#39;macif&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;categories&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;insurance&#39;</span><span class="p">],</span>
+  <span class="s1">&#39;subCategories&#39;</span> <span class="o">:</span> <span class="p">[</span><span class="s1">&#39;car&#39;</span><span class="p">],</span>
+  <span class="s1">&#39;issueDate&#39;</span><span class="o">:</span> <span class="s1">&#39;2019-05-10&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;startDate&#39;</span><span class="o">:</span> <span class="s1">&#39;2019-01-01&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;endDate&#39;</span><span class="o">:</span> <span class="s1">&#39;2019-12-31&#39;</span><span class="p">,</span>
+<span class="p">},</span>
+<span class="s1">&#39;cozyMetadata&#39;</span><span class="o">:</span> <span class="p">{</span>
+  <span class="p">...</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="c1">// tax certificate - CAF</span>
+<span class="s1">&#39;metadata&#39;</span><span class="o">:</span> <span class="p">{</span>
+  <span class="s1">&#39;classification&#39;</span><span class="o">:</span> <span class="s1">&#39;certificate&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;datetime&#39;</span><span class="o">:</span> <span class="s1">&#39;2019-05-10&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;datetimeLabel&#39;</span><span class="o">:</span> <span class="s1">&#39;issueDate&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;contentAuthor&#39;</span><span class="o">:</span> <span class="s1">&#39;caf&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;categories&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;public_service&#39;</span><span class="p">,</span> <span class="s1">&#39;tax&#39;</span><span class="p">],</span>
+  <span class="s1">&#39;issueDate&#39;</span><span class="o">:</span> <span class="s1">&#39;2019-05-10&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;startDate&#39;</span><span class="o">:</span> <span class="s1">&#39;2019-05-01&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;endDate&#39;</span><span class="o">:</span> <span class="s1">&#39;2019-05-31&#39;</span><span class="p">,</span>
+<span class="p">},</span>
+<span class="s1">&#39;cozyMetadata&#39;</span><span class="o">:</span> <span class="p">{</span>
+  <span class="p">...</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<h4 id="identity-documents_1">Identity documents<a class="headerlink" href="#identity-documents_1" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="c1">// id card</span>
+<span class="s1">&#39;metadata&#39;</span><span class="o">:</span> <span class="p">{</span>
+  <span class="s1">&#39;classification&#39;</span><span class="o">:</span> <span class="s1">&#39;identity_document&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;datetime&#39;</span><span class="o">:</span> <span class="s1">&#39;2019-05-10&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;datetimeLabel&#39;</span><span class="o">:</span> <span class="s1">&#39;issueDate&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;contentAuthor&#39;</span><span class="o">:</span> <span class="s1">&#39;france&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;subClassification&#39;</span><span class="o">:</span> <span class="s1">&#39;national_id_card&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;issueDate&#39;</span><span class="o">:</span> <span class="s1">&#39;2014-05-10&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;expirationDate&#39;</span><span class="o">:</span> <span class="s1">&#39;2029-05-10&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;number&#39;</span><span class="o">:</span> <span class="s1">&#39;ABC123456&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;country&#39;</span><span class="o">:</span> <span class="s1">&#39;france&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;relationships&#39;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s1">&#39;contacts&#39;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s1">&#39;data&#39;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s1">&#39;_id&#39;</span><span class="o">:</span> <span class="s1">&#39;ce61088e116994e265d7f0e6091d0755&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;_type&#39;</span><span class="o">:</span> <span class="s1">&#39;io.cozy.contacts&#39;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+<span class="p">}</span>
+<span class="s1">&#39;cozyMetadata&#39;</span><span class="o">:</span> <span class="p">{</span>
+  <span class="p">...</span>
+<span class="p">}</span>
+</pre></div>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../io.cozy.files/" title="Files" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Files
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../io.cozy.identities/" title="Identities" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Identities
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../assets/javascripts/application.245445c6.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../../.."}})</script>
+      
+        <script src="../../../extra.js"></script>
+      
+    
+  </body>
+</html>

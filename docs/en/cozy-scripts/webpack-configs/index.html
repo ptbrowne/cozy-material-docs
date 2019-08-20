@@ -1,0 +1,2783 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Cozy documentation">
+      
+      
+        <link rel="canonical" href="https://docs.cozy.io/cozy-scripts/webpack-configs/">
+      
+      
+        <meta name="author" content="CozyCloud - https://cozy.io">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[^a-zа-яё0-9\-]">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.0">
+    
+    
+      
+        <title>The `cozy-scripts` Webpack configurations - Cozy Developer Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.0284f74d.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.01803549.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#2196f3">
+      
+    
+    
+    
+      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
+    
+    <script type="text/javascript">
+        // Used in extra.js, we have to define the variable here since
+        // we need access to the "config" jinja variable
+        window.outsideDocs = [{"repo": "https://github.com/cozy/cozy-app-publish.git", "name": "cozy-app-publish", "subdir": "."}, {"repo": "https://github.com/cozy/cozy-apps-registry.git", "name": "cozy-apps-registry", "subdir": "."}, {"repo": "https://github.com/cozy/cozy-client.git", "name": "cozy-client", "subdir": "docs"}, {"repo": "https://github.com/cozy/cozy-client-js.git", "name": "cozy-client-js", "subdir": "docs"}, {"repo": "https://github.com/cozy/cozy-ui.git", "name": "cozy-ui", "subdir": "docs"}, {"repo": "https://github.com/cozy/cozy-doctypes.git", "name": "cozy-doctypes", "subdir": "."}, {"repo": "https://github.com/konnectors/libs.git", "name": "cozy-konnector-libs", "subdir": "packages/cozy-konnector-libs/docs"}, {"repo": "https://github.com/CPatchane/create-cozy-app.git", "name": "cozy-scripts", "subdir": "packages/cozy-scripts/docs"}, {"repo": "https://github.com/cozy/cozy-stack.git", "name": "cozy-stack", "subdir": "docs"}, {"repo": "https://github.com/konnectors/konitor.git", "name": "konitor", "subdir": "docs"}, {"repo": "https://github.com/cozy/cozy-libs.git", "name": "babel-preset-cozy-app", "subdir": "packages/babel-preset-cozy-app"}, {"repo": "https://github.com/cozy/cozy-libs.git", "name": "commitlint-config-cozy", "subdir": "packages/commitlint-config-cozy"}, {"repo": "https://github.com/cozy/cozy-libs.git", "name": "cozy-device-helper", "subdir": "packages/cozy-device-helper"}, {"repo": "https://github.com/cozy/cozy-libs.git", "name": "eslint-config-cozy-app", "subdir": "packages/eslint-config-cozy-app"}, {"repo": "https://github.com/cozy/cozy-libs.git", "name": "cozy-flags", "subdir": "packages/cozy-flags"}, {"repo": "https://github.com/cozy/cozy-libs.git", "name": "cozy-realtime", "subdir": "packages/cozy-realtime"}]
+    </script>
+
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Ubuntu+Mono&display=fallback">
+        <style>body,input{font-family:"Lato","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Ubuntu Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="blue" data-md-color-accent="blue">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#the-cozy-scripts-webpack-configurations" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://docs.cozy.io/" title="Cozy Developer Documentation" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon">cloud</i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              Cozy Developer Documentation
+            </span>
+            <span class="md-header-nav__topic">
+              
+                The `cozy-scripts` Webpack configurations
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/cozy/cozy.github.io/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://docs.cozy.io/" title="Cozy Developer Documentation" class="md-nav__button md-logo">
+      
+        <i class="md-icon">cloud</i>
+      
+    </a>
+    Cozy Developer Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/cozy/cozy.github.io/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Tutorials
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Tutorials
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/app/" title="Create Your Application" class="md-nav__link">
+      Create Your Application
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/konnector/" title="Develop a Connector" class="md-nav__link">
+      Develop a Connector
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/selfhost-debian/" title="Self-Host on Debian" class="md-nav__link">
+      Self-Host on Debian
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      How-to
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        How-to
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-1" type="checkbox" id="nav-3-1">
+    
+    <label class="md-nav__link" for="nav-3-1">
+      Dev
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-1">
+        Dev
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../howTos/dev/runCozyDocker/" title="Run an App in a Cozy using Docker" class="md-nav__link">
+      Run an App in a Cozy using Docker
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../howTos/dev/hmr/" title="Use Hot Module Replacement in Your App" class="md-nav__link">
+      Use Hot Module Replacement in Your App
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../howTos/dev/cordova/" title="Make a Mobile App Using Cordova" class="md-nav__link">
+      Make a Mobile App Using Cordova
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../howTos/dev/connect-mobile-app-local-stack/" title="Connect a Mobile App to Your Local Stack" class="md-nav__link">
+      Connect a Mobile App to Your Local Stack
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../howTos/dev/sendmail/" title="Send and Receive E-mails in Development" class="md-nav__link">
+      Send and Receive E-mails in Development
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../references/git-flow/" title="Our Front-End Git Flow" class="md-nav__link">
+      Our Front-End Git Flow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../references/tech-intro/" title="Technical introduction to the Cozy platform" class="md-nav__link">
+      Technical introduction to the Cozy platform
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-2" type="checkbox" id="nav-3-2">
+    
+    <label class="md-nav__link" for="nav-3-2">
+      Synchronize
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-2">
+        Synchronize
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../howTos/sync/linux/" title="Install Cozy Drive on GNU/Linux" class="md-nav__link">
+      Install Cozy Drive on GNU/Linux
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Stack and tools
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Stack and tools
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../eslint-config-cozy-app/" title="eslint-config-cozy-app" class="md-nav__link">
+      eslint-config-cozy-app
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../commitlint-config-cozy/" title="commitlint-config-cozy" class="md-nav__link">
+      commitlint-config-cozy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3" type="checkbox" id="nav-4-3">
+    
+    <label class="md-nav__link" for="nav-4-3">
+      cozy-stack
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-3">
+        cozy-stack
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/" title="README" class="md-nav__link">
+      README
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-2" type="checkbox" id="nav-4-3-2">
+    
+    <label class="md-nav__link" for="nav-4-3-2">
+      Usage
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-3-2">
+        Usage
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/INSTALL/" title="Install the cozy-stack" class="md-nav__link">
+      Install the cozy-stack
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/config/" title="Configuration file" class="md-nav__link">
+      Configuration file
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/instance/" title="Managing Instances" class="md-nav__link">
+      Managing Instances
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/security/" title="Security" class="md-nav__link">
+      Security
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/cli/cozy-stack/" title="Manpages of the command-line tool" class="md-nav__link">
+      Manpages of the command-line tool
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-3" type="checkbox" id="nav-4-3-3">
+    
+    <label class="md-nav__link" for="nav-4-3-3">
+      How-to guides for developpers
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-3-3">
+        How-to guides for developpers
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/client-app-dev/" title="Develop a client-side app" class="md-nav__link">
+      Develop a client-side app
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/docker/" title="Running and building Docker images" class="md-nav__link">
+      Running and building Docker images
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/doctype/" title="Adding a new doctype" class="md-nav__link">
+      Adding a new doctype
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/assets/" title="Working with the stack assets" class="md-nav__link">
+      Working with the stack assets
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/release/" title="Build a release" class="md-nav__link">
+      Build a release
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/CONTRIBUTING/" title="The contributing guide" class="md-nav__link">
+      The contributing guide
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-4" type="checkbox" id="nav-4-3-4">
+    
+    <label class="md-nav__link" for="nav-4-3-4">
+      Explanations
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-3-4">
+        Explanations
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/sharing-design/" title="Sharing design" class="md-nav__link">
+      Sharing design
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/konnectors-workflow/" title="Workflow of the konnectors" class="md-nav__link">
+      Workflow of the konnectors
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-5" type="checkbox" id="nav-4-3-5">
+    
+    <label class="md-nav__link" for="nav-4-3-5">
+      List of services
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-3-5">
+        List of services
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/auth/" title="/auth - Authentication & OAuth" class="md-nav__link">
+      /auth - Authentication & OAuth
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/apps/" title="/apps - Applications Management" class="md-nav__link">
+      /apps - Applications Management
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/registry/" title="/apps - Apps registry" class="md-nav__link">
+       /apps - Apps registry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/konnectors/" title="/apps - Konnectors" class="md-nav__link">
+       /apps - Konnectors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/data-system/" title="/data - Data System" class="md-nav__link">
+      /data - Data System
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/mango/" title="/data - Mango" class="md-nav__link">
+       /data - Mango
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/couchdb-quirks/" title="/data - CouchDB Quirks" class="md-nav__link">
+       /data - CouchDB Quirks
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/pouchdb-quirks/" title="/data - PouchDB Quirks" class="md-nav__link">
+       /data - PouchDB Quirks
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/files/" title="/files - Virtual File System" class="md-nav__link">
+      /files - Virtual File System
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/references-docs-in-vfs/" title="/files - References of documents in VFS" class="md-nav__link">
+       /files - References of documents in VFS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/intents/" title="/intents - Intents" class="md-nav__link">
+      /intents - Intents
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/jobs/" title="/jobs - Jobs" class="md-nav__link">
+      /jobs - Jobs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/workers/" title="/jobs - Workers" class="md-nav__link">
+       /jobs - Workers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/move/" title="/move - Move, export and import an instance" class="md-nav__link">
+      /move - Move, export and import an instance
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/notifications/" title="/notifications - Notifications" class="md-nav__link">
+      /notifications - Notifications
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/public/" title="/public - Public" class="md-nav__link">
+      /public - Public
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/permissions/" title="/permissions - Permissions" class="md-nav__link">
+      /permissions - Permissions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/realtime/" title="/realtime - Realtime" class="md-nav__link">
+      /realtime - Realtime
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/remote/" title="/remote - Proxy for remote data/API" class="md-nav__link">
+      /remote - Proxy for remote data/API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/settings/" title="/settings - Settings" class="md-nav__link">
+      /settings - Settings
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/user-action-required/" title="/settings - Terms of Services" class="md-nav__link">
+       /settings - Terms of Services
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/sharing/" title="/sharings - Sharing" class="md-nav__link">
+      /sharings - Sharing
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-app-publish/" title="cozy-app-publish" class="md-nav__link">
+      cozy-app-publish
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../babel-preset-cozy-app/" title="babel-preset-cozy-app" class="md-nav__link">
+      babel-preset-cozy-app
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../konitor/cli/" title="konitor" class="md-nav__link">
+      konitor
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-7" type="checkbox" id="nav-4-7">
+    
+    <label class="md-nav__link" for="nav-4-7">
+      cozy-doctypes
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-7">
+        cozy-doctypes
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/" title="README" class="md-nav__link">
+      README
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.accounts/" title="Accounts" class="md-nav__link">
+      Accounts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.apps/" title="Apps" class="md-nav__link">
+      Apps
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.bank/" title="Banking doctypes" class="md-nav__link">
+      Banking doctypes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.bills/" title="Bills" class="md-nav__link">
+      Bills
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.konnectors/" title="Connectors" class="md-nav__link">
+      Connectors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.contacts/" title="Contacts" class="md-nav__link">
+      Contacts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.files/" title="Files" class="md-nav__link">
+      Files
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.files_metadata/" title="Files metadata" class="md-nav__link">
+      Files metadata
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.identities/" title="Identities" class="md-nav__link">
+      Identities
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.notifications/" title="Notifications" class="md-nav__link">
+      Notifications
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.remote.requests/" title="Remote requests" class="md-nav__link">
+      Remote requests
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.sessions.logins/" title="Session logins" class="md-nav__link">
+      Session logins
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.permissions/" title="Permissions" class="md-nav__link">
+      Permissions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.photos.albums/" title="Photos Albums" class="md-nav__link">
+      Photos Albums
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.procedures/" title="Procedures" class="md-nav__link">
+      Procedures
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.sessions.logins/" title="Sessions Logins" class="md-nav__link">
+      Sessions Logins
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.settings/" title="Settings" class="md-nav__link">
+      Settings
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.sharings/" title="Sharings" class="md-nav__link">
+      Sharings
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.account_types/" title="Accounts Types" class="md-nav__link">
+      Accounts Types
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/cc.cozycloud.autocategorization/" title="Autocategorization" class="md-nav__link">
+      Autocategorization
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.exports/" title="Exports" class="md-nav__link">
+      Exports
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.jobs/" title="Jobs" class="md-nav__link">
+      Jobs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.oauth.clients/" title="OAuth Clients" class="md-nav__link">
+      OAuth Clients
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.oauth.access_codes/" title="OAuth Access Codes" class="md-nav__link">
+      OAuth Access Codes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.triggers/" title="Triggers" class="md-nav__link">
+      Triggers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.triggers.state/" title="Triggers state" class="md-nav__link">
+      Triggers state
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.remote.requests/" title="Remote requests" class="md-nav__link">
+      Remote requests
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.sessions/" title="Sessions" class="md-nav__link">
+      Sessions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.shared/" title="Shared" class="md-nav__link">
+      Shared
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.terms/" title="Terms" class="md-nav__link">
+      Terms
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/com.unibet.bets/" title="Bets Unibet" class="md-nav__link">
+      Bets Unibet
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-ui/" title="cozy-ui" class="md-nav__link">
+      cozy-ui
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-device-helper/" title="cozy-device-helper" class="md-nav__link">
+      cozy-device-helper
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-10" type="checkbox" id="nav-4-10">
+    
+    <label class="md-nav__link" for="nav-4-10">
+      cozy-client
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-10">
+        cozy-client
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client/getting-started/" title="Getting started" class="md-nav__link">
+      Getting started
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client/relationships/" title="Using relationship" class="md-nav__link">
+      Using relationship
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client/metadata/" title="cozyMetadata maintenance" class="md-nav__link">
+      cozyMetadata maintenance
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client/react-integration/" title="React integration" class="md-nav__link">
+      React integration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client/details/" title="Other details" class="md-nav__link">
+      Other details
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client/api/cozy-client/" title="Cozy Client API" class="md-nav__link">
+      Cozy Client API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client/api/cozy-pouch-link/" title="Cozy Pouch Link API" class="md-nav__link">
+      Cozy Pouch Link API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client/api/cozy-stack-client/" title="Cozy Stack Client API" class="md-nav__link">
+      Cozy Stack Client API
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-realtime/" title="cozy-realtime" class="md-nav__link">
+      cozy-realtime
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-12" type="checkbox" id="nav-4-12">
+    
+    <label class="md-nav__link" for="nav-4-12">
+      cozy-konnector-libs
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-12">
+        cozy-konnector-libs
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-konnector-libs/api/" title="API" class="md-nav__link">
+      API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-konnector-libs/cli/" title="CLI" class="md-nav__link">
+      CLI
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-konnector-libs/dev/" title="Develop" class="md-nav__link">
+      Develop
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-konnector-libs/errors/" title="Errors" class="md-nav__link">
+      Errors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-konnector-libs/operation-linking/" title="Operation linking" class="md-nav__link">
+      Operation linking
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-konnector-libs/synchronization/" title="Synchronization" class="md-nav__link">
+      Synchronization
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-apps-registry/" title="cozy-apps-registry" class="md-nav__link">
+      cozy-apps-registry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-flags/" title="cozy-flags" class="md-nav__link">
+      cozy-flags
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-15" type="checkbox" id="nav-4-15">
+    
+    <label class="md-nav__link" for="nav-4-15">
+      cozy-client-js
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-15">
+        cozy-client-js
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/" title="README" class="md-nav__link">
+      README
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/intro/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/browser-sdk-transition/" title="Transition from cozy-browser-sdk" class="md-nav__link">
+      Transition from cozy-browser-sdk
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/offline/" title="How to support offline" class="md-nav__link">
+      How to support offline
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/oauth/" title="OAuth guide" class="md-nav__link">
+      OAuth guide
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/auth-api/" title="Authentication API" class="md-nav__link">
+      Authentication API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/data-api/" title="Data System API" class="md-nav__link">
+      Data System API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/files-api/" title="Files API" class="md-nav__link">
+      Files API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/jobs-api/" title="Jobs API" class="md-nav__link">
+      Jobs API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/intents-api/" title="Intents API" class="md-nav__link">
+      Intents API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/settings-api/" title="Settings API" class="md-nav__link">
+      Settings API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/sharing-api/" title="Sharing API" class="md-nav__link">
+      Sharing API
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-content" title="Table of content" class="md-nav__link">
+    Table of content
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kind-of-config-file" title="Kind of config file:" class="md-nav__link">
+    Kind of config file:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bundles" title="Bundles" class="md-nav__link">
+    Bundles
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#webpackbundledefaultjs" title="webpack.bundle.default.js" class="md-nav__link">
+    webpack.bundle.default.js
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webpackbundlepreactjs" title="webpack.bundle.preact.js" class="md-nav__link">
+    webpack.bundle.preact.js
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webpackbundlevuejs" title="webpack.bundle.vue.js" class="md-nav__link">
+    webpack.bundle.vue.js
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unit-configs" title="Unit Configs" class="md-nav__link">
+    Unit Configs
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#webpackconfiganalyzerjs" title="webpack.config.analyzer.js" class="md-nav__link">
+    webpack.config.analyzer.js
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webpackconfigbasejs" title="webpack.config.base.js" class="md-nav__link">
+    webpack.config.base.js
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#properties" title="Properties" class="md-nav__link">
+    Properties
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rules" title="Rules" class="md-nav__link">
+    Rules
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plugins" title="Plugins:" class="md-nav__link">
+    Plugins:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webpackconfigchunksjs" title="webpack.config.chunks.js" class="md-nav__link">
+    webpack.config.chunks.js
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webpackconfigcozy-uijs" title="webpack.config.cozy-ui.js" class="md-nav__link">
+    webpack.config.cozy-ui.js
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webpackconfigcozy-uireactjs" title="webpack.config.cozy-ui.react.js" class="md-nav__link">
+    webpack.config.cozy-ui.react.js
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webpackconfigcss-modulesjs" title="webpack.config.css-modules.js" class="md-nav__link">
+    webpack.config.css-modules.js
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webpackconfigeslintjs" title="webpack.config.eslint.js" class="md-nav__link">
+    webpack.config.eslint.js
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webpackconfigintentsjs" title="webpack.config.intents.js" class="md-nav__link">
+    webpack.config.intents.js
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webpackconfighashjs" title="webpack.config.hash.js" class="md-nav__link">
+    webpack.config.hash.js
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webpackconfigmanifestjs" title="webpack.config.manifest.js" class="md-nav__link">
+    webpack.config.manifest.js
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webpackconfigpicturesjs" title="webpack.config.pictures.js" class="md-nav__link">
+    webpack.config.pictures.js
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webpackconfigpreactjs" title="webpack.config.preact.js" class="md-nav__link">
+    webpack.config.preact.js
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webpackconfigprogressjs" title="webpack.config.progress.js" class="md-nav__link">
+    webpack.config.progress.js
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webpackconfigservicesjs" title="webpack.config.services.js" class="md-nav__link">
+    webpack.config.services.js
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webpackconfigreactjs" title="webpack.config.react.js" class="md-nav__link">
+    webpack.config.react.js
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webpackconfigvendorsjs" title="webpack.config.vendors.js" class="md-nav__link">
+    webpack.config.vendors.js
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webpackconfigvuejs" title="webpack.config.vue.js" class="md-nav__link">
+    webpack.config.vue.js
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#environments" title="Environments" class="md-nav__link">
+    Environments
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#webpackenvironmentdevjs" title="webpack.environment.dev.js" class="md-nav__link">
+    webpack.environment.dev.js
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#properties_1" title="Properties" class="md-nav__link">
+    Properties
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plugins_1" title="Plugins:" class="md-nav__link">
+    Plugins:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webpackenvironmentprodjs" title="webpack.environment.prod.js" class="md-nav__link">
+    webpack.environment.prod.js
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#plugins_2" title="Plugins:" class="md-nav__link">
+    Plugins:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#targets" title="Targets" class="md-nav__link">
+    Targets
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#webpacktargetbrowserjs" title="webpack.target.browser.js" class="md-nav__link">
+    webpack.target.browser.js
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#properties_2" title="Properties" class="md-nav__link">
+    Properties
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plugins_3" title="Plugins:" class="md-nav__link">
+    Plugins:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webpacktargetmobilejs" title="webpack.target.mobile.js" class="md-nav__link">
+    webpack.target.mobile.js
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#properties_3" title="Properties" class="md-nav__link">
+    Properties
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plugins_4" title="Plugins:" class="md-nav__link">
+    Plugins:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#miscellaneous" title="Miscellaneous" class="md-nav__link">
+    Miscellaneous
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#webpackvarsjs" title="webpack.vars.js" class="md-nav__link">
+    webpack.vars.js
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/cozy/cozy.github.io/edit/dev/src/cozy-scripts/webpack-configs.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="the-cozy-scripts-webpack-configurations">The <code>cozy-scripts</code> Webpack configurations<a class="headerlink" href="#the-cozy-scripts-webpack-configurations" title="Permanent link">&para;</a></h1>
+<h2 id="table-of-content">Table of content<a class="headerlink" href="#table-of-content" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong><a href="#introduction">Introduction</a></strong></li>
+<li><strong><a href="#bundles">Bundles</a></strong><ul>
+<li><a href="#webpackbundledefaultjs"><code>webpack.bundle.default.js</code></a></li>
+<li><a href="#webpackbundlepreactjs"><code>webpack.bundle.preact.js</code></a></li>
+<li><a href="#webpackbundlevuejs"><code>webpack.bundle.vue.js</code></a></li>
+</ul>
+</li>
+<li><strong><a href="#unit-configs">Unit Configs</a></strong><ul>
+<li><a href="#webpackconfiganalyzerjs"><code>webpack.config.analyzer.js</code></a></li>
+<li><a href="#webpackconfigbasejs"><code>webpack.config.base.js</code></a></li>
+<li><a href="#webpackconfigchunksjs"><code>webpack.config.chunks.js</code></a></li>
+<li><a href="#webpackconfigcozy-uijs"><code>webpack.config.cozy-ui.js</code></a></li>
+<li><a href="#webpackconfigcozy-uireactjs"><code>webpack.config.cozy-ui.react.js</code></a></li>
+<li><a href="#webpackconfigcss-modulesjs"><code>webpack.config.css-modules.js</code></a></li>
+<li><a href="#webpackconfigeslintjs"><code>webpack.config.eslint.js</code></a></li>
+<li><a href="#webpackconfighashjs"><code>webpack.config.hash.js</code></a></li>
+<li><a href="#webpackconfigintentsjs"><code>webpack.config.intents.js</code></a></li>
+<li><a href="#webpackconfigmanifestjs"><code>webpack.config.manifest.js</code></a></li>
+<li><a href="#webpackconfigpicturesjs"><code>webpack.config.pictures.js</code></a></li>
+<li><a href="#webpackconfigpreactjs"><code>webpack.config.preact.js</code></a></li>
+<li><a href="#webpackconfigprogressjs"><code>webpack.config.progress.js</code></a></li>
+<li><a href="#webpackconfigreactjs"><code>webpack.config.react.js</code></a></li>
+<li><a href="#webpackconfigservicesjs"><code>webpack.config.services.js</code></a></li>
+<li><a href="#webpackconfigvendorsjs"><code>webpack.config.vendors.js</code></a></li>
+<li><a href="#webpackconfigvuejs"><code>webpack.config.vue.js</code></a></li>
+</ul>
+</li>
+<li><strong><a href="#environments">Environments</a></strong><ul>
+<li><a href="#webpackenvironmentdevjs"><code>webpack.environment.dev.js</code></a></li>
+<li><a href="#webpackenvironmentprodjs"><code>webpack.environment.prod.js</code></a></li>
+</ul>
+</li>
+<li><strong><a href="#targets">Targets</a></strong><ul>
+<li><a href="#webpacktargetbrowserjs"><code>webpack.target.browser.js</code></a></li>
+<li><a href="#webpacktargetmobilejs"><code>webpack.target.mobile.js</code></a></li>
+</ul>
+</li>
+<li><strong><a href="#miscellaneous">Miscellaneous</a></strong><ul>
+<li><a href="#webpackvarsjs"><code>webpack.vars.js</code></a></li>
+</ul>
+</li>
+</ul>
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
+<p>To build a Cozy application, <code>cozy-scripts</code> uses <code>webpack</code> under the hood, and this documentation is dedicated to all webpack configuration files.
+In order to organize all these webpack configurations, they are classified in many files according to the concern.
+Having many unit files for the configuration will also allow to support specific application needs without &lsquo;ejecting&rsquo; (removing <code>cozy-scripts</code> dependency and copy all webpack configurations and dependencies to the application repository).
+These files are supposed to be enoughly independant to be usable upon request as far as possible without conflicts.</p>
+<h4 id="kind-of-config-file">Kind of config file:<a class="headerlink" href="#kind-of-config-file" title="Permanent link">&para;</a></h4>
+<p><strong>Bundle:</strong> A bundle regroup many unit configuration for a specific use case like the default React application or an VueJS application.</p>
+<p><strong>Environment:</strong> An environment config is in charge of provided variables and pluging specific to a compiling context (development or production for example).</p>
+<p><strong>Target:</strong> A target means the one which will use the built. For now we only have to targets, <code>browser</code> for the default web application and <code>mobile</code> for the native mobile application using Cordova (in progress).</p>
+<h2 id="bundles">Bundles<a class="headerlink" href="#bundles" title="Permanent link">&para;</a></h2>
+<h3 id="webpackbundledefaultjs"><code>webpack.bundle.default.js</code><a class="headerlink" href="#webpackbundledefaultjs" title="Permanent link">&para;</a></h3>
+<p>This file is the default config bundle used for the application built from <code>cozy-scripts</code>. It uses all following configs files:
+- <code>webpack.config.base.js</code>
+- <code>webpack.config.chunks.js</code>
+- <code>webpack.config.cozy-ui.js</code>
+- <code>webpack.config.cozy-ui.react.js</code>
+- <code>webpack.config.eslint.js</code>
+- <code>webpack.config.intents.js</code>
+- <code>webpack.config.manifest.js</code>
+- <code>webpack.config.pictures.js</code>
+- <code>webpack.config.progress.js</code>
+- <code>webpack.config.react.js</code>
+- <code>webpack.config.vendors.js</code>
+- <code>webpack.environment.dev.js</code>
+- <code>webpack.environment.prod.js</code>
+- <code>webpack.target.browser.js</code>
+- <code>webpack.target.mobile.js</code>
+- <code>webpack.vars.js</code></p>
+<p>By default <code>cozy-scripts</code> uses this bundle in an opinionated way, but you can overload this configuration by creating a custom <code>app.config.js</code> in your application root directory:</p>
+<div class="codehilite"><pre><span></span><span class="c1">// app.config.js</span>
+
+<span class="c1">// using ES Modules</span>
+<span class="kr">import</span> <span class="nx">configs</span> <span class="nx">from</span> <span class="s1">&#39;cozy-scripts/config/webpack.bundle.default.js&#39;</span>
+<span class="kr">import</span> <span class="nx">myConfig</span> <span class="nx">from</span> <span class="s1">&#39;./config/webpack.myconfig.js&#39;</span>
+<span class="c1">// or using CommonJS</span>
+<span class="kr">const</span> <span class="nx">configs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;cozy-scripts/config/webpack.bundle.default.js&#39;</span><span class="p">)</span>
+<span class="kr">const</span> <span class="nx">myConfig</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./config/webpack.myconfig.js&#39;</span><span class="p">)</span>
+
+<span class="c1">// it&#39;s possible to add many custom configurations using this way,</span>
+<span class="c1">// the last will overwrite the previous in case of conflicts</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">[</span><span class="nx">configs</span><span class="p">,</span> <span class="nx">myConfig</span><span class="p">]</span>
+</pre></div>
+
+
+<h3 id="webpackbundlepreactjs"><code>webpack.bundle.preact.js</code><a class="headerlink" href="#webpackbundlepreactjs" title="Permanent link">&para;</a></h3>
+<p>This file is the same default bundle but using preact instead (previous default config bundle used for the application built from <code>cozy-scripts</code>). It uses all following configs files:
+- <code>webpack.config.base.js</code>
+- <code>webpack.config.chunks.js</code>
+- <code>webpack.config.cozy-ui.js</code>
+- <code>webpack.config.cozy-ui.react.js</code>
+- <code>webpack.config.eslint.js</code>
+- <code>webpack.config.intents.js</code>
+- <code>webpack.config.manifest.js</code>
+- <code>webpack.config.pictures.js</code>
+- <strong><code>webpack.config.preact.js</code></strong>
+- <code>webpack.config.progress.js</code>
+- <code>webpack.config.vendors.js</code>
+- <code>webpack.environment.dev.js</code>
+- <code>webpack.environment.prod.js</code>
+- <code>webpack.target.browser.js</code>
+- <code>webpack.target.mobile.js</code>
+- <code>webpack.vars.js</code></p>
+<p>This config will replace <code>react</code> usage by <code>preact-compat</code> in a transparent manner (webpack aliases).
+<strong>The <code>app.config.js</code> is needed to use this bundle since it&rsquo;s not the default one for <code>cozy-scripts</code></strong>. But you can still overload it using a custom config like the default bundle:</p>
+<div class="codehilite"><pre><span></span><span class="c1">// app.config.js</span>
+
+<span class="c1">// using ES Modules</span>
+<span class="kr">import</span> <span class="nx">configs</span> <span class="nx">from</span> <span class="s1">&#39;cozy-scripts/config/webpack.bundle.preact.js&#39;</span>
+<span class="kr">import</span> <span class="nx">myConfig</span> <span class="nx">from</span> <span class="s1">&#39;./config/webpack.myconfig.js&#39;</span>
+<span class="c1">// or using CommonJS</span>
+<span class="kr">const</span> <span class="nx">configs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;cozy-scripts/config/webpack.bundle.preact.js&#39;</span><span class="p">)</span>
+<span class="kr">const</span> <span class="nx">myConfig</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./config/webpack.myconfig.js&#39;</span><span class="p">)</span>
+
+<span class="c1">// it&#39;s possible to add many custom configurations using this way,</span>
+<span class="c1">// the last will overwrite the previous in case of conflicts</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">[</span><span class="nx">configs</span><span class="p">,</span> <span class="nx">myConfig</span><span class="p">]</span>
+</pre></div>
+
+
+<h3 id="webpackbundlevuejs"><code>webpack.bundle.vue.js</code><a class="headerlink" href="#webpackbundlevuejs" title="Permanent link">&para;</a></h3>
+<p>This file is the VueJS config bundle used for the application built from <code>cozy-scripts</code> with the option <code>--vue</code>. It uses all following configs files:
+- <code>webpack.config.base.js</code>
+- <code>webpack.config.chunks.js</code>
+- <code>webpack.config.cozy-ui.js</code>
+- <code>webpack.config.eslint.js</code>
+- <code>webpack.config.intents.js</code>
+- <code>webpack.config.manifest.js</code>
+- <code>webpack.config.pictures.js</code>
+- <code>webpack.config.progress.js</code>
+- <code>webpack.config.vendors.js</code>
+- <code>webpack.config.vue.js</code>
+- <code>webpack.environment.dev.js</code>
+- <code>webpack.environment.prod.js</code>
+- <code>webpack.target.browser.js</code>
+- <code>webpack.target.mobile.js</code>
+- <code>webpack.vars.js</code></p>
+<p>You can still overload it using a custom config like the default bundle using the <code>app.config.js</code> file:</p>
+<div class="codehilite"><pre><span></span><span class="c1">// app.config.js</span>
+
+<span class="c1">// ES Modules</span>
+<span class="kr">import</span> <span class="nx">configs</span> <span class="nx">from</span> <span class="s1">&#39;cozy-scripts/config/webpack.bundle.vue.js&#39;</span>
+<span class="kr">import</span> <span class="nx">myConfig</span> <span class="nx">from</span> <span class="s1">&#39;./config/webpack.myconfig.js&#39;</span>
+<span class="c1">// or CommonJS</span>
+<span class="kr">const</span> <span class="nx">configs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;cozy-scripts/config/webpack.bundle.vue.js&#39;</span><span class="p">)</span>
+<span class="kr">const</span> <span class="nx">myConfig</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./config/webpack.myconfig.js&#39;</span><span class="p">)</span>
+
+<span class="c1">// it&#39;s possible to add many custom configurations using this way,</span>
+<span class="c1">// the last will overwrite the previous in case of conflicts</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">[</span><span class="nx">configs</span><span class="p">,</span> <span class="nx">myConfig</span><span class="p">]</span>
+</pre></div>
+
+
+<h2 id="unit-configs">Unit Configs<a class="headerlink" href="#unit-configs" title="Permanent link">&para;</a></h2>
+<h3 id="webpackconfiganalyzerjs"><code>webpack.config.analyzer.js</code><a class="headerlink" href="#webpackconfiganalyzerjs" title="Permanent link">&para;</a></h3>
+<p>This file will only add the plugin <a href="https://github.com/webpack-contrib/webpack-bundle-analyzer"><code>webpack-bundle-analyzer</code></a> to be run on with the <code>--analyzer</code> option.</p>
+<p>It will run a server (on port <code>8889</code> to not be in conflict with the webpack dev server) and open an interactive treemap visualization of the contents of all your bundles in your browser.</p>
+<h3 id="webpackconfigbasejs"><code>webpack.config.base.js</code><a class="headerlink" href="#webpackconfigbasejs" title="Permanent link">&para;</a></h3>
+<p>The default basic configuration of the application.</p>
+<h5 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>output</code> to <code>[name].js</code> filename</li>
+<li>resolve:<ul>
+<li><code>modules</code> to <code>['node_modules', 'src']</code></li>
+<li>extensions: <code>.js</code>, <code>.json</code> and <code>.css</code></li>
+</ul>
+</li>
+</ul>
+<h5 id="rules">Rules<a class="headerlink" href="#rules" title="Permanent link">&para;</a></h5>
+<ul>
+<li>all <code>.js</code> (excluding <code>node_modules</code>, <code>cozy-bar</code> and <code>cozy-client-js</code>) to be loaded using <code>babel-loader</code> (with <code>cacheDirectory</code> option for caching in <code>node_modules/.cache/babel-loader</code>)</li>
+<li>all <code>.css</code> to be loaded using options:<ul>
+<li><code>mini-css-extract-plugin</code> extractor loader by default or <code>style-loader</code> for hot reloading</li>
+<li><code>css-loader</code> with <code>sourceMap</code></li>
+<li><code>postcss-loader</code> to optimize css output code with <code>sourceMap</code> and <code>autoprefixer</code> plugin to <code>{ browsers: ['last 2 versions'] }</code></li>
+</ul>
+</li>
+</ul>
+<p>A specific <code>noParse</code> property is enabled on <code>/localforage/dist</code>.</p>
+<h5 id="plugins">Plugins:<a class="headerlink" href="#plugins" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>postcss-assets-webpack-plugin</code> (logs from this plugin are shown only in <code>--debug</code> mode) to load all <code>.css</code> files with:<ul>
+<li><code>css-mqpacker</code> (pack all CSS media query rules into one)</li>
+<li><code>postcss-discard-duplicates</code> (remove duplicates)</li>
+<li><code>postcss-discard-empty</code> (remove empty definitions)</li>
+<li><code>csswring</code> only in <code>production</code> environment to minify and remove comments (<code>preservehacks</code> enabled)</li>
+</ul>
+</li>
+</ul>
+<h3 id="webpackconfigchunksjs"><code>webpack.config.chunks.js</code><a class="headerlink" href="#webpackconfigchunksjs" title="Permanent link">&para;</a></h3>
+<p>This configuration will use the <code>optimization</code> property with <code>splitChunks</code> in order to split the build into two chunks:
+    - The main one, it can be <code>app</code> or <code>intents</code>
+    - And the <code>vendors</code> chunk which will gather all stuff from node_modules</p>
+<p>Splitting chunks allow to decrease the size of the main chunk and optimize the build for caching (mainly the main chunk will change during development).</p>
+<h3 id="webpackconfigcozy-uijs"><code>webpack.config.cozy-ui.js</code><a class="headerlink" href="#webpackconfigcozy-uijs" title="Permanent link">&para;</a></h3>
+<p>This configuration will allow to load styles from <code>cozy-ui</code>.</p>
+<p>It adds a rule for all <code>.styl</code> files excluding <code>node_modules</code> and <code>node_modules/cozy-ui/react</code> to be loaded using:
+- <code>mini-css-extract-plugin</code> extractor loader by default or <code>style-loader</code> for hot reloading
+- <code>css-loader</code> with <code>sourceMap</code>
+- <code>postcss-loader</code> to optimize css output code with <code>sourceMap</code> and <code>autoprefixer</code> plugin to <code>{ browsers: ['last 2 versions'] }</code>
+- <code>stylus-loader</code> using the custom stylus plugin from cozy-ui as option</p>
+<p>It also uses <code>svg-sprite-loader/plugin</code> to merge the built svg sprite from <code>cozy-ui</code> into the application&rsquo;s one</p>
+<h3 id="webpackconfigcozy-uireactjs"><code>webpack.config.cozy-ui.react.js</code><a class="headerlink" href="#webpackconfigcozy-uireactjs" title="Permanent link">&para;</a></h3>
+<p>This configuration is specific to <code>react</code> components usage from <code>cozy-ui</code>, since they currently need <code>css-modules</code>. This configuration file could be removed if this <code>cozy-ui</code> requirement disappear.</p>
+<p>It adds a rule for all <code>.styl</code> files from <code>cozy-ui/react</code> to be loaded using:
+- <code>mini-css-extract-plugin</code> extractor loader by default or <code>style-loader</code> for hot reloading
+- <code>css-loader</code> with <code>modules</code>, <code>sourceMap</code> and <code>[local]--[hash:base64:5]</code> as <code>localIdentName</code>
+- <code>postcss-loader</code> to optimize css output code with <code>sourceMap</code> and <code>autoprefixer</code> plugin to <code>{ browsers: ['last 2 versions'] }</code>
+- <code>stylus-loader</code> using the custom stylus plugin from cozy-ui as option</p>
+<h3 id="webpackconfigcss-modulesjs"><code>webpack.config.css-modules.js</code><a class="headerlink" href="#webpackconfigcss-modulesjs" title="Permanent link">&para;</a></h3>
+<p>This configuration will allow to use <code>css-modules</code> with stylus files. To overload previous stylus loaders, it uses the following <code>webpack-merge</code> <code>smartStrategy</code>: <code>{ 'modules.loaders': 'replace' }</code>.</p>
+<p>It adds a rule for all <code>.styl</code> files excluding <code>node_modules</code> and <code>node_modules/cozy-ui/react</code> to be loaded using:
+- <code>mini-css-extract-plugin</code> extractor loader by default or <code>style-loader</code> for hot reloading
+- <code>css-loader</code> with <code>modules</code>, <code>sourceMap</code> and <code>[local]--[hash:base64:5]</code> as <code>localIdentName</code>
+- <code>postcss-loader</code> to optimize css output code with <code>sourceMap</code> and <code>autoprefixer</code> plugin to <code>{ browsers: ['last 2 versions'] }</code>
+- <code>stylus-loader</code></p>
+<h3 id="webpackconfigeslintjs"><code>webpack.config.eslint.js</code><a class="headerlink" href="#webpackconfigeslintjs" title="Permanent link">&para;</a></h3>
+<p>A rule to preload all <code>.js/.jsx</code> files with <code>eslint-loader</code> (excluding <code>node_modules</code>) extending <a href="https://github.com/CPatchane/create-cozy-app/tree/master/packages/babel-preset-cozy-app"><code>babel-preset-cozy-app</code></a>
+The <code>emitWarning</code> option is set to true for production environment or if hot reload is enabled to force emitting warning and to avoid errors breaking the build.</p>
+<h3 id="webpackconfigintentsjs"><code>webpack.config.intents.js</code><a class="headerlink" href="#webpackconfigintentsjs" title="Permanent link">&para;</a></h3>
+<p>This is a specific configuration file to develop application intents for the Cozy platform.</p>
+<p>It will:
+- add a webpack entry: the <a href="https://babeljs.io/docs/en/babel-polyfill.html"><code>babel-polyfill</code></a> import and the <code>src/targets/intents/intents.jsx</code> file
+- use <code>html-webpack-plugin</code> configured to use <code>index.ejs</code> HTML template from <code>src/targets/intents/</code> with options:
+    - <code>title</code>: <code>name</code> property of the <code>package.json</code> + <code>intents</code>
+    - <code>filename</code>: <code>intents/index.html</code>, the output file
+    - <code>excludeChunks</code>: to exclude chunk <code>app</code>
+    - <code>inject</code> to <code>false</code>
+    - <code>minify</code> with <code>collapseWhitespace</code> to <code>true</code></p>
+<h3 id="webpackconfighashjs"><code>webpack.config.hash.js</code><a class="headerlink" href="#webpackconfighashjs" title="Permanent link">&para;</a></h3>
+<p>A custom webpack plugin usage to extract the hash from built files for reference.</p>
+<h3 id="webpackconfigmanifestjs"><code>webpack.config.manifest.js</code><a class="headerlink" href="#webpackconfigmanifestjs" title="Permanent link">&para;</a></h3>
+<p>A <code>copy-webpack-plugin</code> plugin usage to copy the <code>manifest.webapp</code>, <code>README.md</code> and <code>LICENSE</code> files to the output build folder.</p>
+<p>In the <code>production</code> environment, the <code>manifest.webapp</code> is transformed to include locales from the application <code>src/locales</code> folder (locales concerning manifest descriptions, permissions, names&hellip;). It will look for the <code>manifest</code> property (if found) of the locale <code>.json</code> file. So the <code>locales</code> property of the <code>manifest.webapp</code> will be an object of language slugs as properties and each slug matching the related locales found. The <code>langs</code> array in the manifest will also be computed according to the languages found in <code>src/locales</code>.</p>
+<p>Except for <code>production</code> environment, the <code>manifest.webapp</code> is transformed using a custom function to change the <code>slug</code> property value to <code>app</code> (to keep using <code>app.cozy.tools:8080</code> URL for different app development).</p>
+<h3 id="webpackconfigpicturesjs"><code>webpack.config.pictures.js</code><a class="headerlink" href="#webpackconfigpicturesjs" title="Permanent link">&para;</a></h3>
+<p>This configuration will handle all pictures files.</p>
+<p>It will add two rules:
+- all <code>.svg</code> files in <code>sprites/</code> and <code>icons/</code> folders will be loaded using <code>svg-sprite-loader</code> with output name to <code>[name]_[hash]</code>. This loader will merge all SVG content to one <code>.svg</code> file and replace their reference to the matching <code>id</code>. Only one <code>.svg</code> sprite file will be loaded by the ouput application.
+- all other <code>.svg</code>, <code>.png</code>, <code>.gif</code>, <code>.jpg</code>, <code>.jpeg</code> files will be loaded using <code>file-loader</code> with options:
+    - <code>path</code> to <code>img</code>, the ouput folder
+    - <code>symbolId</code> to <code>[name].[hash].[ext]</code> for production environment, <code>[name].[ext]</code> for other environments</p>
+<p>It also adds <code>svg-sprite-loader/plugin</code> as plugin to use it with the related loader.</p>
+<h3 id="webpackconfigpreactjs"><code>webpack.config.preact.js</code><a class="headerlink" href="#webpackconfigpreactjs" title="Permanent link">&para;</a></h3>
+<p>A config to resolve all <code>react</code> aliases using <a href="https://preactjs.com"><code>Preact</code></a> instead.</p>
+<p>It will:
+- resolve <code>.jsx</code> extensions
+- add aliases:
+    - <code>react</code> to <code>preact-compat</code>
+    - <code>react-dom</code> to <code>preact-compat</code>
+    - Due to <a href="https://github.com/developit/preact-compat/issues/392">an HMR issue</a>, <code>preact-compat</code> to <code>preact-compat/dist/preact-compat</code>
+- add a rule for <code>.jsx</code> files excluding <code>node_modules</code> (exception for <code>node_modules/cozy-ui</code>) to be loaded using <code>babel-loader</code> (with <code>cacheDirectory</code> option for caching in <code>node_modules/.cache/babel-loader</code>)</p>
+<h3 id="webpackconfigprogressjs"><code>webpack.config.progress.js</code><a class="headerlink" href="#webpackconfigprogressjs" title="Permanent link">&para;</a></h3>
+<p>This config will just add a custom webpack plugin to display a progress bar when webpack building/watching. It internally uses the included webpack plugin <code>webpack.ProgressPlugin</code>.</p>
+<h3 id="webpackconfigservicesjs"><code>webpack.config.services.js</code><a class="headerlink" href="#webpackconfigservicesjs" title="Permanent link">&para;</a></h3>
+<p>This config will provide a separate config to build app services using <a href="https://webpack.js.org/api/compiler/#multicompiler">Webpack multi-compiling</a>.
+In this case, all services files (<code>.js</code> files in the <code>/src/targets/services/</code> folder) will be built using this separate webpack config.</p>
+<p>This config will:
+- use <code>__mergeStrategy</code> to drive the <a href="docs/webpack-merge-strategy.md"><code>webpack-merge</code> strategy</a>:
+    - disable smart merging
+    - use the <code>replace</code> mode <code>plugins</code>, <code>output</code>, <code>entry</code>, <code>optimization</code> and <code>module</code>
+- define as webpack entry an array of all <code>.js</code> files contained in <code>/src/target/services</code> folder
+- use as output the <code>/build/services</code> folder with <code>[name].js</code> as filename
+- define the target as <code>'node'</code>
+- disable devtool (boolean to <code>false</code>)
+- define the global variable <code>__TARGET__</code> to <code>services</code> using the plugin <code>webpack.DefinePlugin</code></p>
+<p>This config will be used only if the webpack target is <code>browser</code>.</p>
+<h3 id="webpackconfigreactjs"><code>webpack.config.react.js</code><a class="headerlink" href="#webpackconfigreactjs" title="Permanent link">&para;</a></h3>
+<p>A config to load <code>.jsx</code> using for React components.</p>
+<p>It will:
+- resolve <code>.jsx</code> extensions
+- add a rule for <code>.jsx</code> files excluding <code>node_modules</code> (exception for <code>node_modules/cozy-ui</code>) to be loaded using <code>babel-loader</code> (with <code>cacheDirectory</code> option for caching in <code>node_modules/.cache/babel-loader</code>)</p>
+<h3 id="webpackconfigvendorsjs"><code>webpack.config.vendors.js</code><a class="headerlink" href="#webpackconfigvendorsjs" title="Permanent link">&para;</a></h3>
+<p>A <code>copy-webpack-plugin</code> plugin usage to copy all files from the <code>vendors/assets/</code> folder to the output build folder.</p>
+<p>This config will also process the application icon and run <a href="https://github.com/svg/svgo"><code>svgo</code></a> to optimize it if this is a SVG file.</p>
+<h3 id="webpackconfigvuejs"><code>webpack.config.vue.js</code><a class="headerlink" href="#webpackconfigvuejs" title="Permanent link">&para;</a></h3>
+<p>A config to use the VueJS (v2+) framework.</p>
+<p>It will:
+- resolve <code>.vue</code> extensions
+- add a rule for <code>.vue</code> files, excluding <code>node_modules</code>, to be loaded using <code>vue-loader</code>.</p>
+<h2 id="environments">Environments<a class="headerlink" href="#environments" title="Permanent link">&para;</a></h2>
+<h3 id="webpackenvironmentdevjs"><code>webpack.environment.dev.js</code><a class="headerlink" href="#webpackenvironmentdevjs" title="Permanent link">&para;</a></h3>
+<h5 id="properties_1">Properties<a class="headerlink" href="#properties_1" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>devtool</code> to <code>#source-map</code></li>
+<li><code>externals</code> with <code>['cozy']</code> to exclude all <code>cozy.*</code> dependencies from the output bundle (since it will be serve by <code>ProvidePlugin</code>)</li>
+<li><code>mode</code> to <code>development</code></li>
+</ul>
+<h5 id="plugins_1">Plugins:<a class="headerlink" href="#plugins_1" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>webpack.DefinePlugin</code> to define globals variables at compiling time:<ul>
+<li><code>__DEVELOPMENT__</code> to <code>true</code></li>
+<li><code>__STACK_ASSETS__</code> to <code>false</code></li>
+</ul>
+</li>
+<li><code>webpack.ProvidePlugin</code> to provide <code>cozy-bar</code> and <code>cozy-client-js</code> from <code>node_modules</code> (in production, these modules will be provided to the application by the <a href="https://cozy.github.io/cozy-stack/client-app-dev.html#good-practices-for-your-application"><code>cozy-stack</code></a>)</li>
+<li>Copy (<code>copy-webpack-plugin</code>) the <code>cozy-bar.css</code> file from <code>node_modules</code> ot the app build to be able to develop on the <code>cozy-bar</code> using the app</li>
+<li>Add the <code>cozy-bar</code> css to the main html file via <code>html-webpack-include-assets-plugin</code></li>
+</ul>
+<p>Only in the hot reload mode:
+- <code>webpack.HotModuleReplacementPlugin</code> which allows all kinds of modules to be updated at runtime without the need for a full refresh
+- <code>write-file-webpack-plugin</code> to write all the build file from <code>webpack-dev-server</code> to the disk (necessary for the hot-reloading)</p>
+<h3 id="webpackenvironmentprodjs"><code>webpack.environment.prod.js</code><a class="headerlink" href="#webpackenvironmentprodjs" title="Permanent link">&para;</a></h3>
+<h5 id="plugins_2">Plugins:<a class="headerlink" href="#plugins_2" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>webpack.optimize.OccurrenceOrderPlugin</code></li>
+<li><code>webpack.DefinePlugin</code> to define globals variables at compiling time:<ul>
+<li><code>process.env.NODE_ENV</code> to <code>production</code></li>
+<li><code>__DEVELOPMENT__</code> to <code>false</code></li>
+<li><code>__DEVTOOLS__</code> to <code>false</code></li>
+<li><code>__STACK_ASSETS__</code> to <code>true</code> if <code>target</code> different from <code>mobile</code></li>
+</ul>
+</li>
+</ul>
+<p>In this production mode, webpack will automatically use the <code>Terser</code> plugin to optimize the build (with <code>parallel: true</code> to speedup the build).</p>
+<h2 id="targets">Targets<a class="headerlink" href="#targets" title="Permanent link">&para;</a></h2>
+<h3 id="webpacktargetbrowserjs"><code>webpack.target.browser.js</code><a class="headerlink" href="#webpacktargetbrowserjs" title="Permanent link">&para;</a></h3>
+<h5 id="properties_2">Properties<a class="headerlink" href="#properties_2" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>entry</code>: the <a href="https://babeljs.io/docs/en/babel-polyfill.html"><code>babel-polyfill</code></a> import and the <code>index.jsx</code> from <code>src/targets/browser/</code></li>
+<li><code>output</code>: <code>build/</code> path with <code>filename</code> to <code>[name].js</code> and <code>pathinfo</code> enabling only with the <code>COZY_SCRIPTS_DEBUG</code> mode</li>
+<li><code>externals</code> with <code>{ 'cozy-client-js': 'cozy' }</code> to exclude <code>cozy-client-js</code> (via <code>cozy.*</code>) dependency from the output bundle</li>
+</ul>
+<h5 id="plugins_3">Plugins:<a class="headerlink" href="#plugins_3" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>html-webpack-plugin</code> configured to use <code>index.ejs</code> HTML template from <code>src/targets/browser/</code> with options:<ul>
+<li><code>title</code>: <code>name</code> property of the <code>package.json</code></li>
+<li><code>inject</code> to <code>false</code></li>
+<li><code>excludeChunks</code>: to exclude chunk <code>intents</code></li>
+<li><code>minify</code> with <code>collapseWhitespace</code> to <code>true</code></li>
+</ul>
+</li>
+<li><code>webpack.DefinePlugin</code> to define globals variables at compile time:<ul>
+<li><code>__TARGET__</code> to <code>browser</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="webpacktargetmobilejs"><code>webpack.target.mobile.js</code><a class="headerlink" href="#webpacktargetmobilejs" title="Permanent link">&para;</a></h3>
+<h5 id="properties_3">Properties<a class="headerlink" href="#properties_3" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>entry</code>: the <a href="https://babeljs.io/docs/en/babel-polyfill.html"><code>babel-polyfill</code></a> import and the <code>index.jsx</code> from <code>src/targets/mobile</code></li>
+<li><code>output</code>: <code>src/targets/mobile/www</code> path and <code>pathinfo</code> enabling only with the <code>COZY_SCRIPTS_DEBUG</code> mode</li>
+</ul>
+<h5 id="plugins_4">Plugins:<a class="headerlink" href="#plugins_4" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>html-webpack-plugin</code> configured to use <code>index.ejs</code> HTML template from <code>src/targets/mobile/</code> with options:<ul>
+<li><code>title</code>: <code>name</code> property of the <code>package.json</code></li>
+<li><code>excludeChunks</code>: to exclude chunk <code>intents</code></li>
+<li><code>minify</code> with <code>collapseWhitespace</code> to <code>true</code></li>
+</ul>
+</li>
+<li><code>webpack.DefinePlugin</code> to define globals variables at compile time:<ul>
+<li><code>__ALLOW_HTTP__</code> to <code>false</code> if <code>production</code> environment, <code>true</code> for other environments</li>
+<li><code>__TARGET__</code> to <code>mobile</code></li>
+<li><code>__APP_VERSION__</code> to the <code>version</code> property of the <code>package.json</code></li>
+</ul>
+</li>
+<li><code>webpack.ProvidePlugin</code> to provide <code>cozy-bar</code> and <code>cozy-client-js</code> from <code>node_modules</code> (since it&rsquo;s for the native application, it&rsquo;s not served by the <code>cozy-stack</code> unlike the browser version)</li>
+</ul>
+<h2 id="miscellaneous">Miscellaneous<a class="headerlink" href="#miscellaneous" title="Permanent link">&para;</a></h2>
+<h3 id="webpackvarsjs"><code>webpack.vars.js</code><a class="headerlink" href="#webpackvarsjs" title="Permanent link">&para;</a></h3>
+<p>This file is used to get webpack variables. They are necessary to build correctly the application. It will export these following variables:
+- <code>addAnalyzer</code> according to the <code>COZY_SCRIPTS_ANALYZER</code> environment variable (used to get the <code>webpack-bundle-analyze</code> usage)
+- <code>environment</code> according to <code>NODE_ENV</code> environment variable (<code>target:environment</code>)
+- <code>getCSSLoader</code>, a function returing the correctly style lodaer to use (<code>mini-css-extract-plugin</code> loader by default and <code>style-loader</code> for hot reloading)
+- <code>isDebugMode</code> according to the <code>COZY_SCRIPTS_DEBUG</code> environment variable (used to get into a debug mode of <code>cozy-scripts</code>)
+- <code>target</code> according to <code>NODE_ENV</code> environment variable (<code>target:environment</code>)
+- <code>useHotReload</code> according to the <code>HOT_RELOAD</code> environment variable to use hot reloading feature or not</p>
+<blockquote>
+<p>If no environment variable <code>NODE_ENV</code> is found, it will be <code>browser:development</code> by default.</p>
+</blockquote>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.245445c6.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="../../extra.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,4368 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Cozy documentation">
+      
+      
+        <link rel="canonical" href="https://docs.cozy.io/cozy-client/api/cozy-stack-client/">
+      
+      
+        <meta name="author" content="CozyCloud - https://cozy.io">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[^a-zа-яё0-9\-]">
+      
+      <link rel="shortcut icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.0">
+    
+    
+      
+        <title>Cozy Stack Client API - Cozy Developer Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/application.0284f74d.css">
+      
+        <link rel="stylesheet" href="../../../assets/stylesheets/application-palette.01803549.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#2196f3">
+      
+    
+    
+    
+      <script src="../../../assets/javascripts/modernizr.74668098.js"></script>
+    
+    <script type="text/javascript">
+        // Used in extra.js, we have to define the variable here since
+        // we need access to the "config" jinja variable
+        window.outsideDocs = [{"repo": "https://github.com/cozy/cozy-app-publish.git", "name": "cozy-app-publish", "subdir": "."}, {"repo": "https://github.com/cozy/cozy-apps-registry.git", "name": "cozy-apps-registry", "subdir": "."}, {"repo": "https://github.com/cozy/cozy-client.git", "name": "cozy-client", "subdir": "docs"}, {"repo": "https://github.com/cozy/cozy-client-js.git", "name": "cozy-client-js", "subdir": "docs"}, {"repo": "https://github.com/cozy/cozy-ui.git", "name": "cozy-ui", "subdir": "docs"}, {"repo": "https://github.com/cozy/cozy-doctypes.git", "name": "cozy-doctypes", "subdir": "."}, {"repo": "https://github.com/konnectors/libs.git", "name": "cozy-konnector-libs", "subdir": "packages/cozy-konnector-libs/docs"}, {"repo": "https://github.com/CPatchane/create-cozy-app.git", "name": "cozy-scripts", "subdir": "packages/cozy-scripts/docs"}, {"repo": "https://github.com/cozy/cozy-stack.git", "name": "cozy-stack", "subdir": "docs"}, {"repo": "https://github.com/konnectors/konitor.git", "name": "konitor", "subdir": "docs"}, {"repo": "https://github.com/cozy/cozy-libs.git", "name": "babel-preset-cozy-app", "subdir": "packages/babel-preset-cozy-app"}, {"repo": "https://github.com/cozy/cozy-libs.git", "name": "commitlint-config-cozy", "subdir": "packages/commitlint-config-cozy"}, {"repo": "https://github.com/cozy/cozy-libs.git", "name": "cozy-device-helper", "subdir": "packages/cozy-device-helper"}, {"repo": "https://github.com/cozy/cozy-libs.git", "name": "eslint-config-cozy-app", "subdir": "packages/eslint-config-cozy-app"}, {"repo": "https://github.com/cozy/cozy-libs.git", "name": "cozy-flags", "subdir": "packages/cozy-flags"}, {"repo": "https://github.com/cozy/cozy-libs.git", "name": "cozy-realtime", "subdir": "packages/cozy-realtime"}]
+    </script>
+
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Ubuntu+Mono&display=fallback">
+        <style>body,input{font-family:"Lato","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Ubuntu Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="blue" data-md-color-accent="blue">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#classes" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://docs.cozy.io/" title="Cozy Developer Documentation" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon">cloud</i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              Cozy Developer Documentation
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Cozy Stack Client API
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/cozy/cozy.github.io/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://docs.cozy.io/" title="Cozy Developer Documentation" class="md-nav__button md-logo">
+      
+        <i class="md-icon">cloud</i>
+      
+    </a>
+    Cozy Developer Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/cozy/cozy.github.io/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Tutorials
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Tutorials
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tutorials/app/" title="Create Your Application" class="md-nav__link">
+      Create Your Application
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tutorials/konnector/" title="Develop a Connector" class="md-nav__link">
+      Develop a Connector
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tutorials/selfhost-debian/" title="Self-Host on Debian" class="md-nav__link">
+      Self-Host on Debian
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      How-to
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        How-to
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-1" type="checkbox" id="nav-3-1">
+    
+    <label class="md-nav__link" for="nav-3-1">
+      Dev
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-1">
+        Dev
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../howTos/dev/runCozyDocker/" title="Run an App in a Cozy using Docker" class="md-nav__link">
+      Run an App in a Cozy using Docker
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../howTos/dev/hmr/" title="Use Hot Module Replacement in Your App" class="md-nav__link">
+      Use Hot Module Replacement in Your App
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../howTos/dev/cordova/" title="Make a Mobile App Using Cordova" class="md-nav__link">
+      Make a Mobile App Using Cordova
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../howTos/dev/connect-mobile-app-local-stack/" title="Connect a Mobile App to Your Local Stack" class="md-nav__link">
+      Connect a Mobile App to Your Local Stack
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../howTos/dev/sendmail/" title="Send and Receive E-mails in Development" class="md-nav__link">
+      Send and Receive E-mails in Development
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../references/git-flow/" title="Our Front-End Git Flow" class="md-nav__link">
+      Our Front-End Git Flow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../references/tech-intro/" title="Technical introduction to the Cozy platform" class="md-nav__link">
+      Technical introduction to the Cozy platform
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-2" type="checkbox" id="nav-3-2">
+    
+    <label class="md-nav__link" for="nav-3-2">
+      Synchronize
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-2">
+        Synchronize
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../howTos/sync/linux/" title="Install Cozy Drive on GNU/Linux" class="md-nav__link">
+      Install Cozy Drive on GNU/Linux
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
+    
+    <label class="md-nav__link" for="nav-4">
+      Stack and tools
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Stack and tools
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../eslint-config-cozy-app/" title="eslint-config-cozy-app" class="md-nav__link">
+      eslint-config-cozy-app
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../commitlint-config-cozy/" title="commitlint-config-cozy" class="md-nav__link">
+      commitlint-config-cozy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3" type="checkbox" id="nav-4-3">
+    
+    <label class="md-nav__link" for="nav-4-3">
+      cozy-stack
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-3">
+        cozy-stack
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/" title="README" class="md-nav__link">
+      README
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-2" type="checkbox" id="nav-4-3-2">
+    
+    <label class="md-nav__link" for="nav-4-3-2">
+      Usage
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-3-2">
+        Usage
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/INSTALL/" title="Install the cozy-stack" class="md-nav__link">
+      Install the cozy-stack
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/config/" title="Configuration file" class="md-nav__link">
+      Configuration file
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/instance/" title="Managing Instances" class="md-nav__link">
+      Managing Instances
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/security/" title="Security" class="md-nav__link">
+      Security
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/cli/cozy-stack/" title="Manpages of the command-line tool" class="md-nav__link">
+      Manpages of the command-line tool
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-3" type="checkbox" id="nav-4-3-3">
+    
+    <label class="md-nav__link" for="nav-4-3-3">
+      How-to guides for developpers
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-3-3">
+        How-to guides for developpers
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/client-app-dev/" title="Develop a client-side app" class="md-nav__link">
+      Develop a client-side app
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/docker/" title="Running and building Docker images" class="md-nav__link">
+      Running and building Docker images
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/doctype/" title="Adding a new doctype" class="md-nav__link">
+      Adding a new doctype
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/assets/" title="Working with the stack assets" class="md-nav__link">
+      Working with the stack assets
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/release/" title="Build a release" class="md-nav__link">
+      Build a release
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/CONTRIBUTING/" title="The contributing guide" class="md-nav__link">
+      The contributing guide
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-4" type="checkbox" id="nav-4-3-4">
+    
+    <label class="md-nav__link" for="nav-4-3-4">
+      Explanations
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-3-4">
+        Explanations
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/sharing-design/" title="Sharing design" class="md-nav__link">
+      Sharing design
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/konnectors-workflow/" title="Workflow of the konnectors" class="md-nav__link">
+      Workflow of the konnectors
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-5" type="checkbox" id="nav-4-3-5">
+    
+    <label class="md-nav__link" for="nav-4-3-5">
+      List of services
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-3-5">
+        List of services
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/auth/" title="/auth - Authentication & OAuth" class="md-nav__link">
+      /auth - Authentication & OAuth
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/apps/" title="/apps - Applications Management" class="md-nav__link">
+      /apps - Applications Management
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/registry/" title="/apps - Apps registry" class="md-nav__link">
+       /apps - Apps registry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/konnectors/" title="/apps - Konnectors" class="md-nav__link">
+       /apps - Konnectors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/data-system/" title="/data - Data System" class="md-nav__link">
+      /data - Data System
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/mango/" title="/data - Mango" class="md-nav__link">
+       /data - Mango
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/couchdb-quirks/" title="/data - CouchDB Quirks" class="md-nav__link">
+       /data - CouchDB Quirks
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/pouchdb-quirks/" title="/data - PouchDB Quirks" class="md-nav__link">
+       /data - PouchDB Quirks
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/files/" title="/files - Virtual File System" class="md-nav__link">
+      /files - Virtual File System
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/references-docs-in-vfs/" title="/files - References of documents in VFS" class="md-nav__link">
+       /files - References of documents in VFS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/intents/" title="/intents - Intents" class="md-nav__link">
+      /intents - Intents
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/jobs/" title="/jobs - Jobs" class="md-nav__link">
+      /jobs - Jobs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/workers/" title="/jobs - Workers" class="md-nav__link">
+       /jobs - Workers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/move/" title="/move - Move, export and import an instance" class="md-nav__link">
+      /move - Move, export and import an instance
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/notifications/" title="/notifications - Notifications" class="md-nav__link">
+      /notifications - Notifications
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/public/" title="/public - Public" class="md-nav__link">
+      /public - Public
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/permissions/" title="/permissions - Permissions" class="md-nav__link">
+      /permissions - Permissions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/realtime/" title="/realtime - Realtime" class="md-nav__link">
+      /realtime - Realtime
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/remote/" title="/remote - Proxy for remote data/API" class="md-nav__link">
+      /remote - Proxy for remote data/API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/settings/" title="/settings - Settings" class="md-nav__link">
+      /settings - Settings
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/user-action-required/" title="/settings - Terms of Services" class="md-nav__link">
+       /settings - Terms of Services
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-stack/sharing/" title="/sharings - Sharing" class="md-nav__link">
+      /sharings - Sharing
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-app-publish/" title="cozy-app-publish" class="md-nav__link">
+      cozy-app-publish
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../babel-preset-cozy-app/" title="babel-preset-cozy-app" class="md-nav__link">
+      babel-preset-cozy-app
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../konitor/cli/" title="konitor" class="md-nav__link">
+      konitor
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-7" type="checkbox" id="nav-4-7">
+    
+    <label class="md-nav__link" for="nav-4-7">
+      cozy-doctypes
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-7">
+        cozy-doctypes
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-doctypes/docs/" title="README" class="md-nav__link">
+      README
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-doctypes/docs/io.cozy.accounts/" title="Accounts" class="md-nav__link">
+      Accounts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-doctypes/docs/io.cozy.apps/" title="Apps" class="md-nav__link">
+      Apps
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-doctypes/docs/io.cozy.bank/" title="Banking doctypes" class="md-nav__link">
+      Banking doctypes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-doctypes/docs/io.cozy.bills/" title="Bills" class="md-nav__link">
+      Bills
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-doctypes/docs/io.cozy.konnectors/" title="Connectors" class="md-nav__link">
+      Connectors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-doctypes/docs/io.cozy.contacts/" title="Contacts" class="md-nav__link">
+      Contacts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-doctypes/docs/io.cozy.files/" title="Files" class="md-nav__link">
+      Files
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-doctypes/docs/io.cozy.files_metadata/" title="Files metadata" class="md-nav__link">
+      Files metadata
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-doctypes/docs/io.cozy.identities/" title="Identities" class="md-nav__link">
+      Identities
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-doctypes/docs/io.cozy.notifications/" title="Notifications" class="md-nav__link">
+      Notifications
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-doctypes/docs/io.cozy.remote.requests/" title="Remote requests" class="md-nav__link">
+      Remote requests
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-doctypes/docs/io.cozy.sessions.logins/" title="Session logins" class="md-nav__link">
+      Session logins
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-doctypes/docs/io.cozy.permissions/" title="Permissions" class="md-nav__link">
+      Permissions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-doctypes/docs/io.cozy.photos.albums/" title="Photos Albums" class="md-nav__link">
+      Photos Albums
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-doctypes/docs/io.cozy.procedures/" title="Procedures" class="md-nav__link">
+      Procedures
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-doctypes/docs/io.cozy.sessions.logins/" title="Sessions Logins" class="md-nav__link">
+      Sessions Logins
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-doctypes/docs/io.cozy.settings/" title="Settings" class="md-nav__link">
+      Settings
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-doctypes/docs/io.cozy.sharings/" title="Sharings" class="md-nav__link">
+      Sharings
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-doctypes/docs/io.cozy.account_types/" title="Accounts Types" class="md-nav__link">
+      Accounts Types
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-doctypes/docs/cc.cozycloud.autocategorization/" title="Autocategorization" class="md-nav__link">
+      Autocategorization
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-doctypes/docs/io.cozy.exports/" title="Exports" class="md-nav__link">
+      Exports
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-doctypes/docs/io.cozy.jobs/" title="Jobs" class="md-nav__link">
+      Jobs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-doctypes/docs/io.cozy.oauth.clients/" title="OAuth Clients" class="md-nav__link">
+      OAuth Clients
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-doctypes/docs/io.cozy.oauth.access_codes/" title="OAuth Access Codes" class="md-nav__link">
+      OAuth Access Codes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-doctypes/docs/io.cozy.triggers/" title="Triggers" class="md-nav__link">
+      Triggers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-doctypes/docs/io.cozy.triggers.state/" title="Triggers state" class="md-nav__link">
+      Triggers state
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-doctypes/docs/io.cozy.remote.requests/" title="Remote requests" class="md-nav__link">
+      Remote requests
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-doctypes/docs/io.cozy.sessions/" title="Sessions" class="md-nav__link">
+      Sessions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-doctypes/docs/io.cozy.shared/" title="Shared" class="md-nav__link">
+      Shared
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-doctypes/docs/io.cozy.terms/" title="Terms" class="md-nav__link">
+      Terms
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-doctypes/docs/com.unibet.bets/" title="Bets Unibet" class="md-nav__link">
+      Bets Unibet
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-ui/" title="cozy-ui" class="md-nav__link">
+      cozy-ui
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-device-helper/" title="cozy-device-helper" class="md-nav__link">
+      cozy-device-helper
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-10" type="checkbox" id="nav-4-10" checked>
+    
+    <label class="md-nav__link" for="nav-4-10">
+      cozy-client
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-10">
+        cozy-client
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../getting-started/" title="Getting started" class="md-nav__link">
+      Getting started
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../relationships/" title="Using relationship" class="md-nav__link">
+      Using relationship
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../metadata/" title="cozyMetadata maintenance" class="md-nav__link">
+      cozyMetadata maintenance
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../react-integration/" title="React integration" class="md-nav__link">
+      React integration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../details/" title="Other details" class="md-nav__link">
+      Other details
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../cozy-client/" title="Cozy Client API" class="md-nav__link">
+      Cozy Client API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../cozy-pouch-link/" title="Cozy Pouch Link API" class="md-nav__link">
+      Cozy Pouch Link API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Cozy Stack Client API
+      </label>
+    
+    <a href="./" title="Cozy Stack Client API" class="md-nav__link md-nav__link--active">
+      Cozy Stack Client API
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#classes" title="Classes" class="md-nav__link">
+    Classes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#constants" title="Constants" class="md-nav__link">
+    Constants
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions" title="Functions" class="md-nav__link">
+    Functions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#appcollection" title="AppCollection" class="md-nav__link">
+    AppCollection
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#appcollectionall-object" title="appCollection.all() ⇒ Object" class="md-nav__link">
+    appCollection.all() ⇒ Object
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#collection" title="Collection" class="md-nav__link">
+    Collection
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#collectiongetstackclient-endpoint-options-object" title="Collection.get(stackClient, endpoint, options) ⇒ Object" class="md-nav__link">
+    Collection.get(stackClient, endpoint, options) ⇒ Object
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cozystackclient" title="CozyStackClient" class="md-nav__link">
+    CozyStackClient
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cozystackclientcollectiondoctype-documentcollection" title="cozyStackClient.collection(doctype) ⇒ DocumentCollection" class="md-nav__link">
+    cozyStackClient.collection(doctype) ⇒ DocumentCollection
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cozystackclientfetchmethod-path-body-options-object" title="cozyStackClient.fetch(method, path, body, options) ⇒ Object" class="md-nav__link">
+    cozyStackClient.fetch(method, path, body, options) ⇒ Object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cozystackclientrefreshtoken-promise" title="cozyStackClient.refreshToken() ⇒ Promise" class="md-nav__link">
+    cozyStackClient.refreshToken() ⇒ Promise
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cozystackclientfetchjsonmethod-path-body-options-object" title="cozyStackClient.fetchJSON(method, path, body, options) ⇒ Object" class="md-nav__link">
+    cozyStackClient.fetchJSON(method, path, body, options) ⇒ Object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cozystackclientgetaccesstoken-string" title="cozyStackClient.getAccessToken() ⇒ string" class="md-nav__link">
+    cozyStackClient.getAccessToken() ⇒ string
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#documentcollection" title="DocumentCollection" class="md-nav__link">
+    DocumentCollection
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#documentcollectionalloptions-object" title="documentCollection.all(options) ⇒ Object" class="md-nav__link">
+    documentCollection.all(options) ⇒ Object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#documentcollectionfindselector-options-object" title="documentCollection.find(selector, options) ⇒ Object" class="md-nav__link">
+    documentCollection.find(selector, options) ⇒ Object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#documentcollectiongetindexfieldsoptions-array" title="documentCollection.getIndexFields(options) ⇒ Array" class="md-nav__link">
+    documentCollection.getIndexFields(options) ⇒ Array
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#documentcollectionfetchchangescouchoptions-options" title="documentCollection.fetchChanges(couchOptions, options)" class="md-nav__link">
+    documentCollection.fetchChanges(couchOptions, options)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#filecollection" title="FileCollection" class="md-nav__link">
+    FileCollection
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#filecollectionfindselector-options-object" title="fileCollection.find(selector, options) ⇒ Object" class="md-nav__link">
+    fileCollection.find(selector, options) ⇒ Object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filecollectionfindreferencedbydocument-options-object" title="fileCollection.findReferencedBy(document, options) ⇒ object" class="md-nav__link">
+    fileCollection.findReferencedBy(document, options) ⇒ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filecollectionaddreferencedbydocument-documents-object" title="fileCollection.addReferencedBy(document, documents) ⇒ object" class="md-nav__link">
+    fileCollection.addReferencedBy(document, documents) ⇒ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filecollectionaddreferencestodocument-documents-object" title="fileCollection.addReferencesTo(document, documents) ⇒ object" class="md-nav__link">
+    fileCollection.addReferencesTo(document, documents) ⇒ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filecollectionrestoreid-promise" title="fileCollection.restore(id) ⇒ Promise" class="md-nav__link">
+    fileCollection.restore(id) ⇒ Promise
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filecollectiondeletefilepermanentlyid-object" title="fileCollection.deleteFilePermanently(id) ⇒ object" class="md-nav__link">
+    fileCollection.deleteFilePermanently(id) ⇒ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filecollectionupdatefiledata-params-object" title="fileCollection.updateFile(data, params) ⇒ object" class="md-nav__link">
+    fileCollection.updateFile(data, params) ⇒ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filecollectionischildofchild-parent-boolean" title="fileCollection.isChildOf(child, parent) ⇒ boolean" class="md-nav__link">
+    fileCollection.isChildOf(child, parent) ⇒ boolean
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filecollectioncreatedirectorybypathpath-object" title="fileCollection.createDirectoryByPath(path) ⇒ object" class="md-nav__link">
+    fileCollection.createDirectoryByPath(path) ⇒ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filecollectionupdatefilemetadataid-attributes-object" title="fileCollection.updateFileMetadata(id, attributes) ⇒ object" class="md-nav__link">
+    fileCollection.updateFileMetadata(id, attributes) ⇒ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filecollectioncreatefilemetadataattributes-object" title="fileCollection.createFileMetadata(attributes) ⇒ object" class="md-nav__link">
+    fileCollection.createFileMetadata(attributes) ⇒ object
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#oauthclient" title="OAuthClient" class="md-nav__link">
+    OAuthClient
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#oauthclientregister-promise" title="oAuthClient.register() ⇒ promise" class="md-nav__link">
+    oAuthClient.register() ⇒ promise
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#oauthclientunregister-promise" title="oAuthClient.unregister() ⇒ promise" class="md-nav__link">
+    oAuthClient.unregister() ⇒ promise
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#oauthclientfetchinformation-promise" title="oAuthClient.fetchInformation() ⇒ promise" class="md-nav__link">
+    oAuthClient.fetchInformation() ⇒ promise
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#oauthclientupdateinformationinformation-resetsecret-promise" title="oAuthClient.updateInformation(information, resetSecret) ⇒ promise" class="md-nav__link">
+    oAuthClient.updateInformation(information, resetSecret) ⇒ promise
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#oauthclientgeneratestatecode-string" title="oAuthClient.generateStateCode() ⇒ string" class="md-nav__link">
+    oAuthClient.generateStateCode() ⇒ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#oauthclientgetauthcodeurlstatecode-scopes-string" title="oAuthClient.getAuthCodeURL(stateCode, scopes) ⇒ string" class="md-nav__link">
+    oAuthClient.getAuthCodeURL(stateCode, scopes) ⇒ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#oauthclientgetaccesscodefromurlpageurl-statecode-string" title="oAuthClient.getAccessCodeFromURL(pageURL, stateCode) ⇒ string" class="md-nav__link">
+    oAuthClient.getAccessCodeFromURL(pageURL, stateCode) ⇒ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#oauthclientfetchaccesstokenaccesscode-oauthoptions-uri-promise" title="oAuthClient.fetchAccessToken(accessCode, oauthOptions, uri) ⇒ Promise" class="md-nav__link">
+    oAuthClient.fetchAccessToken(accessCode, oauthOptions, uri) ⇒ Promise
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#oauthclientrefreshtoken-promise" title="oAuthClient.refreshToken() ⇒ Promise" class="md-nav__link">
+    oAuthClient.refreshToken() ⇒ Promise
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#oauthclientsettokentoken" title="oAuthClient.setToken(token)" class="md-nav__link">
+    oAuthClient.setToken(token)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#oauthclientsetoauthoptionsoptions" title="oAuthClient.setOAuthOptions(options)" class="md-nav__link">
+    oAuthClient.setOAuthOptions(options)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#oauthclientresetclient" title="oAuthClient.resetClient()" class="md-nav__link">
+    oAuthClient.resetClient()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#permissioncollection" title="PermissionCollection" class="md-nav__link">
+    PermissionCollection
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#permissioncollectionadddocument-permission-promise" title="permissionCollection.add(document, permission) ⇒ Promise" class="md-nav__link">
+    permissionCollection.add(document, permission) ⇒ Promise
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#permissioncollectiongetownpermissions-object" title="permissionCollection.getOwnPermissions() ⇒ object" class="md-nav__link">
+    permissionCollection.getOwnPermissions() ⇒ object
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sharingcollection" title="SharingCollection" class="md-nav__link">
+    SharingCollection
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sharingcollectionsharedocument-recipients-sharingtype-description-previewpath" title="sharingCollection.share(document, recipients, sharingType, description, [previewPath])" class="md-nav__link">
+    sharingCollection.share(document, recipients, sharingType, description, [previewPath])
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sharingcollectiongetdiscoverylinksharingid-sharecode-string" title="sharingCollection.getDiscoveryLink(sharingId, sharecode) ⇒ string" class="md-nav__link">
+    sharingCollection.getDiscoveryLink(sharingId, sharecode) ⇒ string
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#triggercollection" title="TriggerCollection" class="md-nav__link">
+    TriggerCollection
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#triggercollectionalloptions-object" title="triggerCollection.all(options) ⇒ Object" class="md-nav__link">
+    triggerCollection.all(options) ⇒ Object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#triggercollectioncreateattributes-object" title="triggerCollection.create(attributes) ⇒ object" class="md-nav__link">
+    triggerCollection.create(attributes) ⇒ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#triggercollectiondestroydocument-object" title="triggerCollection.destroy(document) ⇒ object" class="md-nav__link">
+    triggerCollection.destroy(document) ⇒ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#triggercollectionfindselector-options-object" title="triggerCollection.find(selector, options) ⇒ Object" class="md-nav__link">
+    triggerCollection.find(selector, options) ⇒ Object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#triggercollectionlaunchtrigger-object" title="triggerCollection.launch(Trigger) ⇒ object" class="md-nav__link">
+    triggerCollection.launch(Trigger) ⇒ object
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dontthrownotfounderror-object" title="dontThrowNotFoundError ⇒ Object" class="md-nav__link">
+    dontThrowNotFoundError ⇒ Object
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getaccesstoken-string" title="getAccessToken() ⇒ string" class="md-nav__link">
+    getAccessToken() ⇒ string
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getaccesstoken-string_1" title="getAccessToken() ⇒ string" class="md-nav__link">
+    getAccessToken() ⇒ string
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#garbagecollect" title="garbageCollect()" class="md-nav__link">
+    garbageCollect()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#memoize" title="memoize()" class="md-nav__link">
+    memoize()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getcozyurl" title="getCozyURL()" class="md-nav__link">
+    getCozyURL()
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-realtime/" title="cozy-realtime" class="md-nav__link">
+      cozy-realtime
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-12" type="checkbox" id="nav-4-12">
+    
+    <label class="md-nav__link" for="nav-4-12">
+      cozy-konnector-libs
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-12">
+        cozy-konnector-libs
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-konnector-libs/api/" title="API" class="md-nav__link">
+      API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-konnector-libs/cli/" title="CLI" class="md-nav__link">
+      CLI
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-konnector-libs/dev/" title="Develop" class="md-nav__link">
+      Develop
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-konnector-libs/errors/" title="Errors" class="md-nav__link">
+      Errors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-konnector-libs/operation-linking/" title="Operation linking" class="md-nav__link">
+      Operation linking
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-konnector-libs/synchronization/" title="Synchronization" class="md-nav__link">
+      Synchronization
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-apps-registry/" title="cozy-apps-registry" class="md-nav__link">
+      cozy-apps-registry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-flags/" title="cozy-flags" class="md-nav__link">
+      cozy-flags
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-15" type="checkbox" id="nav-4-15">
+    
+    <label class="md-nav__link" for="nav-4-15">
+      cozy-client-js
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-15">
+        cozy-client-js
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-client-js/" title="README" class="md-nav__link">
+      README
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-client-js/intro/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-client-js/browser-sdk-transition/" title="Transition from cozy-browser-sdk" class="md-nav__link">
+      Transition from cozy-browser-sdk
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-client-js/offline/" title="How to support offline" class="md-nav__link">
+      How to support offline
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-client-js/oauth/" title="OAuth guide" class="md-nav__link">
+      OAuth guide
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-client-js/auth-api/" title="Authentication API" class="md-nav__link">
+      Authentication API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-client-js/data-api/" title="Data System API" class="md-nav__link">
+      Data System API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-client-js/files-api/" title="Files API" class="md-nav__link">
+      Files API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-client-js/jobs-api/" title="Jobs API" class="md-nav__link">
+      Jobs API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-client-js/intents-api/" title="Intents API" class="md-nav__link">
+      Intents API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-client-js/settings-api/" title="Settings API" class="md-nav__link">
+      Settings API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cozy-client-js/sharing-api/" title="Sharing API" class="md-nav__link">
+      Sharing API
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#classes" title="Classes" class="md-nav__link">
+    Classes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#constants" title="Constants" class="md-nav__link">
+    Constants
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions" title="Functions" class="md-nav__link">
+    Functions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#appcollection" title="AppCollection" class="md-nav__link">
+    AppCollection
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#appcollectionall-object" title="appCollection.all() ⇒ Object" class="md-nav__link">
+    appCollection.all() ⇒ Object
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#collection" title="Collection" class="md-nav__link">
+    Collection
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#collectiongetstackclient-endpoint-options-object" title="Collection.get(stackClient, endpoint, options) ⇒ Object" class="md-nav__link">
+    Collection.get(stackClient, endpoint, options) ⇒ Object
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cozystackclient" title="CozyStackClient" class="md-nav__link">
+    CozyStackClient
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cozystackclientcollectiondoctype-documentcollection" title="cozyStackClient.collection(doctype) ⇒ DocumentCollection" class="md-nav__link">
+    cozyStackClient.collection(doctype) ⇒ DocumentCollection
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cozystackclientfetchmethod-path-body-options-object" title="cozyStackClient.fetch(method, path, body, options) ⇒ Object" class="md-nav__link">
+    cozyStackClient.fetch(method, path, body, options) ⇒ Object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cozystackclientrefreshtoken-promise" title="cozyStackClient.refreshToken() ⇒ Promise" class="md-nav__link">
+    cozyStackClient.refreshToken() ⇒ Promise
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cozystackclientfetchjsonmethod-path-body-options-object" title="cozyStackClient.fetchJSON(method, path, body, options) ⇒ Object" class="md-nav__link">
+    cozyStackClient.fetchJSON(method, path, body, options) ⇒ Object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cozystackclientgetaccesstoken-string" title="cozyStackClient.getAccessToken() ⇒ string" class="md-nav__link">
+    cozyStackClient.getAccessToken() ⇒ string
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#documentcollection" title="DocumentCollection" class="md-nav__link">
+    DocumentCollection
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#documentcollectionalloptions-object" title="documentCollection.all(options) ⇒ Object" class="md-nav__link">
+    documentCollection.all(options) ⇒ Object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#documentcollectionfindselector-options-object" title="documentCollection.find(selector, options) ⇒ Object" class="md-nav__link">
+    documentCollection.find(selector, options) ⇒ Object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#documentcollectiongetindexfieldsoptions-array" title="documentCollection.getIndexFields(options) ⇒ Array" class="md-nav__link">
+    documentCollection.getIndexFields(options) ⇒ Array
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#documentcollectionfetchchangescouchoptions-options" title="documentCollection.fetchChanges(couchOptions, options)" class="md-nav__link">
+    documentCollection.fetchChanges(couchOptions, options)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#filecollection" title="FileCollection" class="md-nav__link">
+    FileCollection
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#filecollectionfindselector-options-object" title="fileCollection.find(selector, options) ⇒ Object" class="md-nav__link">
+    fileCollection.find(selector, options) ⇒ Object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filecollectionfindreferencedbydocument-options-object" title="fileCollection.findReferencedBy(document, options) ⇒ object" class="md-nav__link">
+    fileCollection.findReferencedBy(document, options) ⇒ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filecollectionaddreferencedbydocument-documents-object" title="fileCollection.addReferencedBy(document, documents) ⇒ object" class="md-nav__link">
+    fileCollection.addReferencedBy(document, documents) ⇒ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filecollectionaddreferencestodocument-documents-object" title="fileCollection.addReferencesTo(document, documents) ⇒ object" class="md-nav__link">
+    fileCollection.addReferencesTo(document, documents) ⇒ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filecollectionrestoreid-promise" title="fileCollection.restore(id) ⇒ Promise" class="md-nav__link">
+    fileCollection.restore(id) ⇒ Promise
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filecollectiondeletefilepermanentlyid-object" title="fileCollection.deleteFilePermanently(id) ⇒ object" class="md-nav__link">
+    fileCollection.deleteFilePermanently(id) ⇒ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filecollectionupdatefiledata-params-object" title="fileCollection.updateFile(data, params) ⇒ object" class="md-nav__link">
+    fileCollection.updateFile(data, params) ⇒ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filecollectionischildofchild-parent-boolean" title="fileCollection.isChildOf(child, parent) ⇒ boolean" class="md-nav__link">
+    fileCollection.isChildOf(child, parent) ⇒ boolean
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filecollectioncreatedirectorybypathpath-object" title="fileCollection.createDirectoryByPath(path) ⇒ object" class="md-nav__link">
+    fileCollection.createDirectoryByPath(path) ⇒ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filecollectionupdatefilemetadataid-attributes-object" title="fileCollection.updateFileMetadata(id, attributes) ⇒ object" class="md-nav__link">
+    fileCollection.updateFileMetadata(id, attributes) ⇒ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filecollectioncreatefilemetadataattributes-object" title="fileCollection.createFileMetadata(attributes) ⇒ object" class="md-nav__link">
+    fileCollection.createFileMetadata(attributes) ⇒ object
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#oauthclient" title="OAuthClient" class="md-nav__link">
+    OAuthClient
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#oauthclientregister-promise" title="oAuthClient.register() ⇒ promise" class="md-nav__link">
+    oAuthClient.register() ⇒ promise
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#oauthclientunregister-promise" title="oAuthClient.unregister() ⇒ promise" class="md-nav__link">
+    oAuthClient.unregister() ⇒ promise
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#oauthclientfetchinformation-promise" title="oAuthClient.fetchInformation() ⇒ promise" class="md-nav__link">
+    oAuthClient.fetchInformation() ⇒ promise
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#oauthclientupdateinformationinformation-resetsecret-promise" title="oAuthClient.updateInformation(information, resetSecret) ⇒ promise" class="md-nav__link">
+    oAuthClient.updateInformation(information, resetSecret) ⇒ promise
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#oauthclientgeneratestatecode-string" title="oAuthClient.generateStateCode() ⇒ string" class="md-nav__link">
+    oAuthClient.generateStateCode() ⇒ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#oauthclientgetauthcodeurlstatecode-scopes-string" title="oAuthClient.getAuthCodeURL(stateCode, scopes) ⇒ string" class="md-nav__link">
+    oAuthClient.getAuthCodeURL(stateCode, scopes) ⇒ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#oauthclientgetaccesscodefromurlpageurl-statecode-string" title="oAuthClient.getAccessCodeFromURL(pageURL, stateCode) ⇒ string" class="md-nav__link">
+    oAuthClient.getAccessCodeFromURL(pageURL, stateCode) ⇒ string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#oauthclientfetchaccesstokenaccesscode-oauthoptions-uri-promise" title="oAuthClient.fetchAccessToken(accessCode, oauthOptions, uri) ⇒ Promise" class="md-nav__link">
+    oAuthClient.fetchAccessToken(accessCode, oauthOptions, uri) ⇒ Promise
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#oauthclientrefreshtoken-promise" title="oAuthClient.refreshToken() ⇒ Promise" class="md-nav__link">
+    oAuthClient.refreshToken() ⇒ Promise
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#oauthclientsettokentoken" title="oAuthClient.setToken(token)" class="md-nav__link">
+    oAuthClient.setToken(token)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#oauthclientsetoauthoptionsoptions" title="oAuthClient.setOAuthOptions(options)" class="md-nav__link">
+    oAuthClient.setOAuthOptions(options)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#oauthclientresetclient" title="oAuthClient.resetClient()" class="md-nav__link">
+    oAuthClient.resetClient()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#permissioncollection" title="PermissionCollection" class="md-nav__link">
+    PermissionCollection
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#permissioncollectionadddocument-permission-promise" title="permissionCollection.add(document, permission) ⇒ Promise" class="md-nav__link">
+    permissionCollection.add(document, permission) ⇒ Promise
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#permissioncollectiongetownpermissions-object" title="permissionCollection.getOwnPermissions() ⇒ object" class="md-nav__link">
+    permissionCollection.getOwnPermissions() ⇒ object
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sharingcollection" title="SharingCollection" class="md-nav__link">
+    SharingCollection
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sharingcollectionsharedocument-recipients-sharingtype-description-previewpath" title="sharingCollection.share(document, recipients, sharingType, description, [previewPath])" class="md-nav__link">
+    sharingCollection.share(document, recipients, sharingType, description, [previewPath])
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sharingcollectiongetdiscoverylinksharingid-sharecode-string" title="sharingCollection.getDiscoveryLink(sharingId, sharecode) ⇒ string" class="md-nav__link">
+    sharingCollection.getDiscoveryLink(sharingId, sharecode) ⇒ string
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#triggercollection" title="TriggerCollection" class="md-nav__link">
+    TriggerCollection
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#triggercollectionalloptions-object" title="triggerCollection.all(options) ⇒ Object" class="md-nav__link">
+    triggerCollection.all(options) ⇒ Object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#triggercollectioncreateattributes-object" title="triggerCollection.create(attributes) ⇒ object" class="md-nav__link">
+    triggerCollection.create(attributes) ⇒ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#triggercollectiondestroydocument-object" title="triggerCollection.destroy(document) ⇒ object" class="md-nav__link">
+    triggerCollection.destroy(document) ⇒ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#triggercollectionfindselector-options-object" title="triggerCollection.find(selector, options) ⇒ Object" class="md-nav__link">
+    triggerCollection.find(selector, options) ⇒ Object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#triggercollectionlaunchtrigger-object" title="triggerCollection.launch(Trigger) ⇒ object" class="md-nav__link">
+    triggerCollection.launch(Trigger) ⇒ object
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dontthrownotfounderror-object" title="dontThrowNotFoundError ⇒ Object" class="md-nav__link">
+    dontThrowNotFoundError ⇒ Object
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getaccesstoken-string" title="getAccessToken() ⇒ string" class="md-nav__link">
+    getAccessToken() ⇒ string
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getaccesstoken-string_1" title="getAccessToken() ⇒ string" class="md-nav__link">
+    getAccessToken() ⇒ string
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#garbagecollect" title="garbageCollect()" class="md-nav__link">
+    garbageCollect()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#memoize" title="memoize()" class="md-nav__link">
+    memoize()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getcozyurl" title="getCozyURL()" class="md-nav__link">
+    getCozyURL()
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/cozy/cozy.github.io/edit/dev/src/cozy-client/api/cozy-stack-client.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                  <h1>Cozy Stack Client API</h1>
+                
+                <h2 id="classes">Classes<a class="headerlink" href="#classes" title="Permanent link">&para;</a></h2>
+<dl>
+<dt><a href="#AppCollection">AppCollection</a></dt>
+<dd><p>Extends <code>DocumentCollection</code> API along with specific methods for <code>io.cozy.apps</code>.</p>
+</dd>
+<dt><a href="#Collection">Collection</a></dt>
+<dd><p>Utility class to abstract an regroup identical methods and logics for
+specific collections.</p>
+</dd>
+<dt><a href="#CozyStackClient">CozyStackClient</a></dt>
+<dd><p>Main API against the <code>cozy-stack</code> server.</p>
+</dd>
+<dt><a href="#DocumentCollection">DocumentCollection</a></dt>
+<dd><p>Abstracts a collection of documents of the same doctype, providing CRUD methods and other helpers.</p>
+</dd>
+<dt><a href="#FileCollection">FileCollection</a></dt>
+<dd><p>Implements <code>DocumentCollection</code> API along with specific methods for
+<code>io.cozy.files</code>.</p>
+<p>Files are a special type of documents and are handled differently by the stack:
+special routes are to be used, and there is a notion of referenced files, aka
+files associated to a specific document</p>
+</dd>
+<dt><a href="#OAuthClient">OAuthClient</a></dt>
+<dd><p>Specialized <code>CozyStackClient</code> for mobile, implementing stack registration
+through OAuth.</p>
+</dd>
+<dt><a href="#PermissionCollection">PermissionCollection</a></dt>
+<dd><p>Implements <code>DocumentCollection</code> API along with specific methods for <code>io.cozy.permissions</code>.</p>
+</dd>
+<dt><a href="#SharingCollection">SharingCollection</a></dt>
+<dd><p>Implements the <code>DocumentCollection</code> API along with specific methods for
+<code>io.cozy.sharings</code>.</p>
+</dd>
+<dt><a href="#TriggerCollection">TriggerCollection</a></dt>
+<dd><p>Implements <code>DocumentCollection</code> API along with specific methods for <code>io.cozy.triggers</code>.</p>
+</dd>
+</dl>
+
+<h2 id="constants">Constants<a class="headerlink" href="#constants" title="Permanent link">&para;</a></h2>
+<dl>
+<dt><a href="#dontThrowNotFoundError">dontThrowNotFoundError</a> ⇒ <code>Object</code></dt>
+<dd><p>Handler for error response which return a empty value for &quot;not found&quot; error</p>
+</dd>
+</dl>
+
+<h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">&para;</a></h2>
+<dl>
+<dt><a href="#getAccessToken">getAccessToken()</a> ⇒ <code>string</code></dt>
+<dd><p>Get the access token string</p>
+</dd>
+<dt><a href="#getAccessToken">getAccessToken()</a> ⇒ <code>string</code></dt>
+<dd><p>Get the app token string</p>
+</dd>
+<dt><a href="#garbageCollect">garbageCollect()</a></dt>
+<dd><p>Delete outdated results from cache</p>
+</dd>
+<dt><a href="#memoize">memoize()</a></dt>
+<dd><p>Memoize with maxDuration and custom key</p>
+</dd>
+<dt><a href="#getCozyURL">getCozyURL()</a></dt>
+<dd><p>Get a uniform formatted URL and SSL information according to a provided URL</p>
+</dd>
+</dl>
+
+<p><a name="AppCollection"></a></p>
+<h2 id="appcollection">AppCollection<a class="headerlink" href="#appcollection" title="Permanent link">&para;</a></h2>
+<p>Extends <code>DocumentCollection</code> API along with specific methods for <code>io.cozy.apps</code>.</p>
+<p><strong>Kind</strong>: global class<br />
+<a name="AppCollection+all"></a></p>
+<h3 id="appcollectionall-object">appCollection.all() ⇒ <code>Object</code><a class="headerlink" href="#appcollectionall-object" title="Permanent link">&para;</a></h3>
+<p>Lists all apps, without filters.</p>
+<p>The returned documents are not paginated by the stack.</p>
+<p><strong>Kind</strong>: instance method of <a href="#AppCollection"><code>AppCollection</code></a><br />
+<strong>Returns</strong>: <code>Object</code> - The JSON API conformant response.<br />
+<strong>Throws</strong>:</p>
+<ul>
+<li><code>FetchError</code> </li>
+</ul>
+<p><a name="Collection"></a></p>
+<h2 id="collection">Collection<a class="headerlink" href="#collection" title="Permanent link">&para;</a></h2>
+<p>Utility class to abstract an regroup identical methods and logics for
+specific collections.</p>
+<p><strong>Kind</strong>: global class<br />
+<a name="Collection.get"></a></p>
+<h3 id="collectiongetstackclient-endpoint-options-object">Collection.get(stackClient, endpoint, options) ⇒ <code>Object</code><a class="headerlink" href="#collectiongetstackclient-endpoint-options-object" title="Permanent link">&para;</a></h3>
+<p>Utility method aimed to return only one document.</p>
+<p><strong>Kind</strong>: static method of <a href="#Collection"><code>Collection</code></a><br />
+<strong>Returns</strong>: <code>Object</code> - JsonAPI response containing normalized
+document as data attribute  </p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>stackClient</td>
+<td><code>Object</code></td>
+<td></td>
+</tr>
+<tr>
+<td>endpoint</td>
+<td><code>String</code></td>
+<td>Stack endpoint</td>
+</tr>
+<tr>
+<td>options</td>
+<td><code>Object</code></td>
+<td></td>
+</tr>
+<tr>
+<td>options.normalize</td>
+<td><code>Func</code></td>
+<td>Callback to normalize response data (default <code>data =&gt; data</code>)</td>
+</tr>
+<tr>
+<td>options.method</td>
+<td><code>String</code></td>
+<td>HTTP method (default <code>GET</code>)</td>
+</tr>
+</tbody>
+</table>
+<p><a name="CozyStackClient"></a></p>
+<h2 id="cozystackclient">CozyStackClient<a class="headerlink" href="#cozystackclient" title="Permanent link">&para;</a></h2>
+<p>Main API against the <code>cozy-stack</code> server.</p>
+<p><strong>Kind</strong>: global class  </p>
+<ul>
+<li><a href="#CozyStackClient">CozyStackClient</a><ul>
+<li><a href="#CozyStackClient+collection">.collection(doctype)</a> ⇒ <a href="#DocumentCollection"><code>DocumentCollection</code></a></li>
+<li><a href="#CozyStackClient+fetch">.fetch(method, path, body, options)</a> ⇒ <code>Object</code></li>
+<li><a href="#CozyStackClient+refreshToken">.refreshToken()</a> ⇒ <code>Promise</code></li>
+<li><a href="#CozyStackClient+fetchJSON">.fetchJSON(method, path, body, options)</a> ⇒ <code>Object</code></li>
+<li><a href="#CozyStackClient+getAccessToken">.getAccessToken()</a> ⇒ <code>string</code></li>
+</ul>
+</li>
+</ul>
+<p><a name="CozyStackClient+collection"></a></p>
+<h3 id="cozystackclientcollectiondoctype-documentcollection">cozyStackClient.collection(doctype) ⇒ <a href="#DocumentCollection"><code>DocumentCollection</code></a><a class="headerlink" href="#cozystackclientcollectiondoctype-documentcollection" title="Permanent link">&para;</a></h3>
+<p>Creates a <a href="#DocumentCollection">DocumentCollection</a> instance.</p>
+<p><strong>Kind</strong>: instance method of <a href="#CozyStackClient"><code>CozyStackClient</code></a>  </p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>doctype</td>
+<td><code>String</code></td>
+<td>The collection doctype.</td>
+</tr>
+</tbody>
+</table>
+<p><a name="CozyStackClient+fetch"></a></p>
+<h3 id="cozystackclientfetchmethod-path-body-options-object">cozyStackClient.fetch(method, path, body, options) ⇒ <code>Object</code><a class="headerlink" href="#cozystackclientfetchmethod-path-body-options-object" title="Permanent link">&para;</a></h3>
+<p>Fetches an endpoint in an authorized way.</p>
+<p><strong>Kind</strong>: instance method of <a href="#CozyStackClient"><code>CozyStackClient</code></a><br />
+<strong>Throws</strong>:</p>
+<ul>
+<li><code>FetchError</code> </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>method</td>
+<td><code>String</code></td>
+<td>The HTTP method.</td>
+</tr>
+<tr>
+<td>path</td>
+<td><code>String</code></td>
+<td>The URI.</td>
+</tr>
+<tr>
+<td>body</td>
+<td><code>Object</code></td>
+<td>The payload.</td>
+</tr>
+<tr>
+<td>options</td>
+<td><code>Object</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><a name="CozyStackClient+refreshToken"></a></p>
+<h3 id="cozystackclientrefreshtoken-promise">cozyStackClient.refreshToken() ⇒ <code>Promise</code><a class="headerlink" href="#cozystackclientrefreshtoken-promise" title="Permanent link">&para;</a></h3>
+<p>Retrieves a new app token by refreshing the currently used token.</p>
+<p><strong>Kind</strong>: instance method of <a href="#CozyStackClient"><code>CozyStackClient</code></a><br />
+<strong>Returns</strong>: <code>Promise</code> - A promise that resolves with a new AccessToken object<br />
+<strong>Throws</strong>:</p>
+<ul>
+<li><code>Error</code> The client should already have an access token to use this function</li>
+<li><code>Error</code> The client couldn&rsquo;t fetch a new token</li>
+</ul>
+<p><a name="CozyStackClient+fetchJSON"></a></p>
+<h3 id="cozystackclientfetchjsonmethod-path-body-options-object">cozyStackClient.fetchJSON(method, path, body, options) ⇒ <code>Object</code><a class="headerlink" href="#cozystackclientfetchjsonmethod-path-body-options-object" title="Permanent link">&para;</a></h3>
+<p>Fetches JSON in an authorized way.</p>
+<p><strong>Kind</strong>: instance method of <a href="#CozyStackClient"><code>CozyStackClient</code></a><br />
+<strong>Throws</strong>:</p>
+<ul>
+<li><code>FetchError</code> </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>method</td>
+<td><code>String</code></td>
+<td>The HTTP method.</td>
+</tr>
+<tr>
+<td>path</td>
+<td><code>String</code></td>
+<td>The URI.</td>
+</tr>
+<tr>
+<td>body</td>
+<td><code>Object</code></td>
+<td>The payload.</td>
+</tr>
+<tr>
+<td>options</td>
+<td><code>Object</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><a name="CozyStackClient+getAccessToken"></a></p>
+<h3 id="cozystackclientgetaccesstoken-string">cozyStackClient.getAccessToken() ⇒ <code>string</code><a class="headerlink" href="#cozystackclientgetaccesstoken-string" title="Permanent link">&para;</a></h3>
+<p>Get the access token string, being an oauth token or an app token</p>
+<p><strong>Kind</strong>: instance method of <a href="#CozyStackClient"><code>CozyStackClient</code></a><br />
+<strong>Returns</strong>: <code>string</code> - token<br />
+<a name="DocumentCollection"></a></p>
+<h2 id="documentcollection">DocumentCollection<a class="headerlink" href="#documentcollection" title="Permanent link">&para;</a></h2>
+<p>Abstracts a collection of documents of the same doctype, providing CRUD methods and other helpers.</p>
+<p><strong>Kind</strong>: global class  </p>
+<ul>
+<li><a href="#DocumentCollection">DocumentCollection</a><ul>
+<li><a href="#DocumentCollection+all">.all(options)</a> ⇒ <code>Object</code></li>
+<li><a href="#DocumentCollection+find">.find(selector, options)</a> ⇒ <code>Object</code></li>
+<li><a href="#DocumentCollection+getIndexFields">.getIndexFields(options)</a> ⇒ <code>Array</code></li>
+<li><a href="#DocumentCollection+fetchChanges">.fetchChanges(couchOptions, options)</a></li>
+</ul>
+</li>
+</ul>
+<p><a name="DocumentCollection+all"></a></p>
+<h3 id="documentcollectionalloptions-object">documentCollection.all(options) ⇒ <code>Object</code><a class="headerlink" href="#documentcollectionalloptions-object" title="Permanent link">&para;</a></h3>
+<p>Lists all documents of the collection, without filters.</p>
+<p>The returned documents are paginated by the stack.</p>
+<p><strong>Kind</strong>: instance method of <a href="#DocumentCollection"><code>DocumentCollection</code></a><br />
+<strong>Returns</strong>: <code>Object</code> - The JSON API conformant response.<br />
+<strong>Throws</strong>:</p>
+<ul>
+<li><code>FetchError</code> </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>options</td>
+<td><code>Object</code></td>
+<td>The fetch options: pagination &amp; fetch of specific docs.</td>
+</tr>
+</tbody>
+</table>
+<p><a name="DocumentCollection+find"></a></p>
+<h3 id="documentcollectionfindselector-options-object">documentCollection.find(selector, options) ⇒ <code>Object</code><a class="headerlink" href="#documentcollectionfindselector-options-object" title="Permanent link">&para;</a></h3>
+<p>Returns a filtered list of documents using a Mango selector.</p>
+<p>The returned documents are paginated by the stack.</p>
+<p><strong>Kind</strong>: instance method of <a href="#DocumentCollection"><code>DocumentCollection</code></a><br />
+<strong>Returns</strong>: <code>Object</code> - The JSON API conformant response.<br />
+<strong>Throws</strong>:</p>
+<ul>
+<li><code>FetchError</code> </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>selector</td>
+<td><code>Object</code></td>
+<td>The Mango selector.</td>
+</tr>
+<tr>
+<td>options</td>
+<td><code>Object</code></td>
+<td>The query options.</td>
+</tr>
+</tbody>
+</table>
+<p><a name="DocumentCollection+getIndexFields"></a></p>
+<h3 id="documentcollectiongetindexfieldsoptions-array">documentCollection.getIndexFields(options) ⇒ <code>Array</code><a class="headerlink" href="#documentcollectiongetindexfieldsoptions-array" title="Permanent link">&para;</a></h3>
+<p>Compute fields that should be indexed for a mango
+query to work</p>
+<p><strong>Kind</strong>: instance method of <a href="#DocumentCollection"><code>DocumentCollection</code></a><br />
+<strong>Returns</strong>: <code>Array</code> - - Fields to index  </p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>options</td>
+<td><code>Object</code></td>
+<td>Mango query options</td>
+</tr>
+</tbody>
+</table>
+<p><a name="DocumentCollection+fetchChanges"></a></p>
+<h3 id="documentcollectionfetchchangescouchoptions-options">documentCollection.fetchChanges(couchOptions, options)<a class="headerlink" href="#documentcollectionfetchchangescouchoptions-options" title="Permanent link">&para;</a></h3>
+<p>Use Couch _changes API</p>
+<p><strong>Kind</strong>: instance method of <a href="#DocumentCollection"><code>DocumentCollection</code></a>  </p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>couchOptions</td>
+<td><code>Object</code></td>
+<td>Couch options for changes https://kutt.it/5r7MNQ</td>
+</tr>
+<tr>
+<td>options</td>
+<td><code>Object</code></td>
+<td false="false" false_="false," includeDeleted:="includeDeleted:" includeDesign:="includeDesign:"></td>
+</tr>
+</tbody>
+</table>
+<p><a name="FileCollection"></a></p>
+<h2 id="filecollection">FileCollection<a class="headerlink" href="#filecollection" title="Permanent link">&para;</a></h2>
+<p>Implements <code>DocumentCollection</code> API along with specific methods for
+<code>io.cozy.files</code>.</p>
+<p>Files are a special type of documents and are handled differently by the stack:
+special routes are to be used, and there is a notion of referenced files, aka
+files associated to a specific document</p>
+<p><strong>Kind</strong>: global class  </p>
+<ul>
+<li><a href="#FileCollection">FileCollection</a><ul>
+<li><a href="#FileCollection+find">.find(selector, options)</a> ⇒ <code>Object</code></li>
+<li><a href="#FileCollection+findReferencedBy">.findReferencedBy(document, options)</a> ⇒ <code>object</code></li>
+<li><a href="#FileCollection+addReferencedBy">.addReferencedBy(document, documents)</a> ⇒ <code>object</code></li>
+<li><a href="#FileCollection+removeReferencedBy">.removeReferencedBy(document, documents)</a> ⇒ <code>object</code></li>
+<li><a href="#FileCollection+addReferencesTo">.addReferencesTo(document, documents)</a> ⇒ <code>object</code></li>
+<li><a href="#FileCollection+removeReferencesTo">.removeReferencesTo(document, documents)</a> ⇒ <code>object</code></li>
+<li><a href="#FileCollection+restore">.restore(id)</a> ⇒ <code>Promise</code></li>
+<li><a href="#FileCollection+deleteFilePermanently">.deleteFilePermanently(id)</a> ⇒ <code>object</code></li>
+<li><a href="#FileCollection+updateFile">.updateFile(data, params)</a> ⇒ <code>object</code></li>
+<li><a href="#FileCollection+isChildOf">.isChildOf(child, parent)</a> ⇒ <code>boolean</code></li>
+<li><a href="#FileCollection+createDirectoryByPath">.createDirectoryByPath(path)</a> ⇒ <code>object</code></li>
+<li><a href="#FileCollection+updateFileMetadata">.updateFileMetadata(id, attributes)</a> ⇒ <code>object</code></li>
+<li><a href="#FileCollection+createFileMetadata">.createFileMetadata(attributes)</a> ⇒ <code>object</code></li>
+</ul>
+</li>
+</ul>
+<p><a name="FileCollection+find"></a></p>
+<h3 id="filecollectionfindselector-options-object">fileCollection.find(selector, options) ⇒ <code>Object</code><a class="headerlink" href="#filecollectionfindselector-options-object" title="Permanent link">&para;</a></h3>
+<p>Returns a filtered list of documents using a Mango selector.</p>
+<p>The returned documents are paginated by the stack.</p>
+<p><strong>Kind</strong>: instance method of <a href="#FileCollection"><code>FileCollection</code></a><br />
+<strong>Returns</strong>: <code>Object</code> - The JSON API conformant response.<br />
+<strong>Throws</strong>:</p>
+<ul>
+<li><code>FetchError</code> </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>selector</td>
+<td><code>Object</code></td>
+<td>The Mango selector.</td>
+</tr>
+<tr>
+<td>options</td>
+<td><code>Object</code></td>
+<td>The query options.</td>
+</tr>
+</tbody>
+</table>
+<p><a name="FileCollection+findReferencedBy"></a></p>
+<h3 id="filecollectionfindreferencedbydocument-options-object">fileCollection.findReferencedBy(document, options) ⇒ <code>object</code><a class="headerlink" href="#filecollectionfindreferencedbydocument-options-object" title="Permanent link">&para;</a></h3>
+<p>async findReferencedBy - Returns the list of files referenced by a document — see https://docs.cozy.io/en/cozy-stack/references-docs-in-vfs/</p>
+<p><strong>Kind</strong>: instance method of <a href="#FileCollection"><code>FileCollection</code></a><br />
+<strong>Returns</strong>: <code>object</code> - The JSON API conformant response.  </p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>document</td>
+<td><code>object</code></td>
+<td>A JSON representing a document, with at least a <code>_type</code> and <code>_id</code> field.</td>
+</tr>
+<tr>
+<td>options</td>
+<td><code>object</code></td>
+<td>Additional options</td>
+</tr>
+<tr>
+<td>options.skip</td>
+<td><code>number</code></td>
+<td>For skip-based pagination, the number of referenced files to skip.</td>
+</tr>
+<tr>
+<td>options.limit</td>
+<td><code>number</code></td>
+<td>For pagination, the number of results to return.</td>
+</tr>
+<tr>
+<td>options.cursor</td>
+<td><code>object</code></td>
+<td>For cursor-based pagination, the index cursor.</td>
+</tr>
+</tbody>
+</table>
+<p><a name="FileCollection+addReferencedBy"></a></p>
+<h3 id="filecollectionaddreferencedbydocument-documents-object">fileCollection.addReferencedBy(document, documents) ⇒ <code>object</code><a class="headerlink" href="#filecollectionaddreferencedbydocument-documents-object" title="Permanent link">&para;</a></h3>
+<p>Add referenced_by documents to a file — see https://docs.cozy.io/en/cozy-stack/references-docs-in-vfs/#post-filesfile-idrelationshipsreferenced_by</p>
+<p>For example, to have an album referenced by a file:
+ ```
+addReferencedBy({_id: 123, _type: &ldquo;io.cozy.files&rdquo;, name: &ldquo;cozy.jpg&rdquo;}, [{_id: 456, _type: &ldquo;io.cozy.photos.albums&rdquo;, name: &ldquo;Happy Cloud&rdquo;}])</p>
+<div class="codehilite"><pre><span></span>**Kind**: instance method of [<span class="nt">&lt;code&gt;</span>FileCollection<span class="nt">&lt;/code&gt;</span>](#FileCollection)  
+**Returns**: <span class="nt">&lt;code&gt;</span>object<span class="nt">&lt;/code&gt;</span> - The JSON API conformant response.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| document | <span class="nt">&lt;code&gt;</span>object<span class="nt">&lt;/code&gt;</span> | A JSON representing the file |
+| documents | <span class="nt">&lt;code&gt;</span>Array<span class="nt">&lt;/code&gt;</span> | An array of JSON documents having a `_type` and `_id` field. |
+
+<span class="nt">&lt;a</span> <span class="na">name=</span><span class="s">&quot;FileCollection+removeReferencedBy&quot;</span><span class="nt">&gt;&lt;/a&gt;</span>
+
+### fileCollection.removeReferencedBy(document, documents) ⇒ <span class="nt">&lt;code&gt;</span>object<span class="nt">&lt;/code&gt;</span>
+Remove referenced_by documents from a file — see https://docs.cozy.io/en/cozy-stack/references-docs-in-vfs/#delete-filesfile-idrelationshipsreferenced_by
+
+ For example, to remove an album reference from a file:
+ ```
+ removeReferencedBy({_id: 123, _type: &quot;io.cozy.files&quot;, name: &quot;cozy.jpg&quot;}, [{_id: 456, _type: &quot;io.cozy.photos.albums&quot;, name: &quot;Happy Cloud&quot;}])
+</pre></div>
+
+
+<p><strong>Kind</strong>: instance method of <a href="#FileCollection"><code>FileCollection</code></a><br />
+<strong>Returns</strong>: <code>object</code> - The JSON API conformant response.  </p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>document</td>
+<td><code>object</code></td>
+<td>A JSON representing the file</td>
+</tr>
+<tr>
+<td>documents</td>
+<td><code>Array</code></td>
+<td>An array of JSON documents having a <code>_type</code> and <code>_id</code> field.</td>
+</tr>
+</tbody>
+</table>
+<p><a name="FileCollection+addReferencesTo"></a></p>
+<h3 id="filecollectionaddreferencestodocument-documents-object">fileCollection.addReferencesTo(document, documents) ⇒ <code>object</code><a class="headerlink" href="#filecollectionaddreferencestodocument-documents-object" title="Permanent link">&para;</a></h3>
+<p>Add files references to a document — see https://docs.cozy.io/en/cozy-stack/references-docs-in-vfs/#post-datatypedoc-idrelationshipsreferences</p>
+<p>For example, to add a photo to an album:
+ ```
+ addReferencesTo({_id: 456, _type: &ldquo;io.cozy.photos.albums&rdquo;, name: &ldquo;Happy Cloud&rdquo;}, [{_id: 123, _type: &ldquo;io.cozy.files&rdquo;, name: &ldquo;cozy.jpg&rdquo;}])</p>
+<div class="codehilite"><pre><span></span>**Kind**: instance method of [<span class="nt">&lt;code&gt;</span>FileCollection<span class="nt">&lt;/code&gt;</span>](#FileCollection)  
+**Returns**: <span class="nt">&lt;code&gt;</span>object<span class="nt">&lt;/code&gt;</span> - The JSON API conformant response.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| document | <span class="nt">&lt;code&gt;</span>object<span class="nt">&lt;/code&gt;</span> | A JSON representing a document, with at least a `_type` and `_id` field. |
+| documents | <span class="nt">&lt;code&gt;</span>Array<span class="nt">&lt;/code&gt;</span> | An array of JSON files having an `_id` field. |
+
+<span class="nt">&lt;a</span> <span class="na">name=</span><span class="s">&quot;FileCollection+removeReferencesTo&quot;</span><span class="nt">&gt;&lt;/a&gt;</span>
+
+### fileCollection.removeReferencesTo(document, documents) ⇒ <span class="nt">&lt;code&gt;</span>object<span class="nt">&lt;/code&gt;</span>
+Remove files references to a document — see https://docs.cozy.io/en/cozy-stack/references-docs-in-vfs/#delete-datatypedoc-idrelationshipsreferences
+
+ For example, to remove a photo from an album:
+ ```
+ removeReferencesTo({_id: 456, _type: &quot;io.cozy.photos.albums&quot;, name: &quot;Happy Cloud&quot;}, [{_id: 123, _type: &quot;io.cozy.files&quot;, name: &quot;cozy.jpg&quot;}])
+</pre></div>
+
+
+<p><strong>Kind</strong>: instance method of <a href="#FileCollection"><code>FileCollection</code></a><br />
+<strong>Returns</strong>: <code>object</code> - The JSON API conformant response.  </p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>document</td>
+<td><code>object</code></td>
+<td>A JSON representing a document, with at least a <code>_type</code> and <code>_id</code> field.</td>
+</tr>
+<tr>
+<td>documents</td>
+<td><code>Array</code></td>
+<td>An array of JSON files having an <code>_id</code> field.</td>
+</tr>
+</tbody>
+</table>
+<p><a name="FileCollection+restore"></a></p>
+<h3 id="filecollectionrestoreid-promise">fileCollection.restore(id) ⇒ <code>Promise</code><a class="headerlink" href="#filecollectionrestoreid-promise" title="Permanent link">&para;</a></h3>
+<p>Restores a trashed file.</p>
+<p><strong>Kind</strong>: instance method of <a href="#FileCollection"><code>FileCollection</code></a><br />
+<strong>Returns</strong>: <code>Promise</code> - - A promise that returns the restored file if resolved.<br />
+<strong>Throws</strong>:</p>
+<ul>
+<li><code>FetchError</code> </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td><code>string</code></td>
+<td>The file&rsquo;s id</td>
+</tr>
+</tbody>
+</table>
+<p><a name="FileCollection+deleteFilePermanently"></a></p>
+<h3 id="filecollectiondeletefilepermanentlyid-object">fileCollection.deleteFilePermanently(id) ⇒ <code>object</code><a class="headerlink" href="#filecollectiondeletefilepermanentlyid-object" title="Permanent link">&para;</a></h3>
+<p>async deleteFilePermanently - Definitely delete a file</p>
+<p><strong>Kind</strong>: instance method of <a href="#FileCollection"><code>FileCollection</code></a><br />
+<strong>Returns</strong>: <code>object</code> - The deleted file object  </p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td><code>string</code></td>
+<td>The id of the file to delete</td>
+</tr>
+</tbody>
+</table>
+<p><a name="FileCollection+updateFile"></a></p>
+<h3 id="filecollectionupdatefiledata-params-object">fileCollection.updateFile(data, params) ⇒ <code>object</code><a class="headerlink" href="#filecollectionupdatefiledata-params-object" title="Permanent link">&para;</a></h3>
+<p>updateFile - Updates a file&rsquo;s data</p>
+<p><strong>Kind</strong>: instance method of <a href="#FileCollection"><code>FileCollection</code></a><br />
+<strong>Returns</strong>: <code>object</code> - Updated document  </p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>data</td>
+<td><code>object</code></td>
+<td>Javascript File object</td>
+</tr>
+<tr>
+<td>params</td>
+<td><code>object</code></td>
+<td>Additional parameters</td>
+</tr>
+<tr>
+<td>params.fileId</td>
+<td><code>string</code></td>
+<td>The id of the file to update (required)</td>
+</tr>
+<tr>
+<td>params.executable</td>
+<td><code>boolean</code></td>
+<td>Whether the file is executable or not</td>
+</tr>
+<tr>
+<td>params.metadata</td>
+<td><code>object</code></td>
+<td>Metadata to be attached to the File io.cozy.file</td>
+</tr>
+<tr>
+<td>params.options</td>
+<td><code>object</code></td>
+<td>Options to pass to doUpload method (additional headers)</td>
+</tr>
+</tbody>
+</table>
+<p><a name="FileCollection+isChildOf"></a></p>
+<h3 id="filecollectionischildofchild-parent-boolean">fileCollection.isChildOf(child, parent) ⇒ <code>boolean</code><a class="headerlink" href="#filecollectionischildofchild-parent-boolean" title="Permanent link">&para;</a></h3>
+<p>Checks if the file belongs to the parent&rsquo;s hierarchy.</p>
+<p><strong>Kind</strong>: instance method of <a href="#FileCollection"><code>FileCollection</code></a><br />
+<strong>Returns</strong>: <code>boolean</code> - Whether the file is a parent&rsquo;s child  </p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>child</td>
+<td><code>string</code> | <code>object</code></td>
+<td>The file which can either be an id or an object</td>
+</tr>
+<tr>
+<td>parent</td>
+<td><code>string</code> | <code>object</code></td>
+<td>The parent target which can either be an id or an object</td>
+</tr>
+</tbody>
+</table>
+<p><a name="FileCollection+createDirectoryByPath"></a></p>
+<h3 id="filecollectioncreatedirectorybypathpath-object">fileCollection.createDirectoryByPath(path) ⇒ <code>object</code><a class="headerlink" href="#filecollectioncreatedirectorybypathpath-object" title="Permanent link">&para;</a></h3>
+<p>async createDirectoryByPath - Creates one or more folders until the given path exists</p>
+<p><strong>Kind</strong>: instance method of <a href="#FileCollection"><code>FileCollection</code></a><br />
+<strong>Returns</strong>: <code>object</code> - The document corresponding to the last segment of the path  </p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>path</td>
+<td><code>string</code></td>
+</tr>
+</tbody>
+</table>
+<p><a name="FileCollection+updateFileMetadata"></a></p>
+<h3 id="filecollectionupdatefilemetadataid-attributes-object">fileCollection.updateFileMetadata(id, attributes) ⇒ <code>object</code><a class="headerlink" href="#filecollectionupdatefilemetadataid-attributes-object" title="Permanent link">&para;</a></h3>
+<p>async updateFileMetadata - Updates a file&rsquo;s metadata</p>
+<p><strong>Kind</strong>: instance method of <a href="#FileCollection"><code>FileCollection</code></a><br />
+<strong>Returns</strong>: <code>object</code> - Updated document  </p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td><code>string</code></td>
+<td>File id</td>
+</tr>
+<tr>
+<td>attributes</td>
+<td><code>object</code></td>
+<td>New file meta data</td>
+</tr>
+</tbody>
+</table>
+<p><a name="FileCollection+createFileMetadata"></a></p>
+<h3 id="filecollectioncreatefilemetadataattributes-object">fileCollection.createFileMetadata(attributes) ⇒ <code>object</code><a class="headerlink" href="#filecollectioncreatefilemetadataattributes-object" title="Permanent link">&para;</a></h3>
+<p>Send a metadata object that can be associated to a file uploaded after that,
+via the MetadataID query parameter.
+See https://github.com/cozy/cozy-stack/blob/master/docs/files.md#post-filesuploadmetadata</p>
+<p><strong>Kind</strong>: instance method of <a href="#FileCollection"><code>FileCollection</code></a><br />
+<strong>Returns</strong>: <code>object</code> - The Metadata object  </p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>attributes</td>
+<td><code>object</code></td>
+<td>The file&rsquo;s metadata</td>
+</tr>
+</tbody>
+</table>
+<p><a name="OAuthClient"></a></p>
+<h2 id="oauthclient">OAuthClient<a class="headerlink" href="#oauthclient" title="Permanent link">&para;</a></h2>
+<p>Specialized <code>CozyStackClient</code> for mobile, implementing stack registration
+through OAuth.</p>
+<p><strong>Kind</strong>: global class  </p>
+<ul>
+<li><a href="#OAuthClient">OAuthClient</a><ul>
+<li><a href="#OAuthClient+register">.register()</a> ⇒ <code>promise</code></li>
+<li><a href="#OAuthClient+unregister">.unregister()</a> ⇒ <code>promise</code></li>
+<li><a href="#OAuthClient+fetchInformation">.fetchInformation()</a> ⇒ <code>promise</code></li>
+<li><a href="#OAuthClient+updateInformation">.updateInformation(information, resetSecret)</a> ⇒ <code>promise</code></li>
+<li><a href="#OAuthClient+generateStateCode">.generateStateCode()</a> ⇒ <code>string</code></li>
+<li><a href="#OAuthClient+getAuthCodeURL">.getAuthCodeURL(stateCode, scopes)</a> ⇒ <code>string</code></li>
+<li><a href="#OAuthClient+getAccessCodeFromURL">.getAccessCodeFromURL(pageURL, stateCode)</a> ⇒ <code>string</code></li>
+<li><a href="#OAuthClient+fetchAccessToken">.fetchAccessToken(accessCode, oauthOptions, uri)</a> ⇒ <code>Promise</code></li>
+<li><a href="#OAuthClient+refreshToken">.refreshToken()</a> ⇒ <code>Promise</code></li>
+<li><a href="#OAuthClient+setToken">.setToken(token)</a></li>
+<li><a href="#OAuthClient+setOAuthOptions">.setOAuthOptions(options)</a></li>
+<li><a href="#OAuthClient+resetClient">.resetClient()</a></li>
+</ul>
+</li>
+</ul>
+<p><a name="OAuthClient+register"></a></p>
+<h3 id="oauthclientregister-promise">oAuthClient.register() ⇒ <code>promise</code><a class="headerlink" href="#oauthclientregister-promise" title="Permanent link">&para;</a></h3>
+<p>Registers the currenly configured client with the OAuth server.</p>
+<p><strong>Kind</strong>: instance method of <a href="#OAuthClient"><code>OAuthClient</code></a><br />
+<strong>Returns</strong>: <code>promise</code> - A promise that resolves with a complete list of client information, including client ID and client secret.<br />
+<strong>Throws</strong>:</p>
+<ul>
+<li><code>Error</code> When the client is already registered</li>
+</ul>
+<p><a name="OAuthClient+unregister"></a></p>
+<h3 id="oauthclientunregister-promise">oAuthClient.unregister() ⇒ <code>promise</code><a class="headerlink" href="#oauthclientunregister-promise" title="Permanent link">&para;</a></h3>
+<p>Unregisters the currenly configured client with the OAuth server.</p>
+<p><strong>Kind</strong>: instance method of <a href="#OAuthClient"><code>OAuthClient</code></a><br />
+<strong>Throws</strong>:</p>
+<ul>
+<li><code>NotRegisteredException</code> When the client doesn&rsquo;t have it&rsquo;s registration information</li>
+</ul>
+<p><a name="OAuthClient+fetchInformation"></a></p>
+<h3 id="oauthclientfetchinformation-promise">oAuthClient.fetchInformation() ⇒ <code>promise</code><a class="headerlink" href="#oauthclientfetchinformation-promise" title="Permanent link">&para;</a></h3>
+<p>Fetches the complete set of client information from the server after it has been registered.</p>
+<p><strong>Kind</strong>: instance method of <a href="#OAuthClient"><code>OAuthClient</code></a><br />
+<strong>Throws</strong>:</p>
+<ul>
+<li><code>NotRegisteredException</code> When the client doesn&rsquo;t have it&rsquo;s registration information</li>
+</ul>
+<p><a name="OAuthClient+updateInformation"></a></p>
+<h3 id="oauthclientupdateinformationinformation-resetsecret-promise">oAuthClient.updateInformation(information, resetSecret) ⇒ <code>promise</code><a class="headerlink" href="#oauthclientupdateinformationinformation-resetsecret-promise" title="Permanent link">&para;</a></h3>
+<p>Overwrites the client own information. This method will update both the local information and the remote information on the OAuth server.</p>
+<p><strong>Kind</strong>: instance method of <a href="#OAuthClient"><code>OAuthClient</code></a><br />
+<strong>Returns</strong>: <code>promise</code> - A promise that resolves to a complete, updated list of client information<br />
+<strong>Throws</strong>:</p>
+<ul>
+<li><code>NotRegisteredException</code> When the client doesn&rsquo;t have it&rsquo;s registration information</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>information</td>
+<td><code>object</code></td>
+<td></td>
+<td>Set of information to update. Note that some fields such as <code>clientID</code> can&rsquo;t be updated.</td>
+</tr>
+<tr>
+<td>resetSecret</td>
+<td><code>boolean</code></td>
+<td><code>false</code></td>
+<td>= false Optionnal, whether to reset the client secret or not</td>
+</tr>
+</tbody>
+</table>
+<p><a name="OAuthClient+generateStateCode"></a></p>
+<h3 id="oauthclientgeneratestatecode-string">oAuthClient.generateStateCode() ⇒ <code>string</code><a class="headerlink" href="#oauthclientgeneratestatecode-string" title="Permanent link">&para;</a></h3>
+<p>Generates a random state code to be used during the OAuth process</p>
+<p><strong>Kind</strong>: instance method of <a href="#OAuthClient"><code>OAuthClient</code></a><br />
+<a name="OAuthClient+getAuthCodeURL"></a></p>
+<h3 id="oauthclientgetauthcodeurlstatecode-scopes-string">oAuthClient.getAuthCodeURL(stateCode, scopes) ⇒ <code>string</code><a class="headerlink" href="#oauthclientgetauthcodeurlstatecode-scopes-string" title="Permanent link">&para;</a></h3>
+<p>Generates the URL that the user should be sent to in order to accept the app&rsquo;s permissions.</p>
+<p><strong>Kind</strong>: instance method of <a href="#OAuthClient"><code>OAuthClient</code></a><br />
+<strong>Returns</strong>: <code>string</code> - The URL<br />
+<strong>Throws</strong>:</p>
+<ul>
+<li><code>NotRegisteredException</code> When the client doesn&rsquo;t have it&rsquo;s registration information</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>stateCode</td>
+<td><code>string</code></td>
+<td>A random code to be included in the URl for security. Can be generated with <code>client.generateStateCode()</code></td>
+</tr>
+<tr>
+<td>scopes</td>
+<td><code>Array</code></td>
+<td>= [] An array of permission scopes for the token.</td>
+</tr>
+</tbody>
+</table>
+<p><a name="OAuthClient+getAccessCodeFromURL"></a></p>
+<h3 id="oauthclientgetaccesscodefromurlpageurl-statecode-string">oAuthClient.getAccessCodeFromURL(pageURL, stateCode) ⇒ <code>string</code><a class="headerlink" href="#oauthclientgetaccesscodefromurlpageurl-statecode-string" title="Permanent link">&para;</a></h3>
+<p>Retrieves the access code contained in the URL to which the user is redirected after accepting the app&rsquo;s permissions (the <code>redirectURI</code>).</p>
+<p><strong>Kind</strong>: instance method of <a href="#OAuthClient"><code>OAuthClient</code></a><br />
+<strong>Returns</strong>: <code>string</code> - The access code<br />
+<strong>Throws</strong>:</p>
+<ul>
+<li><code>Error</code> The URL should contain the same state code as the one generated with <code>client.getAuthCodeURL()</code>. If not, it will throw an error</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pageURL</td>
+<td><code>string</code></td>
+<td>The redirected page URL, containing the state code and the access code</td>
+</tr>
+<tr>
+<td>stateCode</td>
+<td><code>string</code></td>
+<td>The state code that was contained in the original URL the user was sent to (see <code>client.getAuthCodeURL()</code>)</td>
+</tr>
+</tbody>
+</table>
+<p><a name="OAuthClient+fetchAccessToken"></a></p>
+<h3 id="oauthclientfetchaccesstokenaccesscode-oauthoptions-uri-promise">oAuthClient.fetchAccessToken(accessCode, oauthOptions, uri) ⇒ <code>Promise</code><a class="headerlink" href="#oauthclientfetchaccesstokenaccesscode-oauthoptions-uri-promise" title="Permanent link">&para;</a></h3>
+<p>Exchanges an access code for an access token. This function does <strong>not</strong> update the client&rsquo;s token.</p>
+<p><strong>Kind</strong>: instance method of <a href="#OAuthClient"><code>OAuthClient</code></a><br />
+<strong>Returns</strong>: <code>Promise</code> - A promise that resolves with an AccessToken object.<br />
+<strong>Throws</strong>:</p>
+<ul>
+<li><code>NotRegisteredException</code> When the client doesn&rsquo;t have it&rsquo;s registration information</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>accessCode</td>
+<td><code>string</code></td>
+<td>The access code contained in the redirection URL — see <code>client.getAccessCodeFromURL()</code></td>
+</tr>
+<tr>
+<td>oauthOptions</td>
+<td><code>object</code></td>
+<td>— To use when OAuthClient is not yet registered (during login process)</td>
+</tr>
+<tr>
+<td>uri</td>
+<td><code>string</code></td>
+<td>— To use when OAuthClient is not yet registered (during login process)</td>
+</tr>
+</tbody>
+</table>
+<p><a name="OAuthClient+refreshToken"></a></p>
+<h3 id="oauthclientrefreshtoken-promise">oAuthClient.refreshToken() ⇒ <code>Promise</code><a class="headerlink" href="#oauthclientrefreshtoken-promise" title="Permanent link">&para;</a></h3>
+<p>Retrieves a new access token by refreshing the currently used token.</p>
+<p><strong>Kind</strong>: instance method of <a href="#OAuthClient"><code>OAuthClient</code></a><br />
+<strong>Returns</strong>: <code>Promise</code> - A promise that resolves with a new AccessToken object<br />
+<strong>Throws</strong>:</p>
+<ul>
+<li><code>NotRegisteredException</code> When the client doesn&rsquo;t have it&rsquo;s registration information</li>
+<li><code>Error</code> The client should already have an access token to use this function</li>
+</ul>
+<p><a name="OAuthClient+setToken"></a></p>
+<h3 id="oauthclientsettokentoken">oAuthClient.setToken(token)<a class="headerlink" href="#oauthclientsettokentoken" title="Permanent link">&para;</a></h3>
+<p>Updates the client&rsquo;s stored token</p>
+<p><strong>Kind</strong>: instance method of <a href="#OAuthClient"><code>OAuthClient</code></a>  </p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>token</td>
+<td><code>string</code></td>
+<td>= null The new token to use — can be a string, a json object or an AccessToken instance.</td>
+</tr>
+</tbody>
+</table>
+<p><a name="OAuthClient+setOAuthOptions"></a></p>
+<h3 id="oauthclientsetoauthoptionsoptions">oAuthClient.setOAuthOptions(options)<a class="headerlink" href="#oauthclientsetoauthoptionsoptions" title="Permanent link">&para;</a></h3>
+<p>Updates the OAuth informations</p>
+<p><strong>Kind</strong>: instance method of <a href="#OAuthClient"><code>OAuthClient</code></a>  </p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>options</td>
+<td><code>object</code></td>
+<td>Map of OAuth options</td>
+</tr>
+</tbody>
+</table>
+<p><a name="OAuthClient+resetClient"></a></p>
+<h3 id="oauthclientresetclient">oAuthClient.resetClient()<a class="headerlink" href="#oauthclientresetclient" title="Permanent link">&para;</a></h3>
+<p>Reset the current OAuth client</p>
+<p><strong>Kind</strong>: instance method of <a href="#OAuthClient"><code>OAuthClient</code></a><br />
+<a name="PermissionCollection"></a></p>
+<h2 id="permissioncollection">PermissionCollection<a class="headerlink" href="#permissioncollection" title="Permanent link">&para;</a></h2>
+<p>Implements <code>DocumentCollection</code> API along with specific methods for <code>io.cozy.permissions</code>.</p>
+<p><strong>Kind</strong>: global class  </p>
+<ul>
+<li><a href="#PermissionCollection">PermissionCollection</a><ul>
+<li><a href="#PermissionCollection+add">.add(document, permission)</a> ⇒ <code>Promise</code></li>
+<li><a href="#PermissionCollection+getOwnPermissions">.getOwnPermissions()</a> ⇒ <code>object</code></li>
+</ul>
+</li>
+</ul>
+<p><a name="PermissionCollection+add"></a></p>
+<h3 id="permissioncollectionadddocument-permission-promise">permissionCollection.add(document, permission) ⇒ <code>Promise</code><a class="headerlink" href="#permissioncollectionadddocument-permission-promise" title="Permanent link">&para;</a></h3>
+<p>Adds a permission to the given document. Document type must be
+<code>io.cozy.apps</code>, <code>io.cozy.konnectors</code> or <code>io.cozy.permissions</code></p>
+<p><strong>Kind</strong>: instance method of <a href="#PermissionCollection"><code>PermissionCollection</code></a>  </p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>document</td>
+<td><code>object</code></td>
+</tr>
+<tr>
+<td>permission</td>
+<td><code>object</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong>  </p>
+<div class="codehilite"><pre><span></span>const permissions = await client
+  .collection(&#39;io.cozy.permissions&#39;)
+  .add(konnector, {
+    folder: {
+      type: &#39;io.cozy.files&#39;,
+      verbs: [&#39;GET&#39;, &#39;PUT&#39;],
+      values: [`io.cozy.files.bc57b60eb2954537b0dcdc6ebd8e9d23`]
+    }
+ })
+</pre></div>
+
+
+<p><a name="PermissionCollection+getOwnPermissions"></a></p>
+<h3 id="permissioncollectiongetownpermissions-object">permissionCollection.getOwnPermissions() ⇒ <code>object</code><a class="headerlink" href="#permissioncollectiongetownpermissions-object" title="Permanent link">&para;</a></h3>
+<p>async getOwnPermissions - Gets the permission for the current token</p>
+<p><strong>Kind</strong>: instance method of <a href="#PermissionCollection"><code>PermissionCollection</code></a><br />
+<a name="SharingCollection"></a></p>
+<h2 id="sharingcollection">SharingCollection<a class="headerlink" href="#sharingcollection" title="Permanent link">&para;</a></h2>
+<p>Implements the <code>DocumentCollection</code> API along with specific methods for
+<code>io.cozy.sharings</code>.</p>
+<p><strong>Kind</strong>: global class  </p>
+<ul>
+<li><a href="#SharingCollection">SharingCollection</a><ul>
+<li><a href="#SharingCollection+share">.share(document, recipients, sharingType, description, [previewPath])</a></li>
+<li><a href="#SharingCollection+getDiscoveryLink">.getDiscoveryLink(sharingId, sharecode)</a> ⇒ <code>string</code></li>
+</ul>
+</li>
+</ul>
+<p><a name="SharingCollection+share"></a></p>
+<h3 id="sharingcollectionsharedocument-recipients-sharingtype-description-previewpath">sharingCollection.share(document, recipients, sharingType, description, [previewPath])<a class="headerlink" href="#sharingcollectionsharedocument-recipients-sharingtype-description-previewpath" title="Permanent link">&para;</a></h3>
+<p>share - Creates a new sharing. See https://docs.cozy.io/en/cozy-stack/sharing/#post-sharings</p>
+<p><strong>Kind</strong>: instance method of <a href="#SharingCollection"><code>SharingCollection</code></a>  </p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>document</td>
+<td><code>object</code></td>
+<td></td>
+<td>The document to share. Should have and _id and a name.</td>
+</tr>
+<tr>
+<td>recipients</td>
+<td><code>array</code></td>
+<td></td>
+<td>A list of io.cozy.contacts</td>
+</tr>
+<tr>
+<td>sharingType</td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>description</td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>[previewPath]</td>
+<td><code>string</code></td>
+<td><code>null</code></td>
+<td>Relative URL of the sharings preview page</td>
+</tr>
+</tbody>
+</table>
+<p><a name="SharingCollection+getDiscoveryLink"></a></p>
+<h3 id="sharingcollectiongetdiscoverylinksharingid-sharecode-string">sharingCollection.getDiscoveryLink(sharingId, sharecode) ⇒ <code>string</code><a class="headerlink" href="#sharingcollectiongetdiscoverylinksharingid-sharecode-string" title="Permanent link">&para;</a></h3>
+<p>getDiscoveryLink - Returns the URL of the page that can be used to accept a sharing. See https://docs.cozy.io/en/cozy-stack/sharing/#get-sharingssharing-iddiscovery</p>
+<p><strong>Kind</strong>: instance method of <a href="#SharingCollection"><code>SharingCollection</code></a>  </p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sharingId</td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td>sharecode</td>
+<td><code>string</code></td>
+</tr>
+</tbody>
+</table>
+<p><a name="TriggerCollection"></a></p>
+<h2 id="triggercollection">TriggerCollection<a class="headerlink" href="#triggercollection" title="Permanent link">&para;</a></h2>
+<p>Implements <code>DocumentCollection</code> API along with specific methods for <code>io.cozy.triggers</code>.</p>
+<p><strong>Kind</strong>: global class  </p>
+<ul>
+<li><a href="#TriggerCollection">TriggerCollection</a><ul>
+<li><a href="#TriggerCollection+all">.all(options)</a> ⇒ <code>Object</code></li>
+<li><a href="#TriggerCollection+create">.create(attributes)</a> ⇒ <code>object</code></li>
+<li><a href="#TriggerCollection+destroy">.destroy(document)</a> ⇒ <code>object</code></li>
+<li><a href="#TriggerCollection+find">.find(selector, options)</a> ⇒ <code>Object</code></li>
+<li><a href="#TriggerCollection+launch">.launch(Trigger)</a> ⇒ <code>object</code></li>
+</ul>
+</li>
+</ul>
+<p><a name="TriggerCollection+all"></a></p>
+<h3 id="triggercollectionalloptions-object">triggerCollection.all(options) ⇒ <code>Object</code><a class="headerlink" href="#triggercollectionalloptions-object" title="Permanent link">&para;</a></h3>
+<p>Get the list of triggers.</p>
+<p><strong>Kind</strong>: instance method of <a href="#TriggerCollection"><code>TriggerCollection</code></a><br />
+<strong>Returns</strong>: <code>Object</code> - The JSON API conformant response.<br />
+<strong>Throws</strong>:</p>
+<ul>
+<li><code>FetchError</code> </li>
+</ul>
+<p><strong>See</strong>: https://docs.cozy.io/en/cozy-stack/jobs/#get-jobstriggers  </p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>options</td>
+<td><code>Object</code></td>
+<td>The fetch options: Worker allow to filter only triggers associated with a specific worker.</td>
+</tr>
+</tbody>
+</table>
+<p><a name="TriggerCollection+create"></a></p>
+<h3 id="triggercollectioncreateattributes-object">triggerCollection.create(attributes) ⇒ <code>object</code><a class="headerlink" href="#triggercollectioncreateattributes-object" title="Permanent link">&para;</a></h3>
+<p>Creates a Trigger document</p>
+<p><strong>Kind</strong>: instance method of <a href="#TriggerCollection"><code>TriggerCollection</code></a><br />
+<strong>Returns</strong>: <code>object</code> - Stack response, containing trigger document under <code>data</code> attribute.<br />
+<strong>See</strong>: https://docs.cozy.io/en/cozy-stack/jobs/#post-jobstriggers  </p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>attributes</td>
+<td><code>object</code></td>
+<td>Trigger&rsquo;s attributes</td>
+</tr>
+</tbody>
+</table>
+<p><a name="TriggerCollection+destroy"></a></p>
+<h3 id="triggercollectiondestroydocument-object">triggerCollection.destroy(document) ⇒ <code>object</code><a class="headerlink" href="#triggercollectiondestroydocument-object" title="Permanent link">&para;</a></h3>
+<p>Deletes a trigger</p>
+<p><strong>Kind</strong>: instance method of <a href="#TriggerCollection"><code>TriggerCollection</code></a><br />
+<strong>Returns</strong>: <code>object</code> - The deleted document<br />
+<strong>See</strong>: https://docs.cozy.io/en/cozy-stack/jobs/#delete-jobstriggerstrigger-id  </p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>document</td>
+<td><code>object</code></td>
+<td>The trigger to delete — must have an _id field</td>
+</tr>
+</tbody>
+</table>
+<p><a name="TriggerCollection+find"></a></p>
+<h3 id="triggercollectionfindselector-options-object">triggerCollection.find(selector, options) ⇒ <code>Object</code><a class="headerlink" href="#triggercollectionfindselector-options-object" title="Permanent link">&para;</a></h3>
+<p>Be warned, ATM /jobs/triggers does not return the same informations
+than /data/io.cozy.triggers (used by the super.find method).</p>
+<p>See https://github.com/cozy/cozy-stack/pull/2010</p>
+<p><strong>Kind</strong>: instance method of <a href="#TriggerCollection"><code>TriggerCollection</code></a><br />
+<strong>Returns</strong>: <code>Object</code> - The JSON API conformant response.<br />
+<strong>Throws</strong>:</p>
+<ul>
+<li><code>FetchError</code> </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>selector</td>
+<td><code>Object</code></td>
+</tr>
+<tr>
+<td>options</td>
+<td><code>Object</code></td>
+</tr>
+</tbody>
+</table>
+<p><a name="TriggerCollection+launch"></a></p>
+<h3 id="triggercollectionlaunchtrigger-object">triggerCollection.launch(Trigger) ⇒ <code>object</code><a class="headerlink" href="#triggercollectionlaunchtrigger-object" title="Permanent link">&para;</a></h3>
+<p>Force given trigger execution.</p>
+<p><strong>Kind</strong>: instance method of <a href="#TriggerCollection"><code>TriggerCollection</code></a><br />
+<strong>Returns</strong>: <code>object</code> - Stack response, containing job launched by trigger, under <code>data</code> attribute.<br />
+<strong>See</strong>: https://docs.cozy.io/en/cozy-stack/jobs/#post-jobstriggerstrigger-idlaunch  </p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Trigger</td>
+<td><code>object</code></td>
+<td>to launch</td>
+</tr>
+</tbody>
+</table>
+<p><a name="dontThrowNotFoundError"></a></p>
+<h2 id="dontthrownotfounderror-object">dontThrowNotFoundError ⇒ <code>Object</code><a class="headerlink" href="#dontthrownotfounderror-object" title="Permanent link">&para;</a></h2>
+<p>Handler for error response which return a empty value for &ldquo;not found&rdquo; error</p>
+<p><strong>Kind</strong>: global constant<br />
+<strong>Returns</strong>: <code>Object</code> - JsonAPI response with empty data in case of &ldquo;not
+found&rdquo; error.  </p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>error</td>
+<td><code>Error</code></td>
+<td></td>
+</tr>
+<tr>
+<td>data</td>
+<td><code>Array</code> | <code>Object</code></td>
+<td>Data to return in case of &ldquo;not found&rdquo; error</td>
+</tr>
+</tbody>
+</table>
+<p><a name="getAccessToken"></a></p>
+<h2 id="getaccesstoken-string">getAccessToken() ⇒ <code>string</code><a class="headerlink" href="#getaccesstoken-string" title="Permanent link">&para;</a></h2>
+<p>Get the access token string</p>
+<p><strong>Kind</strong>: global function<br />
+<strong>Returns</strong>: <code>string</code> - token<br />
+<strong>See</strong>: CozyStackClient.getAccessToken<br />
+<a name="getAccessToken"></a></p>
+<h2 id="getaccesstoken-string_1">getAccessToken() ⇒ <code>string</code><a class="headerlink" href="#getaccesstoken-string_1" title="Permanent link">&para;</a></h2>
+<p>Get the app token string</p>
+<p><strong>Kind</strong>: global function<br />
+<strong>Returns</strong>: <code>string</code> - token<br />
+<strong>See</strong>: CozyStackClient.getAccessToken<br />
+<a name="garbageCollect"></a></p>
+<h2 id="garbagecollect">garbageCollect()<a class="headerlink" href="#garbagecollect" title="Permanent link">&para;</a></h2>
+<p>Delete outdated results from cache</p>
+<p><strong>Kind</strong>: global function<br />
+<a name="memoize"></a></p>
+<h2 id="memoize">memoize()<a class="headerlink" href="#memoize" title="Permanent link">&para;</a></h2>
+<p>Memoize with maxDuration and custom key</p>
+<p><strong>Kind</strong>: global function<br />
+<a name="getCozyURL"></a></p>
+<h2 id="getcozyurl">getCozyURL()<a class="headerlink" href="#getcozyurl" title="Permanent link">&para;</a></h2>
+<p>Get a uniform formatted URL and SSL information according to a provided URL</p>
+<p><strong>Kind</strong>: global function  </p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../cozy-pouch-link/" title="Cozy Pouch Link API" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Cozy Pouch Link API
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../../../cozy-realtime/" title="cozy-realtime" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                cozy-realtime
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../assets/javascripts/application.245445c6.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../../.."}})</script>
+      
+        <script src="../../../extra.js"></script>
+      
+    
+  </body>
+</html>

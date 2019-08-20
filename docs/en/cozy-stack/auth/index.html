@@ -1,0 +1,3517 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Cozy documentation">
+      
+      
+        <link rel="canonical" href="https://docs.cozy.io/cozy-stack/auth/">
+      
+      
+        <meta name="author" content="CozyCloud - https://cozy.io">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[^a-zа-яё0-9\-]">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.0">
+    
+    
+      
+        <title>/auth - Authentication & OAuth - Cozy Developer Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.0284f74d.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.01803549.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#2196f3">
+      
+    
+    
+    
+      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
+    
+    <script type="text/javascript">
+        // Used in extra.js, we have to define the variable here since
+        // we need access to the "config" jinja variable
+        window.outsideDocs = [{"repo": "https://github.com/cozy/cozy-app-publish.git", "name": "cozy-app-publish", "subdir": "."}, {"repo": "https://github.com/cozy/cozy-apps-registry.git", "name": "cozy-apps-registry", "subdir": "."}, {"repo": "https://github.com/cozy/cozy-client.git", "name": "cozy-client", "subdir": "docs"}, {"repo": "https://github.com/cozy/cozy-client-js.git", "name": "cozy-client-js", "subdir": "docs"}, {"repo": "https://github.com/cozy/cozy-ui.git", "name": "cozy-ui", "subdir": "docs"}, {"repo": "https://github.com/cozy/cozy-doctypes.git", "name": "cozy-doctypes", "subdir": "."}, {"repo": "https://github.com/konnectors/libs.git", "name": "cozy-konnector-libs", "subdir": "packages/cozy-konnector-libs/docs"}, {"repo": "https://github.com/CPatchane/create-cozy-app.git", "name": "cozy-scripts", "subdir": "packages/cozy-scripts/docs"}, {"repo": "https://github.com/cozy/cozy-stack.git", "name": "cozy-stack", "subdir": "docs"}, {"repo": "https://github.com/konnectors/konitor.git", "name": "konitor", "subdir": "docs"}, {"repo": "https://github.com/cozy/cozy-libs.git", "name": "babel-preset-cozy-app", "subdir": "packages/babel-preset-cozy-app"}, {"repo": "https://github.com/cozy/cozy-libs.git", "name": "commitlint-config-cozy", "subdir": "packages/commitlint-config-cozy"}, {"repo": "https://github.com/cozy/cozy-libs.git", "name": "cozy-device-helper", "subdir": "packages/cozy-device-helper"}, {"repo": "https://github.com/cozy/cozy-libs.git", "name": "eslint-config-cozy-app", "subdir": "packages/eslint-config-cozy-app"}, {"repo": "https://github.com/cozy/cozy-libs.git", "name": "cozy-flags", "subdir": "packages/cozy-flags"}, {"repo": "https://github.com/cozy/cozy-libs.git", "name": "cozy-realtime", "subdir": "packages/cozy-realtime"}]
+    </script>
+
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Ubuntu+Mono&display=fallback">
+        <style>body,input{font-family:"Lato","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Ubuntu Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="blue" data-md-color-accent="blue">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#authentication-and-access-delegations" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://docs.cozy.io/" title="Cozy Developer Documentation" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon">cloud</i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              Cozy Developer Documentation
+            </span>
+            <span class="md-header-nav__topic">
+              
+                /auth - Authentication & OAuth
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/cozy/cozy.github.io/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://docs.cozy.io/" title="Cozy Developer Documentation" class="md-nav__button md-logo">
+      
+        <i class="md-icon">cloud</i>
+      
+    </a>
+    Cozy Developer Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/cozy/cozy.github.io/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Tutorials
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Tutorials
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/app/" title="Create Your Application" class="md-nav__link">
+      Create Your Application
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/konnector/" title="Develop a Connector" class="md-nav__link">
+      Develop a Connector
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/selfhost-debian/" title="Self-Host on Debian" class="md-nav__link">
+      Self-Host on Debian
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      How-to
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        How-to
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-1" type="checkbox" id="nav-3-1">
+    
+    <label class="md-nav__link" for="nav-3-1">
+      Dev
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-1">
+        Dev
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../howTos/dev/runCozyDocker/" title="Run an App in a Cozy using Docker" class="md-nav__link">
+      Run an App in a Cozy using Docker
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../howTos/dev/hmr/" title="Use Hot Module Replacement in Your App" class="md-nav__link">
+      Use Hot Module Replacement in Your App
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../howTos/dev/cordova/" title="Make a Mobile App Using Cordova" class="md-nav__link">
+      Make a Mobile App Using Cordova
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../howTos/dev/connect-mobile-app-local-stack/" title="Connect a Mobile App to Your Local Stack" class="md-nav__link">
+      Connect a Mobile App to Your Local Stack
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../howTos/dev/sendmail/" title="Send and Receive E-mails in Development" class="md-nav__link">
+      Send and Receive E-mails in Development
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../references/git-flow/" title="Our Front-End Git Flow" class="md-nav__link">
+      Our Front-End Git Flow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../references/tech-intro/" title="Technical introduction to the Cozy platform" class="md-nav__link">
+      Technical introduction to the Cozy platform
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-2" type="checkbox" id="nav-3-2">
+    
+    <label class="md-nav__link" for="nav-3-2">
+      Synchronize
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-2">
+        Synchronize
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../howTos/sync/linux/" title="Install Cozy Drive on GNU/Linux" class="md-nav__link">
+      Install Cozy Drive on GNU/Linux
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
+    
+    <label class="md-nav__link" for="nav-4">
+      Stack and tools
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Stack and tools
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../eslint-config-cozy-app/" title="eslint-config-cozy-app" class="md-nav__link">
+      eslint-config-cozy-app
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../commitlint-config-cozy/" title="commitlint-config-cozy" class="md-nav__link">
+      commitlint-config-cozy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3" type="checkbox" id="nav-4-3" checked>
+    
+    <label class="md-nav__link" for="nav-4-3">
+      cozy-stack
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-3">
+        cozy-stack
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../" title="README" class="md-nav__link">
+      README
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-2" type="checkbox" id="nav-4-3-2">
+    
+    <label class="md-nav__link" for="nav-4-3-2">
+      Usage
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-3-2">
+        Usage
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../INSTALL/" title="Install the cozy-stack" class="md-nav__link">
+      Install the cozy-stack
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../config/" title="Configuration file" class="md-nav__link">
+      Configuration file
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../instance/" title="Managing Instances" class="md-nav__link">
+      Managing Instances
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../security/" title="Security" class="md-nav__link">
+      Security
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../cli/cozy-stack/" title="Manpages of the command-line tool" class="md-nav__link">
+      Manpages of the command-line tool
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-3" type="checkbox" id="nav-4-3-3">
+    
+    <label class="md-nav__link" for="nav-4-3-3">
+      How-to guides for developpers
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-3-3">
+        How-to guides for developpers
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../client-app-dev/" title="Develop a client-side app" class="md-nav__link">
+      Develop a client-side app
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../docker/" title="Running and building Docker images" class="md-nav__link">
+      Running and building Docker images
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../doctype/" title="Adding a new doctype" class="md-nav__link">
+      Adding a new doctype
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../assets/" title="Working with the stack assets" class="md-nav__link">
+      Working with the stack assets
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../release/" title="Build a release" class="md-nav__link">
+      Build a release
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../CONTRIBUTING/" title="The contributing guide" class="md-nav__link">
+      The contributing guide
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-4" type="checkbox" id="nav-4-3-4">
+    
+    <label class="md-nav__link" for="nav-4-3-4">
+      Explanations
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-3-4">
+        Explanations
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../sharing-design/" title="Sharing design" class="md-nav__link">
+      Sharing design
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../konnectors-workflow/" title="Workflow of the konnectors" class="md-nav__link">
+      Workflow of the konnectors
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-5" type="checkbox" id="nav-4-3-5" checked>
+    
+    <label class="md-nav__link" for="nav-4-3-5">
+      List of services
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-3-5">
+        List of services
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        /auth - Authentication & OAuth
+      </label>
+    
+    <a href="./" title="/auth - Authentication & OAuth" class="md-nav__link md-nav__link--active">
+      /auth - Authentication & OAuth
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-about-oauth2" title="What about OAuth2?" class="md-nav__link">
+    What about OAuth2?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-cozy-stack-as-an-authorization-server" title="The cozy stack as an authorization server" class="md-nav__link">
+    The cozy stack as an authorization server
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-authlogin" title="GET /auth/login" class="md-nav__link">
+    GET /auth/login
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-authlogin" title="POST /auth/login" class="md-nav__link">
+    POST /auth/login
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-authlogin" title="DELETE /auth/login" class="md-nav__link">
+    DELETE /auth/login
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-authloginothers" title="DELETE /auth/login/others" class="md-nav__link">
+    DELETE /auth/login/others
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-authpassphrase_reset" title="GET /auth/passphrase_reset" class="md-nav__link">
+    GET /auth/passphrase_reset
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-authpassphrase_reset" title="POST /auth/passphrase_reset" class="md-nav__link">
+    POST /auth/passphrase_reset
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-authpassphrase_renew" title="GET /auth/passphrase_renew" class="md-nav__link">
+    GET /auth/passphrase_renew
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-authpassphrase_renew" title="POST /auth/passphrase_renew" class="md-nav__link">
+    POST /auth/passphrase_renew
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-authpassphrase" title="GET /auth/passphrase" class="md-nav__link">
+    GET /auth/passphrase
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-authregister" title="POST /auth/register" class="md-nav__link">
+    POST /auth/register
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#linked-applications" title="Linked applications" class="md-nav__link">
+    Linked applications
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-authregisterclient-id" title="GET /auth/register/:client-id" class="md-nav__link">
+    GET /auth/register/:client-id
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#put-authregisterclient-id" title="PUT /auth/register/:client-id" class="md-nav__link">
+    PUT /auth/register/:client-id
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-authregisterclient-id" title="DELETE /auth/register/:client-id" class="md-nav__link">
+    DELETE /auth/register/:client-id
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-authauthorize" title="GET /auth/authorize" class="md-nav__link">
+    GET /auth/authorize
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-authauthorize" title="POST /auth/authorize" class="md-nav__link">
+    POST /auth/authorize
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-authauthorizesharing-post-authauthorizesharing" title="GET /auth/authorize/sharing &amp; POST /auth/authorize/sharing" class="md-nav__link">
+    GET /auth/authorize/sharing &amp; POST /auth/authorize/sharing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-authaccess_token" title="POST /auth/access_token" class="md-nav__link">
+    POST /auth/access_token
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-authsecret_exchange" title="POST /auth/secret_exchange" class="md-nav__link">
+    POST /auth/secret_exchange
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#faq" title="FAQ" class="md-nav__link">
+    FAQ
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#client-side-apps" title="Client-side apps" class="md-nav__link">
+    Client-side apps
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-register-the-application" title="How to register the application?" class="md-nav__link">
+    How to register the application?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-get-a-token" title="How to get a token?" class="md-nav__link">
+    How to get a token?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use-a-token" title="How to use a token?" class="md-nav__link">
+    How to use a token?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-refresh-a-token" title="How to refresh a token?" class="md-nav__link">
+    How to refresh a token?
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#third-party-websites" title="Third-party websites" class="md-nav__link">
+    Third-party websites
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-register-the-application_1" title="How to register the application?" class="md-nav__link">
+    How to register the application?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-get-a-token_1" title="How to get a token?" class="md-nav__link">
+    How to get a token?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use-a-token_1" title="How to use a token?" class="md-nav__link">
+    How to use a token?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-refresh-a-token_1" title="How to refresh a token?" class="md-nav__link">
+    How to refresh a token?
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#devices-and-browser-extensions" title="Devices and browser extensions" class="md-nav__link">
+    Devices and browser extensions
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#native-apps-on-desktop" title="Native apps on desktop" class="md-nav__link">
+    Native apps on desktop
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#native-apps-on-mobile" title="Native apps on mobile" class="md-nav__link">
+    Native apps on mobile
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chrome-extensions" title="Chrome extensions" class="md-nav__link">
+    Chrome extensions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#firefox-extensions" title="Firefox extensions" class="md-nav__link">
+    Firefox extensions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-considerations" title="Security considerations" class="md-nav__link">
+    Security considerations
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" title="Conclusion" class="md-nav__link">
+    Conclusion
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../apps/" title="/apps - Applications Management" class="md-nav__link">
+      /apps - Applications Management
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../registry/" title="/apps - Apps registry" class="md-nav__link">
+       /apps - Apps registry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../konnectors/" title="/apps - Konnectors" class="md-nav__link">
+       /apps - Konnectors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../data-system/" title="/data - Data System" class="md-nav__link">
+      /data - Data System
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mango/" title="/data - Mango" class="md-nav__link">
+       /data - Mango
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../couchdb-quirks/" title="/data - CouchDB Quirks" class="md-nav__link">
+       /data - CouchDB Quirks
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../pouchdb-quirks/" title="/data - PouchDB Quirks" class="md-nav__link">
+       /data - PouchDB Quirks
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../files/" title="/files - Virtual File System" class="md-nav__link">
+      /files - Virtual File System
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../references-docs-in-vfs/" title="/files - References of documents in VFS" class="md-nav__link">
+       /files - References of documents in VFS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../intents/" title="/intents - Intents" class="md-nav__link">
+      /intents - Intents
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../jobs/" title="/jobs - Jobs" class="md-nav__link">
+      /jobs - Jobs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../workers/" title="/jobs - Workers" class="md-nav__link">
+       /jobs - Workers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../move/" title="/move - Move, export and import an instance" class="md-nav__link">
+      /move - Move, export and import an instance
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../notifications/" title="/notifications - Notifications" class="md-nav__link">
+      /notifications - Notifications
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../public/" title="/public - Public" class="md-nav__link">
+      /public - Public
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../permissions/" title="/permissions - Permissions" class="md-nav__link">
+      /permissions - Permissions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../realtime/" title="/realtime - Realtime" class="md-nav__link">
+      /realtime - Realtime
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../remote/" title="/remote - Proxy for remote data/API" class="md-nav__link">
+      /remote - Proxy for remote data/API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../settings/" title="/settings - Settings" class="md-nav__link">
+      /settings - Settings
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../user-action-required/" title="/settings - Terms of Services" class="md-nav__link">
+       /settings - Terms of Services
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../sharing/" title="/sharings - Sharing" class="md-nav__link">
+      /sharings - Sharing
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-app-publish/" title="cozy-app-publish" class="md-nav__link">
+      cozy-app-publish
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../babel-preset-cozy-app/" title="babel-preset-cozy-app" class="md-nav__link">
+      babel-preset-cozy-app
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../konitor/cli/" title="konitor" class="md-nav__link">
+      konitor
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-7" type="checkbox" id="nav-4-7">
+    
+    <label class="md-nav__link" for="nav-4-7">
+      cozy-doctypes
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-7">
+        cozy-doctypes
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/" title="README" class="md-nav__link">
+      README
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.accounts/" title="Accounts" class="md-nav__link">
+      Accounts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.apps/" title="Apps" class="md-nav__link">
+      Apps
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.bank/" title="Banking doctypes" class="md-nav__link">
+      Banking doctypes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.bills/" title="Bills" class="md-nav__link">
+      Bills
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.konnectors/" title="Connectors" class="md-nav__link">
+      Connectors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.contacts/" title="Contacts" class="md-nav__link">
+      Contacts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.files/" title="Files" class="md-nav__link">
+      Files
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.files_metadata/" title="Files metadata" class="md-nav__link">
+      Files metadata
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.identities/" title="Identities" class="md-nav__link">
+      Identities
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.notifications/" title="Notifications" class="md-nav__link">
+      Notifications
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.remote.requests/" title="Remote requests" class="md-nav__link">
+      Remote requests
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.sessions.logins/" title="Session logins" class="md-nav__link">
+      Session logins
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.permissions/" title="Permissions" class="md-nav__link">
+      Permissions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.photos.albums/" title="Photos Albums" class="md-nav__link">
+      Photos Albums
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.procedures/" title="Procedures" class="md-nav__link">
+      Procedures
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.sessions.logins/" title="Sessions Logins" class="md-nav__link">
+      Sessions Logins
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.settings/" title="Settings" class="md-nav__link">
+      Settings
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.sharings/" title="Sharings" class="md-nav__link">
+      Sharings
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.account_types/" title="Accounts Types" class="md-nav__link">
+      Accounts Types
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/cc.cozycloud.autocategorization/" title="Autocategorization" class="md-nav__link">
+      Autocategorization
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.exports/" title="Exports" class="md-nav__link">
+      Exports
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.jobs/" title="Jobs" class="md-nav__link">
+      Jobs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.oauth.clients/" title="OAuth Clients" class="md-nav__link">
+      OAuth Clients
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.oauth.access_codes/" title="OAuth Access Codes" class="md-nav__link">
+      OAuth Access Codes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.triggers/" title="Triggers" class="md-nav__link">
+      Triggers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.triggers.state/" title="Triggers state" class="md-nav__link">
+      Triggers state
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.remote.requests/" title="Remote requests" class="md-nav__link">
+      Remote requests
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.sessions/" title="Sessions" class="md-nav__link">
+      Sessions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.shared/" title="Shared" class="md-nav__link">
+      Shared
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.terms/" title="Terms" class="md-nav__link">
+      Terms
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/com.unibet.bets/" title="Bets Unibet" class="md-nav__link">
+      Bets Unibet
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-ui/" title="cozy-ui" class="md-nav__link">
+      cozy-ui
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-device-helper/" title="cozy-device-helper" class="md-nav__link">
+      cozy-device-helper
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-10" type="checkbox" id="nav-4-10">
+    
+    <label class="md-nav__link" for="nav-4-10">
+      cozy-client
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-10">
+        cozy-client
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client/getting-started/" title="Getting started" class="md-nav__link">
+      Getting started
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client/relationships/" title="Using relationship" class="md-nav__link">
+      Using relationship
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client/metadata/" title="cozyMetadata maintenance" class="md-nav__link">
+      cozyMetadata maintenance
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client/react-integration/" title="React integration" class="md-nav__link">
+      React integration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client/details/" title="Other details" class="md-nav__link">
+      Other details
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client/api/cozy-client/" title="Cozy Client API" class="md-nav__link">
+      Cozy Client API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client/api/cozy-pouch-link/" title="Cozy Pouch Link API" class="md-nav__link">
+      Cozy Pouch Link API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client/api/cozy-stack-client/" title="Cozy Stack Client API" class="md-nav__link">
+      Cozy Stack Client API
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-realtime/" title="cozy-realtime" class="md-nav__link">
+      cozy-realtime
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-12" type="checkbox" id="nav-4-12">
+    
+    <label class="md-nav__link" for="nav-4-12">
+      cozy-konnector-libs
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-12">
+        cozy-konnector-libs
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-konnector-libs/api/" title="API" class="md-nav__link">
+      API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-konnector-libs/cli/" title="CLI" class="md-nav__link">
+      CLI
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-konnector-libs/dev/" title="Develop" class="md-nav__link">
+      Develop
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-konnector-libs/errors/" title="Errors" class="md-nav__link">
+      Errors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-konnector-libs/operation-linking/" title="Operation linking" class="md-nav__link">
+      Operation linking
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-konnector-libs/synchronization/" title="Synchronization" class="md-nav__link">
+      Synchronization
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-apps-registry/" title="cozy-apps-registry" class="md-nav__link">
+      cozy-apps-registry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-flags/" title="cozy-flags" class="md-nav__link">
+      cozy-flags
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-15" type="checkbox" id="nav-4-15">
+    
+    <label class="md-nav__link" for="nav-4-15">
+      cozy-client-js
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-15">
+        cozy-client-js
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/" title="README" class="md-nav__link">
+      README
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/intro/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/browser-sdk-transition/" title="Transition from cozy-browser-sdk" class="md-nav__link">
+      Transition from cozy-browser-sdk
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/offline/" title="How to support offline" class="md-nav__link">
+      How to support offline
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/oauth/" title="OAuth guide" class="md-nav__link">
+      OAuth guide
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/auth-api/" title="Authentication API" class="md-nav__link">
+      Authentication API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/data-api/" title="Data System API" class="md-nav__link">
+      Data System API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/files-api/" title="Files API" class="md-nav__link">
+      Files API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/jobs-api/" title="Jobs API" class="md-nav__link">
+      Jobs API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/intents-api/" title="Intents API" class="md-nav__link">
+      Intents API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/settings-api/" title="Settings API" class="md-nav__link">
+      Settings API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/sharing-api/" title="Sharing API" class="md-nav__link">
+      Sharing API
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-about-oauth2" title="What about OAuth2?" class="md-nav__link">
+    What about OAuth2?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-cozy-stack-as-an-authorization-server" title="The cozy stack as an authorization server" class="md-nav__link">
+    The cozy stack as an authorization server
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-authlogin" title="GET /auth/login" class="md-nav__link">
+    GET /auth/login
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-authlogin" title="POST /auth/login" class="md-nav__link">
+    POST /auth/login
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-authlogin" title="DELETE /auth/login" class="md-nav__link">
+    DELETE /auth/login
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-authloginothers" title="DELETE /auth/login/others" class="md-nav__link">
+    DELETE /auth/login/others
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-authpassphrase_reset" title="GET /auth/passphrase_reset" class="md-nav__link">
+    GET /auth/passphrase_reset
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-authpassphrase_reset" title="POST /auth/passphrase_reset" class="md-nav__link">
+    POST /auth/passphrase_reset
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-authpassphrase_renew" title="GET /auth/passphrase_renew" class="md-nav__link">
+    GET /auth/passphrase_renew
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-authpassphrase_renew" title="POST /auth/passphrase_renew" class="md-nav__link">
+    POST /auth/passphrase_renew
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-authpassphrase" title="GET /auth/passphrase" class="md-nav__link">
+    GET /auth/passphrase
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-authregister" title="POST /auth/register" class="md-nav__link">
+    POST /auth/register
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#linked-applications" title="Linked applications" class="md-nav__link">
+    Linked applications
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-authregisterclient-id" title="GET /auth/register/:client-id" class="md-nav__link">
+    GET /auth/register/:client-id
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#put-authregisterclient-id" title="PUT /auth/register/:client-id" class="md-nav__link">
+    PUT /auth/register/:client-id
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-authregisterclient-id" title="DELETE /auth/register/:client-id" class="md-nav__link">
+    DELETE /auth/register/:client-id
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-authauthorize" title="GET /auth/authorize" class="md-nav__link">
+    GET /auth/authorize
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-authauthorize" title="POST /auth/authorize" class="md-nav__link">
+    POST /auth/authorize
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-authauthorizesharing-post-authauthorizesharing" title="GET /auth/authorize/sharing &amp; POST /auth/authorize/sharing" class="md-nav__link">
+    GET /auth/authorize/sharing &amp; POST /auth/authorize/sharing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-authaccess_token" title="POST /auth/access_token" class="md-nav__link">
+    POST /auth/access_token
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-authsecret_exchange" title="POST /auth/secret_exchange" class="md-nav__link">
+    POST /auth/secret_exchange
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#faq" title="FAQ" class="md-nav__link">
+    FAQ
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#client-side-apps" title="Client-side apps" class="md-nav__link">
+    Client-side apps
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-register-the-application" title="How to register the application?" class="md-nav__link">
+    How to register the application?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-get-a-token" title="How to get a token?" class="md-nav__link">
+    How to get a token?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use-a-token" title="How to use a token?" class="md-nav__link">
+    How to use a token?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-refresh-a-token" title="How to refresh a token?" class="md-nav__link">
+    How to refresh a token?
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#third-party-websites" title="Third-party websites" class="md-nav__link">
+    Third-party websites
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-register-the-application_1" title="How to register the application?" class="md-nav__link">
+    How to register the application?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-get-a-token_1" title="How to get a token?" class="md-nav__link">
+    How to get a token?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use-a-token_1" title="How to use a token?" class="md-nav__link">
+    How to use a token?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-refresh-a-token_1" title="How to refresh a token?" class="md-nav__link">
+    How to refresh a token?
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#devices-and-browser-extensions" title="Devices and browser extensions" class="md-nav__link">
+    Devices and browser extensions
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#native-apps-on-desktop" title="Native apps on desktop" class="md-nav__link">
+    Native apps on desktop
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#native-apps-on-mobile" title="Native apps on mobile" class="md-nav__link">
+    Native apps on mobile
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chrome-extensions" title="Chrome extensions" class="md-nav__link">
+    Chrome extensions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#firefox-extensions" title="Firefox extensions" class="md-nav__link">
+    Firefox extensions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-considerations" title="Security considerations" class="md-nav__link">
+    Security considerations
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" title="Conclusion" class="md-nav__link">
+    Conclusion
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/cozy/cozy.github.io/edit/dev/src/cozy-stack/auth.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <p><a href="../#table-of-contents">Table of contents</a></p>
+<h1 id="authentication-and-access-delegations">Authentication and access delegations<a class="headerlink" href="#authentication-and-access-delegations" title="Permanent link">&para;</a></h1>
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
+<p>In this document, we will cover how to protect the usage of the cozy-stack. When
+the cozy-stack receives a request, it checks that the request is authorized, and
+if yes, it processes it and answers it.</p>
+<h2 id="what-about-oauth2">What about OAuth2?<a class="headerlink" href="#what-about-oauth2" title="Permanent link">&para;</a></h2>
+<p>OAuth2 is about delegating an access to resources on a server to another party.
+It is a framework, not a strictly defined protocol, for organizing the
+interactions between these 4 actors:</p>
+<ul>
+<li>the resource owner, the &ldquo;user&rdquo; that can click on buttons</li>
+<li>the client, the website or application that would like to access the
+    resources</li>
+<li>the authorization server, whose role is limited to give tokens but is
+    central in OAuth2 interactions</li>
+<li>the resources server, the server that controls the resources.</li>
+</ul>
+<p>For cozy, both the authorization server and the resources server roles are
+played by the cozy-stack. The resource owner is the owner of a cozy instance.
+The client can be the cozy-desktop app, cozy-mobile, or many other applications.</p>
+<p>OAuth2, and its extensions, is a large world. At its core, there is 2 things:
+letting the client get a token issued by the authorization server, and using
+this token to access to the resources. OAuth2 describe 4 flows, called grant
+types, for the first part:</p>
+<ul>
+<li>Authorization code</li>
+<li>Implicit grant type</li>
+<li>Client credentials grant type</li>
+<li>Resource owner credentials grant type.</li>
+</ul>
+<p>On cozy, only the most typical one is used: authorization code. To start this
+flow, the client must have a <code>client_id</code> and <code>client_secret</code>. The Cozy stack
+implements the OAuth2 Dynamic Client Registration Protocol (an extension to
+OAuth2) to allow the clients to obtain them.</p>
+<p>OAuth2 has also 3 ways to use a token:</p>
+<ul>
+<li>in the query-string (even if the spec does not recommended it)</li>
+<li>in the POST body</li>
+<li>in the HTTP Authorization header.</li>
+</ul>
+<p>On cozy, only the HTTP header is supported.</p>
+<p>OAuth2 has a lot of assumptions. Let&rsquo;s see some of them and their consequences
+on Cozy:</p>
+<ul>
+<li>
+<p>TLS is very important to secure the communications. in OAuth 1, there was a
+    mechanism to sign the requests. But it was very difficult to get it right
+    for the developers and was abandonned in OAuth2, in favor of using TLS. The
+    Cozy instance are already accessible only in HTTPS, so there is nothing
+    particular to do for that.</p>
+</li>
+<li>
+<p>There is a principle called TOFU, Trust On First Use. It said that if the
+    user will give his permission for delegating access to its resources when
+    the client will try to access them for the first time. Later, the client
+    will be able to keep accessing them even if the user is no longer here to
+    give his permissions.</p>
+</li>
+<li>
+<p>The client can&rsquo;t make the assumptions about when its tokens will work. The
+    tokens have no meaning for him (like cookies in a browser), they are just
+    something it got from the authorization server and can send with its
+    request. The access token can expire, the user can revoke them, etc.</p>
+</li>
+<li>
+<p>OAuth 2.0 defines no cryptographic methods. But a developer that want to use
+    it will have to put her hands in that.</p>
+</li>
+</ul>
+<p>If you want to learn OAuth 2 in details, I recommend the
+<a href="https://www.manning.com/books/oauth-2-in-action">OAuth 2 in Action book</a>.</p>
+<h2 id="the-cozy-stack-as-an-authorization-server">The cozy stack as an authorization server<a class="headerlink" href="#the-cozy-stack-as-an-authorization-server" title="Permanent link">&para;</a></h2>
+<p>In general, the cozy stack manages the authentication itself. This is what is
+described below. In some special cases, an integration with other softwares can
+be mandatory: this is possible to configure via
+<a href="../delegated-auth/">delegated authentication</a>.</p>
+<h3 id="get-authlogin">GET /auth/login<a class="headerlink" href="#get-authlogin" title="Permanent link">&para;</a></h3>
+<p>Display a form with a password field to let the user authenticates herself to
+the cozy stack.</p>
+<p>This endpoint accepts a <code>redirect</code> parameter. If the user is already logged in,
+she will be redirected immediately. Else, the parameter will be transfered in
+the POST. This parameter can only contain a link to an application installed on
+the cozy (thus to a subdomain of the cozy instance). To protect against stealing
+authorization code with redirection, the fragment is always overriden:</p>
+<div class="codehilite"><pre><span></span><span class="nf">GET</span> <span class="nn">/auth/login?redirect=https://contacts.cozy.example.org/foo?bar#baz</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">cozy.example.org</span>
+<span class="na">Cookie</span><span class="o">:</span> <span class="l">...</span>
+</pre></div>
+
+
+<p><strong>Note</strong>: the redirect parameter should be URL-encoded. We haven&rsquo;t done that to
+make it clear what the path (<code>foo</code>), the query-string (<code>bar</code>), and the fragment
+(<code>baz</code>) are.</p>
+<div class="codehilite"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">302</span> <span class="ne">Moved Temporarily</span>
+<span class="na">Location</span><span class="o">:</span> <span class="l">https://contacts.cozy.example.org/foo?bar#</span>
+</pre></div>
+
+
+<p>If the <code>redirect</code> parameter is invalid, the response will be <code>400 Bad Request</code>.
+Same for other parameters, the redirection will happen only on success (even if
+OAuth2 says the authorization server can redirect on errors, it&rsquo;s very
+complicated to do it safely, and it is better to avoid this trap).</p>
+<h3 id="post-authlogin">POST /auth/login<a class="headerlink" href="#post-authlogin" title="Permanent link">&para;</a></h3>
+<p>After the user has typed her passphrase and clicked on <code>Login</code>, a request is
+made to this endpoint.</p>
+<p>The <code>redirect</code> parameter is passed inside the body. If it is missing, the
+redirection will be made against the default target: the home application of
+this cozy instance.</p>
+<div class="codehilite"><pre><span></span><span class="nf">POST</span> <span class="nn">/auth/login</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">cozy.example.org</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/x-www-form-urlencoded</span>
+
+passphrase=p4ssw0rd&amp;redirect=https%3A%2F%2Fcontacts.cozy.example.org
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">302</span> <span class="ne">Moved Temporarily</span>
+<span class="na">Set-Cookie</span><span class="o">:</span> <span class="l">...</span>
+<span class="na">Location</span><span class="o">:</span> <span class="l">https://contacts.cozy.example.org/foo</span>
+</pre></div>
+
+
+<p>When two-factor authentication (2FA) authentication is activated, this endpoint
+will not directly sent a redirection after this first passphrase step. In such
+case, a <code>200 OK</code> response is sent along with a token value in the response
+(either in JSON if requested or directly in a new HTML form).</p>
+<p>Along with this token, on 2FA passcode is sent to the user via another transport
+(email for instance, depending on the user&rsquo;s preferences). Another request
+should be sent to the same endpoint with a valid pair <code>(token, passcode)</code>,
+ensuring that the user correctly entered its passphrase <em>and</em> received a fresh
+passcode by another mean.</p>
+<div class="codehilite"><pre><span></span><span class="nf">POST</span> <span class="nn">/auth/login</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">cozy.example.org</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/x-www-form-urlencoded</span>
+
+two-factor-token=123123123123&amp;passcode=678678&amp;redirect=https%3A%2F%2Fcontacts.cozy.example.org
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">302</span> <span class="ne">Moved Temporarily</span>
+<span class="na">Set-Cookie</span><span class="o">:</span> <span class="l">...</span>
+<span class="na">Location</span><span class="o">:</span> <span class="l">https://contacts.cozy.example.org/foo</span>
+</pre></div>
+
+
+<h3 id="delete-authlogin">DELETE /auth/login<a class="headerlink" href="#delete-authlogin" title="Permanent link">&para;</a></h3>
+<p>This can be used to log-out the user. An app token must be passed in the
+<code>Authorization</code> header, to protect against CSRF attack on this (this can part of
+bigger attacks like session fixation).</p>
+<div class="codehilite"><pre><span></span><span class="nf">DELETE</span> <span class="nn">/auth/login</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">cozy.example.org</span>
+<span class="na">Cookie</span><span class="o">:</span> <span class="l">seesioncookie....</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer app-token</span>
+</pre></div>
+
+
+<h3 id="delete-authloginothers">DELETE /auth/login/others<a class="headerlink" href="#delete-authloginothers" title="Permanent link">&para;</a></h3>
+<p>This can be used to log-out all active sessions except the one used by the
+request. This allow to disconnect any other users currenctly authenticated on
+the system. An app token must be passed in the <code>Authorization</code> header, to
+protect against CSRF attack on this (this can part of bigger attacks like
+session fixation).</p>
+<div class="codehilite"><pre><span></span><span class="nf">DELETE</span> <span class="nn">/auth/login/others</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">cozy.example.org</span>
+<span class="na">Cookie</span><span class="o">:</span> <span class="l">seesioncookie....</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer app-token</span>
+</pre></div>
+
+
+<h3 id="get-authpassphrase_reset">GET /auth/passphrase_reset<a class="headerlink" href="#get-authpassphrase_reset" title="Permanent link">&para;</a></h3>
+<p>Display a form for the user to reset its password, in case he has forgotten it
+for example. If the user is connected, he won&rsquo;t be shown this form and he will
+be directly redirected to his cozy.</p>
+<div class="codehilite"><pre><span></span><span class="nf">GET</span> <span class="nn">/auth/passphrase_reset</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">cozy.example.org</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">text/html</span>
+<span class="na">Cookie</span><span class="o">:</span> <span class="l">...</span>
+</pre></div>
+
+
+<h3 id="post-authpassphrase_reset">POST /auth/passphrase_reset<a class="headerlink" href="#post-authpassphrase_reset" title="Permanent link">&para;</a></h3>
+<p>After the user has clicked on the reset button of the passphrase reset form, it
+will execute a request to this endpoint.</p>
+<p>This endpoint will create a token for the user to actually renew his passphrase.
+The token has a short-live duration of about 15 minutes. After the token is
+created, it is sent to the user on its mailbox.</p>
+<p>This endpoint will redirect the user on the login form page.</p>
+<div class="codehilite"><pre><span></span><span class="nf">POST</span> <span class="nn">/auth/passphrase_reset</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">cozy.example.org</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/x-www-form-urlencoded</span>
+
+csrf_token=123456890
+</pre></div>
+
+
+<h3 id="get-authpassphrase_renew">GET /auth/passphrase_renew<a class="headerlink" href="#get-authpassphrase_renew" title="Permanent link">&para;</a></h3>
+<p>Display a form for the user to enter a new password. This endpoint should be
+used with a <code>token</code> query parameter. This token makes sure that the user has
+actually reset its passphrase and should have been sent via its mailbox.</p>
+<div class="codehilite"><pre><span></span><span class="nf">GET</span> <span class="nn">/auth/passphrase_renew?token=123456789</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">cozy.example.org</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">text/html</span>
+<span class="na">Cookie</span><span class="o">:</span> <span class="l">...</span>
+</pre></div>
+
+
+<h3 id="post-authpassphrase_renew">POST /auth/passphrase_renew<a class="headerlink" href="#post-authpassphrase_renew" title="Permanent link">&para;</a></h3>
+<p>After the user has entered its new passphrase in the renew passphrase form, a
+request is made to this endpoint to renew the passphrase.</p>
+<p>This endpoint requires a valid token to actually work. In case of a success, the
+user is redirected to the login form.</p>
+<div class="codehilite"><pre><span></span><span class="nf">POST</span> <span class="nn">/auth/passphrase_reset</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">cozy.example.org</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/x-www-form-urlencoded</span>
+
+csrf_token=123456890&amp;passphrase_reset_token=123456789&amp;passphrase=mynewpassphrase
+</pre></div>
+
+
+<h3 id="get-authpassphrase">GET /auth/passphrase<a class="headerlink" href="#get-authpassphrase" title="Permanent link">&para;</a></h3>
+<p>This page renders a form to set the password for an onboarding instance. This
+endpoint expects a valid <code>registerToken</code> parameter.</p>
+<p>In case of success, the instance is marked as onboarded and the user is
+redirected to his home.</p>
+<p>If the instance is already onboarded, the user is redirected to his home.</p>
+<div class="codehilite"><pre><span></span><span class="nf">GET</span> <span class="nn">/auth/passphrase/?registerToken=e0fbe2c5b90cdcdd9b3487b48b480e0b</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">cozy.example.org</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">text/html</span>
+</pre></div>
+
+
+<h3 id="post-authregister">POST /auth/register<a class="headerlink" href="#post-authregister" title="Permanent link">&para;</a></h3>
+<p>This route is used by OAuth2 clients to dynamically register them-selves.</p>
+<p>See
+<a href="https://tools.ietf.org/html/rfc7591">OAuth 2.0 Dynamic Client Registration Protocol</a>
+for the details.</p>
+<p>The client must send a JSON request, with at least:</p>
+<ul>
+<li><code>redirect_uris</code>, an array of strings with the redirect URIs that the client
+    will use in the authorization flow</li>
+<li><code>client_name</code>, human-readable string name of the client to be presented to
+    the end-user during authorization</li>
+<li><code>software_id</code>, an identifier of the software used by the client (it should
+    remain the same for all instances of the client software, whereas
+    <code>client_id</code> varies between instances).</li>
+</ul>
+<p>It can also send the optional fields:</p>
+<ul>
+<li><code>client_kind</code> (possible values: web, desktop, mobile, browser, etc.)</li>
+<li><code>client_uri</code>, URL string of a web page providing information about the
+    client</li>
+<li><code>logo_uri</code>, to display an icon to the user in the authorization flow</li>
+<li><code>policy_uri</code>, URL string that points to a human-readable privacy policy
+    document that describes how the deployment organization collects, uses,
+    retains, and discloses personal data</li>
+<li><code>software_version</code>, a version identifier string for the client software.</li>
+<li><code>notification_platform</code>, to activate notifications on the associated device,
+    this field specify the platform used to send notifications:<ul>
+<li><code>"android"</code>: for Android devices with notifications via Firebase Cloud
+    Messageing</li>
+<li><code>"ios"</code>: for iOS devices with notifications via APNS/2.</li>
+</ul>
+</li>
+<li><code>notification_device_token</code>, the token used to identify the mobile device
+    for notifications</li>
+</ul>
+<p>The server gives to the client the previous fields and these informations:</p>
+<ul>
+<li><code>client_id</code></li>
+<li><code>client_secret</code></li>
+<li><code>registration_access_token</code></li>
+</ul>
+<p>Example:</p>
+<div class="codehilite"><pre><span></span><span class="nf">POST</span> <span class="nn">/auth/register</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">cozy.example.org</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+<span class="na">Accept</span><span class="o">:</span> <span class="l">application/json</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;redirect_uris&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://client.example.org/oauth/callback&quot;</span><span class="p">],</span>
+    <span class="nt">&quot;client_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Client&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;software_id&quot;</span><span class="p">:</span> <span class="s2">&quot;github.com/example/client&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;software_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0.1&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;client_kind&quot;</span><span class="p">:</span> <span class="s2">&quot;web&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;client_uri&quot;</span><span class="p">:</span> <span class="s2">&quot;https://client.example.org/&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;logo_uri&quot;</span><span class="p">:</span> <span class="s2">&quot;https://client.example.org/logo.svg&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;policy_uri&quot;</span><span class="p">:</span> <span class="s2">&quot;https://client/example.org/policy&quot;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">201</span> <span class="ne">Created</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;client_id&quot;</span><span class="p">:</span> <span class="s2">&quot;64ce5cb0-bd4c-11e6-880e-b3b7dfda89d3&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;client_secret&quot;</span><span class="p">:</span> <span class="s2">&quot;eyJpc3Mi[...omitted for brevity...]&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;client_secret_expires_at&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nt">&quot;registration_access_token&quot;</span><span class="p">:</span> <span class="s2">&quot;J9l-ZhwP[...omitted for brevity...]&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;grant_types&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;authorization_code&quot;</span><span class="p">,</span> <span class="s2">&quot;refresh_token&quot;</span><span class="p">],</span>
+    <span class="nt">&quot;response_types&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;code&quot;</span><span class="p">],</span>
+    <span class="nt">&quot;redirect_uris&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://client.example.org/oauth/callback&quot;</span><span class="p">],</span>
+    <span class="nt">&quot;client_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Client&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;software_id&quot;</span><span class="p">:</span> <span class="s2">&quot;github.com/example/client&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;software_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0.1&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;client_kind&quot;</span><span class="p">:</span> <span class="s2">&quot;web&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;client_uri&quot;</span><span class="p">:</span> <span class="s2">&quot;https://client.example.org/&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;logo_uri&quot;</span><span class="p">:</span> <span class="s2">&quot;https://client.example.org/logo.svg&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;policy_uri&quot;</span><span class="p">:</span> <span class="s2">&quot;https://client/example.org/policy&quot;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<h4 id="linked-applications">Linked applications<a class="headerlink" href="#linked-applications" title="Permanent link">&para;</a></h4>
+<p>Some OAuth applications are a mobile or desktop version of a Cozy webapp. For
+them, it&rsquo;s possible to use a special <code>software_id</code> to make a link between the
+mobile/desktop application and the webapp. The <code>software_id</code> must be in a
+<code>registry://slug</code> format, like <code>registry://drive</code> for Cozy-Drive for example.
+When it is the case, the mobile/desktop will share its permissions with the
+webapp. It means several things:</p>
+<ul>
+<li>The mobile/desktop app will have the same permissions that the linked webapp.</li>
+<li>When a sharing by link is done in the mobile/desktop application, the linked
+  webapp will be able to revoke it later, and vice versa.</li>
+<li>When the user accepts to give access to its Cozy to the mobile/desktop app,
+  the linked webapp will be installed on the Cozy if it was not already the
+  case.</li>
+<li>When the linked webapp is uninstalled, the right to access the Cozy for the
+  mobile/desktop app will be revoked.</li>
+</ul>
+<h3 id="get-authregisterclient-id">GET /auth/register/:client-id<a class="headerlink" href="#get-authregisterclient-id" title="Permanent link">&para;</a></h3>
+<p>This route is used by the clients to get informations about them-selves. The
+client has to send its registration access token to be able to use this
+endpoint.</p>
+<p>See
+<a href="https://tools.ietf.org/html/rfc7592">OAuth 2.0 Dynamic Client Registration Management Protocol</a>
+for more details.</p>
+<div class="codehilite"><pre><span></span><span class="nf">GET</span> <span class="nn">/auth/register/64ce5cb0-bd4c-11e6-880e-b3b7dfda89d3</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">cozy.example.org</span>
+<span class="na">Accept</span><span class="o">:</span> <span class="l">application/json</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer J9l-ZhwP...</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">201</span> <span class="ne">Created</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;client_id&quot;</span><span class="p">:</span> <span class="s2">&quot;64ce5cb0-bd4c-11e6-880e-b3b7dfda89d3&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;client_secret&quot;</span><span class="p">:</span> <span class="s2">&quot;eyJpc3Mi[...omitted for brevity...]&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;client_secret_expires_at&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nt">&quot;grant_types&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;authorization_code&quot;</span><span class="p">,</span> <span class="s2">&quot;refresh_token&quot;</span><span class="p">],</span>
+    <span class="nt">&quot;response_types&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;code&quot;</span><span class="p">],</span>
+    <span class="nt">&quot;redirect_uris&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://client.example.org/oauth/callback&quot;</span><span class="p">],</span>
+    <span class="nt">&quot;client_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Client&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;software_id&quot;</span><span class="p">:</span> <span class="s2">&quot;github.com/example/client&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;software_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0.1&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;client_kind&quot;</span><span class="p">:</span> <span class="s2">&quot;web&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;client_uri&quot;</span><span class="p">:</span> <span class="s2">&quot;https://client.example.org/&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;logo_uri&quot;</span><span class="p">:</span> <span class="s2">&quot;https://client.example.org/logo.svg&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;policy_uri&quot;</span><span class="p">:</span> <span class="s2">&quot;https://client/example.org/policy&quot;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<h3 id="put-authregisterclient-id">PUT /auth/register/:client-id<a class="headerlink" href="#put-authregisterclient-id" title="Permanent link">&para;</a></h3>
+<p>This route is used by the clients to update informations about them-selves. The
+client has to send its registration access token to be able to use this
+endpoint.</p>
+<p><strong>Note:</strong> the client can ask to change its <code>client_secret</code>. To do that, it must
+send the current <code>client_secret</code>, and the server will respond with the new
+<code>client_secret</code>.</p>
+<div class="codehilite"><pre><span></span><span class="nf">PUT</span> <span class="nn">/auth/register/64ce5cb0-bd4c-11e6-880e-b3b7dfda89d3</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">cozy.example.org</span>
+<span class="na">Accept</span><span class="o">:</span> <span class="l">application/json</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer J9l-ZhwP...</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;client_id&quot;</span><span class="p">:</span> <span class="s2">&quot;64ce5cb0-bd4c-11e6-880e-b3b7dfda89d3&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;client_secret&quot;</span><span class="p">:</span> <span class="s2">&quot;eyJpc3Mi[...omitted for brevity...]&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;redirect_uris&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://client.example.org/oauth/callback&quot;</span><span class="p">],</span>
+    <span class="nt">&quot;client_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Client&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;software_id&quot;</span><span class="p">:</span> <span class="s2">&quot;github.com/example/client&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;software_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0.2&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;client_kind&quot;</span><span class="p">:</span> <span class="s2">&quot;web&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;client_uri&quot;</span><span class="p">:</span> <span class="s2">&quot;https://client.example.org/&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;logo_uri&quot;</span><span class="p">:</span> <span class="s2">&quot;https://client.example.org/client-logo.svg&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;policy_uri&quot;</span><span class="p">:</span> <span class="s2">&quot;https://client/example.org/policy&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;notification_platform&quot;</span><span class="p">:</span> <span class="s2">&quot;android&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;notification_device_token&quot;</span><span class="p">:</span> <span class="s2">&quot;XXXXxxxx...&quot;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;client_id&quot;</span><span class="p">:</span> <span class="s2">&quot;64ce5cb0-bd4c-11e6-880e-b3b7dfda89d3&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;client_secret&quot;</span><span class="p">:</span> <span class="s2">&quot;IFais2Ah[...omitted for brevity...]&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;client_secret_expires_at&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nt">&quot;grant_types&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;authorization_code&quot;</span><span class="p">,</span> <span class="s2">&quot;refresh_token&quot;</span><span class="p">],</span>
+    <span class="nt">&quot;response_types&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;code&quot;</span><span class="p">],</span>
+    <span class="nt">&quot;redirect_uris&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://client.example.org/oauth/callback&quot;</span><span class="p">],</span>
+    <span class="nt">&quot;client_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Client&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;software_id&quot;</span><span class="p">:</span> <span class="s2">&quot;github.com/example/client&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;software_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0.2&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;client_kind&quot;</span><span class="p">:</span> <span class="s2">&quot;web&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;client_uri&quot;</span><span class="p">:</span> <span class="s2">&quot;https://client.example.org/&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;logo_uri&quot;</span><span class="p">:</span> <span class="s2">&quot;https://client.example.org/client-logo.svg&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;policy_uri&quot;</span><span class="p">:</span> <span class="s2">&quot;https://client/example.org/policy&quot;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<h3 id="delete-authregisterclient-id">DELETE /auth/register/:client-id<a class="headerlink" href="#delete-authregisterclient-id" title="Permanent link">&para;</a></h3>
+<p>This route is used by the clients to unregister them-selves. The client has to
+send its registration access token to be able to use this endpoint.</p>
+<div class="codehilite"><pre><span></span><span class="nf">DELETE</span> <span class="nn">/auth/register/64ce5cb0-bd4c-11e6-880e-b3b7dfda89d3</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">cozy.example.org</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer J9l-ZhwP...</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">204</span> <span class="ne">No Content</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+</pre></div>
+
+
+<h3 id="get-authauthorize">GET /auth/authorize<a class="headerlink" href="#get-authauthorize" title="Permanent link">&para;</a></h3>
+<p>When an OAuth2 client wants to get access to the data of the cozy owner, it
+starts the OAuth2 dance with this step. The user is shown what the client asks
+and has an accept button if she is OK with that.</p>
+<p>The parameters are:</p>
+<ul>
+<li><code>client_id</code>, that identify the client</li>
+<li><code>redirect_uri</code>, it has to be exactly the same as the one used in
+    registration</li>
+<li><code>state</code>, it&rsquo;s a protection against CSRF on the client (a random string
+    generated by the client, that it can check when the user will be redirected
+    with the authorization code. It can be used as a key in local storage for
+    storing a state in a SPA).</li>
+<li><code>response_type</code>, only <code>code</code> is supported</li>
+<li><code>scope</code>, a space separated list of the <a href="../permissions/">permissions</a> asked
+    (like <code>io.cozy.files:GET</code> for read-only access to files).</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="nf">GET</span> <span class="nn">/auth/authorize?client_id=oauth-client-1&amp;response_type=code&amp;scope=io.cozy.files:GET%20io.cozy.contacts&amp;state=Eh6ahshepei5Oojo&amp;redirect_uri=https%3A%2F%2Fclient.org%2F</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">cozy.example.org</span>
+</pre></div>
+
+
+<p><strong>Note</strong> we warn the user that he is about to share his data with an application
+which only the callback URI is guaranteed.</p>
+<h3 id="post-authauthorize">POST /auth/authorize<a class="headerlink" href="#post-authauthorize" title="Permanent link">&para;</a></h3>
+<p>When the user accepts, her browser send a request to this endpoint:</p>
+<div class="codehilite"><pre><span></span><span class="nf">POST</span> <span class="nn">/auth/authorize</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">cozy.example.org</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/x-www-form-urlencoded</span>
+
+state=Eh6ahshepei5Oojo&amp;client_id=oauth-client-1&amp;scope=io.cozy.files:GET%20io.cozy.contacts&amp;csrf_token=johw6Sho&amp;response_type=code&amp;redirect_uri=https%3A%2F%2Fclient.org%2F
+</pre></div>
+
+
+<p><strong>Note</strong>: this endpoint is protected against CSRF attacks.</p>
+<p>The user is then redirected to the original client, with an access code in the
+URL:</p>
+<div class="codehilite"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">302</span> <span class="ne">Moved Temporarily</span>
+<span class="na">Location</span><span class="o">:</span> <span class="l">https://client.org/?state=Eh6ahshepei5Oojo&amp;code=Aih7ohth#</span>
+</pre></div>
+
+
+<h3 id="get-authauthorizesharing-post-authauthorizesharing">GET /auth/authorize/sharing &amp; POST /auth/authorize/sharing<a class="headerlink" href="#get-authauthorizesharing-post-authauthorizesharing" title="Permanent link">&para;</a></h3>
+<p>They are similar to <code>/auth/authorize</code>: they also make the user accept an OAuth
+thing, but it is specialized for sharing. They are a few differences, like the
+scope format (sharing rules, not permissions) and the redirection after the
+POST.</p>
+<h3 id="post-authaccess_token">POST /auth/access_token<a class="headerlink" href="#post-authaccess_token" title="Permanent link">&para;</a></h3>
+<p>Now, the client can check that the state is correct, and if it is the case, ask
+for an <code>access_token</code>. It can use this route with the <code>code</code> given above.</p>
+<p>This endpoint is also used to refresh the access token, by sending the
+<code>refresh_token</code> instead of the <code>code</code>.</p>
+<p>The parameters are:</p>
+<ul>
+<li><code>grant_type</code>, with <code>authorization_code</code> or <code>refresh_token</code> as value</li>
+<li><code>code</code> or <code>refresh_token</code>, depending on which grant type is used</li>
+<li><code>client_id</code></li>
+<li><code>client_secret</code></li>
+</ul>
+<p>Example:</p>
+<div class="codehilite"><pre><span></span><span class="nf">POST</span> <span class="nn">/auth/access_token</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">cozy.example.org</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/x-www-form-urlencoded</span>
+<span class="na">Accept</span><span class="o">:</span> <span class="l">application/json</span>
+
+grant_type=authorization_code&amp;code=Aih7ohth&amp;client_id=oauth-client-1&amp;client_secret=Oung7oi5
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+  <span class="nt">&quot;access_token&quot;</span><span class="p">:</span> <span class="s2">&quot;ooch1Yei&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;token_type&quot;</span><span class="p">:</span> <span class="s2">&quot;bearer&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;refresh_token&quot;</span><span class="p">:</span> <span class="s2">&quot;ui0Ohch8&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;scope&quot;</span><span class="p">:</span> <span class="s2">&quot;io.cozy.files:GET io.cozy.contacts&quot;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<h3 id="post-authsecret_exchange">POST /auth/secret_exchange<a class="headerlink" href="#post-authsecret_exchange" title="Permanent link">&para;</a></h3>
+<p>This endpoint is designed to trade a <code>secret</code> for a client. It is useful when an
+OAuth client had been previously generated by an external entity with an
+onboarding secret.</p>
+<p>The only parameter needed is <code>secret</code>.</p>
+<div class="codehilite"><pre><span></span><span class="nf">POST</span> <span class="nn">/auth/secret_exchange</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">cozy.example.org</span>
+<span class="na">Accept</span><span class="o">:</span> <span class="l">application/json</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+    <span class="nt">&quot;secret&quot;</span><span class="p">:</span> <span class="s2">&quot;myS3Cr3t!&quot;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+  <span class="nt">&quot;client_id&quot;</span><span class="p">:</span> <span class="s2">&quot;cf60f07cd7e00d0c0f86cd3f29240477&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;client_secret&quot;</span><span class="p">:</span> <span class="s2">&quot;NNSLTid18EATInQWyg2XGKd_vs0e3zUC&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;client_secret_expires_at&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="nt">&quot;redirect_uris&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">&quot;https://example.org/oauth/callback&quot;</span>
+  <span class="p">],</span>
+  <span class="nt">&quot;grant_types&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">&quot;authorization_code&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;refresh_token&quot;</span>
+  <span class="p">],</span>
+  <span class="nt">&quot;response_types&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">&quot;code&quot;</span>
+  <span class="p">],</span>
+  <span class="nt">&quot;client_name&quot;</span><span class="p">:</span> <span class="s2">&quot;cozy-test-3&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;software_id&quot;</span><span class="p">:</span> <span class="s2">&quot;github.com/cozy/cozy-test&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;notifications&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="nt">&quot;onboarding_secret&quot;</span><span class="p">:</span> <span class="s2">&quot;myS3Cr3t!&quot;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<h3 id="faq">FAQ<a class="headerlink" href="#faq" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>What format is used for tokens?</p>
+</blockquote>
+<p>The access tokens are formatted as <a href="https://jwt.io/">JSON Web Tokens (JWT)</a>,
+like this:</p>
+<table>
+<thead>
+<tr>
+<th>Claim</th>
+<th>Fullname</th>
+<th>What it identifies</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>aud</code></td>
+<td>Audience</td>
+<td>Identify the recipient where the token can be used (like <code>access</code>)</td>
+</tr>
+<tr>
+<td><code>iss</code></td>
+<td>Issuer</td>
+<td>Identify the Cozy instance (its domain in fact)</td>
+</tr>
+<tr>
+<td><code>iat</code></td>
+<td>Issued At</td>
+<td>Identify when the token was issued (Unix timestamp)</td>
+</tr>
+<tr>
+<td><code>sub</code></td>
+<td>Subject</td>
+<td>Identify the client that can use the token</td>
+</tr>
+<tr>
+<td><code>scope</code></td>
+<td>Scope</td>
+<td>Identify the scope of actions that the client can accomplish</td>
+</tr>
+</tbody>
+</table>
+<p>The <code>scope</code> is used for <a href="../permissions/">permissions</a>.</p>
+<p>Other tokens can be JWT with a similar formalism, or be a simple random value
+(when we want to have a clear revocation process).</p>
+<blockquote>
+<p>What happens when the user has lost her passphrase?</p>
+</blockquote>
+<p>She can reset it from the command-line, like this:</p>
+<div class="codehilite"><pre><span></span>$ cozy-stack instances reset-passphrase cozy.example.org
+ek0Jah1R
+</pre></div>
+
+
+<p>A new password is generated and print in the console.</p>
+<blockquote>
+<p>Is two-factor authentication (2FA) possible?</p>
+</blockquote>
+<p>Yes, it&rsquo;s possible. Via the cozy-settings application, the two-factor
+authentication can be activated.</p>
+<p>Here is how it works in more details:</p>
+<p>On each connection, when the 2FA is activated, the user is asked for its
+passphrase first. When entering correct passphrase, the user is then asked for:</p>
+<ul>
+<li>a TOTP (Timebased One-Time password, RFC 6238) derived from a secret
+    associated with the instance.</li>
+<li>a short term timestamped MAC with the same validity time-range and also
+    derived from the same secret.</li>
+</ul>
+<p>The TOTP is valid for a time range of about 5 minutes. When sending a correct
+and still-valid pair <code>(passcode, token)</code>, the user is granted with
+authentication cookie.</p>
+<p>The passcode can be sent to the instance&rsquo;s owner via email — more transport
+shall be added later.</p>
+<h2 id="client-side-apps">Client-side apps<a class="headerlink" href="#client-side-apps" title="Permanent link">&para;</a></h2>
+<p><strong>Important</strong>: OAuth2 is not used here! The steps looks similar (like obtaining
+a token), but when going in the details, it doesn&rsquo;t match.</p>
+<h3 id="how-to-register-the-application">How to register the application?<a class="headerlink" href="#how-to-register-the-application" title="Permanent link">&para;</a></h3>
+<p>The application is registered at install. See <a href="../apps/">app management</a> for
+details.</p>
+<h3 id="how-to-get-a-token">How to get a token?<a class="headerlink" href="#how-to-get-a-token" title="Permanent link">&para;</a></h3>
+<p>When a user access an application, she first loads the HTML page. Inside this
+page, a token specific to this app is injected (only for private routes), via a
+templating method.</p>
+<p>We have prefered our custom solution to the implicit grant type of OAuth2 for 2
+reasons:</p>
+<ol>
+<li>
+<p>It has a better User Experience. The implicit grant type works with 2
+   redirections (the application to the stack, and then the stack to the
+   application), and the first one needs JS to detect if the token is present or
+   not in the fragment hash. It has a strong impact on the time to load the
+   application.</p>
+</li>
+<li>
+<p>The implicit grant type of OAuth2 has a severe drawback on security: the
+   token appears in the URL and is shown by the browser. It can also be leaked
+   with the HTTP <code>Referer</code> header.</p>
+</li>
+</ol>
+<p>The token will be given only for the authenticated user. For nested subdomains
+(like <code>calendar.joe.example.net</code>), the session cookie from the stack is enough
+(it is for <code>.joe.example.net</code>).</p>
+<p>But for flat subdomains (like <code>joe-calendar.example.net</code>), it&rsquo;s more
+complicated. On the first try of the user, she will be redirected to the stack.
+As she is already logged-in, she will be redirected to the app with a session
+code (else she can login). This session code can be exchanged to a session
+cookie. A redirection will still happen to remove the code from the URL (it
+helps to avoid the code being saved in the browser history). For security
+reasons, the session code have the following properties:</p>
+<ul>
+<li>It can only be used once.</li>
+<li>It is tied to an application (<code>calendar</code> in our example).</li>
+<li>It has a very short time span of validity (1 minute).</li>
+</ul>
+<h3 id="how-to-use-a-token">How to use a token?<a class="headerlink" href="#how-to-use-a-token" title="Permanent link">&para;</a></h3>
+<p>The token can be sent to the cozy-stack as a <code>Bearer</code> token in the
+<code>Authorization</code> header, like this:</p>
+<div class="codehilite"><pre><span></span><span class="nf">GET</span> <span class="nn">/data/io.cozy.events/6494e0ac-dfcb-11e5-88c1-472e84a9cbee</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">cozy.example.org</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer application-token</span>
+</pre></div>
+
+
+<p>If the user is authenticated, her cookies will be sent automatically. The
+cookies are needed for a token to be valid.</p>
+<h3 id="how-to-refresh-a-token">How to refresh a token?<a class="headerlink" href="#how-to-refresh-a-token" title="Permanent link">&para;</a></h3>
+<p>The token is valid only for 24 hours. If the application is opened for more than
+that, it will need to get a new token. But most applications won&rsquo;t be kept open
+for so long and it&rsquo;s okay if they don&rsquo;t try to refresh tokens. At worst, the
+user just had to reload its page and it will work again.</p>
+<p>The app can know it&rsquo;s time to get a new token when the stack starts sending 401
+Unauthorized responses. In that case, it can fetches the same html page that it
+was loaded initially, parses it and extracts the new token.</p>
+<h2 id="third-party-websites">Third-party websites<a class="headerlink" href="#third-party-websites" title="Permanent link">&para;</a></h2>
+<h3 id="how-to-register-the-application_1">How to register the application?<a class="headerlink" href="#how-to-register-the-application_1" title="Permanent link">&para;</a></h3>
+<p>If a third-party websites would like to access a cozy, it had to register first.
+For example, a big company can have data about a user and may want to offer her
+a way to get her data back in her cozy. When the user is connected on the
+website of this company, she can give her cozy address. The website will then
+register on this cozy, using the OAuth2 Dynamic Client Registration Protocol, as
+explained <a href="#post-authregister">above</a>.</p>
+<h3 id="how-to-get-a-token_1">How to get a token?<a class="headerlink" href="#how-to-get-a-token_1" title="Permanent link">&para;</a></h3>
+<p>To get an access token, it&rsquo;s enough to follow the authorization code flow of
+OAuth2:</p>
+<ul>
+<li>sending the user to the cozy, on the authorize page</li>
+<li>if the user approves, she is then redirected back to the client</li>
+<li>the client gets the access code and can exchange it to an access token.</li>
+</ul>
+<h3 id="how-to-use-a-token_1">How to use a token?<a class="headerlink" href="#how-to-use-a-token_1" title="Permanent link">&para;</a></h3>
+<p>The access token can be sent as a bearer token, in the Authorization header of
+HTTP:</p>
+<div class="codehilite"><pre><span></span><span class="nf">GET</span> <span class="nn">/data/io.cozy.contacts/6494e0ac-dfcb-11e5-88c1-472e84a9cbee</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">cozy.example.org</span>
+<span class="na">Accept</span><span class="o">:</span> <span class="l">application/json</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ</span>
+</pre></div>
+
+
+<h3 id="how-to-refresh-a-token_1">How to refresh a token?<a class="headerlink" href="#how-to-refresh-a-token_1" title="Permanent link">&para;</a></h3>
+<p>The access token will be valid only for 24 hours. After that, a new access token
+must be asked. To do that, just follow the refresh token flow, as explained
+<a href="#post-authaccess_token">above</a>.</p>
+<h2 id="devices-and-browser-extensions">Devices and browser extensions<a class="headerlink" href="#devices-and-browser-extensions" title="Permanent link">&para;</a></h2>
+<p>For devices and browser extensions, it is nearly the same than for third-party
+websites. The main difficulty is the redirect_uri. In OAuth2, the access code is
+given to the client by redirecting the user to an URL controlled by the client.
+But devices and browser extensions don&rsquo;t have an obvious URL for that.</p>
+<p>The IETF has published an RFC called
+<a href="https://tools.ietf.org/html/draft-ietf-oauth-native-apps-05">OAuth 2.0 for Native Apps</a>.</p>
+<h3 id="native-apps-on-desktop">Native apps on desktop<a class="headerlink" href="#native-apps-on-desktop" title="Permanent link">&para;</a></h3>
+<p>A desktop native application can start an embedded webserver on localhost. The
+redirect_uri will be something like <code>http://127.0.0.1:19856/callback</code>.</p>
+<h3 id="native-apps-on-mobile">Native apps on mobile<a class="headerlink" href="#native-apps-on-mobile" title="Permanent link">&para;</a></h3>
+<p>On mobile, the native apps can often register a custom URI scheme, like
+<code>com.example.oauthclient:/</code>. Just be sure that no other app has registered
+itself with the same URI.</p>
+<h3 id="chrome-extensions">Chrome extensions<a class="headerlink" href="#chrome-extensions" title="Permanent link">&para;</a></h3>
+<p>Chrome extensions can use URL like
+<code>https://&lt;extension-id&gt;.chromiumapp.org/&lt;anything-here&gt;</code> for their usage. See
+https://developer.chrome.com/apps/app_identity#non for more details. It has also
+a method to simplify the creation of such an URL:
+<a href="https://developer.chrome.com/apps/identity#method-getRedirectURL"><code>chrome.identity.getRedirectURL</code></a>.</p>
+<h3 id="firefox-extensions">Firefox extensions<a class="headerlink" href="#firefox-extensions" title="Permanent link">&para;</a></h3>
+<p>It is possible to use an <em>out of band</em> URN: <code>urn:ietf:wg:oauth:2.0:oob:auto</code>.
+The token is then extracted from the title of the page. See
+<a href="https://github.com/AdrianArroyoCalle/firefox-addons/blob/master/addon-google-oauth2/addon-google-oauth2.js">this addon for google oauth2</a>
+as an example.</p>
+<h2 id="security-considerations">Security considerations<a class="headerlink" href="#security-considerations" title="Permanent link">&para;</a></h2>
+<p>The password will be stored in a secure fashion, with a password hashing
+function. The hashing function and its parameter will be stored with the hash,
+in order to make it possible to change the algorithm and/or the parameters later
+if we had any suspicion that it became too weak. The initial algorithm is
+<a href="https://godoc.org/golang.org/x/crypto/scrypt">scrypt</a>.</p>
+<p>The access code is valid only once, and will expire after 5 minutes</p>
+<p>Dynamically registered applications won&rsquo;t have access to all possible scopes.
+For example, an application that has been dynamically registered can&rsquo;t ask the
+cozy owner to give it the right to install other applications. This limitation
+should improve security, as avoiding too powerful scopes to be used with unknown
+applications.</p>
+<p>The cozy stack will apply rate limiting to avoid brute-force attacks.</p>
+<p>The cozy stack offers
+<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS">CORS</a>
+for most of its services. But it&rsquo;s disabled for <code>/auth</code> (it doesn&rsquo;t make sense
+here) and for the client-side applications (to avoid leaking their tokens).</p>
+<p>The client should really use HTTPS for its <code>redirect_uri</code> parameter, but it&rsquo;s
+allowed to use HTTP for localhost, as in the native desktop app example.</p>
+<p>OAuth2 says that the <code>state</code> parameter is optional in the authorization code
+flow. But it is mandatory to use it with Cozy.</p>
+<p>For more on this subject, here is a list of links:</p>
+<ul>
+<li>https://www.owasp.org/index.php/Authentication_Cheat_Sheet</li>
+<li>https://tools.ietf.org/html/rfc6749#page-53</li>
+<li>https://tools.ietf.org/html/rfc6819</li>
+<li>https://tools.ietf.org/html/draft-ietf-oauth-closing-redirectors-00</li>
+<li>http://www.oauthsecurity.com/</li>
+</ul>
+<h2 id="conclusion">Conclusion<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h2>
+<p>Security is hard. If you want to share some concerns with us, do not hesitate to
+send us an email to security AT cozycloud.cc.</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../konnectors-workflow/" title="Workflow of the konnectors" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Workflow of the konnectors
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../apps/" title="/apps - Applications Management" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                /apps - Applications Management
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.245445c6.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="../../extra.js"></script>
+      
+    
+  </body>
+</html>

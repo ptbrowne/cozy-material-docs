@@ -1,0 +1,2805 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Cozy documentation">
+      
+      
+        <link rel="canonical" href="https://docs.cozy.io/cozy-stack/sharing-design/">
+      
+      
+        <meta name="author" content="CozyCloud - https://cozy.io">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[^a-zа-яё0-9\-]">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.0">
+    
+    
+      
+        <title>Sharing design - Cozy Developer Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.0284f74d.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.01803549.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#2196f3">
+      
+    
+    
+    
+      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
+    
+    <script type="text/javascript">
+        // Used in extra.js, we have to define the variable here since
+        // we need access to the "config" jinja variable
+        window.outsideDocs = [{"repo": "https://github.com/cozy/cozy-app-publish.git", "name": "cozy-app-publish", "subdir": "."}, {"repo": "https://github.com/cozy/cozy-apps-registry.git", "name": "cozy-apps-registry", "subdir": "."}, {"repo": "https://github.com/cozy/cozy-client.git", "name": "cozy-client", "subdir": "docs"}, {"repo": "https://github.com/cozy/cozy-client-js.git", "name": "cozy-client-js", "subdir": "docs"}, {"repo": "https://github.com/cozy/cozy-ui.git", "name": "cozy-ui", "subdir": "docs"}, {"repo": "https://github.com/cozy/cozy-doctypes.git", "name": "cozy-doctypes", "subdir": "."}, {"repo": "https://github.com/konnectors/libs.git", "name": "cozy-konnector-libs", "subdir": "packages/cozy-konnector-libs/docs"}, {"repo": "https://github.com/CPatchane/create-cozy-app.git", "name": "cozy-scripts", "subdir": "packages/cozy-scripts/docs"}, {"repo": "https://github.com/cozy/cozy-stack.git", "name": "cozy-stack", "subdir": "docs"}, {"repo": "https://github.com/konnectors/konitor.git", "name": "konitor", "subdir": "docs"}, {"repo": "https://github.com/cozy/cozy-libs.git", "name": "babel-preset-cozy-app", "subdir": "packages/babel-preset-cozy-app"}, {"repo": "https://github.com/cozy/cozy-libs.git", "name": "commitlint-config-cozy", "subdir": "packages/commitlint-config-cozy"}, {"repo": "https://github.com/cozy/cozy-libs.git", "name": "cozy-device-helper", "subdir": "packages/cozy-device-helper"}, {"repo": "https://github.com/cozy/cozy-libs.git", "name": "eslint-config-cozy-app", "subdir": "packages/eslint-config-cozy-app"}, {"repo": "https://github.com/cozy/cozy-libs.git", "name": "cozy-flags", "subdir": "packages/cozy-flags"}, {"repo": "https://github.com/cozy/cozy-libs.git", "name": "cozy-realtime", "subdir": "packages/cozy-realtime"}]
+    </script>
+
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Ubuntu+Mono&display=fallback">
+        <style>body,input{font-family:"Lato","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Ubuntu Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="blue" data-md-color-accent="blue">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#request-for-comments-about-the-sharings" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://docs.cozy.io/" title="Cozy Developer Documentation" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon">cloud</i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              Cozy Developer Documentation
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Sharing design
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/cozy/cozy.github.io/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://docs.cozy.io/" title="Cozy Developer Documentation" class="md-nav__button md-logo">
+      
+        <i class="md-icon">cloud</i>
+      
+    </a>
+    Cozy Developer Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/cozy/cozy.github.io/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Tutorials
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Tutorials
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/app/" title="Create Your Application" class="md-nav__link">
+      Create Your Application
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/konnector/" title="Develop a Connector" class="md-nav__link">
+      Develop a Connector
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/selfhost-debian/" title="Self-Host on Debian" class="md-nav__link">
+      Self-Host on Debian
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      How-to
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        How-to
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-1" type="checkbox" id="nav-3-1">
+    
+    <label class="md-nav__link" for="nav-3-1">
+      Dev
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-1">
+        Dev
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../howTos/dev/runCozyDocker/" title="Run an App in a Cozy using Docker" class="md-nav__link">
+      Run an App in a Cozy using Docker
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../howTos/dev/hmr/" title="Use Hot Module Replacement in Your App" class="md-nav__link">
+      Use Hot Module Replacement in Your App
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../howTos/dev/cordova/" title="Make a Mobile App Using Cordova" class="md-nav__link">
+      Make a Mobile App Using Cordova
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../howTos/dev/connect-mobile-app-local-stack/" title="Connect a Mobile App to Your Local Stack" class="md-nav__link">
+      Connect a Mobile App to Your Local Stack
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../howTos/dev/sendmail/" title="Send and Receive E-mails in Development" class="md-nav__link">
+      Send and Receive E-mails in Development
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../references/git-flow/" title="Our Front-End Git Flow" class="md-nav__link">
+      Our Front-End Git Flow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../references/tech-intro/" title="Technical introduction to the Cozy platform" class="md-nav__link">
+      Technical introduction to the Cozy platform
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-2" type="checkbox" id="nav-3-2">
+    
+    <label class="md-nav__link" for="nav-3-2">
+      Synchronize
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-2">
+        Synchronize
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../howTos/sync/linux/" title="Install Cozy Drive on GNU/Linux" class="md-nav__link">
+      Install Cozy Drive on GNU/Linux
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
+    
+    <label class="md-nav__link" for="nav-4">
+      Stack and tools
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Stack and tools
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../eslint-config-cozy-app/" title="eslint-config-cozy-app" class="md-nav__link">
+      eslint-config-cozy-app
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../commitlint-config-cozy/" title="commitlint-config-cozy" class="md-nav__link">
+      commitlint-config-cozy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3" type="checkbox" id="nav-4-3" checked>
+    
+    <label class="md-nav__link" for="nav-4-3">
+      cozy-stack
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-3">
+        cozy-stack
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../" title="README" class="md-nav__link">
+      README
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-2" type="checkbox" id="nav-4-3-2">
+    
+    <label class="md-nav__link" for="nav-4-3-2">
+      Usage
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-3-2">
+        Usage
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../INSTALL/" title="Install the cozy-stack" class="md-nav__link">
+      Install the cozy-stack
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../config/" title="Configuration file" class="md-nav__link">
+      Configuration file
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../instance/" title="Managing Instances" class="md-nav__link">
+      Managing Instances
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../security/" title="Security" class="md-nav__link">
+      Security
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../cli/cozy-stack/" title="Manpages of the command-line tool" class="md-nav__link">
+      Manpages of the command-line tool
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-3" type="checkbox" id="nav-4-3-3">
+    
+    <label class="md-nav__link" for="nav-4-3-3">
+      How-to guides for developpers
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-3-3">
+        How-to guides for developpers
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../client-app-dev/" title="Develop a client-side app" class="md-nav__link">
+      Develop a client-side app
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../docker/" title="Running and building Docker images" class="md-nav__link">
+      Running and building Docker images
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../doctype/" title="Adding a new doctype" class="md-nav__link">
+      Adding a new doctype
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../assets/" title="Working with the stack assets" class="md-nav__link">
+      Working with the stack assets
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../release/" title="Build a release" class="md-nav__link">
+      Build a release
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../CONTRIBUTING/" title="The contributing guide" class="md-nav__link">
+      The contributing guide
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-4" type="checkbox" id="nav-4-3-4" checked>
+    
+    <label class="md-nav__link" for="nav-4-3-4">
+      Explanations
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-3-4">
+        Explanations
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Sharing design
+      </label>
+    
+    <a href="./" title="Sharing design" class="md-nav__link md-nav__link--active">
+      Sharing design
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#hypothesis" title="Hypothesis" class="md-nav__link">
+    Hypothesis
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup-of-a-sharing" title="Setup of a sharing" class="md-nav__link">
+    Setup of a sharing
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-the-owner-creates-the-sharing" title="Step 1: the owner creates the sharing" class="md-nav__link">
+    Step 1: the owner creates the sharing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-a-recipient-accepts-the-sharing" title="Step 2: a recipient accepts the sharing" class="md-nav__link">
+    Step 2: a recipient accepts the sharing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-the-initial-replication-starts" title="Step 3: the initial replication starts" class="md-nav__link">
+    Step 3: the initial replication starts
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#workflow" title="Workflow" class="md-nav__link">
+    Workflow
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#files-and-folders" title="Files and folders" class="md-nav__link">
+    Files and folders
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-are-they-special" title="Why are they special?" class="md-nav__link">
+    Why are they special?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-a-sharing-involving-files-works" title="How a sharing involving files works?" class="md-nav__link">
+    How a sharing involving files works?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sequence-diagram" title="Sequence diagram" class="md-nav__link">
+    Sequence diagram
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conflict-resolution" title="Conflict resolution" class="md-nav__link">
+    Conflict resolution
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conflict-with-no-reconciliation" title="Conflict with no reconciliation" class="md-nav__link">
+    Conflict with no reconciliation
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-1" title="Example 1" class="md-nav__link">
+    Example 1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-2" title="Example 2" class="md-nav__link">
+    Example 2
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#schema" title="Schema" class="md-nav__link">
+    Schema
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#description-of-a-sharing" title="Description of a sharing" class="md-nav__link">
+    Description of a sharing
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-i-want-to-share-a-folder-in-readwrite-mode" title="Example: I want to share a folder in read/write mode" class="md-nav__link">
+    Example: I want to share a folder in read/write mode
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-i-want-to-share-a-playlist-where-im-the-only-one-that-can-add-and-remove-items" title="Example: I want to share a playlist where I’m the only one that can add and remove items" class="md-nav__link">
+    Example: I want to share a playlist where I’m the only one that can add and remove items
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iocozyshared" title="io.cozy.shared" class="md-nav__link">
+    io.cozy.shared
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../konnectors-workflow/" title="Workflow of the konnectors" class="md-nav__link">
+      Workflow of the konnectors
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-5" type="checkbox" id="nav-4-3-5">
+    
+    <label class="md-nav__link" for="nav-4-3-5">
+      List of services
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-3-5">
+        List of services
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../auth/" title="/auth - Authentication & OAuth" class="md-nav__link">
+      /auth - Authentication & OAuth
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../apps/" title="/apps - Applications Management" class="md-nav__link">
+      /apps - Applications Management
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../registry/" title="/apps - Apps registry" class="md-nav__link">
+       /apps - Apps registry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../konnectors/" title="/apps - Konnectors" class="md-nav__link">
+       /apps - Konnectors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../data-system/" title="/data - Data System" class="md-nav__link">
+      /data - Data System
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mango/" title="/data - Mango" class="md-nav__link">
+       /data - Mango
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../couchdb-quirks/" title="/data - CouchDB Quirks" class="md-nav__link">
+       /data - CouchDB Quirks
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../pouchdb-quirks/" title="/data - PouchDB Quirks" class="md-nav__link">
+       /data - PouchDB Quirks
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../files/" title="/files - Virtual File System" class="md-nav__link">
+      /files - Virtual File System
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../references-docs-in-vfs/" title="/files - References of documents in VFS" class="md-nav__link">
+       /files - References of documents in VFS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../intents/" title="/intents - Intents" class="md-nav__link">
+      /intents - Intents
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../jobs/" title="/jobs - Jobs" class="md-nav__link">
+      /jobs - Jobs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../workers/" title="/jobs - Workers" class="md-nav__link">
+       /jobs - Workers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../move/" title="/move - Move, export and import an instance" class="md-nav__link">
+      /move - Move, export and import an instance
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../notifications/" title="/notifications - Notifications" class="md-nav__link">
+      /notifications - Notifications
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../public/" title="/public - Public" class="md-nav__link">
+      /public - Public
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../permissions/" title="/permissions - Permissions" class="md-nav__link">
+      /permissions - Permissions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../realtime/" title="/realtime - Realtime" class="md-nav__link">
+      /realtime - Realtime
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../remote/" title="/remote - Proxy for remote data/API" class="md-nav__link">
+      /remote - Proxy for remote data/API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../settings/" title="/settings - Settings" class="md-nav__link">
+      /settings - Settings
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../user-action-required/" title="/settings - Terms of Services" class="md-nav__link">
+       /settings - Terms of Services
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../sharing/" title="/sharings - Sharing" class="md-nav__link">
+      /sharings - Sharing
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-app-publish/" title="cozy-app-publish" class="md-nav__link">
+      cozy-app-publish
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../babel-preset-cozy-app/" title="babel-preset-cozy-app" class="md-nav__link">
+      babel-preset-cozy-app
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../konitor/cli/" title="konitor" class="md-nav__link">
+      konitor
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-7" type="checkbox" id="nav-4-7">
+    
+    <label class="md-nav__link" for="nav-4-7">
+      cozy-doctypes
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-7">
+        cozy-doctypes
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/" title="README" class="md-nav__link">
+      README
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.accounts/" title="Accounts" class="md-nav__link">
+      Accounts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.apps/" title="Apps" class="md-nav__link">
+      Apps
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.bank/" title="Banking doctypes" class="md-nav__link">
+      Banking doctypes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.bills/" title="Bills" class="md-nav__link">
+      Bills
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.konnectors/" title="Connectors" class="md-nav__link">
+      Connectors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.contacts/" title="Contacts" class="md-nav__link">
+      Contacts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.files/" title="Files" class="md-nav__link">
+      Files
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.files_metadata/" title="Files metadata" class="md-nav__link">
+      Files metadata
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.identities/" title="Identities" class="md-nav__link">
+      Identities
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.notifications/" title="Notifications" class="md-nav__link">
+      Notifications
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.remote.requests/" title="Remote requests" class="md-nav__link">
+      Remote requests
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.sessions.logins/" title="Session logins" class="md-nav__link">
+      Session logins
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.permissions/" title="Permissions" class="md-nav__link">
+      Permissions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.photos.albums/" title="Photos Albums" class="md-nav__link">
+      Photos Albums
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.procedures/" title="Procedures" class="md-nav__link">
+      Procedures
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.sessions.logins/" title="Sessions Logins" class="md-nav__link">
+      Sessions Logins
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.settings/" title="Settings" class="md-nav__link">
+      Settings
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.sharings/" title="Sharings" class="md-nav__link">
+      Sharings
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.account_types/" title="Accounts Types" class="md-nav__link">
+      Accounts Types
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/cc.cozycloud.autocategorization/" title="Autocategorization" class="md-nav__link">
+      Autocategorization
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.exports/" title="Exports" class="md-nav__link">
+      Exports
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.jobs/" title="Jobs" class="md-nav__link">
+      Jobs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.oauth.clients/" title="OAuth Clients" class="md-nav__link">
+      OAuth Clients
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.oauth.access_codes/" title="OAuth Access Codes" class="md-nav__link">
+      OAuth Access Codes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.triggers/" title="Triggers" class="md-nav__link">
+      Triggers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.triggers.state/" title="Triggers state" class="md-nav__link">
+      Triggers state
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.remote.requests/" title="Remote requests" class="md-nav__link">
+      Remote requests
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.sessions/" title="Sessions" class="md-nav__link">
+      Sessions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.shared/" title="Shared" class="md-nav__link">
+      Shared
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.terms/" title="Terms" class="md-nav__link">
+      Terms
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/com.unibet.bets/" title="Bets Unibet" class="md-nav__link">
+      Bets Unibet
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-ui/" title="cozy-ui" class="md-nav__link">
+      cozy-ui
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-device-helper/" title="cozy-device-helper" class="md-nav__link">
+      cozy-device-helper
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-10" type="checkbox" id="nav-4-10">
+    
+    <label class="md-nav__link" for="nav-4-10">
+      cozy-client
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-10">
+        cozy-client
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client/getting-started/" title="Getting started" class="md-nav__link">
+      Getting started
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client/relationships/" title="Using relationship" class="md-nav__link">
+      Using relationship
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client/metadata/" title="cozyMetadata maintenance" class="md-nav__link">
+      cozyMetadata maintenance
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client/react-integration/" title="React integration" class="md-nav__link">
+      React integration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client/details/" title="Other details" class="md-nav__link">
+      Other details
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client/api/cozy-client/" title="Cozy Client API" class="md-nav__link">
+      Cozy Client API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client/api/cozy-pouch-link/" title="Cozy Pouch Link API" class="md-nav__link">
+      Cozy Pouch Link API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client/api/cozy-stack-client/" title="Cozy Stack Client API" class="md-nav__link">
+      Cozy Stack Client API
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-realtime/" title="cozy-realtime" class="md-nav__link">
+      cozy-realtime
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-12" type="checkbox" id="nav-4-12">
+    
+    <label class="md-nav__link" for="nav-4-12">
+      cozy-konnector-libs
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-12">
+        cozy-konnector-libs
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-konnector-libs/api/" title="API" class="md-nav__link">
+      API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-konnector-libs/cli/" title="CLI" class="md-nav__link">
+      CLI
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-konnector-libs/dev/" title="Develop" class="md-nav__link">
+      Develop
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-konnector-libs/errors/" title="Errors" class="md-nav__link">
+      Errors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-konnector-libs/operation-linking/" title="Operation linking" class="md-nav__link">
+      Operation linking
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-konnector-libs/synchronization/" title="Synchronization" class="md-nav__link">
+      Synchronization
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-apps-registry/" title="cozy-apps-registry" class="md-nav__link">
+      cozy-apps-registry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-flags/" title="cozy-flags" class="md-nav__link">
+      cozy-flags
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-15" type="checkbox" id="nav-4-15">
+    
+    <label class="md-nav__link" for="nav-4-15">
+      cozy-client-js
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-15">
+        cozy-client-js
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/" title="README" class="md-nav__link">
+      README
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/intro/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/browser-sdk-transition/" title="Transition from cozy-browser-sdk" class="md-nav__link">
+      Transition from cozy-browser-sdk
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/offline/" title="How to support offline" class="md-nav__link">
+      How to support offline
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/oauth/" title="OAuth guide" class="md-nav__link">
+      OAuth guide
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/auth-api/" title="Authentication API" class="md-nav__link">
+      Authentication API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/data-api/" title="Data System API" class="md-nav__link">
+      Data System API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/files-api/" title="Files API" class="md-nav__link">
+      Files API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/jobs-api/" title="Jobs API" class="md-nav__link">
+      Jobs API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/intents-api/" title="Intents API" class="md-nav__link">
+      Intents API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/settings-api/" title="Settings API" class="md-nav__link">
+      Settings API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/sharing-api/" title="Sharing API" class="md-nav__link">
+      Sharing API
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#hypothesis" title="Hypothesis" class="md-nav__link">
+    Hypothesis
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup-of-a-sharing" title="Setup of a sharing" class="md-nav__link">
+    Setup of a sharing
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-the-owner-creates-the-sharing" title="Step 1: the owner creates the sharing" class="md-nav__link">
+    Step 1: the owner creates the sharing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-a-recipient-accepts-the-sharing" title="Step 2: a recipient accepts the sharing" class="md-nav__link">
+    Step 2: a recipient accepts the sharing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-the-initial-replication-starts" title="Step 3: the initial replication starts" class="md-nav__link">
+    Step 3: the initial replication starts
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#workflow" title="Workflow" class="md-nav__link">
+    Workflow
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#files-and-folders" title="Files and folders" class="md-nav__link">
+    Files and folders
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-are-they-special" title="Why are they special?" class="md-nav__link">
+    Why are they special?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-a-sharing-involving-files-works" title="How a sharing involving files works?" class="md-nav__link">
+    How a sharing involving files works?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sequence-diagram" title="Sequence diagram" class="md-nav__link">
+    Sequence diagram
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conflict-resolution" title="Conflict resolution" class="md-nav__link">
+    Conflict resolution
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conflict-with-no-reconciliation" title="Conflict with no reconciliation" class="md-nav__link">
+    Conflict with no reconciliation
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-1" title="Example 1" class="md-nav__link">
+    Example 1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-2" title="Example 2" class="md-nav__link">
+    Example 2
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#schema" title="Schema" class="md-nav__link">
+    Schema
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#description-of-a-sharing" title="Description of a sharing" class="md-nav__link">
+    Description of a sharing
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-i-want-to-share-a-folder-in-readwrite-mode" title="Example: I want to share a folder in read/write mode" class="md-nav__link">
+    Example: I want to share a folder in read/write mode
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-i-want-to-share-a-playlist-where-im-the-only-one-that-can-add-and-remove-items" title="Example: I want to share a playlist where I’m the only one that can add and remove items" class="md-nav__link">
+    Example: I want to share a playlist where I’m the only one that can add and remove items
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iocozyshared" title="io.cozy.shared" class="md-nav__link">
+    io.cozy.shared
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/cozy/cozy.github.io/edit/dev/src/cozy-stack/sharing-design.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="request-for-comments-about-the-sharings">Request for comments about the sharings<a class="headerlink" href="#request-for-comments-about-the-sharings" title="Permanent link">&para;</a></h1>
+<h2 id="hypothesis">Hypothesis<a class="headerlink" href="#hypothesis" title="Permanent link">&para;</a></h2>
+<ol>
+<li>A sharer may not know the adresses of the recipients&rsquo; cozy instances, but
+   he/she has a way to send them an URL on his/her cozy to start the process.</li>
+<li>A user can preview a sharing before accepting it if the application supports
+   this option. Else, he/she will have only the description and rules to make
+   his/her mind about accepting or refusing the sharing.</li>
+<li>The data is duplicated: it is both on the owner&rsquo;s cozy, and on the
+   recipients&rsquo; cozy (no cloud federation like NextCloud).</li>
+<li>The applications say what is shared, the stack synchronizes that. The stack
+   does the low-level stuff and gives primitives to the applications. The
+   applications must use them in a responsible manner, and in particular, to
+   avoid transitivity issues.</li>
+<li>The CouchDB replication will be used to synchronize the documents. It means
+   that the documents will be same on the owner and on the recipients (&ldquo;symetric
+   sharing&rdquo;).</li>
+<li>For files and folders, the replicator will be customized to handle the
+   specificities of the <code>io.cozy.files</code> doctype.</li>
+<li>The applications must be able to work with broken relationships between
+   documents.</li>
+<li>The applications should know how to deal with CouchDB conflicts. At least,
+   the default choice of a winner for conflicts by CouchDB should be acceptable
+   if the applications don&rsquo;t do anything to detect and resolve conflicts.</li>
+<li>First safety principle: when a user B accepts a sharing from user A, the
+   documents that were on the user B&rsquo;s cozy before the sharing are not sent to
+   user A without an explicit action of user B (like moving a file to a shared
+   directory).</li>
+<li>Second safety principle: when two users, A and B, are sharing documents, a
+    change of a document on the user A&rsquo;s cozy can&rsquo;t make an exiting document of
+    user B enter in the sharing.</li>
+</ol>
+<h2 id="setup-of-a-sharing">Setup of a sharing<a class="headerlink" href="#setup-of-a-sharing" title="Permanent link">&para;</a></h2>
+<h3 id="step-1-the-owner-creates-the-sharing">Step 1: the owner creates the sharing<a class="headerlink" href="#step-1-the-owner-creates-the-sharing" title="Permanent link">&para;</a></h3>
+<p>One person decides to share something with other people from an application on
+her cozy. In our example, Alice wants to share a todo list with her friends, Bob
+and Charlie, and it is done from the <em>Todo</em> application. The application calls
+the stack with the rules for this sharing and the identifiers of the contacts
+with whom to share. The stack persists an <code>io.cozy.sharings</code> document and sends
+an email to the recipients (Bob an Charlie).</p>
+<h3 id="step-2-a-recipient-accepts-the-sharing">Step 2: a recipient accepts the sharing<a class="headerlink" href="#step-2-a-recipient-accepts-the-sharing" title="Permanent link">&para;</a></h3>
+<p>A recipient, let’s say Bob, receives the email and clicks on the link. His
+browser shows him the <em>Todo</em> application on Alice’s Cozy so that he can preview
+the todo list, and a modal asks him if he wants to continue the sharing
+acceptation workflow. If he does, a form will ask him what is the address of his
+Cozy (the form can be pre-filled if he has already accepted another sharing in
+the past). After he has filled the form and submitted it, he is redirected on
+his Cozy. If he is not logged in, he has to login first. Then, a page describes
+him how the sharing will work and what technical permissions it implies. It also
+asks him to confirm the sharing. If he accepts, his instance will send to
+Alice’s instance the answer.</p>
+<h3 id="step-3-the-initial-replication-starts">Step 3: the initial replication starts<a class="headerlink" href="#step-3-the-initial-replication-starts" title="Permanent link">&para;</a></h3>
+<p>Alice’s Cozy instance creates token and sends them with other informations as
+the response of the answer request from Bob’s instance. At this moment, both
+instances are ready to start to replicate data to the other instances. So, let’s
+do the initial replication.</p>
+<p>Alice’s instance starts to fill the <code>io.cozy.shared</code> database with all the
+documents that match a rule of the sharing (except the rules with
+<code>local: true</code>), and create triggers for the future documents to be also added in
+this database (the exact triggers depend of the parameters of the rules). And,
+when done, it creates a job for the replicator, and setups a trigger for future
+changes in the <code>io.cozy.shared</code> start a replicator job.</p>
+<p>Bob’s instance also checks if any document matches a sharing rule. In most
+cases, it won’t. But in some very special cases (e.g. a previous revoked sharing
+on the same documents), there are some documents that match a rule. They are
+added to the <code>io.cozy.shared</code> database, but with a <code>conflict</code> flag. They won’t
+be replicated unless Bob accepts to in his <em>Todo</em> application. Triggers are also
+added on Bob’s instance for filling the <code>io.cozy.shared</code> database, and to call
+the replicator after that.</p>
+<p><strong>Note:</strong> there will be a lock around the initial filling of the
+<code>io.cozy.shared</code> database to avoid concurrency issues if two recipients accept
+the sharing at the same time.</p>
+<h2 id="workflow">Workflow<a class="headerlink" href="#workflow" title="Permanent link">&para;</a></h2>
+<p><img alt="Alice has shared a todo-list with Bob and Charlie, and Bob has added an item to this todo-list" src="../diagrams/sharing.png" /></p>
+<p><strong>Step 1:</strong> a todo item is added on Bob’s Cozy, a trigger is fired and it adds
+the new document to the <code>io.cozy.shared</code> database</p>
+<p><strong>Step 2:</strong> a debounced trigger on the <code>io.cozy.shared</code> database is used to
+start a replicator</p>
+<p><strong>Step 3:</strong> the replicator does the following steps</p>
+<ul>
+<li>it queries a local document of the <code>io.cozy.shared</code> database to get the last
+    sequence number of a successful replication</li>
+<li>with this sequence number, it requests the changes feed of <code>io.cozy.shared</code>
+    with a filter on the sharing id</li>
+<li>the results is a list of document doctype + id + rev that is sent to Alice’s
+    Cozy</li>
+<li>Alice’s Cozy checks which revisions are known, and send a response with the
+    list of those that are not</li>
+<li>for each not known revision, Bob’s Cozy send the document to Alice’s Cozy
+    (in bulk)</li>
+<li>and, if it’s all good, it persists the new sequence number in the local
+    document, as a start point for the next replication</li>
+</ul>
+<p><strong>Step 4:</strong> the changes are put in the <code>io.cozy.shared</code> database on Alice’s Cozy</p>
+<p><strong>Step 5:</strong> it starts a replicator on Alice’s Cozy</p>
+<p><strong>Step 6:</strong> the replicator send the changes to Charlie’s Cozy, all the cozy
+instances are synchronized again!</p>
+<p><strong>Note:</strong> when a todo item is moved fron a shared todo list to a not shared todo
+list, the document in <code>io.cozy.shared</code> for the todo item is kept, and the
+sharing id is associated to the keyword <code>removed</code> inside it. The <code>remove</code>
+behavior of the sharing rule is then applied.</p>
+<h2 id="files-and-folders">Files and folders<a class="headerlink" href="#files-and-folders" title="Permanent link">&para;</a></h2>
+<h3 id="why-are-they-special">Why are they special?<a class="headerlink" href="#why-are-they-special" title="Permanent link">&para;</a></h3>
+<p>Files are special for several reasons. First and foremost, they have a binary
+attached to them that can be quite heavy. The stack also enforces some rules on
+them (e.g. a file can’t be added to a deleted folder) and has some specific code
+for the tree nature of files and folders (e.g. a permission on a folder is
+inherited on all the files and folders inside it, even if they are several
+levels below). Thus, the workflow explained just before is not compatible with
+the files.</p>
+<p>As we need to introduce some code specific to the files, we have also wanted to
+improve the sharing of files. First, we don’t want to force the recipients to
+put the shared folder at exactly the same place as the owner. In fact, we think
+that putting the shared folder in a folder called <code>Shared with me</code> is more
+friendly. We also think that a file that has been shared in the past but is no
+longer (the sharing has been revoked) can evolve on both the owner’s cozy and on
+the recipients’ cozy in different ways, and in such a case, it’s more logical to
+consider them as different files. These two reasons implies, on a technical
+level, that the identifiers for files and folders are not the same on the owner
+and the recipients of a sharing. The replicator will translate the identifiers
+from one system to another during the replications. Of course, it will also
+translate the <code>id</code> in the sharing rules, and the <code>dir_id</code> to preserve the
+relationship between a file and its parent folder. The <code>path</code> attribute will be
+seen as a cache, and recomputed when a cozy instance receives a folder document
+from a sharing replication.</p>
+<p>We will continue to have a replication as close to the CouchDB replication as
+possible. It means we synchronize a state, and not looking for the history of
+operations like cozy-desktop does. It is less accurate and can lead more often
+to conflicts. The cozy instances are expected to be online most of the time and
+have a short delay for replications: we think that the conflicts will happen
+only on rares occasions. This make acceptable to take this shortcut. And, in
+case of conflicts, we will preserve the content of the files (no data loss),
+even if it means duplicating the files.</p>
+<h3 id="how-a-sharing-involving-files-works">How a sharing involving files works?<a class="headerlink" href="#how-a-sharing-involving-files-works" title="Permanent link">&para;</a></h3>
+<p>When a sharing involves a rule on the <code>io.cozy.files</code> doctype, a folder is
+created on the recipients cozy where the files will be put. It is created inside
+the <code>Shared with me</code> folder by default, but can be moved somewhere else after
+that. The folder won’t be synchronized its-self later, and if the folder is
+trashed, the sharing is automatically revoked. As it is not a reversible action,
+a confirmation is asked before doing that.</p>
+<p><strong>Note:</strong> we will forbid the sharing of the root of the virtual file system, of
+the trash and trashed files/folders, and of the <code>Shared with me</code> folder.</p>
+<p>The step 3 described above, aka the replicator, will be more complicated for
+folders and files. First change, it will work on two phases: 1. what can be
+synchronized without transfering the binaries first, and 2. the synchronization
+of files with a binary attached. Second change, the replicator will acquire the
+Virtual File System lock on the cozy instance where it will write things to
+ensure the consistency of what it writes. Third change, before inserting a
+folder or file in the database, the replicator checks that its parent exists,
+and if it’s not the case, it creates it. Last change, we will avoid CouchDB
+conflicts for files and folder by using a special conflict resolution process.</p>
+<h3 id="sequence-diagram">Sequence diagram<a class="headerlink" href="#sequence-diagram" title="Permanent link">&para;</a></h3>
+<p><img alt="Replicator and upload" src="../diagrams/replicator.png" /></p>
+<h3 id="conflict-resolution">Conflict resolution<a class="headerlink" href="#conflict-resolution" title="Permanent link">&para;</a></h3>
+<p>We have several cases of conflicts:</p>
+<ol>
+<li>When two cozy instances have modified the same file concurrently</li>
+<li>Same for a folder</li>
+<li>When two files or folders are renamed concurrently to the same name inside
+   the same directory</li>
+<li>When a file or folder is created or updated on cozy instance while the parent
+   directory is trashed concurrently on another cozy instance.</li>
+</ol>
+<p>For 1. and 2., we will reconciliate the changes except for a file with two
+versions having a distinct binary (we rely on <code>size</code> and <code>checksum</code> to detect
+that). In such a case, we create a copy of the file with one version, while
+keeping the other version in the original file.</p>
+<p>For 3., we rename the file or folder with the smaller <code>id</code>.</p>
+<p>For 4., we restore the trashed parent, or recreate it if it the trash was
+emptied.</p>
+<h3 id="conflict-with-no-reconciliation">Conflict with no reconciliation<a class="headerlink" href="#conflict-with-no-reconciliation" title="Permanent link">&para;</a></h3>
+<p>When a file is modified concurrently on two cozy instances, and at least one
+change involve the content, we can&rsquo;t reconciliate the modifications. To know
+which version of the file is the &ldquo;winner&rdquo; and will keep the same identifier, and
+which version is the &ldquo;loser&rdquo; and will have a new identifier, we compare the
+revisions and the higher wins.</p>
+<p>This conflict is particulary tricky to resolve, with a lot of subcases. In
+particular, we try to converge to the same revisions on all the instances for
+the &ldquo;winner&rdquo; file (and for the &ldquo;loser&rdquo; too).</p>
+<p>We have 3 sets of attributes for files:</p>
+<ul>
+<li><code>size</code> and <code>md5sum</code> (they change when the content has changed)</li>
+<li><code>name</code> and <code>dir_id</code> (they change when the file is moved or renamed)</li>
+<li><code>created_at</code>, <code>updated_at</code>, <code>tags</code>, <code>referenced_by</code>, etc.</li>
+</ul>
+<p>For the first two sets, the operation on the Virtual File System will needs to
+reach the storage (Swift), not just CouchDB. For the third set, it&rsquo;s easy: we
+can do the change at the same time as another change, because these attributes
+are only used in CouchDB. But we can&rsquo;t do a change on the first two sets at the
+same time: the Virtual File System can&rsquo;t update the content and move/rename a
+file in the same operation. If we needs to do both, it will generate 2 revisions
+in CouchDB for the file.</p>
+<p><strong>Note:</strong> you can see that using CouchDB-like replication protocol means that we
+have some replications that can look useless, just some echo to a writing. In
+fact, it is used to acknowledge the writing and is helpful for conflict
+resolutions. It may be conter-intuitive, but removing them will harm the
+stability of the system, even if they do nothing most of the time.</p>
+<h4 id="example-1">Example 1<a class="headerlink" href="#example-1" title="Permanent link">&para;</a></h4>
+<p><img alt="File is renamed on both instance" src="../diagrams/files-conflict-1.png" /></p>
+<p>Here, Alice uploads a file on her Cozy. It creates two revisions for this file
+(it&rsquo;s what the Virtual File System does). Then, she shares the directory with
+this file to her friend Bob. When Bob accepts the sharing, the file is sent to
+his Cozy, with the same revision (2-2aa).</p>
+<p>Later, Bob renames the file. It creates a new revision (3-3aa). The change is
+replicated to Alice&rsquo;s Cozy. And we have a replication from Alice to Bob to
+ensure that every thing is fine.</p>
+<p>Even later, Alice and Bob both renames the file at the same time. It creates a
+conflict. We have a first replication (from Alice to Bob), but nothing happens
+on B because the local revision (4-4bb) is greater than the candidate revision
+(4-4aa) and the content is the same.</p>
+<p>Just after that, we have a revision on the opposite direction (from Bob to
+Alice). The candidate revision wins (4-4bb), but for files, we don&rsquo;t use CouchDB
+conflict, thus it&rsquo;s not possible to write a new revision at the same generation
+(4). The only option is to create a new revision (5-5bb). This revision is then
+sent to Bob: Bob&rsquo;s Cozy accepts the new revision even if it has no effect on the
+file (it was already the good name), just to resolve the conflict.</p>
+<h4 id="example-2">Example 2<a class="headerlink" href="#example-2" title="Permanent link">&para;</a></h4>
+<p><img alt="A difficult conflict" src="../diagrams/files-conflict-2.png" /></p>
+<p>Like in the last example, Alice uploads a file and share a directory to Bob with
+this file, Bob acccepts. But then, several actions are made on the file in a
+short lapse of time and it generates a difficult conflict:</p>
+<ul>
+<li>Alice renames the file, and then uploads a new version with cozy-desktop</li>
+<li>Bob moves the file to a sub-directory.</li>
+</ul>
+<p>So, when the replication comes, we have two versions of the file with different
+name, parent directory, and content. The winner is the higher revision (4-4aa).
+The resolution takes 4 steps:</p>
+<ol>
+<li>A copy of the file is created from the revision 3-3bb, with the new
+   identifier id2 = XorID(id, 3-3bb).</li>
+<li>The new content is written on Bob&rsquo;s Cozy: we can&rsquo;t use the revisions 3-3aa
+   (same generation as 3-3bb) and 4-4aa (it will mean the conflict is fixed, but
+   it&rsquo;s not the case, the filenames are still different), so a new revision is
+   used (4-4cc).</li>
+<li>The file is moved and renamed on Bob&rsquo;s Cozy, with a next revision (5-5bb).</li>
+<li>The two files are sent to Alice&rsquo;s Cozy: 5-5bb is accepted just to resolve the
+   conflict, and id2 is uploaded as a new file.</li>
+</ol>
+<h2 id="schema">Schema<a class="headerlink" href="#schema" title="Permanent link">&para;</a></h2>
+<h3 id="description-of-a-sharing">Description of a sharing<a class="headerlink" href="#description-of-a-sharing" title="Permanent link">&para;</a></h3>
+<ul>
+<li>An identifier (the same for all members of the sharing)</li>
+<li>A list of <code>members</code>. The first one is the owner. For each member, we have
+    the URL of the cozy, a contact name, a public name, an email, a status, a
+    read-only flag, and some credentials to authorize the transfer of data
+    between the owner and the recipients</li>
+<li>
+<p>A <code>description</code> (one sentence that will help people understand what is
+    shared and why)</p>
+</li>
+<li>
+<p>a flag <code>active</code> that says if the sharing is currently active for at least
+    one member</p>
+</li>
+<li>
+<p>a flag <code>owner</code>, true for the document on the cozy of the sharer, and false
+    on the other cozy instance</p>
+</li>
+<li>
+<p>a flag <code>open_sharing</code>:</p>
+<ul>
+<li><code>true</code> if any member of the sharing except the read-only ones can add a
+    new recipient</li>
+<li><code>false</code> if only the owner can add a new recipient</li>
+</ul>
+</li>
+<li>Some technical data (<code>created_at</code>, <code>updated_at</code>, <code>app_slug</code>, <code>preview_path</code>,
+    <code>triggers</code>, <code>credentials</code>)</li>
+<li>a number of files to synchronize for the initial sync,
+    <code>initial_number_of_files_to_sync</code> (if there are no files to sync or the
+    initial replication has finished, the field won&rsquo;t be here)</li>
+<li>A list of sharing <code>rules</code>, each rule being composed of:<ul>
+<li>a <code>title</code>, that will be displayed to the recipients before they accept
+    the sharing</li>
+<li>a <code>doctype</code></li>
+<li>a <code>selector</code> (by default, it’s the <code>id</code>) and <code>values</code> (one identifier, a
+    list of identifiers, files and folders inside a folder, files that are
+    referenced by the same document, documents bound to a previous sharing
+    rule)</li>
+<li><code>local</code>: by default <code>false</code>, but it can be <code>true</code> for documents that are
+    useful for the preview page but doesn’t need to be send to the
+    recipients (e.g. a setting document of the application)</li>
+<li><code>add</code>: a behavior when a new document matches this rule (the document is
+    created, or it was a document that didn’t match the rule and is modified
+    and the new version matches the rule):<ul>
+<li><code>none</code>: the updates are never propagated (the default)</li>
+<li><code>push</code>: the updates made on the owner are sent to the recipients</li>
+<li><code>sync</code>: the updates on any member (except the read-only) are
+    propagated to the other members</li>
+</ul>
+</li>
+<li><code>update</code>: a behavior when a document matched by this rule is modified.
+    Can be:<ul>
+<li><code>none</code>: the updates are never propagated (the default)</li>
+<li><code>push</code>: the updates made on the owner are sent to the recipients</li>
+<li><code>sync</code>: the updates on any member (except the read-only) are
+    propagated to the other members</li>
+</ul>
+</li>
+<li><code>remove</code>: a behavior when a document no longer matches this rule (the
+    document is deleted, or it was a document that matched the rule, and is
+    modified and the new version doesn’t match the rule):<ul>
+<li><code>none</code>: the updates are never propagated (the default)</li>
+<li><code>push</code>: the updates made on the owner are sent to the recipients</li>
+<li><code>sync</code>: the updates on any member (except the read-only) are
+    propagated to the other members</li>
+<li><code>revoke</code>: the sharing is revoked.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="example-i-want-to-share-a-folder-in-readwrite-mode">Example: I want to share a folder in read/write mode<a class="headerlink" href="#example-i-want-to-share-a-folder-in-readwrite-mode" title="Permanent link">&para;</a></h4>
+<ul>
+<li>rule 1<ul>
+<li>title: <code>folder</code></li>
+<li>doctype: <code>io.cozy.files</code></li>
+<li>values: <code>"ca527016-0d83-11e8-a580-3b965c80c7f7"</code></li>
+<li>add: <code>sync</code></li>
+<li>update: <code>sync</code></li>
+<li>remove: <code>sync</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="example-i-want-to-share-a-playlist-where-im-the-only-one-that-can-add-and-remove-items">Example: I want to share a playlist where I’m the only one that can add and remove items<a class="headerlink" href="#example-i-want-to-share-a-playlist-where-im-the-only-one-that-can-add-and-remove-items" title="Permanent link">&para;</a></h4>
+<ul>
+<li>rule 1<ul>
+<li>title: <code>playlist</code></li>
+<li>doctype: <code>io.cozy.music.playlists</code></li>
+<li>values: <code>"99445b14-0d84-11e8-ae72-4b96fcbf0552"</code></li>
+<li>update: <code>none</code></li>
+<li>remove: <code>revoke</code></li>
+</ul>
+</li>
+<li>rule 2<ul>
+<li>title: <code>items</code></li>
+<li>doctype: <code>io.cozy.files</code></li>
+<li>selector: <code>referenced_by</code></li>
+<li>values: <code>"io.cozy.files/ca527016-0d83-11e8-a580-3b965c80c7f7"</code></li>
+<li>add: <code>push</code></li>
+<li>update: <code>none</code></li>
+<li>remove: <code>push</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="iocozyshared"><code>io.cozy.shared</code><a class="headerlink" href="#iocozyshared" title="Permanent link">&para;</a></h3>
+<p>This doctype is an internal one for the stack. It is used to track what
+documents are shared, and to replicate changes from one Cozy to the others.</p>
+<ul>
+<li><code>_id</code>: its identifier is the doctype and id of the referenced objet,
+    separated by a <code>/</code> (e.g.
+    <code>io.cozy.contacts/c1f5dae4-0d87-11e8-b91b-1f41c005768b</code>)</li>
+<li><code>_rev</code>: the CouchDB default revision for this document (not very meaningful,
+    it’s here to avoid concurrency issues)</li>
+<li><code>revisions</code>: a tree with the last known <code>_rev</code>s of the referenced object</li>
+<li><code>infos</code>, a map of sharing ids → <code>{rule, removed, binary}</code><ul>
+<li><code>rule</code> says which rule from the sharing must be applied for this
+    document</li>
+<li><code>removed</code> will be true for a deleted document, a trashed file, or if the
+    document does no longer match the sharing rule</li>
+<li><code>binary</code> is a boolean flag that is true only for files (and not even
+    folders) with <code>removed: false</code></li>
+</ul>
+</li>
+</ul>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../CONTRIBUTING/" title="The contributing guide" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                The contributing guide
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../konnectors-workflow/" title="Workflow of the konnectors" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Workflow of the konnectors
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.245445c6.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="../../extra.js"></script>
+      
+    
+  </body>
+</html>

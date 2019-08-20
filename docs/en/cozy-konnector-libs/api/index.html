@@ -1,0 +1,4868 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Cozy documentation">
+      
+      
+        <link rel="canonical" href="https://docs.cozy.io/cozy-konnector-libs/api/">
+      
+      
+        <meta name="author" content="CozyCloud - https://cozy.io">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[^a-zа-яё0-9\-]">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.0">
+    
+    
+      
+        <title>API - Cozy Developer Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.0284f74d.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.01803549.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#2196f3">
+      
+    
+    
+    
+      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
+    
+    <script type="text/javascript">
+        // Used in extra.js, we have to define the variable here since
+        // we need access to the "config" jinja variable
+        window.outsideDocs = [{"repo": "https://github.com/cozy/cozy-app-publish.git", "name": "cozy-app-publish", "subdir": "."}, {"repo": "https://github.com/cozy/cozy-apps-registry.git", "name": "cozy-apps-registry", "subdir": "."}, {"repo": "https://github.com/cozy/cozy-client.git", "name": "cozy-client", "subdir": "docs"}, {"repo": "https://github.com/cozy/cozy-client-js.git", "name": "cozy-client-js", "subdir": "docs"}, {"repo": "https://github.com/cozy/cozy-ui.git", "name": "cozy-ui", "subdir": "docs"}, {"repo": "https://github.com/cozy/cozy-doctypes.git", "name": "cozy-doctypes", "subdir": "."}, {"repo": "https://github.com/konnectors/libs.git", "name": "cozy-konnector-libs", "subdir": "packages/cozy-konnector-libs/docs"}, {"repo": "https://github.com/CPatchane/create-cozy-app.git", "name": "cozy-scripts", "subdir": "packages/cozy-scripts/docs"}, {"repo": "https://github.com/cozy/cozy-stack.git", "name": "cozy-stack", "subdir": "docs"}, {"repo": "https://github.com/konnectors/konitor.git", "name": "konitor", "subdir": "docs"}, {"repo": "https://github.com/cozy/cozy-libs.git", "name": "babel-preset-cozy-app", "subdir": "packages/babel-preset-cozy-app"}, {"repo": "https://github.com/cozy/cozy-libs.git", "name": "commitlint-config-cozy", "subdir": "packages/commitlint-config-cozy"}, {"repo": "https://github.com/cozy/cozy-libs.git", "name": "cozy-device-helper", "subdir": "packages/cozy-device-helper"}, {"repo": "https://github.com/cozy/cozy-libs.git", "name": "eslint-config-cozy-app", "subdir": "packages/eslint-config-cozy-app"}, {"repo": "https://github.com/cozy/cozy-libs.git", "name": "cozy-flags", "subdir": "packages/cozy-flags"}, {"repo": "https://github.com/cozy/cozy-libs.git", "name": "cozy-realtime", "subdir": "packages/cozy-realtime"}]
+    </script>
+
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Ubuntu+Mono&display=fallback">
+        <style>body,input{font-family:"Lato","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Ubuntu Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="blue" data-md-color-accent="blue">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#api" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://docs.cozy.io/" title="Cozy Developer Documentation" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon">cloud</i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              Cozy Developer Documentation
+            </span>
+            <span class="md-header-nav__topic">
+              
+                API
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/cozy/cozy.github.io/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://docs.cozy.io/" title="Cozy Developer Documentation" class="md-nav__button md-logo">
+      
+        <i class="md-icon">cloud</i>
+      
+    </a>
+    Cozy Developer Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/cozy/cozy.github.io/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Tutorials
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Tutorials
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/app/" title="Create Your Application" class="md-nav__link">
+      Create Your Application
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/konnector/" title="Develop a Connector" class="md-nav__link">
+      Develop a Connector
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/selfhost-debian/" title="Self-Host on Debian" class="md-nav__link">
+      Self-Host on Debian
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      How-to
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        How-to
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-1" type="checkbox" id="nav-3-1">
+    
+    <label class="md-nav__link" for="nav-3-1">
+      Dev
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-1">
+        Dev
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../howTos/dev/runCozyDocker/" title="Run an App in a Cozy using Docker" class="md-nav__link">
+      Run an App in a Cozy using Docker
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../howTos/dev/hmr/" title="Use Hot Module Replacement in Your App" class="md-nav__link">
+      Use Hot Module Replacement in Your App
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../howTos/dev/cordova/" title="Make a Mobile App Using Cordova" class="md-nav__link">
+      Make a Mobile App Using Cordova
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../howTos/dev/connect-mobile-app-local-stack/" title="Connect a Mobile App to Your Local Stack" class="md-nav__link">
+      Connect a Mobile App to Your Local Stack
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../howTos/dev/sendmail/" title="Send and Receive E-mails in Development" class="md-nav__link">
+      Send and Receive E-mails in Development
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../references/git-flow/" title="Our Front-End Git Flow" class="md-nav__link">
+      Our Front-End Git Flow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../references/tech-intro/" title="Technical introduction to the Cozy platform" class="md-nav__link">
+      Technical introduction to the Cozy platform
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-2" type="checkbox" id="nav-3-2">
+    
+    <label class="md-nav__link" for="nav-3-2">
+      Synchronize
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-2">
+        Synchronize
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../howTos/sync/linux/" title="Install Cozy Drive on GNU/Linux" class="md-nav__link">
+      Install Cozy Drive on GNU/Linux
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
+    
+    <label class="md-nav__link" for="nav-4">
+      Stack and tools
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Stack and tools
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../eslint-config-cozy-app/" title="eslint-config-cozy-app" class="md-nav__link">
+      eslint-config-cozy-app
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../commitlint-config-cozy/" title="commitlint-config-cozy" class="md-nav__link">
+      commitlint-config-cozy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3" type="checkbox" id="nav-4-3">
+    
+    <label class="md-nav__link" for="nav-4-3">
+      cozy-stack
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-3">
+        cozy-stack
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/" title="README" class="md-nav__link">
+      README
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-2" type="checkbox" id="nav-4-3-2">
+    
+    <label class="md-nav__link" for="nav-4-3-2">
+      Usage
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-3-2">
+        Usage
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/INSTALL/" title="Install the cozy-stack" class="md-nav__link">
+      Install the cozy-stack
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/config/" title="Configuration file" class="md-nav__link">
+      Configuration file
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/instance/" title="Managing Instances" class="md-nav__link">
+      Managing Instances
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/security/" title="Security" class="md-nav__link">
+      Security
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/cli/cozy-stack/" title="Manpages of the command-line tool" class="md-nav__link">
+      Manpages of the command-line tool
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-3" type="checkbox" id="nav-4-3-3">
+    
+    <label class="md-nav__link" for="nav-4-3-3">
+      How-to guides for developpers
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-3-3">
+        How-to guides for developpers
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/client-app-dev/" title="Develop a client-side app" class="md-nav__link">
+      Develop a client-side app
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/docker/" title="Running and building Docker images" class="md-nav__link">
+      Running and building Docker images
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/doctype/" title="Adding a new doctype" class="md-nav__link">
+      Adding a new doctype
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/assets/" title="Working with the stack assets" class="md-nav__link">
+      Working with the stack assets
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/release/" title="Build a release" class="md-nav__link">
+      Build a release
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/CONTRIBUTING/" title="The contributing guide" class="md-nav__link">
+      The contributing guide
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-4" type="checkbox" id="nav-4-3-4">
+    
+    <label class="md-nav__link" for="nav-4-3-4">
+      Explanations
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-3-4">
+        Explanations
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/sharing-design/" title="Sharing design" class="md-nav__link">
+      Sharing design
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/konnectors-workflow/" title="Workflow of the konnectors" class="md-nav__link">
+      Workflow of the konnectors
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-5" type="checkbox" id="nav-4-3-5">
+    
+    <label class="md-nav__link" for="nav-4-3-5">
+      List of services
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-3-5">
+        List of services
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/auth/" title="/auth - Authentication & OAuth" class="md-nav__link">
+      /auth - Authentication & OAuth
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/apps/" title="/apps - Applications Management" class="md-nav__link">
+      /apps - Applications Management
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/registry/" title="/apps - Apps registry" class="md-nav__link">
+       /apps - Apps registry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/konnectors/" title="/apps - Konnectors" class="md-nav__link">
+       /apps - Konnectors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/data-system/" title="/data - Data System" class="md-nav__link">
+      /data - Data System
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/mango/" title="/data - Mango" class="md-nav__link">
+       /data - Mango
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/couchdb-quirks/" title="/data - CouchDB Quirks" class="md-nav__link">
+       /data - CouchDB Quirks
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/pouchdb-quirks/" title="/data - PouchDB Quirks" class="md-nav__link">
+       /data - PouchDB Quirks
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/files/" title="/files - Virtual File System" class="md-nav__link">
+      /files - Virtual File System
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/references-docs-in-vfs/" title="/files - References of documents in VFS" class="md-nav__link">
+       /files - References of documents in VFS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/intents/" title="/intents - Intents" class="md-nav__link">
+      /intents - Intents
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/jobs/" title="/jobs - Jobs" class="md-nav__link">
+      /jobs - Jobs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/workers/" title="/jobs - Workers" class="md-nav__link">
+       /jobs - Workers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/move/" title="/move - Move, export and import an instance" class="md-nav__link">
+      /move - Move, export and import an instance
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/notifications/" title="/notifications - Notifications" class="md-nav__link">
+      /notifications - Notifications
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/public/" title="/public - Public" class="md-nav__link">
+      /public - Public
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/permissions/" title="/permissions - Permissions" class="md-nav__link">
+      /permissions - Permissions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/realtime/" title="/realtime - Realtime" class="md-nav__link">
+      /realtime - Realtime
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/remote/" title="/remote - Proxy for remote data/API" class="md-nav__link">
+      /remote - Proxy for remote data/API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/settings/" title="/settings - Settings" class="md-nav__link">
+      /settings - Settings
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/user-action-required/" title="/settings - Terms of Services" class="md-nav__link">
+       /settings - Terms of Services
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-stack/sharing/" title="/sharings - Sharing" class="md-nav__link">
+      /sharings - Sharing
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-app-publish/" title="cozy-app-publish" class="md-nav__link">
+      cozy-app-publish
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../babel-preset-cozy-app/" title="babel-preset-cozy-app" class="md-nav__link">
+      babel-preset-cozy-app
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../konitor/cli/" title="konitor" class="md-nav__link">
+      konitor
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-7" type="checkbox" id="nav-4-7">
+    
+    <label class="md-nav__link" for="nav-4-7">
+      cozy-doctypes
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-7">
+        cozy-doctypes
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/" title="README" class="md-nav__link">
+      README
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.accounts/" title="Accounts" class="md-nav__link">
+      Accounts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.apps/" title="Apps" class="md-nav__link">
+      Apps
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.bank/" title="Banking doctypes" class="md-nav__link">
+      Banking doctypes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.bills/" title="Bills" class="md-nav__link">
+      Bills
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.konnectors/" title="Connectors" class="md-nav__link">
+      Connectors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.contacts/" title="Contacts" class="md-nav__link">
+      Contacts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.files/" title="Files" class="md-nav__link">
+      Files
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.files_metadata/" title="Files metadata" class="md-nav__link">
+      Files metadata
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.identities/" title="Identities" class="md-nav__link">
+      Identities
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.notifications/" title="Notifications" class="md-nav__link">
+      Notifications
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.remote.requests/" title="Remote requests" class="md-nav__link">
+      Remote requests
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.sessions.logins/" title="Session logins" class="md-nav__link">
+      Session logins
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.permissions/" title="Permissions" class="md-nav__link">
+      Permissions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.photos.albums/" title="Photos Albums" class="md-nav__link">
+      Photos Albums
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.procedures/" title="Procedures" class="md-nav__link">
+      Procedures
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.sessions.logins/" title="Sessions Logins" class="md-nav__link">
+      Sessions Logins
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.settings/" title="Settings" class="md-nav__link">
+      Settings
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.sharings/" title="Sharings" class="md-nav__link">
+      Sharings
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.account_types/" title="Accounts Types" class="md-nav__link">
+      Accounts Types
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/cc.cozycloud.autocategorization/" title="Autocategorization" class="md-nav__link">
+      Autocategorization
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.exports/" title="Exports" class="md-nav__link">
+      Exports
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.jobs/" title="Jobs" class="md-nav__link">
+      Jobs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.oauth.clients/" title="OAuth Clients" class="md-nav__link">
+      OAuth Clients
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.oauth.access_codes/" title="OAuth Access Codes" class="md-nav__link">
+      OAuth Access Codes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.triggers/" title="Triggers" class="md-nav__link">
+      Triggers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.triggers.state/" title="Triggers state" class="md-nav__link">
+      Triggers state
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.remote.requests/" title="Remote requests" class="md-nav__link">
+      Remote requests
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.sessions/" title="Sessions" class="md-nav__link">
+      Sessions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.shared/" title="Shared" class="md-nav__link">
+      Shared
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/io.cozy.terms/" title="Terms" class="md-nav__link">
+      Terms
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-doctypes/docs/com.unibet.bets/" title="Bets Unibet" class="md-nav__link">
+      Bets Unibet
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-ui/" title="cozy-ui" class="md-nav__link">
+      cozy-ui
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-device-helper/" title="cozy-device-helper" class="md-nav__link">
+      cozy-device-helper
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-10" type="checkbox" id="nav-4-10">
+    
+    <label class="md-nav__link" for="nav-4-10">
+      cozy-client
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-10">
+        cozy-client
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client/getting-started/" title="Getting started" class="md-nav__link">
+      Getting started
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client/relationships/" title="Using relationship" class="md-nav__link">
+      Using relationship
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client/metadata/" title="cozyMetadata maintenance" class="md-nav__link">
+      cozyMetadata maintenance
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client/react-integration/" title="React integration" class="md-nav__link">
+      React integration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client/details/" title="Other details" class="md-nav__link">
+      Other details
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client/api/cozy-client/" title="Cozy Client API" class="md-nav__link">
+      Cozy Client API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client/api/cozy-pouch-link/" title="Cozy Pouch Link API" class="md-nav__link">
+      Cozy Pouch Link API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client/api/cozy-stack-client/" title="Cozy Stack Client API" class="md-nav__link">
+      Cozy Stack Client API
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-realtime/" title="cozy-realtime" class="md-nav__link">
+      cozy-realtime
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-12" type="checkbox" id="nav-4-12" checked>
+    
+    <label class="md-nav__link" for="nav-4-12">
+      cozy-konnector-libs
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-12">
+        cozy-konnector-libs
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        API
+      </label>
+    
+    <a href="./" title="API" class="md-nav__link md-nav__link--active">
+      API
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#api" title="API" class="md-nav__link">
+    API
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modules" title="Modules" class="md-nav__link">
+    Modules
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#classes" title="Classes" class="md-nav__link">
+    Classes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#constants" title="Constants" class="md-nav__link">
+    Constants
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions" title="Functions" class="md-nav__link">
+    Functions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adddata" title="addData" class="md-nav__link">
+    addData
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#adddata_1" title="addData() ⏏" class="md-nav__link">
+    addData() ⏏
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cozyclient" title="cozyClient" class="md-nav__link">
+    cozyClient
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cozyclient_1" title="cozyClient ⏏" class="md-nav__link">
+    cozyClient ⏏
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hydrateandfilter" title="hydrateAndFilter" class="md-nav__link">
+    hydrateAndFilter
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hydrateandfilter_1" title="hydrateAndFilter() ⏏" class="md-nav__link">
+    hydrateAndFilter() ⏏
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hydrateandfiltersuitablecall" title="hydrateAndFilter~suitableCall()" class="md-nav__link">
+    hydrateAndFilter~suitableCall()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#linkbankoperations" title="linkBankOperations" class="md-nav__link">
+    linkBankOperations
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#linkbankoperations_1" title="linkBankOperations() ⏏" class="md-nav__link">
+    linkBankOperations() ⏏
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mkdirp" title="mkdirp" class="md-nav__link">
+    mkdirp
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mkdirp_1" title="mkdirp ⏏" class="md-nav__link">
+    mkdirp ⏏
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#normalizefilename" title="normalizeFilename" class="md-nav__link">
+    normalizeFilename
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#normalizefilename_1" title="normalizeFilename() ⏏" class="md-nav__link">
+    normalizeFilename() ⏏
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#savebills" title="saveBills" class="md-nav__link">
+    saveBills
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#savebills_1" title="saveBills() ⏏" class="md-nav__link">
+    saveBills() ⏏
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#savefiles" title="saveFiles" class="md-nav__link">
+    saveFiles
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#savefiles_1" title="saveFiles() ⏏" class="md-nav__link">
+    saveFiles() ⏏
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#saveidentity" title="saveIdentity" class="md-nav__link">
+    saveIdentity
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#saveidentity_1" title="saveIdentity() ⏏" class="md-nav__link">
+    saveIdentity() ⏏
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#signin" title="signin" class="md-nav__link">
+    signin
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#signin_1" title="signin() ⏏" class="md-nav__link">
+    signin() ⏏
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#solvecaptcha" title="solveCaptcha" class="md-nav__link">
+    solveCaptcha
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#solvecaptcha_1" title="solveCaptcha() ⏏" class="md-nav__link">
+    solveCaptcha() ⏏
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#updateorcreate" title="updateOrCreate" class="md-nav__link">
+    updateOrCreate
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#updateorcreate_1" title="updateOrCreate() ⏏" class="md-nav__link">
+    updateOrCreate() ⏏
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#utils" title="utils" class="md-nav__link">
+    utils
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#utilsfetchall" title="utils~fetchAll()" class="md-nav__link">
+    utils~fetchAll()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#utilsqueryall" title="utils~queryAll()" class="md-nav__link">
+    utils~queryAll()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#utilsfindduplicates" title="utils~findDuplicates()" class="md-nav__link">
+    utils~findDuplicates()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#utilsbatchupdateattributes" title="utils~batchUpdateAttributes()" class="md-nav__link">
+    utils~batchUpdateAttributes()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#utilsbatchdelete" title="utils~batchDelete()" class="md-nav__link">
+    utils~batchDelete()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#utilsgetpdftext" title="utils~getPdfText()" class="md-nav__link">
+    utils~getPdfText()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#utilsformatdate" title="utils~formatDate()" class="md-nav__link">
+    utils~formatDate()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#categorization" title="categorization" class="md-nav__link">
+    categorization
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#categorizationcreatecategorizer-object" title="categorization~createCategorizer() ⇒ Object" class="md-nav__link">
+    categorization~createCategorizer() ⇒ Object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#categorizationcategorize-arrayobject" title="categorization~categorize() ⇒ Array.&lt;Object&gt;" class="md-nav__link">
+    categorization~categorize() ⇒ Array.&lt;Object&gt;
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#basekonnector" title="BaseKonnector" class="md-nav__link">
+    BaseKonnector
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-basekonnectorfetch" title="new BaseKonnector(fetch)" class="md-nav__link">
+    new BaseKonnector(fetch)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#basekonnectorend" title="baseKonnector.end()" class="md-nav__link">
+    baseKonnector.end()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#basekonnectorfail" title="baseKonnector.fail()" class="md-nav__link">
+    baseKonnector.fail()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#basekonnectorinit-promise" title="baseKonnector.init() ⇒ Promise" class="md-nav__link">
+    baseKonnector.init() ⇒ Promise
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#basekonnectorsaveaccountdatadata-options-promise" title="baseKonnector.saveAccountData(data, options) ⇒ Promise" class="md-nav__link">
+    baseKonnector.saveAccountData(data, options) ⇒ Promise
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#basekonnectorgetaccountdata-object" title="baseKonnector.getAccountData() ⇒ object" class="md-nav__link">
+    baseKonnector.getAccountData() ⇒ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#basekonnectorupdateaccountattributes" title="baseKonnector.updateAccountAttributes()" class="md-nav__link">
+    baseKonnector.updateAccountAttributes()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#basekonnectorwaitfortwofacode" title="baseKonnector.waitForTwoFaCode()" class="md-nav__link">
+    baseKonnector.waitForTwoFaCode()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#basekonnectorsavebills-promise" title="baseKonnector.saveBills() ⇒ Promise" class="md-nav__link">
+    baseKonnector.saveBills() ⇒ Promise
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#basekonnectorsavefiles-promise" title="baseKonnector.saveFiles() ⇒ Promise" class="md-nav__link">
+    baseKonnector.saveFiles() ⇒ Promise
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#basekonnectorupdateorcreate-promise" title="baseKonnector.updateOrCreate() ⇒ Promise" class="md-nav__link">
+    baseKonnector.updateOrCreate() ⇒ Promise
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#basekonnectorsaveidentity-promise" title="baseKonnector.saveIdentity() ⇒ Promise" class="md-nav__link">
+    baseKonnector.saveIdentity() ⇒ Promise
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#basekonnectorterminatemessage" title="baseKonnector.terminate(message)" class="md-nav__link">
+    baseKonnector.terminate(message)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#basekonnectorgetcozymetadatadata" title="baseKonnector.getCozyMetadata(data)" class="md-nav__link">
+    baseKonnector.getCozyMetadata(data)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cookiekonnector" title="CookieKonnector" class="md-nav__link">
+    CookieKonnector
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-cookiekonnectorrequestfactoryoptions" title="new CookieKonnector(requestFactoryOptions)" class="md-nav__link">
+    new CookieKonnector(requestFactoryOptions)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cookiekonnectorinit-promise" title="cookieKonnector.init() ⇒ Promise" class="md-nav__link">
+    cookieKonnector.init() ⇒ Promise
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cookiekonnectorend" title="cookieKonnector.end()" class="md-nav__link">
+    cookieKonnector.end()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cookiekonnectorrequestfactoryoptions-object" title="cookieKonnector.requestFactory(options) ⇒ object" class="md-nav__link">
+    cookieKonnector.requestFactory(options) ⇒ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cookiekonnectorresetsession-promise" title="cookieKonnector.resetSession() ⇒ Promise" class="md-nav__link">
+    cookieKonnector.resetSession() ⇒ Promise
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cookiekonnectorinitsession-promise" title="cookieKonnector.initSession() ⇒ Promise" class="md-nav__link">
+    cookieKonnector.initSession() ⇒ Promise
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cookiekonnectorsavesession-promise" title="cookieKonnector.saveSession() ⇒ Promise" class="md-nav__link">
+    cookieKonnector.saveSession() ⇒ Promise
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cookiekonnectorsignin-promise" title="cookieKonnector.signin() ⇒ Promise" class="md-nav__link">
+    cookieKonnector.signin() ⇒ Promise
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cookiekonnectorsavefiles-promise" title="cookieKonnector.saveFiles() ⇒ Promise" class="md-nav__link">
+    cookieKonnector.saveFiles() ⇒ Promise
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cookiekonnectorsavebills-promise" title="cookieKonnector.saveBills() ⇒ Promise" class="md-nav__link">
+    cookieKonnector.saveBills() ⇒ Promise
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#document" title="Document" class="md-nav__link">
+    Document
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#documentisequal" title="document.isEqual()" class="md-nav__link">
+    document.isEqual()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fs" title="fs" class="md-nav__link">
+    fs
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#login95failed-string" title="LOGIN_FAILED : String" class="md-nav__link">
+    LOGIN_FAILED : String
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#not95existing95directory-string" title="NOT_EXISTING_DIRECTORY : String" class="md-nav__link">
+    NOT_EXISTING_DIRECTORY : String
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vendor95down-string" title="VENDOR_DOWN : String" class="md-nav__link">
+    VENDOR_DOWN : String
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#user95action95needed-string" title="USER_ACTION_NEEDED : String" class="md-nav__link">
+    USER_ACTION_NEEDED : String
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#file95download95failed-string" title="FILE_DOWNLOAD_FAILED : String" class="md-nav__link">
+    FILE_DOWNLOAD_FAILED : String
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#save95file95failed-string" title="SAVE_FILE_FAILED : String" class="md-nav__link">
+    SAVE_FILE_FAILED : String
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#disk95quota95exceeded-string" title="DISK_QUOTA_EXCEEDED : String" class="md-nav__link">
+    DISK_QUOTA_EXCEEDED : String
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#challenge95asked-string" title="CHALLENGE_ASKED : String" class="md-nav__link">
+    CHALLENGE_ASKED : String
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#login95failed95too95many95attempts-string" title="LOGIN_FAILED_TOO_MANY_ATTEMPTS : String" class="md-nav__link">
+    LOGIN_FAILED_TOO_MANY_ATTEMPTS : String
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#user95action95needed95oauth95outdated-string" title="USER_ACTION_NEEDED_OAUTH_OUTDATED : String" class="md-nav__link">
+    USER_ACTION_NEEDED_OAUTH_OUTDATED : String
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#user95action95needed95account95removed-string" title="USER_ACTION_NEEDED_ACCOUNT_REMOVED : String" class="md-nav__link">
+    USER_ACTION_NEEDED_ACCOUNT_REMOVED : String
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#user95action95needed95change95password-string" title="USER_ACTION_NEEDED_CHANGE_PASSWORD : String" class="md-nav__link">
+    USER_ACTION_NEEDED_CHANGE_PASSWORD : String
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#user95action95needed95permissions95changed-string" title="USER_ACTION_NEEDED_PERMISSIONS_CHANGED : String" class="md-nav__link">
+    USER_ACTION_NEEDED_PERMISSIONS_CHANGED : String
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#user95action95needed95cgu95form-string" title="USER_ACTION_NEEDED_CGU_FORM : String" class="md-nav__link">
+    USER_ACTION_NEEDED_CGU_FORM : String
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#captcha95resolution95failed-string" title="CAPTCHA_RESOLUTION_FAILED : String" class="md-nav__link">
+    CAPTCHA_RESOLUTION_FAILED : String
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mkspec" title="mkSpec()" class="md-nav__link">
+    mkSpec()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scrape-specs-childselector-object-124-array" title="scrape($, spec(s), [childSelector]) ⇒ object | array" class="md-nav__link">
+    scrape($, spec(s), [childSelector]) ⇒ object | array
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#permissions" title="⚠ Permissions" class="md-nav__link">
+    ⚠ Permissions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../cli/" title="CLI" class="md-nav__link">
+      CLI
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../dev/" title="Develop" class="md-nav__link">
+      Develop
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../errors/" title="Errors" class="md-nav__link">
+      Errors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../operation-linking/" title="Operation linking" class="md-nav__link">
+      Operation linking
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../synchronization/" title="Synchronization" class="md-nav__link">
+      Synchronization
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-apps-registry/" title="cozy-apps-registry" class="md-nav__link">
+      cozy-apps-registry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-flags/" title="cozy-flags" class="md-nav__link">
+      cozy-flags
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-15" type="checkbox" id="nav-4-15">
+    
+    <label class="md-nav__link" for="nav-4-15">
+      cozy-client-js
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-15">
+        cozy-client-js
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/" title="README" class="md-nav__link">
+      README
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/intro/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/browser-sdk-transition/" title="Transition from cozy-browser-sdk" class="md-nav__link">
+      Transition from cozy-browser-sdk
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/offline/" title="How to support offline" class="md-nav__link">
+      How to support offline
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/oauth/" title="OAuth guide" class="md-nav__link">
+      OAuth guide
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/auth-api/" title="Authentication API" class="md-nav__link">
+      Authentication API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/data-api/" title="Data System API" class="md-nav__link">
+      Data System API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/files-api/" title="Files API" class="md-nav__link">
+      Files API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/jobs-api/" title="Jobs API" class="md-nav__link">
+      Jobs API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/intents-api/" title="Intents API" class="md-nav__link">
+      Intents API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/settings-api/" title="Settings API" class="md-nav__link">
+      Settings API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cozy-client-js/sharing-api/" title="Sharing API" class="md-nav__link">
+      Sharing API
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#api" title="API" class="md-nav__link">
+    API
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modules" title="Modules" class="md-nav__link">
+    Modules
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#classes" title="Classes" class="md-nav__link">
+    Classes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#constants" title="Constants" class="md-nav__link">
+    Constants
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions" title="Functions" class="md-nav__link">
+    Functions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adddata" title="addData" class="md-nav__link">
+    addData
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#adddata_1" title="addData() ⏏" class="md-nav__link">
+    addData() ⏏
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cozyclient" title="cozyClient" class="md-nav__link">
+    cozyClient
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cozyclient_1" title="cozyClient ⏏" class="md-nav__link">
+    cozyClient ⏏
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hydrateandfilter" title="hydrateAndFilter" class="md-nav__link">
+    hydrateAndFilter
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hydrateandfilter_1" title="hydrateAndFilter() ⏏" class="md-nav__link">
+    hydrateAndFilter() ⏏
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hydrateandfiltersuitablecall" title="hydrateAndFilter~suitableCall()" class="md-nav__link">
+    hydrateAndFilter~suitableCall()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#linkbankoperations" title="linkBankOperations" class="md-nav__link">
+    linkBankOperations
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#linkbankoperations_1" title="linkBankOperations() ⏏" class="md-nav__link">
+    linkBankOperations() ⏏
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mkdirp" title="mkdirp" class="md-nav__link">
+    mkdirp
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mkdirp_1" title="mkdirp ⏏" class="md-nav__link">
+    mkdirp ⏏
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#normalizefilename" title="normalizeFilename" class="md-nav__link">
+    normalizeFilename
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#normalizefilename_1" title="normalizeFilename() ⏏" class="md-nav__link">
+    normalizeFilename() ⏏
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#savebills" title="saveBills" class="md-nav__link">
+    saveBills
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#savebills_1" title="saveBills() ⏏" class="md-nav__link">
+    saveBills() ⏏
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#savefiles" title="saveFiles" class="md-nav__link">
+    saveFiles
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#savefiles_1" title="saveFiles() ⏏" class="md-nav__link">
+    saveFiles() ⏏
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#saveidentity" title="saveIdentity" class="md-nav__link">
+    saveIdentity
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#saveidentity_1" title="saveIdentity() ⏏" class="md-nav__link">
+    saveIdentity() ⏏
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#signin" title="signin" class="md-nav__link">
+    signin
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#signin_1" title="signin() ⏏" class="md-nav__link">
+    signin() ⏏
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#solvecaptcha" title="solveCaptcha" class="md-nav__link">
+    solveCaptcha
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#solvecaptcha_1" title="solveCaptcha() ⏏" class="md-nav__link">
+    solveCaptcha() ⏏
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#updateorcreate" title="updateOrCreate" class="md-nav__link">
+    updateOrCreate
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#updateorcreate_1" title="updateOrCreate() ⏏" class="md-nav__link">
+    updateOrCreate() ⏏
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#utils" title="utils" class="md-nav__link">
+    utils
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#utilsfetchall" title="utils~fetchAll()" class="md-nav__link">
+    utils~fetchAll()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#utilsqueryall" title="utils~queryAll()" class="md-nav__link">
+    utils~queryAll()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#utilsfindduplicates" title="utils~findDuplicates()" class="md-nav__link">
+    utils~findDuplicates()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#utilsbatchupdateattributes" title="utils~batchUpdateAttributes()" class="md-nav__link">
+    utils~batchUpdateAttributes()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#utilsbatchdelete" title="utils~batchDelete()" class="md-nav__link">
+    utils~batchDelete()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#utilsgetpdftext" title="utils~getPdfText()" class="md-nav__link">
+    utils~getPdfText()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#utilsformatdate" title="utils~formatDate()" class="md-nav__link">
+    utils~formatDate()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#categorization" title="categorization" class="md-nav__link">
+    categorization
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#categorizationcreatecategorizer-object" title="categorization~createCategorizer() ⇒ Object" class="md-nav__link">
+    categorization~createCategorizer() ⇒ Object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#categorizationcategorize-arrayobject" title="categorization~categorize() ⇒ Array.&lt;Object&gt;" class="md-nav__link">
+    categorization~categorize() ⇒ Array.&lt;Object&gt;
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#basekonnector" title="BaseKonnector" class="md-nav__link">
+    BaseKonnector
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-basekonnectorfetch" title="new BaseKonnector(fetch)" class="md-nav__link">
+    new BaseKonnector(fetch)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#basekonnectorend" title="baseKonnector.end()" class="md-nav__link">
+    baseKonnector.end()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#basekonnectorfail" title="baseKonnector.fail()" class="md-nav__link">
+    baseKonnector.fail()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#basekonnectorinit-promise" title="baseKonnector.init() ⇒ Promise" class="md-nav__link">
+    baseKonnector.init() ⇒ Promise
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#basekonnectorsaveaccountdatadata-options-promise" title="baseKonnector.saveAccountData(data, options) ⇒ Promise" class="md-nav__link">
+    baseKonnector.saveAccountData(data, options) ⇒ Promise
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#basekonnectorgetaccountdata-object" title="baseKonnector.getAccountData() ⇒ object" class="md-nav__link">
+    baseKonnector.getAccountData() ⇒ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#basekonnectorupdateaccountattributes" title="baseKonnector.updateAccountAttributes()" class="md-nav__link">
+    baseKonnector.updateAccountAttributes()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#basekonnectorwaitfortwofacode" title="baseKonnector.waitForTwoFaCode()" class="md-nav__link">
+    baseKonnector.waitForTwoFaCode()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#basekonnectorsavebills-promise" title="baseKonnector.saveBills() ⇒ Promise" class="md-nav__link">
+    baseKonnector.saveBills() ⇒ Promise
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#basekonnectorsavefiles-promise" title="baseKonnector.saveFiles() ⇒ Promise" class="md-nav__link">
+    baseKonnector.saveFiles() ⇒ Promise
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#basekonnectorupdateorcreate-promise" title="baseKonnector.updateOrCreate() ⇒ Promise" class="md-nav__link">
+    baseKonnector.updateOrCreate() ⇒ Promise
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#basekonnectorsaveidentity-promise" title="baseKonnector.saveIdentity() ⇒ Promise" class="md-nav__link">
+    baseKonnector.saveIdentity() ⇒ Promise
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#basekonnectorterminatemessage" title="baseKonnector.terminate(message)" class="md-nav__link">
+    baseKonnector.terminate(message)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#basekonnectorgetcozymetadatadata" title="baseKonnector.getCozyMetadata(data)" class="md-nav__link">
+    baseKonnector.getCozyMetadata(data)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cookiekonnector" title="CookieKonnector" class="md-nav__link">
+    CookieKonnector
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-cookiekonnectorrequestfactoryoptions" title="new CookieKonnector(requestFactoryOptions)" class="md-nav__link">
+    new CookieKonnector(requestFactoryOptions)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cookiekonnectorinit-promise" title="cookieKonnector.init() ⇒ Promise" class="md-nav__link">
+    cookieKonnector.init() ⇒ Promise
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cookiekonnectorend" title="cookieKonnector.end()" class="md-nav__link">
+    cookieKonnector.end()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cookiekonnectorrequestfactoryoptions-object" title="cookieKonnector.requestFactory(options) ⇒ object" class="md-nav__link">
+    cookieKonnector.requestFactory(options) ⇒ object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cookiekonnectorresetsession-promise" title="cookieKonnector.resetSession() ⇒ Promise" class="md-nav__link">
+    cookieKonnector.resetSession() ⇒ Promise
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cookiekonnectorinitsession-promise" title="cookieKonnector.initSession() ⇒ Promise" class="md-nav__link">
+    cookieKonnector.initSession() ⇒ Promise
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cookiekonnectorsavesession-promise" title="cookieKonnector.saveSession() ⇒ Promise" class="md-nav__link">
+    cookieKonnector.saveSession() ⇒ Promise
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cookiekonnectorsignin-promise" title="cookieKonnector.signin() ⇒ Promise" class="md-nav__link">
+    cookieKonnector.signin() ⇒ Promise
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cookiekonnectorsavefiles-promise" title="cookieKonnector.saveFiles() ⇒ Promise" class="md-nav__link">
+    cookieKonnector.saveFiles() ⇒ Promise
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cookiekonnectorsavebills-promise" title="cookieKonnector.saveBills() ⇒ Promise" class="md-nav__link">
+    cookieKonnector.saveBills() ⇒ Promise
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#document" title="Document" class="md-nav__link">
+    Document
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#documentisequal" title="document.isEqual()" class="md-nav__link">
+    document.isEqual()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fs" title="fs" class="md-nav__link">
+    fs
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#login95failed-string" title="LOGIN_FAILED : String" class="md-nav__link">
+    LOGIN_FAILED : String
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#not95existing95directory-string" title="NOT_EXISTING_DIRECTORY : String" class="md-nav__link">
+    NOT_EXISTING_DIRECTORY : String
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vendor95down-string" title="VENDOR_DOWN : String" class="md-nav__link">
+    VENDOR_DOWN : String
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#user95action95needed-string" title="USER_ACTION_NEEDED : String" class="md-nav__link">
+    USER_ACTION_NEEDED : String
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#file95download95failed-string" title="FILE_DOWNLOAD_FAILED : String" class="md-nav__link">
+    FILE_DOWNLOAD_FAILED : String
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#save95file95failed-string" title="SAVE_FILE_FAILED : String" class="md-nav__link">
+    SAVE_FILE_FAILED : String
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#disk95quota95exceeded-string" title="DISK_QUOTA_EXCEEDED : String" class="md-nav__link">
+    DISK_QUOTA_EXCEEDED : String
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#challenge95asked-string" title="CHALLENGE_ASKED : String" class="md-nav__link">
+    CHALLENGE_ASKED : String
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#login95failed95too95many95attempts-string" title="LOGIN_FAILED_TOO_MANY_ATTEMPTS : String" class="md-nav__link">
+    LOGIN_FAILED_TOO_MANY_ATTEMPTS : String
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#user95action95needed95oauth95outdated-string" title="USER_ACTION_NEEDED_OAUTH_OUTDATED : String" class="md-nav__link">
+    USER_ACTION_NEEDED_OAUTH_OUTDATED : String
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#user95action95needed95account95removed-string" title="USER_ACTION_NEEDED_ACCOUNT_REMOVED : String" class="md-nav__link">
+    USER_ACTION_NEEDED_ACCOUNT_REMOVED : String
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#user95action95needed95change95password-string" title="USER_ACTION_NEEDED_CHANGE_PASSWORD : String" class="md-nav__link">
+    USER_ACTION_NEEDED_CHANGE_PASSWORD : String
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#user95action95needed95permissions95changed-string" title="USER_ACTION_NEEDED_PERMISSIONS_CHANGED : String" class="md-nav__link">
+    USER_ACTION_NEEDED_PERMISSIONS_CHANGED : String
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#user95action95needed95cgu95form-string" title="USER_ACTION_NEEDED_CGU_FORM : String" class="md-nav__link">
+    USER_ACTION_NEEDED_CGU_FORM : String
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#captcha95resolution95failed-string" title="CAPTCHA_RESOLUTION_FAILED : String" class="md-nav__link">
+    CAPTCHA_RESOLUTION_FAILED : String
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mkspec" title="mkSpec()" class="md-nav__link">
+    mkSpec()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scrape-specs-childselector-object-124-array" title="scrape($, spec(s), [childSelector]) ⇒ object | array" class="md-nav__link">
+    scrape($, spec(s), [childSelector]) ⇒ object | array
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#permissions" title="⚠ Permissions" class="md-nav__link">
+    ⚠ Permissions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/cozy/cozy.github.io/edit/dev/src/cozy-konnector-libs/api.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                  <h1>API</h1>
+                
+                <h2 id="api">API<a class="headerlink" href="#api" title="Permanent link">&para;</a></h2>
+<h2 id="modules">Modules<a class="headerlink" href="#modules" title="Permanent link">&para;</a></h2>
+<dl>
+<dt><a href="#module_addData">addData</a></dt>
+<dd><p>Saves the data into the cozy blindly without check.</p>
+</dd>
+<dt><a href="#module_cozyClient">cozyClient</a></dt>
+<dd><p><a href="https://cozy.github.io/cozy-client-js/">cozy-client-js</a> instance already
+initialized and ready to use.</p>
+</dd>
+<dt><a href="#module_hydrateAndFilter">hydrateAndFilter</a></dt>
+<dd><p>Filters the passed array from data already present in the cozy so that there is
+not duplicated data in the Cozy.</p>
+</dd>
+<dt><a href="#module_linkBankOperations">linkBankOperations</a></dt>
+<dd><p>Finds links between bills and bank operations.</p>
+</dd>
+<dt><a href="#module_mkdirp">mkdirp</a></dt>
+<dd></dd>
+<dt><a href="#module_normalizeFilename">normalizeFilename</a></dt>
+<dd><p>Returns the given name, replacing characters that could be an issue when
+used in a filename with spaces.</p>
+</dd>
+<dt><a href="#module_saveBills">saveBills</a></dt>
+<dd><p>Encapsulates the saving of Bills : saves the files, saves the new data, and associate the files
+to an existing bank operation</p>
+</dd>
+<dt><a href="#module_saveFiles">saveFiles</a></dt>
+<dd><p>Saves the given files in the given folder via the Cozy API.</p>
+</dd>
+<dt><a href="#module_saveIdentity">saveIdentity</a></dt>
+<dd><p>Helper to set or merge io.cozy.identities
+See <a href="https://github.com/cozy/cozy-doctypes/blob/master/docs/io.cozy.identities.md">https://github.com/cozy/cozy-doctypes/blob/master/docs/io.cozy.identities.md</a></p>
+</dd>
+<dt><a href="#module_signin">signin</a></dt>
+<dd><p>Provides an handy method to log the user in,
+on HTML form pages. On success, it resolves to a promise with a parsed body.</p>
+</dd>
+<dt><a href="#module_solveCaptcha">solveCaptcha</a></dt>
+<dd><p>Use every possible means to solve a captcha. At the moment, Anticaptcha web service is used if
+any related secret key is found in COZY_PARAMETERS environment variable.</p>
+</dd>
+<dt><a href="#module_updateOrCreate">updateOrCreate</a></dt>
+<dd><p>Creates or updates the given entries according to if they already
+exist in the cozy or not</p>
+</dd>
+<dt><a href="#module_utils">utils</a></dt>
+<dd><p>Small utilities helping to develop konnectors.</p>
+</dd>
+<dt><a href="#module_categorization">categorization</a></dt>
+<dd><p>Bank transactions categorization</p>
+</dd>
+</dl>
+
+<h2 id="classes">Classes<a class="headerlink" href="#classes" title="Permanent link">&para;</a></h2>
+<dl>
+<dt><a href="#BaseKonnector">BaseKonnector</a></dt>
+<dd><p>The class from which all the connectors must inherit.
+It takes a fetch function in parameter that must return a <code>Promise</code>.
+You need at least the <code>GET</code> permission on <code>io.cozy.accounts</code> in your manifest to allow it to
+fetch account information for your connector.</p>
+</dd>
+<dt><a href="#CookieKonnector">CookieKonnector</a></dt>
+<dd><p>Connector base class extending BaseKonnector which handles cookie session in a central way
+It also handles saving cookie session in the account and automatically restore it for the next
+connector run.
+All cozy-konnector-libs tools using request are proposed as methods of this class to force them
+to use the central cookie which can be saved/restored.
+You need at least the <code>GET</code> and <code>PUT</code> permissions on <code>io.cozy.accounts</code> in your manifest to allow
+it to save/restore cookies</p>
+</dd>
+<dt><a href="#Document">Document</a></dt>
+<dd><p>Simple Model for Documents. Allows to specify
+<code>shouldSave</code>, <code>shouldUpdate</code> as methods.</p>
+<p>Has useful <code>isEqual</code> method</p>
+</dd>
+</dl>
+
+<h2 id="constants">Constants<a class="headerlink" href="#constants" title="Permanent link">&para;</a></h2>
+<dl>
+<dt><a href="#fs">fs</a></dt>
+<dd><p>Manifest is provided differently in developement that in production.</p>
+<ul>
+<li><p>In production, the manifest has been &quot;merged&quot; via Webpack via the
+DefinePlugin</p>
+</li>
+<li><p>In development/test, we simply read the manifest from the fs</p>
+</li>
+</ul>
+</dd>
+<dt><a href="#LOGIN_FAILED">LOGIN_FAILED</a> : <code>String</code></dt>
+<dd><p>The konnector could not login</p>
+</dd>
+<dt><a href="#NOT_EXISTING_DIRECTORY">NOT_EXISTING_DIRECTORY</a> : <code>String</code></dt>
+<dd><p>The folder specified as folder_to_save does not exist (checked by BaseKonnector)</p>
+</dd>
+<dt><a href="#VENDOR_DOWN">VENDOR_DOWN</a> : <code>String</code></dt>
+<dd><p>The vendor&#39;s website is down</p>
+</dd>
+<dt><a href="#USER_ACTION_NEEDED">USER_ACTION_NEEDED</a> : <code>String</code></dt>
+<dd><p>There was an unexpected error, please take a look at the logs to know what happened</p>
+</dd>
+<dt><a href="#FILE_DOWNLOAD_FAILED">FILE_DOWNLOAD_FAILED</a> : <code>String</code></dt>
+<dd><p>There was a problem while downloading a file</p>
+</dd>
+<dt><a href="#SAVE_FILE_FAILED">SAVE_FILE_FAILED</a> : <code>String</code></dt>
+<dd><p>There was a problem while saving a file</p>
+</dd>
+<dt><a href="#DISK_QUOTA_EXCEEDED">DISK_QUOTA_EXCEEDED</a> : <code>String</code></dt>
+<dd><p>Could not save a file to the cozy because of disk quota exceeded</p>
+</dd>
+<dt><a href="#CHALLENGE_ASKED">CHALLENGE_ASKED</a> : <code>String</code></dt>
+<dd><p>It seems that the website requires a second authentification factor that we don’t support yet.</p>
+</dd>
+<dt><a href="#LOGIN_FAILED_TOO_MANY_ATTEMPTS">LOGIN_FAILED_TOO_MANY_ATTEMPTS</a> : <code>String</code></dt>
+<dd><p>Temporarily blocked</p>
+</dd>
+<dt><a href="#USER_ACTION_NEEDED_OAUTH_OUTDATED">USER_ACTION_NEEDED_OAUTH_OUTDATED</a> : <code>String</code></dt>
+<dd><p>Access refresh required</p>
+</dd>
+<dt><a href="#USER_ACTION_NEEDED_ACCOUNT_REMOVED">USER_ACTION_NEEDED_ACCOUNT_REMOVED</a> : <code>String</code></dt>
+<dd><p>Unavailable account</p>
+</dd>
+<dt><a href="#USER_ACTION_NEEDED_CHANGE_PASSWORD">USER_ACTION_NEEDED_CHANGE_PASSWORD</a> : <code>String</code></dt>
+<dd><p>Unavailable account</p>
+</dd>
+<dt><a href="#USER_ACTION_NEEDED_PERMISSIONS_CHANGED">USER_ACTION_NEEDED_PERMISSIONS_CHANGED</a> : <code>String</code></dt>
+<dd><p>Password update required</p>
+</dd>
+<dt><a href="#USER_ACTION_NEEDED_CGU_FORM">USER_ACTION_NEEDED_CGU_FORM</a> : <code>String</code></dt>
+<dd><p>The user needs to accept a CGU form before accessing the rest of the website</p>
+</dd>
+<dt><a href="#CAPTCHA_RESOLUTION_FAILED">CAPTCHA_RESOLUTION_FAILED</a> : <code>String</code></dt>
+<dd><p>solveCaptcha failed to solve the captcha</p>
+</dd>
+</dl>
+
+<h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">&para;</a></h2>
+<dl>
+<dt><a href="#mkSpec">mkSpec()</a></dt>
+<dd><p>Declarative scraping.</p>
+<p>Describe your items attributes and where to find/parse them
+instead of imperatively building them.</p>
+<p>Heavily inspired by <a href="https://medialab.github.io/artoo/">artoo</a> scraping method.</p>
+</dd>
+<dt><a href="#scrape">scrape($, spec(s), [childSelector])</a> ⇒ <code>object</code> | <code>array</code></dt>
+<dd><p>Scrape a cheerio object for properties</p>
+</dd>
+</dl>
+
+<p><a name="module_addData"></a></p>
+<h2 id="adddata">addData<a class="headerlink" href="#adddata" title="Permanent link">&para;</a></h2>
+<p>Saves the data into the cozy blindly without check.</p>
+<p><a name="exp_module_addData--addData"></a></p>
+<h3 id="adddata_1">addData() ⏏<a class="headerlink" href="#adddata_1" title="Permanent link">&para;</a></h3>
+<p>Saves the data into the cozy blindly without check.</p>
+<p>You need at least the <code>POST</code> permission for the given doctype in your manifest, to be able to
+use this function.</p>
+<p>Parameters:</p>
+<ul>
+<li><code>documents</code>: an array of objects corresponding to the data you want to save in the cozy</li>
+<li><code>doctype</code> (string): the doctype where you want to save data (ex: &lsquo;io.cozy.bills&rsquo;)</li>
+<li><code>options</code> (object): option object</li>
+<li><code>sourceAccount</code> (String): id of the source account</li>
+<li><code>sourceAccountIdentifier</code> (String): identifier unique to the account targetted by the connector. It is the login most of the time</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="kr">const</span> <span class="nx">documents</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="p">{</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;toto&#39;</span><span class="p">,</span>
+    <span class="nx">height</span><span class="o">:</span> <span class="mf">1.8</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;titi&#39;</span><span class="p">,</span>
+    <span class="nx">height</span><span class="o">:</span> <span class="mf">1.7</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+
+<span class="k">return</span> <span class="nx">addData</span><span class="p">(</span><span class="nx">documents</span><span class="p">,</span> <span class="s1">&#39;io.cozy.height&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<p><strong>Kind</strong>: Exported function<br />
+<a name="module_cozyClient"></a></p>
+<h2 id="cozyclient">cozyClient<a class="headerlink" href="#cozyclient" title="Permanent link">&para;</a></h2>
+<p><a href="https://cozy.github.io/cozy-client-js/">cozy-client-js</a> instance already
+initialized and ready to use.</p>
+<p><a name="exp_module_cozyClient--cozyClient"></a></p>
+<h3 id="cozyclient_1">cozyClient ⏏<a class="headerlink" href="#cozyclient_1" title="Permanent link">&para;</a></h3>
+<p><a href="https://cozy.github.io/cozy-client-js/">cozy-client-js</a> instance already initialized and ready to use.</p>
+<p>If you want to access cozy-client-js directly, this method gives you directly an instance of it,
+initialized according to <code>COZY_URL</code> and <code>COZY_CREDENTIALS</code> environment variable given by cozy-stack
+You can refer to the <a href="https://cozy.github.io/cozy-client-js/">cozy-client-js documentation</a> for more information.</p>
+<p>Example :</p>
+<div class="codehilite"><pre><span></span><span class="kr">const</span> <span class="p">{</span><span class="nx">cozyClient</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;cozy-konnector-libs&#39;</span><span class="p">)</span>
+
+<span class="nx">cozyClient</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">defineIndex</span><span class="p">(</span><span class="s1">&#39;my.doctype&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;_id&#39;</span><span class="p">])</span>
+</pre></div>
+
+
+<p><strong>Kind</strong>: Exported constant<br />
+<a name="module_hydrateAndFilter"></a></p>
+<h2 id="hydrateandfilter">hydrateAndFilter<a class="headerlink" href="#hydrateandfilter" title="Permanent link">&para;</a></h2>
+<p>Filters the passed array from data already present in the cozy so that there is
+not duplicated data in the Cozy.</p>
+<ul>
+<li><a href="#module_hydrateAndFilter">hydrateAndFilter</a><ul>
+<li><a href="#exp_module_hydrateAndFilter--hydrateAndFilter">hydrateAndFilter()</a> ⏏<ul>
+<li><a href="#module_hydrateAndFilter--hydrateAndFilter..suitableCall">~suitableCall()</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><a name="exp_module_hydrateAndFilter--hydrateAndFilter"></a></p>
+<h3 id="hydrateandfilter_1">hydrateAndFilter() ⏏<a class="headerlink" href="#hydrateandfilter_1" title="Permanent link">&para;</a></h3>
+<p>Filters the passed array from data already present in the cozy so that there is
+not duplicated data in the Cozy.</p>
+<p>You need at least the <code>GET</code> permission for the given doctype in your manifest, to be able to
+use this function.</p>
+<p>Parameters:</p>
+<ul>
+<li><code>documents</code>: an array of objects corresponding to the data you want to save in the cozy</li>
+<li><code>doctype</code> (string): the doctype where you want to save data (ex: &lsquo;io.cozy.bills&rsquo;)</li>
+<li><code>options</code> :</li>
+<li><code>keys</code> (array) : List of keys used to check that two items are the same. By default it is set to `[&lsquo;id&rsquo;]&rsquo;.</li>
+<li><code>index</code> (optionnal) : Return value returned by <code>cozy.data.defineIndex</code>, the default will correspond to all documents of the selected doctype.</li>
+<li><code>selector</code> (optionnal object) : Mango request to get records. Default is built from the keys <code>{selector: {_id: {"$gt": null}}}</code> to get all the records.</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="kr">const</span> <span class="nx">documents</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="p">{</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;toto&#39;</span><span class="p">,</span>
+    <span class="nx">height</span><span class="o">:</span> <span class="mf">1.8</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;titi&#39;</span><span class="p">,</span>
+    <span class="nx">height</span><span class="o">:</span> <span class="mf">1.7</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+
+<span class="k">return</span> <span class="nx">hydrateAndFilter</span><span class="p">(</span><span class="nx">documents</span><span class="p">,</span> <span class="s1">&#39;io.cozy.height&#39;</span><span class="p">,</span> <span class="p">{</span>
+  <span class="nx">keys</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="nx">filteredDocuments</span> <span class="p">=&gt;</span> <span class="nx">addData</span><span class="p">(</span><span class="nx">filteredDocuments</span><span class="p">,</span> <span class="s1">&#39;io.cozy.height&#39;</span><span class="p">))</span>
+</pre></div>
+
+
+<p><strong>Kind</strong>: Exported function<br />
+<a name="module_hydrateAndFilter--hydrateAndFilter..suitableCall"></a></p>
+<h4 id="hydrateandfiltersuitablecall">hydrateAndFilter~suitableCall()<a class="headerlink" href="#hydrateandfiltersuitablecall" title="Permanent link">&para;</a></h4>
+<p>Since we can use methods or basic functions for
+<code>shouldSave</code> and <code>shouldUpdate</code> we pass the
+appropriate <code>this</code> and <code>arguments</code>.</p>
+<p>If <code>funcOrMethod</code> is a method, it will be called
+with args[0] as <code>this</code> and the rest as <code>arguments</code>
+Otherwise, <code>this</code> will be null and <code>args</code> will be passed
+as <code>arguments</code>.</p>
+<p><strong>Kind</strong>: inner method of <a href="#exp_module_hydrateAndFilter--hydrateAndFilter"><code>hydrateAndFilter</code></a><br />
+<a name="module_linkBankOperations"></a></p>
+<h2 id="linkbankoperations">linkBankOperations<a class="headerlink" href="#linkbankoperations" title="Permanent link">&para;</a></h2>
+<p>Finds links between bills and bank operations.</p>
+<p><a name="exp_module_linkBankOperations--linkBankOperations"></a></p>
+<h3 id="linkbankoperations_1">linkBankOperations() ⏏<a class="headerlink" href="#linkbankoperations_1" title="Permanent link">&para;</a></h3>
+<p>Will soon move to a dedicated service. You should not use it.</p>
+<p>Finds links between bills and bank operations.</p>
+<p><strong>Kind</strong>: Exported function<br />
+<a name="module_mkdirp"></a></p>
+<h2 id="mkdirp">mkdirp<a class="headerlink" href="#mkdirp" title="Permanent link">&para;</a></h2>
+<p><a name="exp_module_mkdirp--mkdirp"></a></p>
+<h3 id="mkdirp_1">mkdirp ⏏<a class="headerlink" href="#mkdirp_1" title="Permanent link">&para;</a></h3>
+<p>Creates a directory and its missing ancestors as needed.</p>
+<p>Options :</p>
+<ul>
+<li><code>...pathComponents</code>:  one or many path components to be joined</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="nx">await</span> <span class="nx">mkdirp</span><span class="p">(</span><span class="s1">&#39;/foo&#39;</span><span class="p">)</span> <span class="c1">// Creates /foo</span>
+<span class="nx">await</span> <span class="nx">mkdirp</span><span class="p">(</span><span class="s1">&#39;/foo&#39;</span><span class="p">)</span> <span class="c1">// Does nothing as /foo already exists</span>
+<span class="nx">await</span> <span class="nx">mkdirp</span><span class="p">(</span><span class="s1">&#39;/bar/baz&#39;</span><span class="p">)</span> <span class="c1">// Creates /bar, then /bar/baz</span>
+<span class="nx">await</span> <span class="nx">mkdirp</span><span class="p">(</span><span class="s1">&#39;/foo/bar/baz&#39;</span><span class="p">)</span> <span class="c1">// Creates /foo/bar, then /foo/bar/baz, not /foo</span>
+<span class="nx">await</span> <span class="nx">mkdirp</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span> <span class="c1">// Does nothing</span>
+<span class="nx">await</span> <span class="nx">mkdirp</span><span class="p">(</span><span class="s1">&#39;/qux&#39;</span><span class="p">,</span> <span class="s1">&#39;qux2/qux3&#39;</span><span class="p">,</span> <span class="s1">&#39;qux4&#39;</span><span class="p">)</span> <span class="c1">// Creates /qux, then /qux/qux2,</span>
+                                          <span class="c1">// then /qux/qux2/qux3 and</span>
+                                          <span class="c1">// finally /qux/qux2/qux3/qux4</span>
+</pre></div>
+
+
+<p>The function will automatically add a leading slash when missing:</p>
+<div class="codehilite"><pre><span></span><span class="nx">await</span> <span class="nx">mkdirp</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">)</span> <span class="c1">// Creates /foo, then /foo/bar</span>
+</pre></div>
+
+
+<p><strong>Kind</strong>: Exported constant<br />
+<a name="module_normalizeFilename"></a></p>
+<h2 id="normalizefilename">normalizeFilename<a class="headerlink" href="#normalizefilename" title="Permanent link">&para;</a></h2>
+<p>Returns the given name, replacing characters that could be an issue when
+used in a filename with spaces.</p>
+<p><a name="exp_module_normalizeFilename--normalizeFilename"></a></p>
+<h3 id="normalizefilename_1">normalizeFilename() ⏏<a class="headerlink" href="#normalizefilename_1" title="Permanent link">&para;</a></h3>
+<p>Returns the given name, replacing characters that could be an issue when
+used in a filename with spaces.</p>
+<p>Replaced characters include:</p>
+<ul>
+<li>Those forbidden on one or many popular OS or filesystem: <code>&lt;&gt;:"/\|?*</code></li>
+<li>Those forbidden by the cozy-stack <code>\0</code>, <code>\r</code> and <code>\n</code></li>
+<li>Multiple spaces and/or tabs are replaced with a single space</li>
+<li>Leading &amp; trailing spaces and/or tabs are removed</li>
+</ul>
+<p>An exception will be thrown in case there is not any filename-compatible
+character in the given name.</p>
+<p>Parameters:</p>
+<ul>
+<li><code>basename</code> is whatever string you want to generate the filename from</li>
+<li><code>ext</code> is an optional file extension, with or without leading dot</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="kr">const</span> <span class="p">{</span> <span class="nx">normalizeFilename</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;cozy-konnector-libs&#39;</span><span class="p">)</span>
+
+<span class="kr">const</span> <span class="nx">filename</span> <span class="o">=</span> <span class="nx">normalizeFilename</span><span class="p">(</span><span class="s1">&#39;*foo/bar: &lt;baz&gt; \\&quot;qux&quot;\t???&#39;</span><span class="p">,</span> <span class="s1">&#39;.txt&#39;</span><span class="p">)</span>
+<span class="c1">// `filename` === `foo bar baz qux.txt`</span>
+</pre></div>
+
+
+<p><strong>Kind</strong>: Exported function<br />
+<a name="module_saveBills"></a></p>
+<h2 id="savebills">saveBills<a class="headerlink" href="#savebills" title="Permanent link">&para;</a></h2>
+<p>Encapsulates the saving of Bills : saves the files, saves the new data, and associate the files
+to an existing bank operation</p>
+<p><a name="exp_module_saveBills--saveBills"></a></p>
+<h3 id="savebills_1">saveBills() ⏏<a class="headerlink" href="#savebills_1" title="Permanent link">&para;</a></h3>
+<p>Combines the features of <code>saveFiles</code>, <code>hydrateAndFilter</code>, <code>addData</code> and <code>linkBankOperations</code> for a
+common case: bills.
+Will create <code>io.cozy.bills</code> objects. The default deduplication keys are <code>['date', 'amount', 'vendor']</code>.
+You need the full permission on <code>io.cozy.bills</code>, full permission on <code>io.cozy.files</code> and also
+full permission on <code>io.cozy.bank.operations</code> in your manifest, to be able to use this function.</p>
+<p>Parameters:</p>
+<ul>
+<li><code>documents</code> is an array of objects with any attributes with some mandatory attributes :</li>
+<li><code>amount</code> (Number): the amount of the bill used to match bank operations</li>
+<li><code>date</code> (Date): the date of the bill also used to match bank operations</li>
+<li><code>vendor</code> (String): the name of the vendor associated to the bill. Ex: &lsquo;trainline&rsquo;</li>
+<li><code>currency</code> (String) default: EUR:  The ISO currency value (not mandatory since there is a
+  default value.</li>
+<li><code>matchingCriterias</code> (Object): criterias that can be used by an external service to match bills
+  with bank operations. If not specified but the &lsquo;banksTransactionRegExp&rsquo; attribute is specified in the
+  manifest of the connector, this value is automatically added to the bill</li>
+</ul>
+<p>You can also pass attributes expected by <code>saveFiles</code> : fileurl, filename, requestOptions
+  and more</p>
+<p>Please take a look at <a href="https://github.com/cozy/cozy-doctypes/blob/master/docs/io.cozy.bills.md">io.cozy.bills doctype documentation</a>
+- <code>fields</code> (object) this is the first parameter given to BaseKonnector&rsquo;s constructor
+- <code>options</code> is passed directly to <code>saveFiles</code>, <code>hydrateAndFilter</code>, <code>addData</code> and <code>linkBankOperations</code>.</p>
+<p><strong>Kind</strong>: Exported function<br />
+<strong>Example</strong>  </p>
+<div class="codehilite"><pre><span></span><span class="kr">const</span> <span class="p">{</span> <span class="nx">BaseKonnector</span><span class="p">,</span> <span class="nx">saveBills</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;cozy-konnector-libs&#39;</span><span class="p">)</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BaseKonnector</span><span class="p">(</span><span class="kd">function</span> <span class="nx">fetch</span> <span class="p">(</span><span class="nx">fields</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">documents</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="c1">// some code which fills documents</span>
+  <span class="k">return</span> <span class="nx">saveBills</span><span class="p">(</span><span class="nx">documents</span><span class="p">,</span> <span class="nx">fields</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">identifiers</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;vendor&#39;</span><span class="p">]</span>
+  <span class="p">})</span>
+<span class="p">})</span>
+</pre></div>
+
+
+<p><a name="module_saveFiles"></a></p>
+<h2 id="savefiles">saveFiles<a class="headerlink" href="#savefiles" title="Permanent link">&para;</a></h2>
+<p>Saves the given files in the given folder via the Cozy API.</p>
+<p><a name="exp_module_saveFiles--saveFiles"></a></p>
+<h3 id="savefiles_1">saveFiles() ⏏<a class="headerlink" href="#savefiles_1" title="Permanent link">&para;</a></h3>
+<p>Saves the files given in the fileurl attribute of each entries</p>
+<p>You need the full permission on <code>io.cozy.files</code> in your manifest to use this function.</p>
+<ul>
+<li>
+<p><code>files</code> is an array of object with the following possible attributes :</p>
+</li>
+<li>
+<p>fileurl: The url of the file (can be a function returning the value). Ignored if <code>filestream</code>
+  is given</p>
+</li>
+<li>filestream: the stream which will be directly passed to cozyClient.files.create (can also be
+  function returning the stream)</li>
+<li>requestOptions (object) : The options passed to request to fetch fileurl (can be a function returning the value)</li>
+<li>filename : The file name of the item written on disk. This attribute is optional and as default value, the
+    file name will be &ldquo;smartly&rdquo; guessed by the function. Use this attribute if the guess is not smart
+  enough for you, or if you use <code>filestream</code> (can be a function returning the value).</li>
+<li><code>shouldReplaceName</code> (string) used to migrate filename. If saveFiles find a file linked to this entry and this
+  file name matches <code>shouldReplaceName</code>, the file is renames to <code>filename</code> (can be a function returning the value)</li>
+<li><code>shouldReplaceFile</code> (function) use this function to state if the current entry should be forced
+  to be redownloaded and replaced. Usefull if we know the file content can change and we always
+  want the last version.</li>
+<li>
+<p><code>fileAttributes</code> (object) ex: <code>{created_at: new Date()}</code> sets some additionnal file
+  attributes passed to cozyClient.file.create</p>
+</li>
+<li>
+<p><code>fields</code> (string) is the argument given to the main function of your connector by the BaseKonnector.
+     It especially contains a <code>folderPath</code> which is the string path configured by the user in
+     collect/home</p>
+</li>
+<li>
+<p><code>options</code> (object) is optional. Possible options :</p>
+</li>
+<li>
+<p><code>timeout</code> (timestamp) can be used if your connector needs to fetch a lot of files and if the
+  stack does not give enough time to your connector to fetch it all. It could happen that the
+  connector is stopped right in the middle of the download of the file and the file will be
+  broken. With the <code>timeout</code> option, the <code>saveFiles</code> function will check if the timeout has
+  passed right after downloading each file and then will be sure to be stopped cleanly if the
+  timeout is not too long. And since it is really fast to check that a file has already been
+  downloaded, on the next run of the connector, it will be able to download some more
+  files, and so on. If you want the timeout to be in 10s, do <code>Date.now() + 10*1000</code>.
+  You can try it in the previous code.</p>
+</li>
+<li><code>contentType</code> (string or boolean) ex: &lsquo;application/pdf&rsquo; used to force the contentType of documents when
+  they are badly recognized by cozy. If &ldquo;true&rdquo; the content type will be recognized from the file
+  name and forced the same way.</li>
+<li><code>concurrency</code> (number) default: <code>1</code> sets the maximum number of concurrent downloads</li>
+<li><code>validateFile</code> (function) default: do not validate if file is empty or has bad mime type</li>
+<li><code>validateFileContent</code> (boolean or function) default false. Also check the content of the file to
+  recognize the mime type</li>
+</ul>
+<p><strong>Kind</strong>: Exported function<br />
+<strong>Example</strong>  </p>
+<div class="codehilite"><pre><span></span><span class="nx">await</span> <span class="nx">saveFiles</span><span class="p">([{</span><span class="nx">fileurl</span><span class="o">:</span> <span class="s1">&#39;https://...&#39;</span><span class="p">,</span> <span class="nx">filename</span><span class="o">:</span> <span class="s1">&#39;bill1.pdf&#39;</span><span class="p">}],</span> <span class="nx">fields</span><span class="p">)</span>
+</pre></div>
+
+
+<p><a name="module_saveIdentity"></a></p>
+<h2 id="saveidentity">saveIdentity<a class="headerlink" href="#saveidentity" title="Permanent link">&para;</a></h2>
+<p>Helper to set or merge io.cozy.identities
+See https://github.com/cozy/cozy-doctypes/blob/master/docs/io.cozy.identities.md</p>
+<p><a name="exp_module_saveIdentity--saveIdentity"></a></p>
+<h3 id="saveidentity_1">saveIdentity() ⏏<a class="headerlink" href="#saveidentity_1" title="Permanent link">&para;</a></h3>
+<p>Set or merge a io.cozy.identities</p>
+<p>You need full permission for the doctype io.cozy.identities in your
+manifest, to be able to use this function.</p>
+<p>Parameters:</p>
+<ul>
+<li><code>contact</code> (object): the identity to create/update as an object io.cozy.contacts</li>
+<li><code>accountIdentifier</code> (string): a string that represent the account use, if available fields.login</li>
+<li><code>options</code> (object): options which will be given to updateOrCreate directly :</li>
+<li><code>sourceAccount</code> (String): id of the source account</li>
+<li><code>sourceAccountIdentifier</code> (String): identifier unique to the account targetted by the connector. It is the login most of the time</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="kr">const</span> <span class="p">{</span> <span class="nx">saveIdentity</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;cozy-konnector-libs&#39;</span><span class="p">)</span>
+<span class="kr">const</span> <span class="nx">identity</span> <span class="o">=</span>
+  <span class="p">{</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;toto&#39;</span><span class="p">,</span>
+    <span class="nx">email</span><span class="o">:</span> <span class="p">{</span> <span class="s1">&#39;address&#39;</span><span class="o">:</span> <span class="s1">&#39;toto@example.com&#39;</span> <span class="p">}</span>
+  <span class="p">}</span>
+
+<span class="k">return</span> <span class="nx">saveIdentity</span><span class="p">(</span><span class="nx">identity</span><span class="p">,</span> <span class="nx">fields</span><span class="p">.</span><span class="nx">login</span><span class="p">)</span>
+</pre></div>
+
+
+<p><strong>Kind</strong>: Exported function<br />
+<a name="module_signin"></a></p>
+<h2 id="signin">signin<a class="headerlink" href="#signin" title="Permanent link">&para;</a></h2>
+<p>Provides an handy method to log the user in,
+on HTML form pages. On success, it resolves to a promise with a parsed body.</p>
+<p><a name="exp_module_signin--signin"></a></p>
+<h3 id="signin_1">signin() ⏏<a class="headerlink" href="#signin_1" title="Permanent link">&para;</a></h3>
+<p>Provides an handy method to log the user in,
+on HTML form pages. On success, it resolves to a promise with a parsed body.</p>
+<p>Errors:</p>
+<ul>
+<li>LOGIN_FAILED if the validate predicate is false</li>
+<li>INVALID_FORM if the element matched by <code>formSelector</code> is not a form or has
+  no <code>action</code> attribute</li>
+<li>UNKNOWN_PARSING_STRATEGY if <code>parse</code> is not one of the accepted values:
+  <code>raw</code>, <code>cheerio</code>, <code>json</code>.</li>
+<li>VENDOR_DOWN if a request throws a RequestError, or StatusCodeError</li>
+</ul>
+<p>It does not submit values provided through <code>select</code> tags, except if populated
+by user with <code>formData</code>.</p>
+<ul>
+<li>
+<p><code>url</code> is the url to access the html form</p>
+</li>
+<li>
+<p><code>formSelector</code> is used by cheerio to uniquely identify the form in which to
+  log in</p>
+</li>
+<li>
+<p><code>formData</code> is an object <code>{ name: value, … }</code>. It is used to populate the
+  form, in the proper inputs with the same name as the properties of this
+  object, before submitting it. It can also be a function that returns this
+  object. The page at <code>url</code> would be given as argument, right after having
+  been parsed through <code>cheerio</code>.</p>
+</li>
+<li>
+<p><code>parse</code> allow the user to resolve <code>signin</code> with a preparsed body. The
+  choice of the strategy for the parsing is one of : <code>raw</code>, <code>json</code> or
+  <code>cheerio</code>. <code>cheerio</code> being the default.</p>
+</li>
+<li>
+<p><code>validate</code> is a predicate taking three arguments <code>statusCode</code>, <code>parsedBody</code> and <code>fullResponse</code>.
+  If it is false, <code>LOGIN_FAILED</code> is thrown, otherwise the
+  signin resolves with <code>parsedBody</code> value.</p>
+</li>
+<li>
+<p><code>requestOpts</code> allows to pass eventual options to the <code>signin</code>&lsquo;s
+  <code>requestFactory</code>. It could be useful for pages using <code>latin1</code> <code>encoding</code>
+  for instance.</p>
+</li>
+</ul>
+<p><strong>Kind</strong>: Exported function<br />
+<strong>Example</strong><br />
+== basic example : ==</p>
+<div class="codehilite"><pre><span></span><span class="kr">const</span> <span class="nx">$</span> <span class="o">=</span> <span class="nx">signin</span><span class="p">({</span>
+  <span class="nx">url</span><span class="o">:</span> <span class="sb">`http://quotes.toscrape.com/login`</span><span class="p">,</span>
+  <span class="nx">formSelector</span><span class="o">:</span> <span class="s1">&#39;form&#39;</span><span class="p">,</span>
+  <span class="nx">formData</span><span class="o">:</span> <span class="p">{</span> <span class="nx">username</span><span class="p">,</span> <span class="nx">password</span> <span class="p">}</span>
+<span class="p">})</span>
+</pre></div>
+
+
+<p>If the behavior of the targeted website is not standard. You can pass a validate function which
+will allow you to:
+ - detect if the credentials work or not -&gt; LOGIN_FAILED
+ - detect if actions from the user are needed -&gt; USER_ACTION_NEEDED
+ - detect if the targeted website is out -&gt; VENDOR_DOWN
+<strong>Example</strong>  </p>
+<div class="codehilite"><pre><span></span><span class="kr">const</span> <span class="nx">$</span> <span class="o">=</span> <span class="nx">signin</span><span class="p">({</span>
+  <span class="nx">url</span><span class="o">:</span> <span class="sb">`http://quotes.toscrape.com/login`</span><span class="p">,</span>
+  <span class="nx">formSelector</span><span class="o">:</span> <span class="s1">&#39;form&#39;</span><span class="p">,</span>
+  <span class="nx">formData</span><span class="o">:</span> <span class="p">{</span> <span class="nx">username</span><span class="p">,</span> <span class="nx">password</span> <span class="p">},</span>
+  <span class="nx">validate</span><span class="o">:</span> <span class="p">(</span><span class="nx">statusCode</span><span class="p">,</span> <span class="nx">$</span><span class="p">,</span> <span class="nx">fullResponse</span><span class="p">)</span> <span class="p">{</span>
+   <span class="k">if</span> <span class="p">(</span><span class="nx">statusCode</span> <span class="o">!==</span> <span class="mi">200</span><span class="p">)</span> <span class="k">return</span> <span class="kc">false</span> <span class="c1">// LOGIN_FAILED</span>
+   <span class="k">if</span> <span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.cgu&#39;</span><span class="p">).</span><span class="nx">length</span><span class="p">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;USER_ACTION_NEEDED&#39;</span><span class="p">)</span>
+   <span class="k">if</span> <span class="p">(</span><span class="nx">fullResponse</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">uri</span><span class="p">.</span><span class="nx">href</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">))</span> <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;VENDOR_DOWN&#39;</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+</pre></div>
+
+
+<p>Do not forget that the use of the signin function is not mandatory in a connector and won&rsquo;t work
+if the signin page does not use html forms. Here, a simple POST request may be a lot more
+simple.
+<a name="module_solveCaptcha"></a></p>
+<h2 id="solvecaptcha">solveCaptcha<a class="headerlink" href="#solvecaptcha" title="Permanent link">&para;</a></h2>
+<p>Use every possible means to solve a captcha. At the moment, Anticaptcha web service is used if
+any related secret key is found in COZY_PARAMETERS environment variable.</p>
+<p><a name="exp_module_solveCaptcha--solveCaptcha"></a></p>
+<h3 id="solvecaptcha_1">solveCaptcha() ⏏<a class="headerlink" href="#solvecaptcha_1" title="Permanent link">&para;</a></h3>
+<p>Use every possible means to solve a captcha. At the moment, Anticaptcha web service is used if
+any related secret key is found in COZY_PARAMETERS environment variable.
+If you do not want to solve the captcha each time the connector is run, please also use
+CookieKonnector which will help you save the session.</p>
+<p>Parameters:</p>
+<ul>
+<li><code>params</code> is an array of objects with any attributes with some mandatory attributes :</li>
+<li><code>type</code> (String): (default recaptcha) type of captcha to solve. can be &ldquo;recaptcha&rdquo; or &ldquo;image&rdquo; at the moment</li>
+<li><code>timeout</code> (Number): (default 3 minutes after now) time when the solver should stop trying to
+  solve the captcha</li>
+<li><code>websiteKey</code> (String): the key you can find on the targeted website (for recaptcha)</li>
+<li><code>websiteURL</code> (String): The URL of the page showing the captcha (for recaptcha)</li>
+<li><code>body</code> (String): The base64 encoded image (for image captcha)
+Returns: Promise with the solved captcha response as a string</li>
+</ul>
+<p><strong>Kind</strong>: Exported function<br />
+<strong>Example</strong>  </p>
+<div class="codehilite"><pre><span></span><span class="kr">const</span> <span class="p">{</span> <span class="nx">solveCaptcha</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;cozy-konnector-libs&#39;</span><span class="p">)</span>
+
+<span class="kr">const</span> <span class="nx">solvedKey</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">solveCaptcha</span><span class="p">({</span>
+  <span class="nx">websiteKey</span><span class="o">:</span> <span class="s1">&#39;the key in the webpage&#39;</span><span class="p">,</span>
+  <span class="nx">websiteURL</span><span class="o">:</span> <span class="s1">&#39;http://quotes.toscrape.com/login&#39;</span><span class="p">,</span>
+<span class="p">})</span>
+<span class="c1">// now use the solveKey to submit your form</span>
+</pre></div>
+
+
+<p><a name="module_updateOrCreate"></a></p>
+<h2 id="updateorcreate">updateOrCreate<a class="headerlink" href="#updateorcreate" title="Permanent link">&para;</a></h2>
+<p>Creates or updates the given entries according to if they already
+exist in the cozy or not</p>
+<p><a name="exp_module_updateOrCreate--updateOrCreate"></a></p>
+<h3 id="updateorcreate_1">updateOrCreate() ⏏<a class="headerlink" href="#updateorcreate_1" title="Permanent link">&para;</a></h3>
+<p>Creates or updates the given entries according to if they already
+exist in the cozy or not</p>
+<p>You need the full permission for the given doctype in your manifest, to be able to
+use this function.</p>
+<ul>
+<li><code>entries</code> (object array): Documents to save</li>
+<li><code>doctype</code> (string): Doctype of the documents</li>
+<li><code>matchingAttributes</code> (string array): attributes in each entry used to check if an entry already exists in the Cozy</li>
+<li><code>options</code> (object): general option affecting metadata :</li>
+<li><code>sourceAccount</code> (String): id of the source account</li>
+<li><code>sourceAccountIdentifier</code> (String): identifier unique to the account targetted by the connector. It is the login most of the time</li>
+</ul>
+<p><strong>Kind</strong>: Exported function<br />
+<a name="module_utils"></a></p>
+<h2 id="utils">utils<a class="headerlink" href="#utils" title="Permanent link">&para;</a></h2>
+<p>Small utilities helping to develop konnectors.</p>
+<ul>
+<li><a href="#module_utils">utils</a><ul>
+<li><a href="#module_utils..fetchAll">~fetchAll()</a></li>
+<li><a href="#module_utils..queryAll">~queryAll()</a></li>
+<li><a href="#module_utils..findDuplicates">~findDuplicates()</a></li>
+<li><a href="#module_utils..batchUpdateAttributes">~batchUpdateAttributes()</a></li>
+<li><a href="#module_utils..batchDelete">~batchDelete()</a></li>
+<li><a href="#module_utils..getPdfText">~getPdfText()</a></li>
+<li><a href="#module_utils..formatDate">~formatDate()</a></li>
+</ul>
+</li>
+</ul>
+<p><a name="module_utils..fetchAll"></a></p>
+<h3 id="utilsfetchall">utils~fetchAll()<a class="headerlink" href="#utilsfetchall" title="Permanent link">&para;</a></h3>
+<p>This function allows to fetch all documents for a given doctype. It is the fastest to get all
+documents but without filtering possibilities
+deprecated by the findAll method from cozyClient</p>
+<p>Parameters:</p>
+<ul>
+<li><code>doctype</code> (string): the doctype from which you want to fetch the data</li>
+</ul>
+<p><strong>Kind</strong>: inner method of <a href="#module_utils"><code>utils</code></a><br />
+<a name="module_utils..queryAll"></a></p>
+<h3 id="utilsqueryall">utils~queryAll()<a class="headerlink" href="#utilsqueryall" title="Permanent link">&para;</a></h3>
+<p>This function allows to fetch all documents for a given doctype exceeding the 100 limit.
+It is slower that fetchAll because it fetches the data 100 by 100 but allows to filter the data
+with a selector and an index</p>
+<p>Parameters:</p>
+<ul>
+<li><code>doctype</code> (string): the doctype from which you want to fetch the data</li>
+<li><code>selector</code> (object): the mango query selector</li>
+<li><code>index</code> (object): (optional) the query selector index. If not defined, the function will
+create it&rsquo;s own index with the keys specified in the selector</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="kr">const</span> <span class="nx">documents</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">queryAll</span><span class="p">(</span><span class="s1">&#39;io.cozy.bills&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">vendor</span><span class="o">:</span> <span class="s1">&#39;Direct Energie&#39;</span><span class="p">})</span>
+</pre></div>
+
+
+<p><strong>Kind</strong>: inner method of <a href="#module_utils"><code>utils</code></a><br />
+<a name="module_utils..findDuplicates"></a></p>
+<h3 id="utilsfindduplicates">utils~findDuplicates()<a class="headerlink" href="#utilsfindduplicates" title="Permanent link">&para;</a></h3>
+<p>This function find duplicates in a given doctype, filtered by an optional mango selector</p>
+<p>Parameters:</p>
+<ul>
+<li><code>doctype</code> (string): the doctype from which you want to fetch the data</li>
+<li><code>selector</code> (object): (optional) the mango query selector</li>
+<li><code>options</code> :</li>
+<li><code>keys</code> (array) : List of keys used to check that two items are the same.</li>
+<li><code>index</code> (optionnal) : Return value returned by <code>cozy.data.defineIndex</code>, the default will correspond to all documents of the selected doctype.</li>
+<li><code>selector</code> (optionnal object) : Mango request to get records. Gets all the records by default</li>
+</ul>
+<p>Returns an object with the following keys:
+<em> <code>toKeep</code>: this is the list of unique documents that you should keep in db
+</em> <code>toRemove</code>: this is the list of documents that can remove from db. If this is io.cozy.bills
+documents, do not forget to clean linked bank operations</p>
+<div class="codehilite"><pre><span></span><span class="kr">const</span> <span class="p">{</span><span class="nx">toKeep</span><span class="p">,</span> <span class="nx">toRemove</span><span class="p">}</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">findDuplicates</span><span class="p">(</span><span class="s1">&#39;io.cozy.bills&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">selector</span><span class="o">:</span> <span class="p">{</span><span class="nx">vendor</span><span class="o">:</span> <span class="s1">&#39;Direct Energie&#39;</span><span class="p">}})</span>
+</pre></div>
+
+
+<p><strong>Kind</strong>: inner method of <a href="#module_utils"><code>utils</code></a><br />
+<a name="module_utils..batchUpdateAttributes"></a></p>
+<h3 id="utilsbatchupdateattributes">utils~batchUpdateAttributes()<a class="headerlink" href="#utilsbatchupdateattributes" title="Permanent link">&para;</a></h3>
+<p>This is a shortcut to update multiple documents in one call</p>
+<p>Parameters:</p>
+<ul>
+<li><code>doctype</code> (string): the doctype from which you want to fetch the data</li>
+<li><code>ids</code> (array): array of ids of documents to update</li>
+<li><code>transformation</code> (object): attributes to change with their values</li>
+<li><code>options</code> :</li>
+<li><code>keys</code> (array) : List of keys used to check that two items are the same.</li>
+<li><code>index</code> (optionnal) : Return value returned by <code>cozy.data.defineIndex</code>, the default will correspond to all documents of the selected doctype.</li>
+<li><code>selector</code> (optionnal object) : Mango request to get records. Gets all the records by default</li>
+</ul>
+<p>Returns a promise which resolves with all the return values of updateAttributes</p>
+<div class="codehilite"><pre><span></span><span class="nx">await</span> <span class="nx">batchUpdateAttributes</span><span class="p">(</span><span class="s1">&#39;io.cozy.bills&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">{</span><span class="nx">vendor</span><span class="o">:</span> <span class="s1">&#39;Direct Energie&#39;</span><span class="p">})</span>
+</pre></div>
+
+
+<p><strong>Kind</strong>: inner method of <a href="#module_utils"><code>utils</code></a><br />
+<a name="module_utils..batchDelete"></a></p>
+<h3 id="utilsbatchdelete">utils~batchDelete()<a class="headerlink" href="#utilsbatchdelete" title="Permanent link">&para;</a></h3>
+<p>This is a shortcut to delete multiple documents in one call</p>
+<p>Parameters:</p>
+<ul>
+<li><code>doctype</code> (string): the doctype from which you want to fetch the data</li>
+<li><code>documents</code> (array): documents to delete with their ids</li>
+<li><code>transformation</code> (object): attributes to change with their values</li>
+<li><code>options</code> :</li>
+<li><code>keys</code> (array) : List of keys used to check that two items are the same.</li>
+<li><code>index</code> (optionnal) : Return value returned by <code>cozy.data.defineIndex</code>, the default will correspond to all documents of the selected doctype.</li>
+<li><code>selector</code> (optionnal object) : Mango request to get records. Gets all the records by default</li>
+</ul>
+<p>Returns a promise which resolves with all the return values of updateAttributes</p>
+<p>Example to remove all the documents for a given doctype</p>
+<div class="codehilite"><pre><span></span><span class="kr">const</span> <span class="nx">documents</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">fetchAll</span><span class="p">(</span><span class="s1">&#39;io.cozy.marvel&#39;</span><span class="p">)</span>
+<span class="nx">await</span> <span class="nx">batchDelete</span><span class="p">(</span><span class="s1">&#39;io.cozy.marvel&#39;</span><span class="p">,</span> <span class="nx">documents</span><span class="p">)</span>
+</pre></div>
+
+
+<p><strong>Kind</strong>: inner method of <a href="#module_utils"><code>utils</code></a><br />
+<a name="module_utils..getPdfText"></a></p>
+<h3 id="utilsgetpdftext">utils~getPdfText()<a class="headerlink" href="#utilsgetpdftext" title="Permanent link">&para;</a></h3>
+<p>This function can read the content of a cozy pdf file and output its text</p>
+<p>Parameters:</p>
+<ul>
+<li><code>fileId</code> (string): the id of the file in the cozy</li>
+<li><code>options</code> :</li>
+<li><code>pages</code> (array or number) : The list of page you want to interpret</li>
+</ul>
+<p>Returns a promise which resolves with an object with the following attributes:
+   - <code>text</code> (string) : The full text of the pdf
+   - <code>1</code> : The full pdfjs data for page 1
+   - <code>n</code> : The full pdfjs data for page n</p>
+<p>Example:</p>
+<div class="codehilite"><pre><span></span><span class="kr">const</span> <span class="nx">pdfText</span> <span class="o">=</span> <span class="p">(</span><span class="nx">await</span> <span class="nx">getPdfText</span><span class="p">(</span><span class="s1">&#39;887ABCFE87687&#39;</span><span class="p">)).</span><span class="nx">text</span>
+</pre></div>
+
+
+<p><strong>Kind</strong>: inner method of <a href="#module_utils"><code>utils</code></a><br />
+<a name="module_utils..formatDate"></a></p>
+<h3 id="utilsformatdate">utils~formatDate()<a class="headerlink" href="#utilsformatdate" title="Permanent link">&para;</a></h3>
+<p>This function convert a Date Object to a ISO date string (2018-07-31)</p>
+<p>Parameters:</p>
+<ul>
+<li><code>date</code> (Date): the id of the file in the cozy</li>
+</ul>
+<p>Returns a string</p>
+<p>Example:</p>
+<div class="codehilite"><pre><span></span><span class="kr">const</span> <span class="nx">date</span> <span class="o">=</span> <span class="nx">formatFrenchDate</span><span class="p">(</span><span class="nx">New</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">())</span>
+</pre></div>
+
+
+<p><strong>Kind</strong>: inner method of <a href="#module_utils"><code>utils</code></a><br />
+<a name="module_categorization"></a></p>
+<h2 id="categorization">categorization<a class="headerlink" href="#categorization" title="Permanent link">&para;</a></h2>
+<p>Bank transactions categorization</p>
+<ul>
+<li><a href="#module_categorization">categorization</a><ul>
+<li><a href="#module_categorization..createCategorizer">~createCategorizer()</a> ⇒ <code>Object</code></li>
+<li><a href="#module_categorization..categorize">~categorize()</a> ⇒ <code>Array.&lt;Object&gt;</code></li>
+</ul>
+</li>
+</ul>
+<p><a name="module_categorization..createCategorizer"></a></p>
+<h3 id="categorizationcreatecategorizer-object">categorization~createCategorizer() ⇒ <code>Object</code><a class="headerlink" href="#categorizationcreatecategorizer-object" title="Permanent link">&para;</a></h3>
+<p>Initialize global and local models and return an object exposing a
+<code>categorize</code> function that applies both models on an array of transactions</p>
+<p>The global model is a model specific to hosted Cozy instances. It is not available for self-hosted instances. It will just do nothing in that case.</p>
+<p>The local model is based on the user manual categorizations.</p>
+<p>Each model adds two properties to the transactions:
+  * The global model adds <code>cozyCategoryId</code> and <code>cozyCategoryProba</code>
+  * The local model adds <code>localCategoryId</code> and <code>localCategoryProba</code></p>
+<p>In the end, each transaction can have up to four different categories. An application can use these categories to show the most significant for the user. See https://github.com/cozy/cozy-doctypes/blob/master/docs/io.cozy.bank.md#categories for more informations.</p>
+<p><strong>Kind</strong>: inner method of <a href="#module_categorization"><code>categorization</code></a><br />
+<strong>Returns</strong>: <code>Object</code> - an object with a <code>categorize</code> method<br />
+<strong>Example</strong>  </p>
+<div class="codehilite"><pre><span></span><span class="kr">const</span> <span class="p">{</span> <span class="nx">BaseKonnector</span><span class="p">,</span> <span class="nx">createCategorizer</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;cozy-konnector-libs&#39;</span><span class="p">)</span>
+
+<span class="kr">class</span> <span class="nx">BankingKonnector</span> <span class="kr">extends</span> <span class="nx">BaseKonnector</span> <span class="p">{</span>
+  <span class="nx">async</span> <span class="nx">saveTransactions</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">transactions</span> <span class="o">=</span> <span class="nx">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">fetchTransactions</span><span class="p">()</span>
+    <span class="kr">const</span> <span class="nx">categorizer</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">createCategorizer</span>
+    <span class="kr">const</span> <span class="nx">categorizedTransactions</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">categorizer</span><span class="p">.</span><span class="nx">categorize</span><span class="p">(</span><span class="nx">transactions</span><span class="p">)</span>
+
+    <span class="c1">// Save categorizedTransactions</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p><a name="module_categorization..categorize"></a></p>
+<h3 id="categorizationcategorize-arrayobject">categorization~categorize() ⇒ <code>Array.&lt;Object&gt;</code><a class="headerlink" href="#categorizationcategorize-arrayobject" title="Permanent link">&para;</a></h3>
+<p>Initialize global and local models and categorize the given array of transactions</p>
+<p><strong>Kind</strong>: inner method of <a href="#module_categorization"><code>categorization</code></a><br />
+<strong>Returns</strong>: <code>Array.&lt;Object&gt;</code> - the categorized transactions<br />
+<strong>See</strong>: <a href="createCategorizer">createCategorizer</a> for more informations about models initialization<br />
+<strong>Example</strong>  </p>
+<div class="codehilite"><pre><span></span><span class="kr">const</span> <span class="p">{</span> <span class="nx">BaseKonnector</span><span class="p">,</span> <span class="nx">categorize</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;cozy-konnector-libs&#39;</span><span class="p">)</span>
+
+<span class="kr">class</span> <span class="nx">BankingKonnector</span> <span class="kr">extends</span> <span class="nx">BaseKonnector</span> <span class="p">{</span>
+  <span class="nx">async</span> <span class="nx">saveTransactions</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">transactions</span> <span class="o">=</span> <span class="nx">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">fetchTransactions</span><span class="p">()</span>
+    <span class="kr">const</span> <span class="nx">categorizedTransactions</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">categorize</span><span class="p">(</span><span class="nx">transactions</span><span class="p">)</span>
+
+    <span class="c1">// Save categorizedTransactions</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p><a name="BaseKonnector"></a></p>
+<h2 id="basekonnector">BaseKonnector<a class="headerlink" href="#basekonnector" title="Permanent link">&para;</a></h2>
+<p>The class from which all the connectors must inherit.
+It takes a fetch function in parameter that must return a <code>Promise</code>.
+You need at least the <code>GET</code> permission on <code>io.cozy.accounts</code> in your manifest to allow it to
+fetch account information for your connector.</p>
+<p><strong>Kind</strong>: global class  </p>
+<ul>
+<li><a href="#BaseKonnector">BaseKonnector</a><ul>
+<li><a href="#new_BaseKonnector_new">new BaseKonnector(fetch)</a></li>
+<li><a href="#BaseKonnector+end">.end()</a></li>
+<li><a href="#BaseKonnector+fail">.fail()</a></li>
+<li><a href="#BaseKonnector+init">.init()</a> ⇒ <code>Promise</code></li>
+<li><a href="#BaseKonnector+saveAccountData">.saveAccountData(data, options)</a> ⇒ <code>Promise</code></li>
+<li><a href="#BaseKonnector+getAccountData">.getAccountData()</a> ⇒ <code>object</code></li>
+<li><a href="#BaseKonnector+updateAccountAttributes">.updateAccountAttributes()</a></li>
+<li><a href="#BaseKonnector+waitForTwoFaCode">.waitForTwoFaCode()</a></li>
+<li><a href="#BaseKonnector+saveBills">.saveBills()</a> ⇒ <code>Promise</code></li>
+<li><a href="#BaseKonnector+saveFiles">.saveFiles()</a> ⇒ <code>Promise</code></li>
+<li><a href="#BaseKonnector+updateOrCreate">.updateOrCreate()</a> ⇒ <code>Promise</code></li>
+<li><a href="#BaseKonnector+saveIdentity">.saveIdentity()</a> ⇒ <code>Promise</code></li>
+<li><a href="#BaseKonnector+terminate">.terminate(message)</a></li>
+<li><a href="#BaseKonnector+getCozyMetadata">.getCozyMetadata(data)</a></li>
+</ul>
+</li>
+</ul>
+<p><a name="new_BaseKonnector_new"></a></p>
+<h3 id="new-basekonnectorfetch">new BaseKonnector(fetch)<a class="headerlink" href="#new-basekonnectorfetch" title="Permanent link">&para;</a></h3>
+<p>Its role is twofold :</p>
+<ul>
+<li>Make the link between account data and konnector</li>
+<li>Handle errors</li>
+</ul>
+<p>⚠️  A promise should be returned from the <code>fetch</code> function otherwise
+the konnector cannot know that asynchronous code has been called.</p>
+<div class="codehilite"><pre><span></span>this.terminate(&#39;LOGIN_FAILED&#39;)
+</pre></div>
+
+
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fetch</td>
+<td><code>function</code></td>
+<td>Function to be run automatically after account data is fetched. This function will be binded to the current connector. If not fetch function is given. The connector will have to handle itself it&rsquo;s own exection and error handling</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong>  </p>
+<div class="codehilite"><pre><span></span><span class="kr">const</span> <span class="p">{</span> <span class="nx">BaseKonnector</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;cozy-konnector-libs&#39;</span><span class="p">)</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BaseKonnector</span><span class="p">(</span><span class="kd">function</span> <span class="nx">fetch</span> <span class="p">()</span> <span class="p">{</span>
+ <span class="c1">// use this to access the instance of the konnector to</span>
+ <span class="c1">// store any information that needs to be passed to</span>
+ <span class="c1">// different stages of the konnector</span>
+ <span class="k">return</span> <span class="nx">request</span><span class="p">(</span><span class="s1">&#39;http://ameli.fr&#39;</span><span class="p">)</span>
+   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">computeReimbursements</span><span class="p">)</span>
+   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">saveBills</span><span class="p">)</span>
+<span class="p">})</span>
+</pre></div>
+
+
+<p><a name="BaseKonnector+end"></a></p>
+<h3 id="basekonnectorend">baseKonnector.end()<a class="headerlink" href="#basekonnectorend" title="Permanent link">&para;</a></h3>
+<p>Hook called when the connector is ended</p>
+<p><strong>Kind</strong>: instance method of <a href="#BaseKonnector"><code>BaseKonnector</code></a><br />
+<a name="BaseKonnector+fail"></a></p>
+<h3 id="basekonnectorfail">baseKonnector.fail()<a class="headerlink" href="#basekonnectorfail" title="Permanent link">&para;</a></h3>
+<p>Hook called when the connector fails</p>
+<p><strong>Kind</strong>: instance method of <a href="#BaseKonnector"><code>BaseKonnector</code></a><br />
+<a name="BaseKonnector+init"></a></p>
+<h3 id="basekonnectorinit-promise">baseKonnector.init() ⇒ <code>Promise</code><a class="headerlink" href="#basekonnectorinit-promise" title="Permanent link">&para;</a></h3>
+<p>Initializes the current connector with data coming from the associated account</p>
+<p><strong>Kind</strong>: instance method of <a href="#BaseKonnector"><code>BaseKonnector</code></a><br />
+<strong>Returns</strong>: <code>Promise</code> - with the fields as an object<br />
+<a name="BaseKonnector+saveAccountData"></a></p>
+<h3 id="basekonnectorsaveaccountdatadata-options-promise">baseKonnector.saveAccountData(data, options) ⇒ <code>Promise</code><a class="headerlink" href="#basekonnectorsaveaccountdatadata-options-promise" title="Permanent link">&para;</a></h3>
+<p>Saves data to the account that is passed to the konnector.
+Use it to persist data that needs to be passed to each
+konnector run.</p>
+<p>By default, the data is merged to the remote data, use
+<code>options.merge = false</code> to overwrite the data.</p>
+<p>The data is saved under the <code>.data</code> attribute of the cozy
+account.</p>
+<p>Don&rsquo;t forget to modify the manifest.konnector file to give the right to write on the
+<code>io.cozy.accounts</code> doctype. The syntax can be : <code>"permissions": {"accounts": {"type": "io.cozy.accounts"}}</code> (here we juste removed the verb <code>GET</code>)</p>
+<p><strong>Kind</strong>: instance method of <a href="#BaseKonnector"><code>BaseKonnector</code></a><br />
+<strong>Returns</strong>: <code>Promise</code> - : resolved with the modified account  </p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>data</td>
+<td><code>object</code></td>
+<td>Attributes to be merged</td>
+</tr>
+<tr>
+<td>options</td>
+<td><code>object</code></td>
+<td>{ merge: true</td>
+</tr>
+</tbody>
+</table>
+<p><a name="BaseKonnector+getAccountData"></a></p>
+<h3 id="basekonnectorgetaccountdata-object">baseKonnector.getAccountData() ⇒ <code>object</code><a class="headerlink" href="#basekonnectorgetaccountdata-object" title="Permanent link">&para;</a></h3>
+<p>Get the data saved by saveAccountData</p>
+<p><strong>Kind</strong>: instance method of <a href="#BaseKonnector"><code>BaseKonnector</code></a><br />
+<a name="BaseKonnector+updateAccountAttributes"></a></p>
+<h3 id="basekonnectorupdateaccountattributes">baseKonnector.updateAccountAttributes()<a class="headerlink" href="#basekonnectorupdateaccountattributes" title="Permanent link">&para;</a></h3>
+<p>Update account attributes and cache the account</p>
+<p><strong>Kind</strong>: instance method of <a href="#BaseKonnector"><code>BaseKonnector</code></a><br />
+<a name="BaseKonnector+waitForTwoFaCode"></a></p>
+<h3 id="basekonnectorwaitfortwofacode">baseKonnector.waitForTwoFaCode()<a class="headerlink" href="#basekonnectorwaitfortwofacode" title="Permanent link">&para;</a></h3>
+<p>Notices that 2FA code is needed and wait for the user to submit it.
+It uses the account to do the communication with the user</p>
+<p>Parameters:</p>
+<ul>
+<li><code>params</code> object with some mandatory attributes :</li>
+<li><code>type</code> (String): (default email) this is the type of expected 2FA code. The message displayed
+  to the user will follow it. Possible values: email, sms</li>
+<li><code>timeout</code> (Number): (default 3 minutes after now) time when the function will stop waiting
+  for a code and fail</li>
+<li><code>heartBeat</code> (Number): (default 5s) how much time is waited between each code check</li>
+<li><code>retry</code> (boolen): (default false) is it a retry. If true, an error message will be
+  displayed to the user
+Returns: Promise with sucessfull code if any</li>
+</ul>
+<p><strong>Kind</strong>: instance method of <a href="#BaseKonnector"><code>BaseKonnector</code></a><br />
+<strong>Example</strong>  </p>
+<div class="codehilite"><pre><span></span><span class="kr">const</span> <span class="p">{</span> <span class="nx">BaseKonnector</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;cozy-konnector-libs&#39;</span><span class="p">)</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BaseKonnector</span><span class="p">(</span><span class="nx">start</span><span class="p">)</span>
+
+<span class="nx">async</span> <span class="kd">function</span> <span class="nx">start</span><span class="p">()</span> <span class="p">{</span>
+   <span class="c1">// we detect the need of a 2FA code</span>
+   <span class="kr">const</span> <span class="nx">code</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">waitForTwoFaCode</span><span class="p">({</span>
+     <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;email&#39;</span><span class="p">,</span>
+     <span class="nx">timeout</span><span class="o">:</span> <span class="mi">5</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">1000</span>
+   <span class="p">})</span>
+   <span class="c1">// send the code to the targeted site</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p><a name="BaseKonnector+saveBills"></a></p>
+<h3 id="basekonnectorsavebills-promise">baseKonnector.saveBills() ⇒ <code>Promise</code><a class="headerlink" href="#basekonnectorsavebills-promise" title="Permanent link">&para;</a></h3>
+<p>This is saveBills function from cozy-konnector-libs which automatically adds sourceAccount in
+metadata of each entry</p>
+<p><strong>Kind</strong>: instance method of <a href="#BaseKonnector"><code>BaseKonnector</code></a><br />
+<a name="BaseKonnector+saveFiles"></a></p>
+<h3 id="basekonnectorsavefiles-promise">baseKonnector.saveFiles() ⇒ <code>Promise</code><a class="headerlink" href="#basekonnectorsavefiles-promise" title="Permanent link">&para;</a></h3>
+<p>This is saveFiles function from cozy-konnector-libs which automatically adds sourceAccount and
+sourceAccountIdentifier cozyMetadatas to files</p>
+<p><strong>Kind</strong>: instance method of <a href="#BaseKonnector"><code>BaseKonnector</code></a><br />
+<a name="BaseKonnector+updateOrCreate"></a></p>
+<h3 id="basekonnectorupdateorcreate-promise">baseKonnector.updateOrCreate() ⇒ <code>Promise</code><a class="headerlink" href="#basekonnectorupdateorcreate-promise" title="Permanent link">&para;</a></h3>
+<p>This is updateOrCreate function from cozy-konnector-libs which automatically adds sourceAccount in
+metadata of each entry</p>
+<p><strong>Kind</strong>: instance method of <a href="#BaseKonnector"><code>BaseKonnector</code></a><br />
+<a name="BaseKonnector+saveIdentity"></a></p>
+<h3 id="basekonnectorsaveidentity-promise">baseKonnector.saveIdentity() ⇒ <code>Promise</code><a class="headerlink" href="#basekonnectorsaveidentity-promise" title="Permanent link">&para;</a></h3>
+<p>This is saveIdentity function from cozy-konnector-libs which automatically adds sourceAccount in
+metadata of each entry</p>
+<p><strong>Kind</strong>: instance method of <a href="#BaseKonnector"><code>BaseKonnector</code></a><br />
+<a name="BaseKonnector+terminate"></a></p>
+<h3 id="basekonnectorterminatemessage">baseKonnector.terminate(message)<a class="headerlink" href="#basekonnectorterminatemessage" title="Permanent link">&para;</a></h3>
+<p>Send a special error code which is interpreted by the cozy stack to terminate the execution of the
+connector now</p>
+<p><strong>Kind</strong>: instance method of <a href="#BaseKonnector"><code>BaseKonnector</code></a>  </p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>message</td>
+<td><code>string</code></td>
+<td>The error code to be saved as connector result see [docs/ERROR_CODES.md]</td>
+</tr>
+</tbody>
+</table>
+<p><a name="BaseKonnector+getCozyMetadata"></a></p>
+<h3 id="basekonnectorgetcozymetadatadata">baseKonnector.getCozyMetadata(data)<a class="headerlink" href="#basekonnectorgetcozymetadatadata" title="Permanent link">&para;</a></h3>
+<p>Get cozyMetaData from the context of the connector</p>
+<p><strong>Kind</strong>: instance method of <a href="#BaseKonnector"><code>BaseKonnector</code></a>  </p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>data</td>
+<td><code>object</code></td>
+<td>this data will be merged with cozyMetaData</td>
+</tr>
+</tbody>
+</table>
+<p><a name="CookieKonnector"></a></p>
+<h2 id="cookiekonnector">CookieKonnector<a class="headerlink" href="#cookiekonnector" title="Permanent link">&para;</a></h2>
+<p>Connector base class extending BaseKonnector which handles cookie session in a central way
+It also handles saving cookie session in the account and automatically restore it for the next
+connector run.
+All cozy-konnector-libs tools using request are proposed as methods of this class to force them
+to use the central cookie which can be saved/restored.
+You need at least the <code>GET</code> and <code>PUT</code> permissions on <code>io.cozy.accounts</code> in your manifest to allow
+it to save/restore cookies</p>
+<p><strong>Kind</strong>: global class  </p>
+<ul>
+<li><a href="#CookieKonnector">CookieKonnector</a><ul>
+<li><a href="#new_CookieKonnector_new">new CookieKonnector(requestFactoryOptions)</a></li>
+<li><a href="#CookieKonnector+init">.init()</a> ⇒ <code>Promise</code></li>
+<li><a href="#CookieKonnector+end">.end()</a></li>
+<li><a href="#CookieKonnector+requestFactory">.requestFactory(options)</a> ⇒ <code>object</code></li>
+<li><a href="#CookieKonnector+resetSession">.resetSession()</a> ⇒ <code>Promise</code></li>
+<li><a href="#CookieKonnector+initSession">.initSession()</a> ⇒ <code>Promise</code></li>
+<li><a href="#CookieKonnector+saveSession">.saveSession()</a> ⇒ <code>Promise</code></li>
+<li><a href="#CookieKonnector+signin">.signin()</a> ⇒ <code>Promise</code></li>
+<li><a href="#CookieKonnector+saveFiles">.saveFiles()</a> ⇒ <code>Promise</code></li>
+<li><a href="#CookieKonnector+saveBills">.saveBills()</a> ⇒ <code>Promise</code></li>
+</ul>
+</li>
+</ul>
+<p><a name="new_CookieKonnector_new"></a></p>
+<h3 id="new-cookiekonnectorrequestfactoryoptions">new CookieKonnector(requestFactoryOptions)<a class="headerlink" href="#new-cookiekonnectorrequestfactoryoptions" title="Permanent link">&para;</a></h3>
+<p>Constructor</p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>requestFactoryOptions</td>
+<td><code>function</code></td>
+<td>Option object passed to requestFactory to initialize this.request. It is still possible to change this.request doing : <code>javascript this.request = this.requestFactory(...)</code> Please not you have to run the connector yourself doing : <code>javascript connector.run()</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong>  </p>
+<div class="codehilite"><pre><span></span><span class="kr">const</span> <span class="p">{</span> <span class="nx">CookieKonnector</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;cozy-konnector-libs&#39;</span><span class="p">)</span>
+<span class="kr">class</span> <span class="nx">MyConnector</span> <span class="kr">extends</span> <span class="nx">CookieKonnector</span> <span class="p">{</span>
+  <span class="nx">async</span> <span class="nx">fetch</span><span class="p">(</span><span class="nx">fields</span><span class="p">)</span> <span class="p">{</span>
+     <span class="c1">// the code of your connector</span>
+     <span class="nx">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">request</span><span class="p">(</span><span class="s1">&#39;https://...&#39;</span><span class="p">)</span>
+  <span class="p">}</span>
+  <span class="nx">async</span> <span class="nx">testSession</span><span class="p">()</span> <span class="p">{</span>
+     <span class="kr">const</span> <span class="nx">$</span> <span class="o">=</span> <span class="nx">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">request</span><span class="p">(</span><span class="s1">&#39;https://...&#39;</span><span class="p">)</span>
+     <span class="k">return</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="kr">const</span> <span class="nx">connector</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyKonnector</span><span class="p">({</span>
+  <span class="nx">cheerio</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="nx">json</span><span class="o">:</span> <span class="kc">false</span>
+<span class="p">})</span>
+<span class="nx">connector</span><span class="p">.</span><span class="nx">run</span><span class="p">()</span>
+</pre></div>
+
+
+<p><a name="CookieKonnector+init"></a></p>
+<h3 id="cookiekonnectorinit-promise">cookieKonnector.init() ⇒ <code>Promise</code><a class="headerlink" href="#cookiekonnectorinit-promise" title="Permanent link">&para;</a></h3>
+<p>Initializes the current connector with data coming from the associated account
+and also the session</p>
+<p><strong>Kind</strong>: instance method of <a href="#CookieKonnector"><code>CookieKonnector</code></a><br />
+<strong>Returns</strong>: <code>Promise</code> - with the fields as an object<br />
+<a name="CookieKonnector+end"></a></p>
+<h3 id="cookiekonnectorend">cookieKonnector.end()<a class="headerlink" href="#cookiekonnectorend" title="Permanent link">&para;</a></h3>
+<p>Hook called when the connector is ended</p>
+<p><strong>Kind</strong>: instance method of <a href="#CookieKonnector"><code>CookieKonnector</code></a><br />
+<a name="CookieKonnector+requestFactory"></a></p>
+<h3 id="cookiekonnectorrequestfactoryoptions-object">cookieKonnector.requestFactory(options) ⇒ <code>object</code><a class="headerlink" href="#cookiekonnectorrequestfactoryoptions-object" title="Permanent link">&para;</a></h3>
+<p>Calls cozy-konnector-libs requestFactory forcing this._jar as the cookie</p>
+<p><strong>Kind</strong>: instance method of <a href="#CookieKonnector"><code>CookieKonnector</code></a><br />
+<strong>Returns</strong>: <code>object</code> - - The resulting request object  </p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>options</td>
+<td><code>object</code></td>
+<td>requestFactory option</td>
+</tr>
+</tbody>
+</table>
+<p><a name="CookieKonnector+resetSession"></a></p>
+<h3 id="cookiekonnectorresetsession-promise">cookieKonnector.resetSession() ⇒ <code>Promise</code><a class="headerlink" href="#cookiekonnectorresetsession-promise" title="Permanent link">&para;</a></h3>
+<p>Reset cookie session with a new empty session and save it to the associated account</p>
+<p><strong>Kind</strong>: instance method of <a href="#CookieKonnector"><code>CookieKonnector</code></a><br />
+<a name="CookieKonnector+initSession"></a></p>
+<h3 id="cookiekonnectorinitsession-promise">cookieKonnector.initSession() ⇒ <code>Promise</code><a class="headerlink" href="#cookiekonnectorinitsession-promise" title="Permanent link">&para;</a></h3>
+<p>Get the cookie session from the account if any</p>
+<p><strong>Kind</strong>: instance method of <a href="#CookieKonnector"><code>CookieKonnector</code></a><br />
+<strong>Returns</strong>: <code>Promise</code> - true or false if the session in the account exists or not<br />
+<a name="CookieKonnector+saveSession"></a></p>
+<h3 id="cookiekonnectorsavesession-promise">cookieKonnector.saveSession() ⇒ <code>Promise</code><a class="headerlink" href="#cookiekonnectorsavesession-promise" title="Permanent link">&para;</a></h3>
+<p>Saves the current cookie session to the account</p>
+<p><strong>Kind</strong>: instance method of <a href="#CookieKonnector"><code>CookieKonnector</code></a><br />
+<a name="CookieKonnector+signin"></a></p>
+<h3 id="cookiekonnectorsignin-promise">cookieKonnector.signin() ⇒ <code>Promise</code><a class="headerlink" href="#cookiekonnectorsignin-promise" title="Permanent link">&para;</a></h3>
+<p>This is signin function from cozy-konnector-libs which is forced to use the current cookies
+and current request from CookieKonnector. It also automatically saves the session after
+signin if it is a success.</p>
+<p><strong>Kind</strong>: instance method of <a href="#CookieKonnector"><code>CookieKonnector</code></a><br />
+<a name="CookieKonnector+saveFiles"></a></p>
+<h3 id="cookiekonnectorsavefiles-promise">cookieKonnector.saveFiles() ⇒ <code>Promise</code><a class="headerlink" href="#cookiekonnectorsavefiles-promise" title="Permanent link">&para;</a></h3>
+<p>This is saveFiles function from cozy-konnector-libs which is forced to use the current cookies
+and current request from CookieKonnector.</p>
+<p><strong>Kind</strong>: instance method of <a href="#CookieKonnector"><code>CookieKonnector</code></a><br />
+<a name="CookieKonnector+saveBills"></a></p>
+<h3 id="cookiekonnectorsavebills-promise">cookieKonnector.saveBills() ⇒ <code>Promise</code><a class="headerlink" href="#cookiekonnectorsavebills-promise" title="Permanent link">&para;</a></h3>
+<p>This is saveBills function from cozy-konnector-libs which is forced to use the current cookies
+and current request from CookieKonnector.</p>
+<p><strong>Kind</strong>: instance method of <a href="#CookieKonnector"><code>CookieKonnector</code></a><br />
+<a name="Document"></a></p>
+<h2 id="document">Document<a class="headerlink" href="#document" title="Permanent link">&para;</a></h2>
+<p>Simple Model for Documents. Allows to specify
+<code>shouldSave</code>, <code>shouldUpdate</code> as methods.</p>
+<p>Has useful <code>isEqual</code> method</p>
+<p><strong>Kind</strong>: global class<br />
+<a name="Document+isEqual"></a></p>
+<h3 id="documentisequal">document.isEqual()<a class="headerlink" href="#documentisequal" title="Permanent link">&para;</a></h3>
+<p>Compares to another document deeply.</p>
+<p><code>_id</code> and <code>_rev</code> are by default ignored in the comparison.</p>
+<p>By default, will compare dates loosely since you often
+compare existing documents (dates in ISO string) with documents
+that just have been scraped where dates are <code>Date</code>s.</p>
+<p><strong>Kind</strong>: instance method of <a href="#Document"><code>Document</code></a><br />
+<a name="fs"></a></p>
+<h2 id="fs">fs<a class="headerlink" href="#fs" title="Permanent link">&para;</a></h2>
+<p>Manifest is provided differently in developement that in production.</p>
+<ul>
+<li>
+<p>In production, the manifest has been &ldquo;merged&rdquo; via Webpack via the
+  DefinePlugin</p>
+</li>
+<li>
+<p>In development/test, we simply read the manifest from the fs</p>
+</li>
+</ul>
+<p><strong>Kind</strong>: global constant<br />
+<a name="LOGIN_FAILED"></a></p>
+<h2 id="login95failed-string">LOGIN_FAILED : <code>String</code><a class="headerlink" href="#login95failed-string" title="Permanent link">&para;</a></h2>
+<p>The konnector could not login</p>
+<p><strong>Kind</strong>: global constant<br />
+<a name="NOT_EXISTING_DIRECTORY"></a></p>
+<h2 id="not95existing95directory-string">NOT_EXISTING_DIRECTORY : <code>String</code><a class="headerlink" href="#not95existing95directory-string" title="Permanent link">&para;</a></h2>
+<p>The folder specified as folder_to_save does not exist (checked by BaseKonnector)</p>
+<p><strong>Kind</strong>: global constant<br />
+<a name="VENDOR_DOWN"></a></p>
+<h2 id="vendor95down-string">VENDOR_DOWN : <code>String</code><a class="headerlink" href="#vendor95down-string" title="Permanent link">&para;</a></h2>
+<p>The vendor&rsquo;s website is down</p>
+<p><strong>Kind</strong>: global constant<br />
+<a name="USER_ACTION_NEEDED"></a></p>
+<h2 id="user95action95needed-string">USER_ACTION_NEEDED : <code>String</code><a class="headerlink" href="#user95action95needed-string" title="Permanent link">&para;</a></h2>
+<p>There was an unexpected error, please take a look at the logs to know what happened</p>
+<p><strong>Kind</strong>: global constant<br />
+<a name="FILE_DOWNLOAD_FAILED"></a></p>
+<h2 id="file95download95failed-string">FILE_DOWNLOAD_FAILED : <code>String</code><a class="headerlink" href="#file95download95failed-string" title="Permanent link">&para;</a></h2>
+<p>There was a problem while downloading a file</p>
+<p><strong>Kind</strong>: global constant<br />
+<a name="SAVE_FILE_FAILED"></a></p>
+<h2 id="save95file95failed-string">SAVE_FILE_FAILED : <code>String</code><a class="headerlink" href="#save95file95failed-string" title="Permanent link">&para;</a></h2>
+<p>There was a problem while saving a file</p>
+<p><strong>Kind</strong>: global constant<br />
+<a name="DISK_QUOTA_EXCEEDED"></a></p>
+<h2 id="disk95quota95exceeded-string">DISK_QUOTA_EXCEEDED : <code>String</code><a class="headerlink" href="#disk95quota95exceeded-string" title="Permanent link">&para;</a></h2>
+<p>Could not save a file to the cozy because of disk quota exceeded</p>
+<p><strong>Kind</strong>: global constant<br />
+<a name="CHALLENGE_ASKED"></a></p>
+<h2 id="challenge95asked-string">CHALLENGE_ASKED : <code>String</code><a class="headerlink" href="#challenge95asked-string" title="Permanent link">&para;</a></h2>
+<p>It seems that the website requires a second authentification factor that we don’t support yet.</p>
+<p><strong>Kind</strong>: global constant<br />
+<a name="LOGIN_FAILED_TOO_MANY_ATTEMPTS"></a></p>
+<h2 id="login95failed95too95many95attempts-string">LOGIN_FAILED_TOO_MANY_ATTEMPTS : <code>String</code><a class="headerlink" href="#login95failed95too95many95attempts-string" title="Permanent link">&para;</a></h2>
+<p>Temporarily blocked</p>
+<p><strong>Kind</strong>: global constant<br />
+<a name="USER_ACTION_NEEDED_OAUTH_OUTDATED"></a></p>
+<h2 id="user95action95needed95oauth95outdated-string">USER_ACTION_NEEDED_OAUTH_OUTDATED : <code>String</code><a class="headerlink" href="#user95action95needed95oauth95outdated-string" title="Permanent link">&para;</a></h2>
+<p>Access refresh required</p>
+<p><strong>Kind</strong>: global constant<br />
+<a name="USER_ACTION_NEEDED_ACCOUNT_REMOVED"></a></p>
+<h2 id="user95action95needed95account95removed-string">USER_ACTION_NEEDED_ACCOUNT_REMOVED : <code>String</code><a class="headerlink" href="#user95action95needed95account95removed-string" title="Permanent link">&para;</a></h2>
+<p>Unavailable account</p>
+<p><strong>Kind</strong>: global constant<br />
+<a name="USER_ACTION_NEEDED_CHANGE_PASSWORD"></a></p>
+<h2 id="user95action95needed95change95password-string">USER_ACTION_NEEDED_CHANGE_PASSWORD : <code>String</code><a class="headerlink" href="#user95action95needed95change95password-string" title="Permanent link">&para;</a></h2>
+<p>Unavailable account</p>
+<p><strong>Kind</strong>: global constant<br />
+<a name="USER_ACTION_NEEDED_PERMISSIONS_CHANGED"></a></p>
+<h2 id="user95action95needed95permissions95changed-string">USER_ACTION_NEEDED_PERMISSIONS_CHANGED : <code>String</code><a class="headerlink" href="#user95action95needed95permissions95changed-string" title="Permanent link">&para;</a></h2>
+<p>Password update required</p>
+<p><strong>Kind</strong>: global constant<br />
+<a name="USER_ACTION_NEEDED_CGU_FORM"></a></p>
+<h2 id="user95action95needed95cgu95form-string">USER_ACTION_NEEDED_CGU_FORM : <code>String</code><a class="headerlink" href="#user95action95needed95cgu95form-string" title="Permanent link">&para;</a></h2>
+<p>The user needs to accept a CGU form before accessing the rest of the website</p>
+<p><strong>Kind</strong>: global constant<br />
+<a name="CAPTCHA_RESOLUTION_FAILED"></a></p>
+<h2 id="captcha95resolution95failed-string">CAPTCHA_RESOLUTION_FAILED : <code>String</code><a class="headerlink" href="#captcha95resolution95failed-string" title="Permanent link">&para;</a></h2>
+<p>solveCaptcha failed to solve the captcha</p>
+<p><strong>Kind</strong>: global constant<br />
+<a name="mkSpec"></a></p>
+<h2 id="mkspec">mkSpec()<a class="headerlink" href="#mkspec" title="Permanent link">&para;</a></h2>
+<p>Declarative scraping.</p>
+<p>Describe your items attributes and where to find/parse them
+instead of imperatively building them.</p>
+<p>Heavily inspired by <a href="https://medialab.github.io/artoo/">artoo</a> scraping method.</p>
+<p><strong>Kind</strong>: global function<br />
+<a name="scrape"></a></p>
+<h2 id="scrape-specs-childselector-object-124-array">scrape($, spec(s), [childSelector]) ⇒ <code>object</code> | <code>array</code><a class="headerlink" href="#scrape-specs-childselector-object-124-array" title="Permanent link">&para;</a></h2>
+<p>Scrape a cheerio object for properties</p>
+<p><strong>Kind</strong>: global function<br />
+<strong>Returns</strong>: <code>object</code> | <code>array</code> - - Item(s) scraped  </p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$</td>
+<td><code>cheerio</code></td>
+<td>Cheerio node which will be scraped</td>
+</tr>
+<tr>
+<td>spec(s)</td>
+<td><code>object</code> | <code>string</code></td>
+<td>Options object describing what you want to scrape</td>
+</tr>
+<tr>
+<td>[childSelector]</td>
+<td><code>string</code></td>
+<td>If passed, scrape will return an array of items</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong><br />
+<code>scrape</code> can be used to declaratively extract data :</p>
+<ul>
+<li>For one object :</li>
+</ul>
+<div class="codehilite"><pre><span></span>const item = scrape($(&#39;#item&#39;), {
+  title: &#39;.title&#39;,
+  content: &#39;.content&#39;
+})
+</pre></div>
+
+
+<ul>
+<li>For a list of objects :</li>
+</ul>
+<div class="codehilite"><pre><span></span>const items = scrape($(&#39;#content&#39;), {
+  title: &#39;.title&#39;,
+  content: &#39;.content&#39;
+}, &#39;.item&#39;)
+</pre></div>
+
+
+<p>For more power, you can use <code>object</code>s for each retriever :</p>
+<div class="codehilite"><pre><span></span>const items = scrape($(&#39;#content&#39;), {
+  title: &#39;.title&#39;,
+  content: &#39;.content&#39;,
+  link: {
+    sel: &#39;a&#39;,
+    attr: &#39;href&#39;
+  },
+}, &#39;.item&#39;)
+</pre></div>
+
+
+<p>Here the <code>href</code> attribute of the <code>a</code> inside <code>.item</code>s would have been
+put into the <code>link</code> attribute of the items returned by <code>scrape</code>.</p>
+<p>Available options :</p>
+<ul>
+<li><code>sel</code>: the CSS selector used to target the HTML node from which data will be scraped</li>
+<li><code>attr</code>: the HTML attribute from which to extract data</li>
+<li><code>parse</code>: function applied to the value extracted (<code>{ sel: '.price', parse: parseAmount }</code>)</li>
+<li><code>fn</code>: if you need something more complicated than <code>attr</code>, you can use this function, it receives
+the complete DOM node. <code>{ sel: '.person', fn: $node =&gt; $node.attr('data-name') + $node.attr('data-firstname') }</code></li>
+</ul>
+<h3 id="permissions">⚠ Permissions<a class="headerlink" href="#permissions" title="Permanent link">&para;</a></h3>
+<p>Please note that some classes require some permissions:</p>
+<ul>
+<li><code>io.cozy.accounts</code> for the <code>BaseKonnector</code> class (<code>GET</code> only)</li>
+<li><code>io.cozy.files</code> to save files</li>
+<li><code>io.cozy.bills</code> to save bills</li>
+<li><code>io.cozy.bank.operations</code> for <code>linkBankOperations</code></li>
+</ul>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../../cozy-realtime/" title="cozy-realtime" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                cozy-realtime
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../cli/" title="CLI" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                CLI
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.245445c6.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="../../extra.js"></script>
+      
+    
+  </body>
+</html>
