@@ -9,7 +9,7 @@ site_description: Cozy documentation
 site_author: CozyCloud - https://cozy.io
 extra_javascript:
 - extra.js
-pages:
+nav:
 - Home: index.md
 - Tutorials:
   - Create Your Application: tutorials/app.md
