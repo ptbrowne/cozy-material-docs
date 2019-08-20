@@ -49,3 +49,6 @@ markdown_extensions:
 - smarty
 - toc:
     permalink: true
+extra:
+  search:
+    tokenizer: '[^a-zа-яё0-9\-]'
